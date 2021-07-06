@@ -7,7 +7,7 @@ class Jb extends CI_Controller
 
     public function index()
     {
-        $data['jb'] = $this->db->query("SELECT * FROM jb GROUP BY no_transaksi ORDER BY tanggal ASC")->result();
+        $data['jb'] = $this->db->query("SELECT * FROM jurnal_pembelian GROUP BY no_transaksi ORDER BY tanggal ASC")->result();
         $this->load->view('templates/header');
         $this->load->view('templates/sidebar');
         $this->load->view('jb/index', $data);
@@ -61,7 +61,7 @@ class Jb extends CI_Controller
                     'id_syarat'    =>  0
                 )
             );
-            $this->db->insert_batch('jb', $data);
+            $this->db->insert_batch('jurnal_pembelian', $data);
             redirect('jurnal/jb/index');
         } elseif ($pil == 2) {
 
@@ -97,14 +97,14 @@ class Jb extends CI_Controller
                     'id_syarat'    =>  0
                 )
             );
-            $this->db->insert_batch('jb', $data);
+            $this->db->insert_batch('jurnal_pembelian', $data);
             redirect('jurnal/jb/index');
         }
     }
 
     public function edit($no_transaksi)
     {
-        $data['jb'] = $this->db->query("SELECT * FROM jb WHERE no_transaksi = '$no_transaksi' ")->row();
+        $data['jb'] = $this->db->query("SELECT * FROM jurnal_pembelian WHERE no_transaksi = '$no_transaksi' ")->row();
         $data['utang_dagang'] = $this->db->query("SELECT * FROM utang_dagang ")->result();
         $data['akun'] = [5, 6];
 
@@ -160,7 +160,7 @@ class Jb extends CI_Controller
                 )
             );
             // $this->db->update_batch('jkm', $data);
-            $this->db->update_batch('jb', $data, 'id_jb');
+            $this->db->update_batch('jurnal_pembelian', $data, 'id_jb');
             redirect('jurnal/jb/index');
         } elseif ($pil == 2) {
 
@@ -203,7 +203,7 @@ class Jb extends CI_Controller
                 )
             );
             // $this->db->update_batch('jkm', $data);
-            $this->db->update_batch('jb', $data, 'id_jb');
+            $this->db->update_batch('jurnal_pembelian', $data, 'id_jb');
             redirect('jurnal/jb/index');
         }
     }
