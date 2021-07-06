@@ -124,13 +124,10 @@
                   <li class="bg-light text-dark text-center">
                     <a class="bg-light text-dark">
                       Transaksi hari ini
-                      <?php
-                      $saldolama = $this->db->query("SELECT SUM(jumlah_transaksi) as jumtrak FROM transaksi WHERE DATE(waktu_transaksi) = CURDATE()");
-                      $row = $saldolama->row();
-                      $lo = $row->jumtrak;
-                      ?>
+                     
+                   
                       <h5>
-                        <?= rupiah($lo) ?>
+                        
                       </h5>
                     </a>
                   </li>
@@ -167,13 +164,9 @@
                   <li class="bg-light text-dark text-center">
                     <a class="bg-light text-dark">
                       Transaksi hari ini
-                      <?php
-                      $saldolama = $this->db->query("SELECT SUM(jumlah_transaksi) as jumtrak FROM transaksi WHERE DATE(waktu_transaksi) = CURDATE()");
-                      $row = $saldolama->row();
-                      $lo = $row->jumtrak;
-                      ?>
+                    
                       <h5>
-                        <?= rupiah($lo) ?>
+                        
                       </h5>
                     </a>
                   </li>

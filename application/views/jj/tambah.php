@@ -35,16 +35,7 @@
                                     <input class="form-control" type="number" id="jj_jual" name="kredit" placeholder="Jumlah penjualan" required>
                                 </div>
                             </div>
-                            <!-- <div class="form-group row">
-                                <label class="col-sm-12 col-md-2 col-form-label">syarat</label>
-                                <div class="col-sm-12 col-md-10">
-                                    <select class="custom-select col-12" name="syarat2" id="jj_syarat">
-                                        <option value="1">Tidak ada</option>
-                                        <option value="2">2/10, n/30</option>
-                                        <option value="3">3/10, n/30</option>
-                                    </select>
-                                </div>
-                            </div> -->
+                            
                             <div class='form-group row'>
                                 <label class='col-sm-12 col-md-2 col-form-label'>Akun Piutang Dagang</label>
                                 <div class='col-sm-12 col-md-10'>
@@ -58,7 +49,7 @@
                             <div class="form-group row pemb">
                                 <label class="col-sm-12 col-md-2 col-form-label">Piutang Dagang (D)</label>
                                 <div class="col-sm-12 col-md-10">
-                                    <!-- <input class="form-control" type="hidden" name="id_akun_piutang_dagang" required> -->
+                                    
                                     <input class="form-control" type="number" id="jj_piutang" name="debet" placeholder="Jumlah" required>
                                 </div>
                             </div>

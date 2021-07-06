@@ -38,113 +38,170 @@ class jps extends CI_Controller
 
             $data = array(
             array(
-                //penjualan
-                'id_akun'	=>  12, 
-                'kredit' =>  $kredit, 
-                'debet' =>  0, 
-                'tanggal'	=>  $tanggal,
-                    'no_transaksi'	=>  $no_transaksi,
-                    'id_piutang_dagang'    =>  0,
-                    'id_utang_dagang'    =>  0,
-                    'id_syarat'	=>  0
-
+                    //penjualan
+                    'no_akun'	=>  514, 
+                    'kredit' =>  0, 
+                    'debet' =>  $debet, 
+                    'tanggal'	=>  $tanggal,
+                        'no_transaksi'	=>  $no_transaksi
             ),
             array(
-                //Kas
-                    'id_akun'	=>  1,
-                    'kredit' =>  0, 
-                    'debet'=>  $debet,
+                    //Kas
+                    'no_akun'	=>  114,
+                    'kredit' =>  $kredit, 
+                    'debet'=>  0,
                     'tanggal'    =>  $tanggal,
-                    'no_transaksi'    =>  $no_transaksi,
-                    'id_piutang_dagang'    =>  0,
-                    'id_utang_dagang'    =>  0,
-                    'id_syarat'    =>  0
+                    'no_transaksi'    =>  $no_transaksi
             )
         );
             $this->db->insert_batch('jps', $data); 
-            redirect('jurnal/jps/index');
+            redirect('jps/index');
 
         }elseif($pil == 2){
 
             $kredit = $this->input->post('kredit2');
             $debet = $this->input->post('debet2');
-            $debet2 = $this->input->post('debet2potpenj');
-            $piutang = $this->input->post('id_akun_piutang_dagang');
-
 
             $data = array(
                 array(
-                    //piutang dagang
-                    'id_akun'    =>  3,
-                    'kredit' =>  $kredit,
-                    'debet' =>  0,
-                    'tanggal'    =>  $tanggal,
-                    'no_transaksi'    =>  $no_transaksi,
-                    'id_piutang_dagang'    =>  $piutang,
-                    'id_utang_dagang'    =>  0,
-                    'id_syarat'    =>  0
-
-                ),
-                array(
-                    //pot penjualan
-                    'id_akun'    =>  14,
-                    'kredit' =>  0,
-                    'debet' =>  $debet2,
-                    'tanggal'    =>  $tanggal,
-                    'no_transaksi'    =>  $no_transaksi,
-                    'id_piutang_dagang'    =>  0,
-                    'id_utang_dagang'    =>  0,
-                    'id_syarat'    =>  0
-                ),
-                array(
-                    //kas
-                    'id_akun'    =>  1,
+                    //penjualan
+                    'no_akun'    =>  114,
                     'kredit' =>  0,
                     'debet' =>  $debet,
                     'tanggal'    =>  $tanggal,
-                    'no_transaksi'    =>  $no_transaksi,
-                    'id_piutang_dagang'    =>  0,
-                    'id_utang_dagang'    =>  0,
-                    'id_syarat'    =>  0
-                )
-            );
-            $this->db->insert_batch('jps', $data);
-            redirect('jurnal/jps/index');
-        }elseif($pil == 3){
-
-            $akun_kredit3 = $this->input->post('akun_kredit3');
-            $kredit3 = $this->input->post('kredit3');
-
-            $debet3 = $this->input->post('debet3');
-
-
-            $data = array(
-                array(
-                    //akun_kredit3
-                    'id_akun'    =>  $akun_kredit3,
-                    'kredit' =>  $kredit3,
-                    'debet' =>  0,
-                    'tanggal'    =>  $tanggal,
-                    'no_transaksi'    =>  $no_transaksi,
-                    'id_piutang_dagang'    =>  0,
-                    'id_utang_dagang'    =>  0,
-                    'id_syarat'    =>  0
-
+                    'no_transaksi'    =>  $no_transaksi
                 ),
                 array(
                     //Kas
-                    'id_akun'    =>  1,
-                    'kredit' =>  0,
-                    'debet' =>  $debet3,
+                    'no_akun'    =>  514,
+                    'kredit' =>  $kredit,
+                    'debet' =>  0,
                     'tanggal'    =>  $tanggal,
-                    'no_transaksi'    =>  $no_transaksi,
-                    'id_piutang_dagang'    =>  0,
-                    'id_utang_dagang'    =>  0,
-                    'id_syarat'    =>  0
+                    'no_transaksi'    =>  $no_transaksi
+                )
+            );
+
+            $this->db->insert_batch('jps', $data);
+            redirect('jps/index');
+        }elseif($pil == 3){
+            $kredit = $this->input->post('kredit3');
+            $debet = $this->input->post('debet3');
+            $data = array(
+                array(
+                    //penjualan
+                    'no_akun'    =>  614,
+                    'kredit' =>  0,
+                    'debet' =>  $debet,
+                    'tanggal'    =>  $tanggal,
+                    'no_transaksi'    =>  $no_transaksi
+                ),
+                array(
+                    //Kas
+                    'no_akun'    =>  222,
+                    'kredit' =>  $kredit,
+                    'debet' =>  0,
+                    'tanggal'    =>  $tanggal,
+                    'no_transaksi'    =>  $no_transaksi
                 )
             );
             $this->db->insert_batch('jps', $data);
-            redirect('jurnal/jps/index');
+            redirect('jps/index');
+        } elseif ($pil == 4) {
+            $kredit = $this->input->post('kredit4');
+            $debet = $this->input->post('debet4');
+
+            $data = array(
+                array(
+                    //penjualan
+                    'no_akun'    =>  612,
+                    'kredit' =>  0,
+                    'debet' =>  $debet,
+                    'tanggal'    =>  $tanggal,
+                    'no_transaksi'    =>  $no_transaksi
+                ),
+                array(
+                    //Kas
+                    'no_akun'    =>  115,
+                    'kredit' =>  $kredit,
+                    'debet' =>  0,
+                    'tanggal'    =>  $tanggal,
+                    'no_transaksi'    =>  $no_transaksi
+                )
+            );
+            $this->db->insert_batch('jps', $data);
+            redirect('jps/index');
+        } elseif ($pil == 5) {
+            $kredit = $this->input->post('kredit5');
+            $debet = $this->input->post('debet5');
+
+            $data = array(
+                array(
+                    //penjualan
+                    'no_akun'    =>  622,
+                    'kredit' =>  0,
+                    'debet' =>  $debet,
+                    'tanggal'    =>  $tanggal,
+                    'no_transaksi'    =>  $no_transaksi
+                ),
+                array(
+                    //Kas
+                    'no_akun'    =>  122,
+                    'kredit' =>  $kredit,
+                    'debet' =>  0,
+                    'tanggal'    =>  $tanggal,
+                    'no_transaksi'    =>  $no_transaksi
+                )
+            );
+            $this->db->insert_batch('jps', $data);
+            redirect('jps/index');
+        } elseif ($pil == 6) {
+            $kredit = $this->input->post('kredit6');
+            $debet = $this->input->post('debet6');
+
+            $data = array(
+                array(
+                    //penjualan
+                    'no_akun'    =>  623,
+                    'kredit' =>  0,
+                    'debet' =>  $debet,
+                    'tanggal'    =>  $tanggal,
+                    'no_transaksi'    =>  $no_transaksi
+                ),
+                array(
+                    //Kas
+                    'no_akun'    =>  112,
+                    'kredit' =>  $kredit,
+                    'debet' =>  0,
+                    'tanggal'    =>  $tanggal,
+                    'no_transaksi'    =>  $no_transaksi
+                )
+            );
+            $this->db->insert_batch('jps', $data);
+            redirect('jps/index');
+        } elseif ($pil == 7) {
+            $kredit = $this->input->post('kredit7');
+            $debet = $this->input->post('debet7');
+
+            $data = array(
+                array(
+                    //penjualan
+                    'no_akun'    =>  116,
+                    'kredit' =>  0,
+                    'debet' =>  $debet,
+                    'tanggal'    =>  $tanggal,
+                    'no_transaksi'    =>  $no_transaksi
+                ),
+                array(
+                    //Kas
+                    'no_akun'    =>  611,
+                    'kredit' =>  $kredit,
+                    'debet' =>  0,
+                    'tanggal'    =>  $tanggal,
+                    'no_transaksi'    =>  $no_transaksi
+                )
+            );
+            $this->db->insert_batch('jps', $data);
+            redirect('jps/index');
         }
 
     }
@@ -178,7 +235,7 @@ $data['akun'] = [10, 9];
                 array(
                     //penjualan
                     'id_jps' => $akun_penjualan,
-                    'id_akun'    =>  12,
+                    'no_akun'    =>  411,
                     'kredit' =>  $kredit,
                     'debet' =>  0,
                     'tanggal'    =>  $tanggal,
@@ -191,7 +248,7 @@ $data['akun'] = [10, 9];
                 array(
                     //Kas
                     'id_jps' => $akun_kas,
-                    'id_akun'    =>  1,
+                    'no_akun'    =>  111,
                     'kredit' =>  0,
                     'debet' =>  $debet,
                     'tanggal'    =>  $tanggal,
@@ -220,7 +277,7 @@ $data['akun'] = [10, 9];
                 array(
                     //piutang dagang
                     'id_jps' => $akun_piutang,
-                    'id_akun'    =>  3,
+                    'no_akun'    =>  113,
                     'kredit' =>  $kredit,
                     'debet' =>  0,
                     'tanggal'    =>  $tanggal,
@@ -233,7 +290,7 @@ $data['akun'] = [10, 9];
                 array(
                     //pot penjualan
                     'id_jps' => $akun_pot_pen,
-                    'id_akun'    =>  14,
+                    'no_akun'    =>  413,
                     'kredit' =>  0,
                     'debet' =>  $debet2,
                     'tanggal'    =>  $tanggal,
@@ -245,7 +302,7 @@ $data['akun'] = [10, 9];
                 array(
                     //kas
                     'id_jps' => $akun_kas1,
-                    'id_akun'    =>  1,
+                    'no_akun'    =>  111,
                     'kredit' =>  0,
                     'debet' =>  $debet,
                     'tanggal'    =>  $tanggal,
@@ -276,7 +333,7 @@ $data['akun'] = [10, 9];
                 array(
                     //akun serba
                     'id_jps' => $akun_serba,
-                    'id_akun'    =>  $akun_id,
+                    'no_akun'    =>  $akun_id,
                     'kredit' =>  $kredit,
                     'debet' =>  0,
                     'tanggal'    =>  $tanggal,
@@ -289,7 +346,7 @@ $data['akun'] = [10, 9];
                 array(
                     //kas
                     'id_jps' => $akun_kas3,
-                    'id_akun'    =>  1,
+                    'no_akun'    =>  111,
                     'kredit' =>  0,
                     'debet' =>  $debet,
                     'tanggal'    =>  $tanggal,

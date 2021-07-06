@@ -40,7 +40,7 @@ class Ju extends CI_Controller
             $data = array(
                 array(
                     //Utang Dagang
-                    'id_akun'    =>  8,
+                    'no_akun'    =>  211,
                     'kredit' =>  0,
                     'debet' =>  $debet,
                     'tanggal'    =>  $tanggal,
@@ -52,7 +52,7 @@ class Ju extends CI_Controller
                 ),
                 array(
                     //Retur Pembelian
-                    'id_akun'    =>  16,
+                    'no_akun'    =>  512,
                     'kredit' =>  $kredit,
                     'debet' =>  0,
                     'tanggal'    =>  $tanggal,
@@ -74,7 +74,7 @@ class Ju extends CI_Controller
             $data = array(
                 array(
                     //Retur Pemjualan
-                    'id_akun'    =>  13,
+                    'no_akun'    =>  412,
                     'kredit' =>  0,
                     'debet' =>  $debet,
                     'tanggal'    =>  $tanggal,
@@ -85,7 +85,7 @@ class Ju extends CI_Controller
                 ),
                 array(
                     //PiUtang Dagang
-                    'id_akun'    =>  3,
+                    'no_akun'    =>  113,
                     'kredit' =>  $kredit,
                     'debet' =>  0,
                     'tanggal'    =>  $tanggal,
@@ -133,7 +133,7 @@ class Ju extends CI_Controller
                 array(
                     //pembelian
                     'id_ju' => $id_ju_utang,
-                    'id_akun'    =>  $id_ju_akun_utang1,
+                    'no_akun'    =>  $id_ju_akun_utang1,
                     'kredit' =>  0,
                     'debet' =>  $debet,
                     'tanggal'    =>  $tanggal,
@@ -145,7 +145,7 @@ class Ju extends CI_Controller
                 array(
                     //Retur pembelian
                     'id_ju' => $id_ju_retur_pembelian,
-                    'id_akun'    =>  $id_akun_returpembelian,
+                    'no_akun'    =>  $id_akun_returpembelian,
                     'kredit' =>  $kredit,
                     'debet' =>  0,
                     'tanggal'    =>  $tanggal,
@@ -154,7 +154,6 @@ class Ju extends CI_Controller
                     'id_piutang_dagang'    =>  0
                 )
             );
-            // $this->db->update_batch('jkm', $data);
             $this->db->update_batch('ju', $data, 'id_ju');
             redirect('jurnal/ju/index');
         } elseif ($pil == 2) {
@@ -173,7 +172,7 @@ class Ju extends CI_Controller
                 array(
                     //Retur Penjualan
                     'id_ju' => $id_ju_retur_penjualan,
-                    'id_akun'    =>  $id_akun_retur_penjualan,
+                    'no_akun'    =>  $id_akun_retur_penjualan,
                     'kredit' =>  0,
                     'debet' =>  $debet,
                     'tanggal'    =>  $tanggal,
@@ -185,7 +184,7 @@ class Ju extends CI_Controller
                 array(
                     //piutang dagang
                     'id_ju' => $id_ju_piutang_dagang,
-                    'id_akun'    =>  $id_ju_akun_piutang_dagang,
+                    'no_akun'    =>  $id_ju_akun_piutang_dagang,
                     'kredit' =>  $kredit,
                     'debet' =>  0,
                     'tanggal'    =>  $tanggal,
@@ -194,7 +193,6 @@ class Ju extends CI_Controller
                     'id_utang_dagang'    =>  0
                 )
             );
-            // $this->db->update_batch('jkm', $data);
             $this->db->update_batch('ju', $data, 'id_ju');
             redirect('jurnal/ju/index');
         }

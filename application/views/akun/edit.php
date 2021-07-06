@@ -22,12 +22,12 @@
                     <div class="x_content">
                         <br>
                         <form class="bg-white pd-20" action="<?= base_url('akun/aksi_edit') ?>" method="POST" enctype="multipart/form-data">
-                            <div class="form-group d-none row">
+                            <!-- <div class="form-group d-none row">
                                 <label class="col-sm-12 col-md-2 col-form-label">Kode Barang</label>
                                 <div class="col-sm-12 col-md-10">
                                     <input class="form-control" type="text" name="id_akun" value="<?= $akun->id_akun ?>" placeholder="kode barang" required>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="form-group row">
                                 <label class="col-sm-12 col-md-2 col-form-label">No Akun</label>
                                 <div class="col-sm-12 col-md-10">

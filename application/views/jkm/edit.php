@@ -3,7 +3,7 @@
 
         <div class="page-title">
             <div class="title_center">
-                <h3>Selamat datang, <?= $jkm->id_akun ?></h3>
+                <h3>Selamat datang, <?= $jkm->no_akun ?></h3>
             </div>
         </div>
 
@@ -46,7 +46,7 @@
                                 </div>
                             </div>
 
-                            <?php if ($jkm->id_akun == 12) { ?>
+                            <?php if ($jkm->no_akun == 12) { ?>
 
                                 <input class='form-control' type='hidden' name='no_transaksi' value='<?= $jkm->no_transaksi ?>' required>
 
@@ -55,16 +55,16 @@
                                     <div class='form-group row penj1'><label class='col-sm-12 col-md-2 col-form-label'>Penjualan</label>
                                         <div class='col-sm-12 col-md-10'>
                                             <input class='form-control' type='hidden' name='pil' value='1' required>
-                                            <input class='form-control' type='hidden' name='id_akun_penjualan' value='12' required>
+                                            <input class='form-control' type='hidden' name='no_akun_penjualan' value='12' required>
                                             <input class='form-control' type='hidden' name='akun_penjualan' value='<?= $jkm->id_jkm ?>' required>
                                             <input class='form-control' id='jkm_jual' type='number' name='kredit1' placeholder='Jumlah penjualan' value='<?= $jkm->kredit ?>' required>
 
                                         </div>
                                     </div>
                                     <div class='form-group row penj_kas'><label class='col-sm-12 col-md-2 col-form-label'>KAS</label>
-                                        <div class='col-sm-12 col-md-10'><input class='form-control' type='hidden' name='id_akun_kas' value='1' required>
+                                        <div class='col-sm-12 col-md-10'><input class='form-control' type='hidden' name='no_akun_kas' value='1' required>
                                             <?php
-                                            $qk = "SELECT * FROM jkm WHERE no_transaksi = $jkm->no_transaksi AND id_akun = 1";
+                                            $qk = "SELECT * FROM jkm WHERE no_transaksi = $jkm->no_transaksi AND no_akun = 1";
                                             $gk = $this->db->query($qk)->row_array();
                                             ?>
                                             <input class='form-control' type='hidden' name='akun_kas' value='<?= $gk['id_jkm']; ?>' required>
@@ -73,19 +73,19 @@
                                     </div>
                                 </div>
 
-                            <?php } elseif ($jkm->id_akun == 3) { ?>
+                            <?php } elseif ($jkm->no_akun == 3) { ?>
                                 <input class='form-control' type='hidden' name='no_transaksi' value='<?= $jkm->no_transaksi ?>' required>
 
                                 <div id='jkmapp2'>
                                     <div class='form-group row'> <label class='col-sm-12 col-md-2 col-form-label'>Piutang Dagang</label>
                                         <div class='col-sm-12 col-md-10'><input class='form-control' type='hidden' name='pil' value='2' required>
-                                            <!-- <input class='form-control' type='hidden' name='id_akun_piutang_dagang' value='3' required> -->
+                                            <!-- <input class='form-control' type='hidden' name='no_akun_piutang_dagang' value='3' required> -->
                                             <input class='form-control' type='number' name='akun_piutang' value='<?= $jkm->id_jkm ?>' required>
                                             <input class='form-control' type='number' id='jkm_piutang' name='kredit2' value='<?= $jkm->kredit ?>' placeholder='Jumlah piutang dagang' required></div>
                                     </div>
                                     <div class='form-group row'><label class='col-sm-12 col-md-2 col-form-label'>Akun Piutang DAgang</label>
                                         <div class='col-sm-12 col-md-10'>
-                                            <select class='custom-select col-12' name='id_akun_piutang_dagang2'>
+                                            <select class='custom-select col-12' name='no_akun_piutang_dagang2'>
                                                 <?php foreach ($piutang_dagang as $piutang) : ?>
                                                     <?php if ($piutang->id_piutang_dagang == $jkm->id_piutang_dagang) { ?>
                                                         <option value='<?= $piutang->id_piutang_dagang ?>' selected><?= $piutang->nama_piutang_dagang ?></option>
@@ -107,9 +107,9 @@
                                     </div>
                                     <div class='form-group row '><label class='col-sm-12 col-md-2 col-form-label'>Potongan penjualan</label>
                                         <div class='col-sm-12 col-md-10'>
-                                            <input class='form-control' type='hidden' name='id_akun_potongan_penjualan2' required>
+                                            <input class='form-control' type='hidden' name='no_akun_potongan_penjualan2' required>
                                             <?php
-                                            $qk1 = "SELECT * FROM jkm WHERE no_transaksi = $jkm->no_transaksi AND id_akun = 14";
+                                            $qk1 = "SELECT * FROM jkm WHERE no_transaksi = $jkm->no_transaksi AND no_akun = 14";
                                             $gp = $this->db->query($qk1)->row_array();
                                             ?>
                                             <input class='form-control' type='number' name='akun_pot_pen' value='<?= $gp['id_jkm']; ?>' required>
@@ -118,9 +118,9 @@
                                     </div>
                                     <div class='form-group row'><label class='col-sm-12 col-md-2 col-form-label'>KAS</label>
                                         <div class='col-sm-12 col-md-10'>
-                                            <input class='form-control' type='hidden' name='id_akun_kas2' required>
+                                            <input class='form-control' type='hidden' name='no_akun_kas2' required>
                                             <?php
-                                            $qk2 = "SELECT * FROM jkm WHERE no_transaksi = $jkm->no_transaksi AND id_akun = 1";
+                                            $qk2 = "SELECT * FROM jkm WHERE no_transaksi = $jkm->no_transaksi AND no_akun = 1";
                                             $gk2 = $this->db->query($qk2)->row_array();
                                             ?>
                                             <input class='form-control' type='number' name='akun_kas1' value='<?= $gk2['id_jkm']; ?>' required>
@@ -133,12 +133,12 @@
                                 <input class='form-control' type='hidden' name='no_transaksi' value='<?= $jkm->no_transaksi ?>' required>
 
                                 <div id='jkmapp3'>
-                                    <div class='form-group row'><label class='col-sm-12 col-md-2 col-form-label'><?= $jkm->id_akun ?>Pilih Akun Serba Serbi</label>
+                                    <div class='form-group row'><label class='col-sm-12 col-md-2 col-form-label'><?= $jkm->no_akun ?>Pilih Akun Serba Serbi</label>
                                         <div class='col-sm-12 col-md-10'>
-                                            <select class='custom-select col-12' name='id_akun'>
+                                            <select class='custom-select col-12' name='no_akun'>
 
                                                 <?php foreach ($akun as $aku) : ?>
-                                                    <?php if ($aku == $jkm->id_akun) { ?>
+                                                    <?php if ($aku == $jkm->no_akun) { ?>
                                                         <option value='<?= $aku ?>' selected>
                                                             <?php if ($aku == 10) {
                                                                 echo 'Modal';
@@ -167,9 +167,9 @@
                                     </div>
                                     <div class='form-group row'><label class='col-sm-12 col-md-2 col-form-label'>KAS</label>
                                         <div class='col-sm-12 col-md-10'>
-                                            <!-- <input class='form-control' type='hidden' name='id_akun_kas3' required> -->
+                                            <!-- <input class='form-control' type='hidden' name='no_akun_kas3' required> -->
                                             <?php
-                                            $qk3 = "SELECT * FROM jkm WHERE no_transaksi = '$jkm->no_transaksi' AND id_akun = 1";
+                                            $qk3 = "SELECT * FROM jkm WHERE no_transaksi = '$jkm->no_transaksi' AND no_akun = 1";
                                             $gk3 = $this->db->query($qk3)->row_array();
                                             ?>
                                             <input class='form-control' type='hidden' name='akun_kas3' value='<?= $gk3['id_jkm']; ?>' required>

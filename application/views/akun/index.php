@@ -23,9 +23,10 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($akun as $ak) : ?>
+                        <?php $no = 1;
+                        foreach ($akun as $ak) : ?>
                             <tr role="row" class="odd">
-                                <td class="table-plus sorting_1" tabindex="0"><?= $ak->id_akun ?></td>
+                                <td class="table-plus sorting_1" tabindex="0"><?= $no++ ?></td>
                                 <td><?= $ak->no_akun ?></td>
                                 <td><?= $ak->nama_akun ?></td>
                                 <td>
@@ -34,9 +35,9 @@
                                             <i class="dw dw-more"></i>
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                                            <a class="dropdown-item" href="<?= base_url('akun/lihat/') . $ak->id_akun ?>"><i class="fa fa-eye"></i> Lihat</a>
-                                            <a class="dropdown-item" href="<?= base_url('akun/edit/') . $ak->id_akun ?>"><i class="fa fa-edit"></i> Ubah</a>
-                                            <a class="dropdown-item" href="<?= base_url('akun/hapus/') . $ak->id_akun ?>"><i class="fa fa-trash"></i> Hapus</a>
+                                            <a class="dropdown-item" href="<?= base_url('akun/lihat/') . $ak->no_akun ?>"><i class="fa fa-eye"></i> Lihat</a>
+                                            <a class="dropdown-item" href="<?= base_url('akun/edit/') . $ak->no_akun ?>"><i class="fa fa-edit"></i> Ubah</a>
+                                            <a class="dropdown-item" href="<?= base_url('akun/hapus/') . $ak->no_akun ?>"><i class="fa fa-trash"></i> Hapus</a>
                                         </div>
                                     </div>
                                 </td>

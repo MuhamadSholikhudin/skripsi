@@ -39,7 +39,7 @@ class Jb extends CI_Controller
             $data = array(
                 array(
                     //PembeliaN
-                    'id_akun'    =>  15,
+                    'no_akun'    =>  511,
                     'kredit' =>  0,
                     'debet' =>  $debet,
                     'tanggal'    =>  $tanggal,
@@ -51,7 +51,7 @@ class Jb extends CI_Controller
                 ),
                 array(
                     //utang dagang 
-                    'id_akun'    =>  8,
+                    'no_akun'    =>  211,
                     'kredit' =>  $kredit,
                     'debet' =>  0,
                     'tanggal'    =>  $tanggal,
@@ -75,7 +75,7 @@ class Jb extends CI_Controller
             $data = array(
                 array(
                     //akun serba
-                    'id_akun'    =>  $akun_serba_serbi,
+                    'no_akun'    =>  $akun_serba_serbi,
                     'kredit' =>  0,
                     'debet' =>  $debet,
                     'tanggal'    =>  $tanggal,
@@ -87,7 +87,7 @@ class Jb extends CI_Controller
                 ),
                 array(
                     //Utang Dagang
-                    'id_akun'    =>  8,
+                    'no_akun'    =>  211,
                     'kredit' =>  $kredit,
                     'debet' =>  0,
                     'tanggal'    =>  $tanggal,
@@ -136,7 +136,7 @@ class Jb extends CI_Controller
                 array(
                     //pembelian
                     'id_jb' => $id_jb_pembelian,
-                    'id_akun'    =>  $id_jb_akun_pembelian,
+                    'no_akun'    =>  $id_jb_akun_pembelian,
                     'kredit' =>  0,
                     'debet' =>  $debet,
                     'tanggal'    =>  $tanggal,
@@ -149,7 +149,7 @@ class Jb extends CI_Controller
                 array(
                     //Utang Dagang
                     'id_jb' => $id_jb_utang,
-                    'id_akun'    =>  $id_jb_akun_utang,
+                    'no_akun'    =>  $id_jb_akun_utang,
                     'kredit' =>  $kredit,
                     'debet' =>  0,
                     'tanggal'    =>  $tanggal,
@@ -180,7 +180,7 @@ class Jb extends CI_Controller
                 array(
                     //Akun Serba
                     'id_jb' => $id_jb_akun,
-                    'id_akun'    =>  $id_jb_akun_serba_serbi,
+                    'no_akun'    =>  $id_jb_akun_serba_serbi,
                     'kredit' =>  0,
                     'debet' =>  $debet,
                     'tanggal'    =>  $tanggal,
@@ -192,7 +192,7 @@ class Jb extends CI_Controller
                 array(
                     //utang dagang
                     'id_jb' => $id_jb_utang_dagang,
-                    'id_akun'    =>  $id_jb_akun_utang_dagang,
+                    'no_akun'    =>  $id_jb_akun_utang_dagang,
                     'kredit' =>  $kredit,
                     'debet' =>  0,
                     'tanggal'    =>  $tanggal,

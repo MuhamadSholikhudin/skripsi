@@ -37,7 +37,7 @@
                             <td><?= $ak->no_faktur ?></td>
                             <td>
                                 <?php
-                                $qq = "SELECT  piutang_dagang.no_piutang_dagang as no_piutang_dagang, piutang_dagang.nama_piutang_dagang as nama_piutang_dagang FROM jj JOIN piutang_dagang ON jj.id_piutang_dagang = piutang_dagang.id_piutang_dagang  WHERE jj.no_transaksi = '$ak->no_transaksi' AND jj.id_akun = 3";
+                                $qq = "SELECT  piutang_dagang.no_piutang_dagang as no_piutang_dagang, piutang_dagang.nama_piutang_dagang as nama_piutang_dagang FROM jj JOIN piutang_dagang ON jj.id_piutang_dagang = piutang_dagang.id_piutang_dagang  WHERE jj.no_transaksi = '$ak->no_transaksi' AND jj.no_akun = 113";
                                 $gg = $this->db->query($qq)->row_array();
                                 echo $gg['nama_piutang_dagang'];
                                 ?>
@@ -64,7 +64,7 @@
                         <td></td>
                         <td>
                             <?php
-                            $qk = "SELECT SUM(debet) as total FROM jj WHERE  id_akun = 3";
+                            $qk = "SELECT SUM(debet) as total FROM jj WHERE  no_akun = 113";
                             $gk = $this->db->query($qk)->row_array();
                             echo rupiah($gk['total']);
                             ?>

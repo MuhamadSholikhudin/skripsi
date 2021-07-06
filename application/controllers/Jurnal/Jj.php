@@ -36,7 +36,7 @@ class jj extends CI_Controller
         $data = array(
             array(
                 //Penjualan
-                'id_akun'    =>  12,
+                'no_akun'    =>  411,
                 'kredit' =>  $kredit,
                 'debet' =>  0,
                 'tanggal'    =>  $tanggal,
@@ -48,7 +48,7 @@ class jj extends CI_Controller
             ),
             array(
                 //Piutang dagang 
-                'id_akun'    =>  3,
+                'no_akun'    =>  113,
                 'kredit' =>  0,
                 'debet' =>  $debet,
                 'tanggal'    =>  $tanggal,
@@ -94,7 +94,7 @@ class jj extends CI_Controller
             array(
                 //Penjualan
                 'id_jj'    =>  $jj_id_jual,
-                'id_akun'    =>  12,
+                'no_akun'    =>  411,
                 'kredit' =>  $kredit,
                 'debet' =>  0,
                 'tanggal'    =>  $tanggal,
@@ -107,7 +107,7 @@ class jj extends CI_Controller
             array(
                 //Piutang dagang 
                 'id_jj'    =>  $jj_id_piutang,
-                'id_akun'    =>  3,
+                'no_akun'    =>  113,
                 'kredit' =>  0,
                 'debet' =>  $debet,
                 'tanggal'    =>  $tanggal,

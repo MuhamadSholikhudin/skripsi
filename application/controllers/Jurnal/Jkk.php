@@ -41,7 +41,7 @@ class Jkk extends CI_Controller
             $data = array(
                 array(
                     //utang dagang
-                    'id_akun'    =>  8,
+                    'no_akun'    =>  211,
                     'kredit' =>  0,
                     'debet' =>  $debet,
                     'tanggal'    =>  $tanggal,
@@ -53,7 +53,7 @@ class Jkk extends CI_Controller
                 ),
                 array(
                     //Kas
-                    'id_akun'    =>  1,
+                    'no_akun'    =>  111,
                     'kredit' =>  $kredit,
                     'debet' =>  0,
                     'tanggal'    =>  $tanggal,
@@ -76,7 +76,7 @@ class Jkk extends CI_Controller
             $data = array(
                 array(
                     //pembelian
-                    'id_akun'    =>  15,
+                    'no_akun'    =>  511,
                     'kredit' =>  0,
                     'debet' =>  $debet,
                     'tanggal'    =>  $tanggal,
@@ -88,7 +88,7 @@ class Jkk extends CI_Controller
                 ),
                 array(
                     //pot pembelian
-                    'id_akun'    =>  17,
+                    'no_akun'    =>  513,
                     'kredit' =>  $kredit2,
                     'debet' =>  0,
                     'tanggal'    =>  $tanggal,
@@ -99,7 +99,7 @@ class Jkk extends CI_Controller
                 ),
                 array(
                     //kas
-                    'id_akun'    =>  1,
+                    'no_akun'    =>  111,
                     'kredit' =>  $kredit,
                     'debet' =>  0,
                     'tanggal'    =>  $tanggal,
@@ -122,7 +122,7 @@ class Jkk extends CI_Controller
             $data = array(
                 array(
                     //akun_kredit3
-                    'id_akun'    =>  $jkk_id_akun_serba,
+                    'no_akun'    =>  $jkk_id_akun_serba,
                     'kredit' =>  0,
                     'debet' =>  $debet3,
                     'tanggal'    =>  $tanggal,
@@ -134,7 +134,7 @@ class Jkk extends CI_Controller
                 ),
                 array(
                     //Kas
-                    'id_akun'    =>  1,
+                    'no_akun'    =>  111,
                     'kredit' =>  $kredit3,
                     'debet' =>  0,
                     'tanggal'    =>  $tanggal,
@@ -184,7 +184,7 @@ class Jkk extends CI_Controller
             $data = array(
                 array(
                     //utang dagang
-                    'id_jkk' => $id_jkk_utang_dagang,
+                    'no_akun' => $id_jkk_utang_dagang,
                     'id_akun'    =>  $id_jkk_akun_utang_dagang,
                     'kredit' =>  0,
                     'debet' =>  $debet,
@@ -198,7 +198,7 @@ class Jkk extends CI_Controller
                 array(
                     //Kas
                     'id_jkk' => $id_jkk_kas,
-                    'id_akun'    =>  $id_jkk_akun_kas,
+                    'no_akun'    =>  $id_jkk_akun_kas,
                     'kredit' =>  $kredit,
                     'debet' =>  0,
                     'tanggal'    =>  $tanggal,
@@ -229,7 +229,7 @@ class Jkk extends CI_Controller
                 array(
                     //pembelian
                     'id_jkk' => $id_jkk_pembelian,
-                    'id_akun'    =>  $id_jkk_akun_pembelian,
+                    'no_akun'    =>  $id_jkk_akun_pembelian,
                     'kredit' =>  0,
                     'debet' =>  $debet,
                     'tanggal'    =>  $tanggal,
@@ -241,7 +241,7 @@ class Jkk extends CI_Controller
                 array(
                     //pot pembelian
                     'id_jkk' => $id_jkk_potongan_pembelian,
-                    'id_akun'    =>  $id_jkk_akun_potongan_pembelian,
+                    'no_akun'    =>  $id_jkk_akun_potongan_pembelian,
                     'kredit' =>  $kredit2,
                     'debet' =>  0,
                     'tanggal'    =>  $tanggal,
@@ -253,7 +253,7 @@ class Jkk extends CI_Controller
                 array(
                     //kas
                     'id_jkk' => $id_jkk_kas,
-                    'id_akun'    =>  $id_jkk_akun_kas,
+                    'no_akun'    =>  $id_jkk_akun_kas,
                     'kredit' =>  $kredit,
                     'debet' =>  0,
                     'tanggal'    =>  $tanggal,
@@ -281,7 +281,7 @@ class Jkk extends CI_Controller
                 array(
                     //akun serba
                     'id_jkk' => $id_jkk_serba,
-                    'id_akun'    =>  $id_jkk_akun_serba,
+                    'no_akun'    =>  $id_jkk_akun_serba,
                     'kredit' =>  0,
                     'debet' =>  $debet,
                     'tanggal'    =>  $tanggal,
@@ -294,7 +294,7 @@ class Jkk extends CI_Controller
                 array(
                     //kas
                     'id_jkk' => $id_jkk_kas,
-                    'id_akun'    =>  $id_jkk_akun_kas,
+                    'no_akun'    =>  $id_jkk_akun_kas,
                     'kredit' =>  $kredit,
                     'debet' =>  0,
                     'tanggal'    =>  $tanggal,

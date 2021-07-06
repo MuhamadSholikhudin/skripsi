@@ -24,7 +24,7 @@
                         <form class="bg-white pd-20" action="<?= base_url('jurnal/jkk/aksi_edit') ?>" method="POST" enctype="multipart/form-data">
 
 
-                            <?php if ($jkk->id_akun == 8) { ?>
+                            <?php if ($jkk->no_akun == 211) { ?>
                                 <input class='form-control' type='hidden' name='no_transaksi' value='<?= $jkk->no_transaksi ?>' required>
                                 <div class="form-group row">
                                     <label class="col-sm-12 col-md-2 col-form-label">Tanggal</label>
@@ -48,7 +48,7 @@
                                         <div class='col-sm-12 col-md-10'>
                                             <input class='form-control' type='hidden' name='pil' value='1' required>
                                             <input class='form-control' type='text' name='id_jkk_utang_dagang' value='<?= $jkk->id_jkk ?>' required>
-                                            <input class='form-control' type='text' name='id_jkk_akun_utang_dagang' value='<?= $jkk->id_akun ?>' required>
+                                            <input class='form-control' type='text' name='id_jkk_akun_utang_dagang' value='<?= $jkk->no_akun ?>' required>
                                             <input class='form-control' id='jkk_utang' type='number' name='debet1' value='<?= $jkk->debet ?>' placeholder='Jumlah utang dagang' required>
                                         </div>
                                     </div>
@@ -56,17 +56,17 @@
                                         <label class='col-sm-12 col-md-2 col-form-label'>KAS</label>
                                         <div class='col-sm-12 col-md-10'>
                                             <?php
-                                            $jkk_kas = "SELECT * FROM jkk WHERE no_transaksi = $jkk->no_transaksi AND id_akun = 1";
+                                            $jkk_kas = "SELECT * FROM jkk WHERE no_transaksi = $jkk->no_transaksi AND no_akun = 1";
                                             $qjkk_kas = $this->db->query($jkk_kas)->row_array();
                                             ?>
                                             <input class='form-control' type='text' name='id_jkk_kas' value='<?= $qjkk_kas['id_jkk'] ?>' required>
-                                            <input class='form-control' type='text' name='id_jkk-akun_kas' value='<?= $qjkk_kas['id_akun'] ?>' required>
+                                            <input class='form-control' type='text' name='id_jkk_akun_kas' value='<?= $qjkk_kas['no_akun'] ?>' required>
                                             <input class='form-control' id='jkk_kas' type='text' name='kredit1' value="<?= $qjkk_kas['kredit'] ?>" placeholder='Jumlah Kas Keluar' required>
                                         </div>
                                     </div>
                                 </div>
 
-                            <?php } elseif ($jkk->id_akun == 15) { ?>
+                            <?php } elseif ($jkk->no_akun == 511) { ?>
                                 <input class='form-control' type='hidden' name='no_transaksi' value='<?= $jkk->no_transaksi ?>' required>
                                 <div class="form-group row">
                                     <label class="col-sm-12 col-md-2 col-form-label">Tanggal</label>
@@ -97,22 +97,22 @@
                                         <label class='col-sm-12 col-md-2 col-form-label'>Potongan pembelian</label>
                                         <div class='col-sm-12 col-md-10'>
                                             <?php
-                                            $jkk_potpemb = "SELECT * FROM jkk WHERE no_transaksi = $jkk->no_transaksi AND id_akun = 17";
+                                            $jkk_potpemb = "SELECT * FROM jkk WHERE no_transaksi = $jkk->no_transaksi AND no_akun = 17";
                                             $qjkk_potpemb = $this->db->query($jkk_potpemb)->row_array();
                                             ?>
                                             <input class='form-control' type='text' name='id_jkk_potongan_pembelian' value='<?= $qjkk_potpemb['id_jkk'] ?>' required>
-                                            <input class='form-control' type='text' name='id_jkk_akun_potongan_pembelian' value='<?= $qjkk_potpemb['id_akun'] ?>' required>
+                                            <input class='form-control' type='text' name='id_jkk_akun_potongan_pembelian' value='<?= $qjkk_potpemb['no_akun'] ?>' required>
                                             <input class='form-control' type='text' id='jkk_potpemb' name='kredit2potpemb' value='<?= $qjkk_potpemb['kredit'] ?>' placeholder='Jumlah Kas Masuk' value='0' required>
                                         </div>
                                     </div>
                                     <div class='form-group row'><label class='col-sm-12 col-md-2 col-form-label'>KAS</label>
-                                        <div class='col-sm-12 col-md-10'><input class='form-control' type='hidden' name='id_akun_kas2' required>
+                                        <div class='col-sm-12 col-md-10'><input class='form-control' type='hidden' name='no_akun_kas2' required>
                                             <?php
-                                            $jkk_kas = "SELECT * FROM jkk WHERE no_transaksi = $jkk->no_transaksi AND id_akun = 1";
+                                            $jkk_kas = "SELECT * FROM jkk WHERE no_transaksi = $jkk->no_transaksi AND no_akun = 111";
                                             $qjkk_kas = $this->db->query($jkk_kas)->row_array();
                                             ?>
                                             <input class='form-control' type='number' name='id_jkk_kas' value='<?= $qjkk_kas['id_jkk'] ?>' placeholder='Jumlah Kas keluar' required>
-                                            <input class='form-control' type='number' name='id_jkk_akun_kas' value='<?= $qjkk_kas['id_akun'] ?>' placeholder='Jumlah Kas keluar' required>
+                                            <input class='form-control' type='number' name='id_jkk_akun_kas' value='<?= $qjkk_kas['no_akun'] ?>' placeholder='Jumlah Kas keluar' required>
                                             <input class='form-control' id='jkk_kas' type='number' name='kredit2' value='<?= $qjkk_kas['kredit'] ?>' placeholder='Jumlah Kas keluar' required>
                                         </div>
                                     </div>
@@ -129,9 +129,9 @@
                                 <div id='jkkapp3'>
                                     <div class='form-group row'><label class='col-sm-12 col-md-2 col-form-label'>Pilih Akun Serba Serbi</label>
                                         <div class='col-sm-12 col-md-10'>
-                                            <select class='custom-select col-12' name='id_jkk_akun_serba' id='id_akun'>
+                                            <select class='custom-select col-12' name='id_jkk_akun_serba' id='no_akun'>
                                                 <?php foreach ($akun as $aku) : ?>
-                                                    <?php if ($aku == $jkk->id_akun) { ?>
+                                                    <?php if ($aku == $jkk->no_akun) { ?>
                                                         <option value='<?= $aku ?>' selected>
                                                             <?php if ($aku == 18) {
                                                                 echo 'Beban sewa';
@@ -172,11 +172,11 @@
                                         <label class='col-sm-12 col-md-2 col-form-label'>KAS</label>
                                         <div class='col-sm-12 col-md-10'>
                                             <?php
-                                            $jkk_kas3 = "SELECT * FROM jkk WHERE no_transaksi = $jkk->no_transaksi AND id_akun = 1";
+                                            $jkk_kas3 = "SELECT * FROM jkk WHERE no_transaksi = $jkk->no_transaksi AND no_akun = 111";
                                             $qjkk_kas3 = $this->db->query($jkk_kas3)->row_array();
                                             ?>
                                             <input class='form-control' type='text' name='id_jkk_kas' value='<?= $qjkk_kas3['id_jkk'] ?>' required>
-                                            <input class='form-control' type='text' name='id_jkk_akun_kas' value='<?= $qjkk_kas3['id_akun'] ?>' placeholder='Jumlah Kas Masuk' required>
+                                            <input class='form-control' type='text' name='id_jkk_akun_kas' value='<?= $qjkk_kas3['no_akun'] ?>' placeholder='Jumlah Kas Masuk' required>
                                             <input class='form-control' id='jkk_kas' type='text' name='kredit3' value='<?= $qjkk_kas3['kredit'] ?>' placeholder='Jumlah Kas Masuk' required>
                                         </div>
                                     </div>

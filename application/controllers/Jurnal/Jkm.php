@@ -38,11 +38,11 @@ class Jkm extends CI_Controller
 
             $data = array(
             array(
-                //penjualan
-                'id_akun'	=>  12, 
-                'kredit' =>  $kredit, 
-                'debet' =>  0, 
-                'tanggal'	=>  $tanggal,
+                    //penjualan
+                    'no_akun'	=>  411, 
+                    'kredit' =>  $kredit, 
+                    'debet' =>  0, 
+                    'tanggal'	=>  $tanggal,
                     'no_transaksi'	=>  $no_transaksi,
                     'id_piutang_dagang'    =>  0,
                     'id_utang_dagang'    =>  0,
@@ -50,8 +50,8 @@ class Jkm extends CI_Controller
 
             ),
             array(
-                //Kas
-                    'id_akun'	=>  1,
+                    //Kas
+                    'no_akun'	=>  111,
                     'kredit' =>  0, 
                     'debet'=>  $debet,
                     'tanggal'    =>  $tanggal,
@@ -75,7 +75,7 @@ class Jkm extends CI_Controller
             $data = array(
                 array(
                     //piutang dagang
-                    'id_akun'    =>  3,
+                    'no_akun'    =>  113,
                     'kredit' =>  $kredit,
                     'debet' =>  0,
                     'tanggal'    =>  $tanggal,
@@ -87,7 +87,7 @@ class Jkm extends CI_Controller
                 ),
                 array(
                     //pot penjualan
-                    'id_akun'    =>  14,
+                    'no_akun'    =>  413,
                     'kredit' =>  0,
                     'debet' =>  $debet2,
                     'tanggal'    =>  $tanggal,
@@ -98,7 +98,7 @@ class Jkm extends CI_Controller
                 ),
                 array(
                     //kas
-                    'id_akun'    =>  1,
+                    'no_akun'    =>  111,
                     'kredit' =>  0,
                     'debet' =>  $debet,
                     'tanggal'    =>  $tanggal,
@@ -121,7 +121,7 @@ class Jkm extends CI_Controller
             $data = array(
                 array(
                     //akun_kredit3
-                    'id_akun'    =>  $akun_kredit3,
+                    'no_akun'    =>  $akun_kredit3,
                     'kredit' =>  $kredit3,
                     'debet' =>  0,
                     'tanggal'    =>  $tanggal,
@@ -133,7 +133,7 @@ class Jkm extends CI_Controller
                 ),
                 array(
                     //Kas
-                    'id_akun'    =>  1,
+                    'no_akun'    =>  111,
                     'kredit' =>  0,
                     'debet' =>  $debet3,
                     'tanggal'    =>  $tanggal,
@@ -153,7 +153,7 @@ class Jkm extends CI_Controller
     {
         $data['jkm'] = $this->db->query("SELECT * FROM jkm WHERE no_transaksi = '$no_transaksi' ")->row();
         $data['piutang_dagang'] = $this->db->query("SELECT * FROM piutang_dagang ")->result();
-$data['akun'] = [10, 9];
+        $data['akun'] = [10, 9];
         $this->load->view('templates/header');
         $this->load->view('templates/sidebar');
         $this->load->view('jkm/edit', $data);
@@ -178,7 +178,7 @@ $data['akun'] = [10, 9];
                 array(
                     //penjualan
                     'id_jkm' => $akun_penjualan,
-                    'id_akun'    =>  12,
+                    'no_akun'    =>  411,
                     'kredit' =>  $kredit,
                     'debet' =>  0,
                     'tanggal'    =>  $tanggal,
@@ -191,7 +191,7 @@ $data['akun'] = [10, 9];
                 array(
                     //Kas
                     'id_jkm' => $akun_kas,
-                    'id_akun'    =>  1,
+                    'no_akun'    =>  111,
                     'kredit' =>  0,
                     'debet' =>  $debet,
                     'tanggal'    =>  $tanggal,
@@ -201,7 +201,7 @@ $data['akun'] = [10, 9];
                     'id_syarat'    =>  0
                 )
             );
-            // $this->db->update_batch('jkm', $data);
+            
             $this->db->update_batch('jkm', $data, 'id_jkm');
             redirect('jurnal/jkm/index');
 
@@ -220,7 +220,7 @@ $data['akun'] = [10, 9];
                 array(
                     //piutang dagang
                     'id_jkm' => $akun_piutang,
-                    'id_akun'    =>  3,
+                    'no_akun'    =>  113,
                     'kredit' =>  $kredit,
                     'debet' =>  0,
                     'tanggal'    =>  $tanggal,
@@ -233,7 +233,7 @@ $data['akun'] = [10, 9];
                 array(
                     //pot penjualan
                     'id_jkm' => $akun_pot_pen,
-                    'id_akun'    =>  14,
+                    'no_akun'    =>  413,
                     'kredit' =>  0,
                     'debet' =>  $debet2,
                     'tanggal'    =>  $tanggal,
@@ -245,7 +245,7 @@ $data['akun'] = [10, 9];
                 array(
                     //kas
                     'id_jkm' => $akun_kas1,
-                    'id_akun'    =>  1,
+                    'no_akun'    =>  111,
                     'kredit' =>  0,
                     'debet' =>  $debet,
                     'tanggal'    =>  $tanggal,
@@ -255,7 +255,7 @@ $data['akun'] = [10, 9];
                     'id_syarat'    =>  0
                 )
             );
-            // $this->db->update_batch('jkm', $data);
+            
             $this->db->update_batch('jkm', $data, 'id_jkm');
             redirect('jurnal/jkm/index');
 
@@ -263,10 +263,7 @@ $data['akun'] = [10, 9];
 
             $kredit = $this->input->post('kredit3');
             $debet = $this->input->post('debet3');
-
-            // $debet2 = $this->input->post('debet2potpenj');
-            // $piutang2 = $this->input->post('id_akun_piutang_dagang2');
-            
+        
             $akun_serba = $this->input->post('akun_serba');
             $akun_id = $this->input->post('id_akun');
             $debet2 = $this->input->post('debet2potpenj');
@@ -276,7 +273,7 @@ $data['akun'] = [10, 9];
                 array(
                     //akun serba
                     'id_jkm' => $akun_serba,
-                    'id_akun'    =>  $akun_id,
+                    'no_akun'    =>  $akun_id,
                     'kredit' =>  $kredit,
                     'debet' =>  0,
                     'tanggal'    =>  $tanggal,
@@ -289,7 +286,7 @@ $data['akun'] = [10, 9];
                 array(
                     //kas
                     'id_jkm' => $akun_kas3,
-                    'id_akun'    =>  1,
+                    'no_akun'    =>  111,
                     'kredit' =>  0,
                     'debet' =>  $debet,
                     'tanggal'    =>  $tanggal,

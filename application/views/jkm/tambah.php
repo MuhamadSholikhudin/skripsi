@@ -41,14 +41,14 @@
                                 <label class="col-sm-12 col-md-2 col-form-label">Penjualan</label>
                                 <div class="col-sm-12 col-md-10">
                                     <input class="form-control" type="hidden" name="pil" value="1" required>
-                                    <input class="form-control" type="hidden" name="id_akun_penjualan" value="12" required>
+                                    <input class="form-control" type="hidden" name="no_akun_penjualan" value="12" required>
                                     <input class="form-control" type="number" id="jkm_jual" name="kredit1" placeholder="Jumlah penjualan" required>
                                 </div>
                             </div>
                             <div class="form-group row penj">
                                 <label class="col-sm-12 col-md-2 col-form-label">KAS</label>
                                 <div class="col-sm-12 col-md-10">
-                                    <input class="form-control" type="hidden" name="id_akun_kas" value="1" required>
+                                    <input class="form-control" type="hidden" name="no_akun_kas" value="1" required>
                                     <input class="form-control" type="number" id="jkm_kas" name="debet1" placeholder="Jumlah Kas Masuk" required>
                                 </div>
                             </div>
@@ -58,7 +58,7 @@
                                 <label class="col-sm-12 col-md-2 col-form-label">Penjualan</label>
                                 <div class="col-sm-12 col-md-10">
                                     <input class="form-control" type="hidden" name="pil" value="2" required>
-                                    <input class="form-control" type="hidden" name="id_akun_piutang_dagang" required>
+                                    <input class="form-control" type="hidden" name="no_akun_piutang_dagang" required>
                                     <input class="form-control" type="number" id="jkm_piutang" name="kredit2" placeholder="Jumlah piutang dagang" required>
                                 </div>
                             </div>
@@ -75,14 +75,14 @@
                             <div class="form-group row ">
                                 <label class="col-sm-12 col-md-2 col-form-label">Potongan penjualan</label>
                                 <div class="col-sm-12 col-md-10">
-                                    <input class="form-control" type="hidden" name="id_akun_potongan_penjualan2" required>
+                                    <input class="form-control" type="hidden" name="no_akun_potongan_penjualan2" required>
                                     <input class="form-control" type="number" id="jkm_potpenj" name="debet2" placeholder="Jumlah Kas Masuk" required>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-12 col-md-2 col-form-label">KAS</label>
                                 <div class="col-sm-12 col-md-10">
-                                    <input class="form-control" type="hidden" name="id_akun_kas2" required>
+                                    <input class="form-control" type="hidden" name="no_akun_kas2" required>
                                     <input class="form-control" id="jkm_kas" type="number" name="debet2" placeholder="Jumlah Kas Masuk" required>
                                 </div>
                             </div> -->
@@ -103,14 +103,14 @@
                             <div class="form-group row penj">
                                 <label class="col-sm-12 col-md-2 col-form-label">KAS</label>
                                 <div class="col-sm-12 col-md-10">
-                                    <input class="form-control" type="hidden" name="id_akun_pil3" required>
+                                    <input class="form-control" type="hidden" name="no_akun_pil3" required>
                                     <input class="form-control" type="text" name="kredit3" placeholder="Jumlah Kas Masuk" required>
                                 </div>
                             </div>
                             <div class="form-group row penj">
                                 <label class="col-sm-12 col-md-2 col-form-label">KAS</label>
                                 <div class="col-sm-12 col-md-10">
-                                    <input class="form-control" type="hidden" name="id_akun_kas3" required>
+                                    <input class="form-control" type="hidden" name="no_akun_kas3" required>
                                     <input class="form-control" type="text" name="debet3" placeholder="Jumlah Kas Masuk" required>
                                 </div>
                             </div> -->

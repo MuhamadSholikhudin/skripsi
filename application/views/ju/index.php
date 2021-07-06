@@ -31,12 +31,12 @@
                 </thead>
                 <tbody>
                     <?php foreach ($ju as $ak) : ?>
-                        <?php if ($ak->id_akun == 8) { ?>
+                        <?php if ($ak->no_akun == 8) { ?>
                             <tr>
                                 <td><?= $ak->tanggal ?></td>
                                 <td>
                                     <?php
-                                    $qq = "SELECT   akun.nama_akun as nama_akun FROM ju JOIN akun ON ju.id_akun = akun.id_akun  WHERE ju.no_transaksi = '$ak->no_transaksi' AND ju.id_akun = 8";
+                                    $qq = "SELECT   akun.nama_akun as nama_akun FROM ju JOIN akun ON ju.no_akun = akun.no_akun  WHERE ju.no_transaksi = '$ak->no_transaksi' AND ju.no_akun = 8";
                                     $gg = $this->db->query($qq)->row_array();
                                     echo $gg['nama_akun'];
                                     ?>
@@ -62,7 +62,7 @@
                                 <td></td>
                                 <td></td>
                                 <td><?php
-                                    $q2 = "SELECT  ju.kredit, akun.nama_akun as nama_akun FROM ju JOIN akun ON ju.id_akun = akun.id_akun  WHERE ju.no_transaksi = '$ak->no_transaksi' AND ju.id_akun != 8";
+                                    $q2 = "SELECT  ju.kredit, akun.nama_akun as nama_akun FROM ju JOIN akun ON ju.no_akun = akun.no_akun  WHERE ju.no_transaksi = '$ak->no_transaksi' AND ju.no_akun != 8";
                                     $g2 = $this->db->query($q2)->row_array();
 
                                     ?>
@@ -81,7 +81,7 @@
 
                                 </td>
                                 <td><?php
-                                    $q5 = "SELECT  utang_dagang.nama_utang_dagang as nama_utang_dagang FROM ju JOIN utang_dagang ON ju.id_utang_dagang = utang_dagang.id_utang_dagang  WHERE ju.no_transaksi = '$ak->no_transaksi' AND ju.id_akun = 8";
+                                    $q5 = "SELECT  utang_dagang.nama_utang_dagang as nama_utang_dagang FROM ju JOIN utang_dagang ON ju.id_utang_dagang = utang_dagang.id_utang_dagang  WHERE ju.no_transaksi = '$ak->no_transaksi' AND ju.no_akun = 8";
                                     $g5 = $this->db->query($q5)->row_array();
 
                                     ?>
@@ -94,12 +94,12 @@
 
                                 </td>
                             </tr>
-                        <?php } elseif ($ak->id_akun == 13) { ?>
+                        <?php } elseif ($ak->no_akun == 13) { ?>
                             <tr>
                                 <td><?= $ak->tanggal ?></td>
                                 <td>
                                     <?php
-                                    $qq = "SELECT   akun.nama_akun as nama_akun FROM ju JOIN akun ON ju.id_akun = akun.id_akun  WHERE ju.no_transaksi = '$ak->no_transaksi' AND ju.id_akun = 13";
+                                    $qq = "SELECT   akun.nama_akun as nama_akun FROM ju JOIN akun ON ju.no_akun = akun.no_akun  WHERE ju.no_transaksi = '$ak->no_transaksi' AND ju.no_akun = 13";
                                     $gg = $this->db->query($qq)->row_array();
                                     echo $gg['nama_akun'];
                                     ?>
@@ -125,7 +125,7 @@
                                 <td></td>
                                 <td></td>
                                 <td><?php
-                                    $q2 = "SELECT  ju.kredit, akun.nama_akun as nama_akun FROM ju JOIN akun ON ju.id_akun = akun.id_akun  WHERE ju.no_transaksi = '$ak->no_transaksi' AND ju.id_akun != 13";
+                                    $q2 = "SELECT  ju.kredit, akun.nama_akun as nama_akun FROM ju JOIN akun ON ju.no_akun = akun.no_akun  WHERE ju.no_transaksi = '$ak->no_transaksi' AND ju.no_akun != 13";
                                     $g2 = $this->db->query($q2)->row_array();
 
                                     ?>
@@ -144,7 +144,7 @@
 
                                 </td>
                                 <td><?php
-                                    $q5 = "SELECT  piutang_dagang.nama_piutang_dagang as nama_piutang_dagang FROM ju JOIN piutang_dagang ON ju.id_piutang_dagang = piutang_dagang.id_piutang_dagang  WHERE ju.no_transaksi = '$ak->no_transaksi' AND ju.id_akun = 3";
+                                    $q5 = "SELECT  piutang_dagang.nama_piutang_dagang as nama_piutang_dagang FROM ju JOIN piutang_dagang ON ju.id_piutang_dagang = piutang_dagang.id_piutang_dagang  WHERE ju.no_transaksi = '$ak->no_transaksi' AND ju.no_akun = 3";
                                     $g5 = $this->db->query($q5)->row_array();
 
                                     ?>
@@ -162,7 +162,7 @@
                                 <td><?= $ak->tanggal ?></td>
                                 <td>
                                     <?php
-                                    $qq = "SELECT  piutang_dagang.no_piutang_dagang as no_piutang_dagang, piutang_dagang.nama_piutang_dagang as nama_piutang_dagang FROM ju JOIN piutang_dagang ON ju.id_piutang_dagang = piutang_dagang.id_piutang_dagang  WHERE ju.no_transaksi = '$ak->no_transaksi' AND ju.id_akun = 3";
+                                    $qq = "SELECT  piutang_dagang.no_piutang_dagang as no_piutang_dagang, piutang_dagang.nama_piutang_dagang as nama_piutang_dagang FROM ju JOIN piutang_dagang ON ju.id_piutang_dagang = piutang_dagang.id_piutang_dagang  WHERE ju.no_transaksi = '$ak->no_transaksi' AND ju.no_akun = 3";
                                     $gg = $this->db->query($qq)->row_array();
                                     echo $gg['nama_piutang_dagang'];
                                     ?>

@@ -41,9 +41,9 @@ class Akun extends CI_Controller
         
     }
 
-    public function edit($id_akun)
+    public function edit($no_akun)
     {
-        $data['akun'] = $this->db->query("SELECT * FROM akun WHERE id_akun = '$id_akun' ")->row();
+        $data['akun'] = $this->db->query("SELECT * FROM akun WHERE no_akun = '$no_akun' ")->row();
 
         $this->load->view('templates/header');
         $this->load->view('templates/sidebar');
@@ -53,7 +53,7 @@ class Akun extends CI_Controller
 
     public function aksi_edit()
     {
-        $id_akun = $this->input->post('id_akun');
+        $no_akun_lama = $this->input->post('no_akun_lama');
 
         $no_akun = $this->input->post('no_akun');
         $nama_akun = $this->input->post('nama_akun');
@@ -64,7 +64,7 @@ class Akun extends CI_Controller
         ];
 
         $this->db->set($data);
-        $this->db->where('id_akun', $id_akun);
+        $this->db->where('no_akun', $no_akun_lama);
         $this->db->update('akun');
 
         redirect('akun/');
