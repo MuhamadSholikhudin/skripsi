@@ -6,7 +6,7 @@ class jj extends CI_Controller
 
     public function index()
     {
-        $data['jj'] = $this->db->query("SELECT * FROM jj GROUP BY no_transaksi ORDER BY tanggal ASC")->result();
+        $data['jj'] = $this->db->query("SELECT * FROM jurnal_penjualan GROUP BY no_transaksi ORDER BY tanggal ASC")->result();
         $this->load->view('templates/header');
         $this->load->view('templates/sidebar');
         $this->load->view('jj/index', $data);
@@ -58,7 +58,7 @@ class jj extends CI_Controller
                 'id_syarat'    =>  0
             ),
         );
-        $this->db->insert_batch('jj', $data);
+        $this->db->insert_batch('jurnal_penjualan', $data);
         redirect('jurnal/jj/index');
        
           
@@ -67,7 +67,7 @@ class jj extends CI_Controller
 
     public function edit($no_transaksi)
     {
-        $data['jj'] = $this->db->query("SELECT * FROM jj WHERE no_transaksi = '$no_transaksi' ")->row();
+        $data['jj'] = $this->db->query("SELECT * FROM jurnal_penjualan WHERE no_transaksi = '$no_transaksi' ")->row();
         $data['piutang_dagang'] = $this->db->query("SELECT * FROM piutang_dagang ")->result();
         $data['akun'] = [5, 6];
 
@@ -117,7 +117,7 @@ class jj extends CI_Controller
                 'id_syarat'    =>  0
             ),
         );
-        $this->db->update_batch('jj', $data, 'id_jj');
+        $this->db->update_batch('jurnal_penjualan', $data, 'id_jj');
         redirect('jurnal/jj/index');
     }
 }
