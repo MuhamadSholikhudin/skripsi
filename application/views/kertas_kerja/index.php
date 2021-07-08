@@ -10,7 +10,7 @@
             <br>
             <div class="col-md-12 text-center">
                 <h5>Toko Norkayati</h5>
-                <h5>jpsrnal Umum</h5>
+                <h5>Kertas Kerja</h5>
                 <h5>Periode <?= date('m-Y') ?> </h5>
             </div>
 
@@ -40,37 +40,38 @@
                 </thead>
                 <tbody>
                     <?php foreach ($akun as $ak) : ?>
+                        <!-- Neraca -->
                         <tr>
                             <td><?= $ak->no_akun ?></td>
                             <td><?= $ak->nama_akun ?></td>
                             <?php
-                            $q1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jkm WHERE no_akun = $ak->no_akun ";
+                            $q1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_pemasukan_kas WHERE no_akun = $ak->no_akun ";
                             $g1 = $this->db->query($q1)->row_array();
-                            $n1 = $this->db->query("SELECT * FROM jkm WHERE no_akun = $ak->no_akun")->num_rows();
+                            $n1 = $this->db->query("SELECT * FROM jurnal_pemasukan_kas WHERE no_akun = $ak->no_akun")->num_rows();
                             // perhitungan jumlah 
                             $a = $g1['debet'] + $g1['kredit'];
 
-                            $q2 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jkk WHERE no_akun = $ak->no_akun";
-                            $n2 = $this->db->query("SELECT * FROM jkk WHERE no_akun = $ak->no_akun")->num_rows();
+                            $q2 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_pengeluaran_kas WHERE no_akun = $ak->no_akun";
+                            $n2 = $this->db->query("SELECT * FROM jurnal_pengeluaran_kas WHERE no_akun = $ak->no_akun")->num_rows();
                             $g2 = $this->db->query($q2)->row_array();
                             // perhitungan jumlah 
                             $b = $g2['debet'] + $g2['kredit'];
 
-                            $q3 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jb WHERE no_akun = $ak->no_akun";
+                            $q3 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_pembelian WHERE no_akun = $ak->no_akun";
                             $g3 = $this->db->query($q3)->row_array();
-                            $n3 = $this->db->query("SELECT * FROM jb WHERE no_akun = $ak->no_akun")->num_rows();
+                            $n3 = $this->db->query("SELECT * FROM jurnal_pembelian WHERE no_akun = $ak->no_akun")->num_rows();
                             // perhitungan jumlah 
                             $c = $g3['debet'] + $g3['kredit'];
 
-                            $q4 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jj WHERE no_akun = $ak->no_akun";
+                            $q4 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_penjualan WHERE no_akun = $ak->no_akun";
                             $g4 = $this->db->query($q4)->row_array();
-                            $n4 = $this->db->query("SELECT * FROM jj WHERE no_akun = $ak->no_akun")->num_rows();
+                            $n4 = $this->db->query("SELECT * FROM jurnal_penjualan WHERE no_akun = $ak->no_akun")->num_rows();
                             // perhitungan jumlah 
                             $d = $g4['debet'] + $g4['kredit'];
 
-                            $q5 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM ju WHERE no_akun = $ak->no_akun";
+                            $q5 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_umum WHERE no_akun = $ak->no_akun";
                             $g5 = $this->db->query($q5)->row_array();
-                            $n5 = $this->db->query("SELECT * FROM ju WHERE no_akun = $ak->no_akun")->num_rows();
+                            $n5 = $this->db->query("SELECT * FROM jurnal_umum WHERE no_akun = $ak->no_akun")->num_rows();
                             // perhitungan jumlah 
                             $e = $g5['debet'] + $g5['kredit'];
                             ?>
@@ -104,7 +105,7 @@
 
                             <!-- Jurnal Penyesuaian -->
                             <?php
-                            $jps1 = $this->db->query("SELECT SUM(debet) as debet, SUM(kredit) as kredit FROM jps WHERE no_akun = $ak->no_akun ");
+                            $jps1 = $this->db->query("SELECT SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_penyesuaian WHERE no_akun = $ak->no_akun ");
                             $jpsr = $jps1->row();
                             if ($jps1->num_rows() > 0) {
                                 if ($jpsr->debet > 0) { ?>
@@ -205,33 +206,33 @@
                             <?php $total_debet = 0;
                             foreach ($akun as $ak) : ?>
                                 <?php
-                                $q1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jkm WHERE no_akun = $ak->no_akun ";
+                                $q1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_pemasukan_kas WHERE no_akun = $ak->no_akun ";
                                 $g1 = $this->db->query($q1)->row_array();
-                                $n1 = $this->db->query("SELECT * FROM jkm WHERE no_akun = $ak->no_akun")->num_rows();
+                                $n1 = $this->db->query("SELECT * FROM jurnal_pemasukan_kas WHERE no_akun = $ak->no_akun")->num_rows();
                                 // perhitungan jumlah 
                                 $a = $g1['debet'] + $g1['kredit'];
 
-                                $q2 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jkk WHERE no_akun = $ak->no_akun";
-                                $n2 = $this->db->query("SELECT * FROM jkk WHERE no_akun = $ak->no_akun")->num_rows();
+                                $q2 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_pengeluaran_kas WHERE no_akun = $ak->no_akun";
+                                $n2 = $this->db->query("SELECT * FROM jurnal_pengeluaran_kas WHERE no_akun = $ak->no_akun")->num_rows();
                                 $g2 = $this->db->query($q2)->row_array();
                                 // perhitungan jumlah 
                                 $b = $g2['debet'] + $g2['kredit'];
 
-                                $q3 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jb WHERE no_akun = $ak->no_akun";
+                                $q3 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_pembelian WHERE no_akun = $ak->no_akun";
                                 $g3 = $this->db->query($q3)->row_array();
-                                $n3 = $this->db->query("SELECT * FROM jb WHERE no_akun = $ak->no_akun")->num_rows();
+                                $n3 = $this->db->query("SELECT * FROM jurnal_pembelian WHERE no_akun = $ak->no_akun")->num_rows();
                                 // perhitungan jumlah 
                                 $c = $g3['debet'] + $g3['kredit'];
 
-                                $q4 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jj WHERE no_akun = $ak->no_akun";
+                                $q4 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_penjualan WHERE no_akun = $ak->no_akun";
                                 $g4 = $this->db->query($q4)->row_array();
-                                $n4 = $this->db->query("SELECT * FROM jj WHERE no_akun = $ak->no_akun")->num_rows();
+                                $n4 = $this->db->query("SELECT * FROM jurnal_penjualan WHERE no_akun = $ak->no_akun")->num_rows();
                                 // perhitungan jumlah 
                                 $d = $g4['debet'] + $g4['kredit'];
 
-                                $q5 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM ju WHERE no_akun = $ak->no_akun";
+                                $q5 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_umum WHERE no_akun = $ak->no_akun";
                                 $g5 = $this->db->query($q5)->row_array();
-                                $n5 = $this->db->query("SELECT * FROM ju WHERE no_akun = $ak->no_akun")->num_rows();
+                                $n5 = $this->db->query("SELECT * FROM jurnal_umum WHERE no_akun = $ak->no_akun")->num_rows();
                                 // perhitungan jumlah 
                                 $e = $g5['debet'] + $g5['kredit'];
                                 ?>
@@ -251,33 +252,33 @@
                             <?php $total_kredit = 0;
                             foreach ($akun as $ak) : ?>
                                 <?php
-                                $q1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jkm WHERE no_akun = $ak->no_akun ";
+                                $q1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_pemasukan_kas WHERE no_akun = $ak->no_akun ";
                                 $g1 = $this->db->query($q1)->row_array();
-                                $n1 = $this->db->query("SELECT * FROM jkm WHERE no_akun = $ak->no_akun")->num_rows();
+                                $n1 = $this->db->query("SELECT * FROM jurnal_pemasukan_kas WHERE no_akun = $ak->no_akun")->num_rows();
                                 // perhitungan jumlah 
                                 $a = $g1['debet'] + $g1['kredit'];
 
-                                $q2 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jkk WHERE no_akun = $ak->no_akun";
-                                $n2 = $this->db->query("SELECT * FROM jkk WHERE no_akun = $ak->no_akun")->num_rows();
+                                $q2 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_pengeluaran_kas WHERE no_akun = $ak->no_akun";
+                                $n2 = $this->db->query("SELECT * FROM jurnal_pengeluaran_kas WHERE no_akun = $ak->no_akun")->num_rows();
                                 $g2 = $this->db->query($q2)->row_array();
                                 // perhitungan jumlah 
                                 $b = $g2['debet'] + $g2['kredit'];
 
-                                $q3 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jb WHERE no_akun = $ak->no_akun";
+                                $q3 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_pembelian WHERE no_akun = $ak->no_akun";
                                 $g3 = $this->db->query($q3)->row_array();
-                                $n3 = $this->db->query("SELECT * FROM jb WHERE no_akun = $ak->no_akun")->num_rows();
+                                $n3 = $this->db->query("SELECT * FROM jurnal_pembelian WHERE no_akun = $ak->no_akun")->num_rows();
                                 // perhitungan jumlah 
                                 $c = $g3['debet'] + $g3['kredit'];
 
-                                $q4 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jj WHERE no_akun = $ak->no_akun";
+                                $q4 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_penjualan WHERE no_akun = $ak->no_akun";
                                 $g4 = $this->db->query($q4)->row_array();
-                                $n4 = $this->db->query("SELECT * FROM jj WHERE no_akun = $ak->no_akun")->num_rows();
+                                $n4 = $this->db->query("SELECT * FROM jurnal_penjualan WHERE no_akun = $ak->no_akun")->num_rows();
                                 // perhitungan jumlah 
                                 $d = $g4['debet'] + $g4['kredit'];
 
-                                $q5 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM ju WHERE no_akun = $ak->no_akun";
+                                $q5 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_umum WHERE no_akun = $ak->no_akun";
                                 $g5 = $this->db->query($q5)->row_array();
-                                $n5 = $this->db->query("SELECT * FROM ju WHERE no_akun = $ak->no_akun")->num_rows();
+                                $n5 = $this->db->query("SELECT * FROM jurnal_umum WHERE no_akun = $ak->no_akun")->num_rows();
                                 // perhitungan jumlah 
                                 $e = $g5['debet'] + $g5['kredit'];
                                 ?>
@@ -296,7 +297,7 @@
 
                         <!-- Total Jurnal Penyesuaian -->
                         <?php
-                        $jp1 = "SELECT SUM(debet) as debet_jps, SUM(kredit) as kredit_jps FROM jps ";
+                        $jp1 = "SELECT SUM(debet) as debet_jps, SUM(kredit) as kredit_jps FROM jurnal_penyesuaian ";
                         $jpsg1 = $this->db->query($jp1)->row_array();
 
                         ?>
@@ -314,37 +315,37 @@
                         $nsdtotal_debet = 0;
                         $nsdtotal_kredit = 0;
                         foreach ($akun as $ak) :
-                            $q1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jkm WHERE no_akun = $ak->no_akun ";
+                            $q1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_pemasukan_kas WHERE no_akun = $ak->no_akun ";
                             $g1 = $this->db->query($q1)->row_array();
-                            $n1 = $this->db->query("SELECT * FROM jkm WHERE no_akun = $ak->no_akun")->num_rows();
+                            $n1 = $this->db->query("SELECT * FROM jurnal_pemasukan_kas WHERE no_akun = $ak->no_akun")->num_rows();
                             // perhitungan jumlah
                             $a = $g1['debet'] + $g1['kredit'];
 
-                            $q2 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jkk WHERE no_akun = $ak->no_akun";
-                            $n2 = $this->db->query("SELECT * FROM jkk WHERE no_akun = $ak->no_akun")->num_rows();
+                            $q2 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_pengeluaran_kas WHERE no_akun = $ak->no_akun";
+                            $n2 = $this->db->query("SELECT * FROM jurnal_pengeluaran_kas WHERE no_akun = $ak->no_akun")->num_rows();
                             $g2 = $this->db->query($q2)->row_array();
                             // perhitungan jumlah
                             $b = $g2['debet'] + $g2['kredit'];
 
-                            $q3 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jb WHERE no_akun = $ak->no_akun";
+                            $q3 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_pembelian WHERE no_akun = $ak->no_akun";
                             $g3 = $this->db->query($q3)->row_array();
-                            $n3 = $this->db->query("SELECT * FROM jb WHERE no_akun = $ak->no_akun")->num_rows();
+                            $n3 = $this->db->query("SELECT * FROM jurnal_pembelian WHERE no_akun = $ak->no_akun")->num_rows();
                             // perhitungan jumlah
                             $c = $g3['debet'] + $g3['kredit'];
 
-                            $q4 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jj WHERE no_akun = $ak->no_akun";
+                            $q4 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_penjualan WHERE no_akun = $ak->no_akun";
                             $g4 = $this->db->query($q4)->row_array();
-                            $n4 = $this->db->query("SELECT * FROM jj WHERE no_akun = $ak->no_akun")->num_rows();
+                            $n4 = $this->db->query("SELECT * FROM jurnal_penjualan WHERE no_akun = $ak->no_akun")->num_rows();
                             // perhitungan jumlah
                             $d = $g4['debet'] + $g4['kredit'];
 
-                            $q5 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM ju WHERE no_akun = $ak->no_akun";
+                            $q5 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_umum WHERE no_akun = $ak->no_akun";
                             $g5 = $this->db->query($q5)->row_array();
-                            $n5 = $this->db->query("SELECT * FROM ju WHERE no_akun = $ak->no_akun")->num_rows();
+                            $n5 = $this->db->query("SELECT * FROM jurnal_umum WHERE no_akun = $ak->no_akun")->num_rows();
                             // perhitungan jumlah
                             $e = $g5['debet'] + $g5['kredit'];
 
-                            $jps1 = $this->db->query("SELECT SUM(debet) as debet, SUM(kredit) as kredit FROM jps WHERE no_akun = $ak->no_akun ");
+                            $jps1 = $this->db->query("SELECT SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_penyesuaian WHERE no_akun = $ak->no_akun ");
                             $jpsr = $jps1->row();
 
                             $nsddebet = $g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet'];
@@ -378,22 +379,22 @@
                         $nrtotal_debet = 0;
                         $nrtotal_kredit = 0;
                         foreach ($akun as $ak) :
-                            $q1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jkm WHERE no_akun = $ak->no_akun ";
+                            $q1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_pemasukan_kas WHERE no_akun = $ak->no_akun ";
                             $g1 = $this->db->query($q1)->row_array();
 
-                            $q2 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jkk WHERE no_akun = $ak->no_akun";
+                            $q2 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_pengeluaran_kas WHERE no_akun = $ak->no_akun";
                             $g2 = $this->db->query($q2)->row_array();
 
-                            $q3 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jb WHERE no_akun = $ak->no_akun";
+                            $q3 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_pembelian WHERE no_akun = $ak->no_akun";
                             $g3 = $this->db->query($q3)->row_array();
 
-                            $q4 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jj WHERE no_akun = $ak->no_akun";
+                            $q4 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_penjualan WHERE no_akun = $ak->no_akun";
                             $g4 = $this->db->query($q4)->row_array();
 
-                            $q5 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM ju WHERE no_akun = $ak->no_akun";
+                            $q5 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_umum WHERE no_akun = $ak->no_akun";
                             $g5 = $this->db->query($q5)->row_array();
 
-                            $jps1 = $this->db->query("SELECT SUM(debet) as debet, SUM(kredit) as kredit FROM jps WHERE no_akun = $ak->no_akun ");
+                            $jps1 = $this->db->query("SELECT SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_penyesuaian WHERE no_akun = $ak->no_akun ");
                             $jpsr = $jps1->row();
 
                             $nsddebet = $g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet'];
@@ -448,44 +449,44 @@
             <p>
                 Selisih-nya : <?= rupiah1($nrtotal_debet - $nrtotal_kredit) ?>
             </p>
-
+            <!--  
             <div>
                 Ini Debet :
                 <?php
                 $nsdtotal_debet = 0;
                 // $nsdtotal_kredit = 0;
                 foreach ($akun as $ak) :
-                    $q1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jkm WHERE no_akun = $ak->no_akun ";
+                    $q1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_pemasukan_kas WHERE no_akun = $ak->no_akun ";
                     $g1 = $this->db->query($q1)->row_array();
-                    $n1 = $this->db->query("SELECT * FROM jkm WHERE no_akun = $ak->no_akun")->num_rows();
+                    $n1 = $this->db->query("SELECT * FROM jurnal_pemasukan_kas WHERE no_akun = $ak->no_akun")->num_rows();
                     // perhitungan jumlah
                     $a = $g1['debet'] + $g1['kredit'];
 
-                    $q2 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jkk WHERE no_akun = $ak->no_akun";
-                    $n2 = $this->db->query("SELECT * FROM jkk WHERE no_akun = $ak->no_akun")->num_rows();
+                    $q2 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_pengeluaran_kas WHERE no_akun = $ak->no_akun";
+                    $n2 = $this->db->query("SELECT * FROM jurnal_pengeluaran_kas WHERE no_akun = $ak->no_akun")->num_rows();
                     $g2 = $this->db->query($q2)->row_array();
                     // perhitungan jumlah
                     $b = $g2['debet'] + $g2['kredit'];
 
-                    $q3 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jb WHERE no_akun = $ak->no_akun";
+                    $q3 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_pembelian WHERE no_akun = $ak->no_akun";
                     $g3 = $this->db->query($q3)->row_array();
-                    $n3 = $this->db->query("SELECT * FROM jb WHERE no_akun = $ak->no_akun")->num_rows();
+                    $n3 = $this->db->query("SELECT * FROM jurnal_pembelian WHERE no_akun = $ak->no_akun")->num_rows();
                     // perhitungan jumlah
                     $c = $g3['debet'] + $g3['kredit'];
 
-                    $q4 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jj WHERE no_akun = $ak->no_akun";
+                    $q4 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_penjualan WHERE no_akun = $ak->no_akun";
                     $g4 = $this->db->query($q4)->row_array();
-                    $n4 = $this->db->query("SELECT * FROM jj WHERE no_akun = $ak->no_akun")->num_rows();
+                    $n4 = $this->db->query("SELECT * FROM jurnal_penjualan WHERE no_akun = $ak->no_akun")->num_rows();
                     // perhitungan jumlah
                     $d = $g4['debet'] + $g4['kredit'];
 
-                    $q5 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM ju WHERE no_akun = $ak->no_akun";
+                    $q5 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_umum WHERE no_akun = $ak->no_akun";
                     $g5 = $this->db->query($q5)->row_array();
-                    $n5 = $this->db->query("SELECT * FROM ju WHERE no_akun = $ak->no_akun")->num_rows();
+                    $n5 = $this->db->query("SELECT * FROM jurnal_umum WHERE no_akun = $ak->no_akun")->num_rows();
                     // perhitungan jumlah
                     $e = $g5['debet'] + $g5['kredit'];
 
-                    $jps1 = $this->db->query("SELECT SUM(debet) as debet, SUM(kredit) as kredit FROM jps WHERE no_akun = $ak->no_akun ");
+                    $jps1 = $this->db->query("SELECT SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_penyesuaian WHERE no_akun = $ak->no_akun ");
                     $jpsr = $jps1->row();
 
                     $nsddebet = $g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet'];
@@ -509,44 +510,44 @@
 
             </div>
             <br>
-
+            
             <div>
                 ini Kredit :
                 <?php
                 // $nsdtotal_debet = 0;
                 $nsdtotal_kredit = 0;
                 foreach ($akun as $ak) :
-                    $q1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jkm WHERE no_akun = $ak->no_akun ";
+                    $q1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_pemasukan_kas WHERE no_akun = $ak->no_akun ";
                     $g1 = $this->db->query($q1)->row_array();
-                    $n1 = $this->db->query("SELECT * FROM jkm WHERE no_akun = $ak->no_akun")->num_rows();
+                    $n1 = $this->db->query("SELECT * FROM jurnal_pemasukan_kas WHERE no_akun = $ak->no_akun")->num_rows();
                     // perhitungan jumlah
                     $a = $g1['debet'] + $g1['kredit'];
 
-                    $q2 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jkk WHERE no_akun = $ak->no_akun";
-                    $n2 = $this->db->query("SELECT * FROM jkk WHERE no_akun = $ak->no_akun")->num_rows();
+                    $q2 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_pengeluaran_kas WHERE no_akun = $ak->no_akun";
+                    $n2 = $this->db->query("SELECT * FROM jurnal_pengeluaran_kas WHERE no_akun = $ak->no_akun")->num_rows();
                     $g2 = $this->db->query($q2)->row_array();
                     // perhitungan jumlah
                     $b = $g2['debet'] + $g2['kredit'];
 
-                    $q3 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jb WHERE no_akun = $ak->no_akun";
+                    $q3 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_pembelian WHERE no_akun = $ak->no_akun";
                     $g3 = $this->db->query($q3)->row_array();
-                    $n3 = $this->db->query("SELECT * FROM jb WHERE no_akun = $ak->no_akun")->num_rows();
+                    $n3 = $this->db->query("SELECT * FROM jurnal_pembelian WHERE no_akun = $ak->no_akun")->num_rows();
                     // perhitungan jumlah
                     $c = $g3['debet'] + $g3['kredit'];
 
-                    $q4 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jj WHERE no_akun = $ak->no_akun";
+                    $q4 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_penjualan WHERE no_akun = $ak->no_akun";
                     $g4 = $this->db->query($q4)->row_array();
-                    $n4 = $this->db->query("SELECT * FROM jj WHERE no_akun = $ak->no_akun")->num_rows();
+                    $n4 = $this->db->query("SELECT * FROM jurnal_penjualan WHERE no_akun = $ak->no_akun")->num_rows();
                     // perhitungan jumlah
                     $d = $g4['debet'] + $g4['kredit'];
 
-                    $q5 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM ju WHERE no_akun = $ak->no_akun";
+                    $q5 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_umum WHERE no_akun = $ak->no_akun";
                     $g5 = $this->db->query($q5)->row_array();
-                    $n5 = $this->db->query("SELECT * FROM ju WHERE no_akun = $ak->no_akun")->num_rows();
+                    $n5 = $this->db->query("SELECT * FROM jurnal_umum WHERE no_akun = $ak->no_akun")->num_rows();
                     // perhitungan jumlah
                     $e = $g5['debet'] + $g5['kredit'];
 
-                    $jps1 = $this->db->query("SELECT SUM(debet) as debet, SUM(kredit) as kredit FROM jps WHERE no_akun = $ak->no_akun ");
+                    $jps1 = $this->db->query("SELECT SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_penyesuaian WHERE no_akun = $ak->no_akun ");
                     $jpsr = $jps1->row();
 
                     $nsddebet = $g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet'];
@@ -568,8 +569,12 @@
 
                 ?>
                 <?= $nsdtotal_kredit ?>
-            </div>
+-->
+
+
 
         </div>
+
     </div>
+</div>
 </div>

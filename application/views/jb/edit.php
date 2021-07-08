@@ -23,7 +23,7 @@
                         <br>
                         <form class="bg-white pd-20" action="<?= base_url('jurnal/jb/aksi_edit') ?>" method="POST" enctype="multipart/form-data">
 
-                            <?php if ($jb->id_akun == 15) { ?>
+                            <?php if ($jb->no_akun == 511) { ?>
                                 <input class='form-control' type='hidden' name='no_transaksi' value='<?= $jb->no_transaksi ?>' required>
                                 <div class="form-group row">
                                     <label class="col-sm-12 col-md-2 col-form-label">Tanggal</label>
@@ -43,7 +43,7 @@
                                         <div class='col-sm-12 col-md-10'>
                                             <input class='form-control' type='hidden' name='pil' value='1' required>
                                             <input class='form-control' type='hidden' name='id_jb_pembelian' value='<?= $jb->id_jb ?>' required>
-                                            <input class='form-control' type='hidden' name='id_jb_akun_pembelian' value='<?= $jb->id_akun ?>' required>
+                                            <input class='form-control' type='hidden' name='id_jb_akun_pembelian' value='<?= $jb->no_akun ?>' required>
                                             <input class='form-control' id='jb_beli' type='number' name='debet1' value='<?= $jb->debet ?>' placeholder='Jumlah Pembelian' required>
                                         </div>
                                     </div>
@@ -51,10 +51,10 @@
                                         <label class='col-sm-12 col-md-2 col-form-label'>Akun Utang Dagang</label>
                                         <div class='col-sm-12 col-md-10'>
                                             <?php
-                                            $jbutang = "SELECT * FROM jb WHERE no_transaksi = '$jb->no_transaksi' AND id_akun = 8";
+                                            $jbutang = "SELECT * FROM jurnal_pembelian WHERE no_transaksi = '$jb->no_transaksi' AND no_akun = 211";
                                             $jb_1 = $this->db->query($jbutang)->row_array();
                                             ?>
-                                            <select class='custom-select col-12' name='id_utang_dagang' id='id_akun'>
+                                            <select class='custom-select col-12' name='id_utang_dagang' id='no_akun'>
                                                 <?php foreach ($utang_dagang as $utang) : ?>
                                                     <?php if ($utang->id_utang_dagang == $jb_1['id_utang_dagang']) { ?>
                                                         <option value='<?= $utang->id_utang_dagang ?>' selected>
@@ -73,7 +73,7 @@
                                         <label class='col-sm-12 col-md-2 col-form-label'>Utang Dagang</label>
                                         <div class='col-sm-12 col-md-10'>
                                             <input class='form-control' type='hidden' name='id_jb_utang' value="<?= $jb_1['id_jb']; ?>" required>
-                                            <input class='form-control' type='hidden' name='id_jb_akun_utang' value="<?= $jb_1['id_akun']; ?>" required>
+                                            <input class='form-control' type='hidden' name='id_jb_akun_utang' value="<?= $jb_1['no_akun']; ?>" required>
                                             <input class='form-control' id='jb_utang' type='number' name='kredit1' value="<?= $jb_1['kredit']; ?>" placeholder='Jumlah Utang Dagang' required></div>
                                     </div>
                                 </div>
@@ -96,10 +96,10 @@
                                     <div class='form-group row'>
                                         <label class='col-sm-12 col-md-2 col-form-label'>Pilih Akun Serba Serbi</label>
                                         <div class='col-sm-12 col-md-10'>
-                                            <select class='custom-select col-12' name='id_jb_akun_serba_serbi' id='id_akun'>
+                                            <select class='custom-select col-12' name='id_jb_akun_serba_serbi' id='no_akun'>
 
                                                 <?php foreach ($akun as $aku) : ?>
-                                                    <?php if ($aku == $jb->id_akun) { ?>
+                                                    <?php if ($aku == $jb->no_akun) { ?>
                                                         <option value='<?= $aku ?>' selected>
                                                             <?php if ($aku == 5) {
                                                                 echo 'Perlengkapan';
@@ -132,10 +132,10 @@
                                         <label class='col-sm-12 col-md-2 col-form-label'>Akun Utang Dagang</label>
                                         <div class='col-sm-12 col-md-10'>
                                             <?php
-                                            $jbutang2 = "SELECT * FROM jb WHERE no_transaksi = '$jb->no_transaksi' AND id_akun = 8";
+                                            $jbutang2 = "SELECT * FROM jurnal_pembelian WHERE no_transaksi = '$jb->no_transaksi' AND no_akun = 211";
                                             $jb_12 = $this->db->query($jbutang2)->row_array();
                                             ?>
-                                            <select class='custom-select col-12' name='id__utang' id='id_akun'>
+                                            <select class='custom-select col-12' name='id__utang' id='no_akun'>
                                                 <?php foreach ($utang_dagang as $utang) : ?>
                                                     <?php if ($utang->id_utang_dagang == $jb_12['id_utang_dagang']) { ?>
                                                         <option value='<?= $utang->id_utang_dagang ?>' selected>
@@ -153,9 +153,9 @@
                                     <div class='form-group row'>
                                         <label class='col-sm-12 col-md-2 col-form-label'>Utang Dagang</label>
                                         <div class='col-sm-12 col-md-10'>
-                                            <input class='form-control' type='hidden' name='id_jb_utang_dagang' value='<?= $jb_12['id_jb'] ?>' required>
-                                            <input class='form-control' type='hidden' name='id_jb_akun_utang_dagang' value='<?= $jb_12['id_akun'] ?>' required>
-                                            <input class='form-control' id='jb_utang' type='text' name='kredit2' value='<?= $jb_12['kredit'] ?>' placeholder='Jumlah Kas Masuk' required>
+                                            <input class='form-control' type='number' name='id_jb_utang_dagang' value='<?= $jb_12['id_jb'] ?>' required>
+                                            <input class='form-control' type='number' name='id_jb_akun_utang_dagang' value='<?= $jb_12['no_akun'] ?>' required>
+                                            <input class='form-control' id='jb_utang' type='number' name='kredit2' value='<?= $jb_12['kredit'] ?>' placeholder='Jumlah Kas Masuk' required>
                                         </div>
                                     </div>
                                 </div>

@@ -3,7 +3,7 @@
 
         <div class="page-title">
             <div class="title_center">
-                <h3>Selamat datang,  <small> Bendahara Disdikpora</small></h3>
+                <h3>Selamat datang,  <small> </small></h3>
 
             </div>
 
@@ -29,7 +29,7 @@
                                     <input class="form-control" type="hidden" id="" name="no_transaksi" value="<?= $jps->no_transaksi ?>" placeholder="jpsmlah penjpsalan" required>
                                 </div>
                             </div>
-                            <?php if ($jps->no_akun == 8) { ?>
+                            <?php if ($jps->no_akun == 211) { ?>
 
                                 <div class='form-group row'>
                                     <label class='col-sm-12 col-md-2 col-form-label'>Akun Utang Dagang</label>
@@ -63,7 +63,7 @@
                                     <label class="col-sm-12 col-md-2 col-form-label">Retur Pembelian</label>
                                     <div class="col-sm-12 col-md-10">
                                         <?php
-                                        $jpsretur = "SELECT * FROM jps WHERE no_transaksi = '$jps->no_transaksi' AND no_akun != 8";
+                                        $jpsretur = "SELECT * FROM jurnal_penyesuaian WHERE no_transaksi = '$jps->no_transaksi' AND no_akun != 8";
                                         $jpsre = $this->db->query($jpsretur)->row_array();
                                         ?>
                                         <input class="form-control" type="number" id="id_jps_retur_pembelian" name="id_jps_retur_pembelian" value="<?= $jpsre['id_jps'] ?>" placeholder="jpsmlah" required>
@@ -72,7 +72,7 @@
                                     </div>
                                 </div>
 
-                            <?php } elseif ($jps->no_akun == 13) { ?>
+                            <?php } elseif ($jps->no_akun == 412) { ?>
                                 <div class="form-group row ">
                                     <label class="col-sm-12 col-md-2 col-form-label">Retur Penjpsalan</label>
                                     <div class="col-sm-12 col-md-10">
@@ -88,7 +88,7 @@
                                     <div class='col-sm-12 col-md-10'>
 
                                         <?php
-                                        $jpspiutang = "SELECT * FROM jps WHERE no_transaksi = '$jps->no_transaksi' AND no_akun != 13";
+                                        $jpspiutang = "SELECT * FROM jurnal_penyesuaian WHERE no_transaksi = '$jps->no_transaksi' AND no_akun != 13";
                                         $jps_1 = $this->db->query($jpspiutang)->row_array();
                                         ?>
                                         <select class='custom-select col-12' name='no_akun_piutang_dagang2'>

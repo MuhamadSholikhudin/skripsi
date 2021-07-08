@@ -7,7 +7,7 @@
 
         <div class="row">
             <div class="col-md-4">
-                <a class="btn btn-primary" href="<?= base_url('jurnal/jb/tambah') ?>" role="button">Tambah jb</a>
+                <a class="btn btn-primary" href="<?= base_url('jurnal/jb/tambah') ?>" role="button">Tambah jurnal_pembelian</a>
             </div>
             <br>
             <div class="col-md-12 text-center">
@@ -45,7 +45,7 @@
                 <tbody>
                     <?php foreach ($jb as $ak) : ?>
                         <?php
-                        if ($ak->no_akun == 15) { ?>
+                        if ($ak->no_akun == 511) { ?>
                             <tr>
                                 <td class="table-plus sorting_1" tabindex="0">
                                     <a href="<?= base_url('jurnal/jb/edit/' . $ak->no_transaksi) ?>"><?= $ak->tanggal ?></a>
@@ -53,14 +53,14 @@
                                 <td><?= $ak->no_faktur ?></td>
                                 <td>
                                     <?php
-                                    $qk = "SELECT utang_dagang.nama_utang_dagang as nama_utang_dagang FROM jb JOIN utang_dagang ON jb.id_utang_dagang = utang_dagang.id_utang_dagang  WHERE jb.no_transaksi = '$ak->no_transaksi' AND jb.no_akun = 211";
+                                    $qk = "SELECT utang_dagang.nama_utang_dagang as nama_utang_dagang FROM jurnal_pembelian JOIN utang_dagang ON jurnal_pembelian.id_utang_dagang = utang_dagang.id_utang_dagang  WHERE jurnal_pembelian.no_transaksi = '$ak->no_transaksi' AND jurnal_pembelian.no_akun = 211";
                                     $gk = $this->db->query($qk)->row_array();
                                     echo $gk['nama_utang_dagang'];
                                     ?>
                                 </td>
                                 <td>
                                     <?php
-                                    $qq = "SELECT utang_dagang.no_utang_dagang as no_utang_dagang FROM jb JOIN utang_dagang ON jb.id_utang_dagang = utang_dagang.id_utang_dagang  WHERE jb.no_transaksi = '$ak->no_transaksi' AND jb.no_akun = 211";
+                                    $qq = "SELECT utang_dagang.no_utang_dagang as no_utang_dagang FROM jurnal_pembelian JOIN utang_dagang ON jurnal_pembelian.id_utang_dagang = utang_dagang.id_utang_dagang  WHERE jurnal_pembelian.no_transaksi = '$ak->no_transaksi' AND jurnal_pembelian.no_akun = 211";
                                     $gg = $this->db->query($qq)->row_array();
                                     echo $gg['no_utang_dagang'];
                                     ?>
@@ -73,7 +73,7 @@
                                 </td>
                                 <td>
                                     <?php
-                                    $qk = "SELECT * FROM jb WHERE no_transaksi = $ak->no_transaksi AND no_akun != 511";
+                                    $qk = "SELECT * FROM jurnal_pembelian WHERE no_transaksi = $ak->no_transaksi AND no_akun != 511";
                                     $gk = $this->db->query($qk)->row_array();
                                     echo rupiah($gk['kredit']);
                                     ?>
@@ -100,7 +100,7 @@
                                 </td>
                                 <td>
                                     <?php
-                                    $qkp1 = "SELECT utang_dagang.nama_utang_dagang as nama_utang_dagang, utang_dagang.no_utang_dagang as no_utang_dagang FROM jb JOIN utang_dagang ON jb.id_utang_dagang = utang_dagang.id_utang_dagang  WHERE jb.no_transaksi = '$ak->no_transaksi' AND jb.no_akun = 211";
+                                    $qkp1 = "SELECT utang_dagang.nama_utang_dagang as nama_utang_dagang, utang_dagang.no_utang_dagang as no_utang_dagang FROM jurnal_pembelian JOIN utang_dagang ON jurnal_pembelian.id_utang_dagang = utang_dagang.id_utang_dagang  WHERE jurnal_pembelian.no_transaksi = '$ak->no_transaksi' AND jurnal_pembelian.no_akun = 211";
                                     $gkp1 = $this->db->query($qkp1)->row_array();
                                     echo $gkp1['nama_utang_dagang'];
                                     ?>
@@ -114,7 +114,7 @@
                                 </td>
                                 <td>
                                     <?php
-                                    $qkp34 = "SELECT akun.nama_akun as nama_akun FROM jb JOIN akun ON akun.no_akun = jb.no_akun  WHERE jb.no_transaksi = '$ak->no_transaksi'";
+                                    $qkp34 = "SELECT akun.nama_akun as nama_akun FROM jurnal_pembelian JOIN akun ON akun.no_akun = jurnal_pembelian.no_akun  WHERE jurnal_pembelian.no_transaksi = '$ak->no_transaksi'";
                                     $gkp34 = $this->db->query($qkp34)->row_array();
                                     echo $gkp34['nama_akun'];
                                     ?>
@@ -126,7 +126,7 @@
                                 </td>
                                 <td>
                                     <?php
-                                    $qk23 = "SELECT * FROM jb WHERE no_transaksi = '$ak->no_transaksi' AND no_akun = 211";
+                                    $qk23 = "SELECT * FROM jurnal_pembelian WHERE no_transaksi = '$ak->no_transaksi' AND no_akun = 211";
                                     $gkh = $this->db->query($qk23)->row_array();
                                     echo rupiah($gkh['kredit']);
                                     ?>
@@ -152,7 +152,7 @@
                         <td></td>
                         <td>
                             <?php
-                            $qk = "SELECT SUM(debet) as pembelian FROM jb WHERE no_akun = 511";
+                            $qk = "SELECT SUM(debet) as pembelian FROM jurnal_pembelian WHERE no_akun = 511";
                             $gk = $this->db->query($qk)->row_array();
                             echo rupiah($gk['pembelian']);
                             ?>
@@ -163,14 +163,14 @@
                         <td></td>
                         <td>
                             <?php
-                            $qk = "SELECT SUM(debet) as total FROM jb WHERE no_akun != 511 AND no_akun != 211 ";
+                            $qk = "SELECT SUM(debet) as total FROM jurnal_pembelian WHERE no_akun != 511 AND no_akun != 211 ";
                             $gk = $this->db->query($qk)->row_array();
                             echo rupiah($gk['total']);
                             ?>
                         </td>
                         <td>
                             <?php
-                            $qk = "SELECT SUM(kredit) as utang_dagang FROM jb WHERE no_akun = 211";
+                            $qk = "SELECT SUM(kredit) as utang_dagang FROM jurnal_pembelian WHERE no_akun = 211";
                             $gk = $this->db->query($qk)->row_array();
                             echo rupiah($gk['utang_dagang']);
                             ?>

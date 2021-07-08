@@ -57,7 +57,7 @@
                                 <label class="col-sm-12 col-md-2 col-form-label">Akun Piutang Dagang</label>
                                 <div class="col-sm-12 col-md-10">
                                     <?php
-                                    $fgh = "SELECT * FROM jj WHERE no_transaksi = '$jj->no_transaksi' AND id_akun = 3";
+                                    $fgh = "SELECT * FROM jurnal_penjualan WHERE no_transaksi = '$jj->no_transaksi' AND no_akun = 113";
                                     $jb_1 = $this->db->query($fgh)->row_array();
                                     ?>
                                     <select class="custom-select col-12" name="id_piu" id="id_akun" required>
@@ -79,7 +79,7 @@
                                 <label class="col-sm-12 col-md-2 col-form-label">Piutang Dagang (D)</label>
                                 <div class="col-sm-12 col-md-10">
                                     <!-- <input class="form-control" type="hidden" name="id_akun_piutang_dagang" required> -->
-                                    <input class="form-control" type="hidden" name="jj_id_piutang" value="<?= $jb_1['id_jj'] ?>" placeholder="Jumlah" required>
+                                    <input class="form-control" type="text" name="jj_id_piutang" value="<?= $jb_1['id_jj'] ?>" placeholder="Jumlah" required>
                                     <input class="form-control" type="number" id="jj_piutang" name="debet" value="<?= $jb_1['debet'] ?>" placeholder="Jumlah" required>
                                 </div>
                             </div>

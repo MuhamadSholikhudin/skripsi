@@ -46,7 +46,7 @@
                                 </div>
                             </div>
 
-                            <?php if ($jkm->no_akun == 12) { ?>
+                            <?php if ($jkm->no_akun == 411) { ?>
 
                                 <input class='form-control' type='hidden' name='no_transaksi' value='<?= $jkm->no_transaksi ?>' required>
 
@@ -64,7 +64,7 @@
                                     <div class='form-group row penj_kas'><label class='col-sm-12 col-md-2 col-form-label'>KAS</label>
                                         <div class='col-sm-12 col-md-10'><input class='form-control' type='hidden' name='no_akun_kas' value='1' required>
                                             <?php
-                                            $qk = "SELECT * FROM jkm WHERE no_transaksi = $jkm->no_transaksi AND no_akun = 1";
+                                            $qk = "SELECT * FROM jurnal_pemasukan_kas WHERE no_transaksi = $jkm->no_transaksi AND no_akun = 111";
                                             $gk = $this->db->query($qk)->row_array();
                                             ?>
                                             <input class='form-control' type='hidden' name='akun_kas' value='<?= $gk['id_jkm']; ?>' required>
@@ -73,7 +73,7 @@
                                     </div>
                                 </div>
 
-                            <?php } elseif ($jkm->no_akun == 3) { ?>
+                            <?php } elseif ($jkm->no_akun == 113) { ?>
                                 <input class='form-control' type='hidden' name='no_transaksi' value='<?= $jkm->no_transaksi ?>' required>
 
                                 <div id='jkmapp2'>
@@ -109,7 +109,7 @@
                                         <div class='col-sm-12 col-md-10'>
                                             <input class='form-control' type='hidden' name='no_akun_potongan_penjualan2' required>
                                             <?php
-                                            $qk1 = "SELECT * FROM jkm WHERE no_transaksi = $jkm->no_transaksi AND no_akun = 14";
+                                            $qk1 = "SELECT * FROM jurnal_pemasukan_kas WHERE no_transaksi = $jkm->no_transaksi AND no_akun = 413";
                                             $gp = $this->db->query($qk1)->row_array();
                                             ?>
                                             <input class='form-control' type='number' name='akun_pot_pen' value='<?= $gp['id_jkm']; ?>' required>
@@ -120,7 +120,7 @@
                                         <div class='col-sm-12 col-md-10'>
                                             <input class='form-control' type='hidden' name='no_akun_kas2' required>
                                             <?php
-                                            $qk2 = "SELECT * FROM jkm WHERE no_transaksi = $jkm->no_transaksi AND no_akun = 1";
+                                            $qk2 = "SELECT * FROM jurnal_pemasukan_kas WHERE no_transaksi = $jkm->no_transaksi AND no_akun = 111";
                                             $gk2 = $this->db->query($qk2)->row_array();
                                             ?>
                                             <input class='form-control' type='number' name='akun_kas1' value='<?= $gk2['id_jkm']; ?>' required>
@@ -133,7 +133,7 @@
                                 <input class='form-control' type='hidden' name='no_transaksi' value='<?= $jkm->no_transaksi ?>' required>
 
                                 <div id='jkmapp3'>
-                                    <div class='form-group row'><label class='col-sm-12 col-md-2 col-form-label'><?= $jkm->no_akun ?>Pilih Akun Serba Serbi</label>
+                                    <div class='form-group row'><label class='col-sm-12 col-md-2 col-form-label'>Pilih Akun Serba Serbi</label>
                                         <div class='col-sm-12 col-md-10'>
                                             <select class='custom-select col-12' name='no_akun'>
 
@@ -169,7 +169,7 @@
                                         <div class='col-sm-12 col-md-10'>
                                             <!-- <input class='form-control' type='hidden' name='no_akun_kas3' required> -->
                                             <?php
-                                            $qk3 = "SELECT * FROM jkm WHERE no_transaksi = '$jkm->no_transaksi' AND no_akun = 1";
+                                            $qk3 = "SELECT * FROM jurnal_pemasukan_kas WHERE no_transaksi = '$jkm->no_transaksi' AND no_akun = 111";
                                             $gk3 = $this->db->query($qk3)->row_array();
                                             ?>
                                             <input class='form-control' type='hidden' name='akun_kas3' value='<?= $gk3['id_jkm']; ?>' required>

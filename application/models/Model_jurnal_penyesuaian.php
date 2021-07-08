@@ -1,19 +1,19 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Model_jkk extends CI_Model
+class Model_jurnal_penyesuaian extends CI_Model
 {
     public function tampil_data()
     {
-        return $this->db->get('jkk');
+        return $this->db->get('jurnal_pemasukan_kas');
     }
 
-    public function tambah_jkk($data, $table)
+    public function tambah_jurnal_pemasukan_kas($data, $table)
     {
         $this->db->insert($table, $data);
     }
 
-    public function edit_jkk($where, $table)
+    public function edit_jurnal_pemasukan_kas($where, $table)
     {
         return $this->db->get_where($table, $where);
     }
@@ -31,23 +31,23 @@ class Model_jkk extends CI_Model
     }
 
 
-    function get_jkk($keyword)
+    function get_jurnal_pemasukan_kas($keyword)
     {
-        $query = $this->db->query("SELECT * FROM jkk WHERE  kode_jkk LIKE '%$keyword%' OR nama_jkk LIKE '%$keyword%' ");
+        $query = $this->db->query("SELECT * FROM jurnal_pemasukan_kas WHERE  kode_jurnal_pemasukan_kas LIKE '%$keyword%' OR nama_jurnal_pemasukan_kas LIKE '%$keyword%' ");
         return $query->result();
     }
 
-    function cari_jkk($nama_jkk)
+    function cari_jurnal_pemasukan_kas($nama_jurnal_pemasukan_kas)
     {
-        $query = $this->db->query("SELECT * FROM jkk WHERE   nama_jkk LIKE '%$nama_jkk%' ");
+        $query = $this->db->query("SELECT * FROM jurnal_pemasukan_kas WHERE   nama_jurnal_pemasukan_kas LIKE '%$nama_jurnal_pemasukan_kas%' ");
         return $query->result();
     }
 
     public function find($id)
     {
-        $result = $this->db->where('id_jkk', $id)
+        $result = $this->db->where('id_jurnal_pemasukan_kas', $id)
             ->limit(1)
-            ->get('jkk');
+            ->get('jurnal_pemasukan_kas');
         if ($result->num_rows() > 0) {
             return $result->row();
         } else {
@@ -57,7 +57,7 @@ class Model_jkk extends CI_Model
 
     public function detail_brg($id_brg)
     {
-        $result = $this->db->where('id_brg', $id_brg)->get('tb_jkk');
+        $result = $this->db->where('id_brg', $id_brg)->get('tb_jurnal_pemasukan_kas');
         if ($result->num_rows() > 0) {
             return $result->result();
         } else {
@@ -68,7 +68,7 @@ class Model_jkk extends CI_Model
     public function get_keyword($keyword)
     {
         $this->db->select('*');
-        $this->db->from('tb_jkk');
+        $this->db->from('tb_jurnal_pemasukan_kas');
         $this->db->like('nama_brg', $keyword);
         $this->db->or_like('kategori', $keyword);
         $this->db->or_like('harga', $keyword);

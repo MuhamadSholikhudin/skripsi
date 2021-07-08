@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class jj extends CI_Controller
+class Jj extends CI_Controller
 {
 
     public function index()
@@ -15,7 +15,7 @@ class jj extends CI_Controller
 
     public function tambah()
     {
-        // $data['jj'] = $this->db->query("SELECT * FROM jj ORDER BY no_jj ASC")->result();
+        // $data['jurnal_penjualan'] = $this->db->query("SELECT * FROM jurnal_penjualan ORDER BY no_jurnal_penjualan ASC")->result();
         $data['piutang_dagang'] = $this->db->query("SELECT * FROM piutang_dagang ORDER BY nama_piutang_dagang ASC")->result();
         $this->load->view('templates/header');
         $this->load->view('templates/sidebar');

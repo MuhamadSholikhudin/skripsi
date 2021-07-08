@@ -1,13 +1,13 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class jps extends CI_Controller
+class Jps extends CI_Controller
 {
 
 
     public function index()
     {
-        $data['jps'] = $this->db->query("SELECT * FROM jps GROUP BY no_transaksi ORDER BY tanggal ASC")->result();
+        $data['jps'] = $this->db->query("SELECT * FROM jurnal_penyesuaian GROUP BY no_transaksi ORDER BY tanggal ASC")->result();
         $this->load->view('templates/header');
         $this->load->view('templates/sidebar');
         $this->load->view('jps/index', $data);
@@ -16,7 +16,7 @@ class jps extends CI_Controller
 
     public function tambah()
     {
-        // $data['jps'] = $this->db->query("SELECT * FROM jps ORDER BY no_jps ASC")->result();
+        // $data['jurnal_penyesuaian'] = $this->db->query("SELECT * FROM jurnal_penyesuaian ORDER BY no_jurnal_penyesuaian ASC")->result();
         $data['piutang_dagang'] = $this->db->query("SELECT * FROM piutang_dagang ORDER BY nama_piutang_dagang ASC")->result();
 
         $this->load->view('templates/header');
@@ -54,7 +54,7 @@ class jps extends CI_Controller
                     'no_transaksi'    =>  $no_transaksi
             )
         );
-            $this->db->insert_batch('jps', $data); 
+            $this->db->insert_batch('jurnal_penyesuaian', $data); 
             redirect('jps/index');
 
         }elseif($pil == 2){
@@ -81,7 +81,7 @@ class jps extends CI_Controller
                 )
             );
 
-            $this->db->insert_batch('jps', $data);
+            $this->db->insert_batch('jurnal_penyesuaian', $data);
             redirect('jps/index');
         }elseif($pil == 3){
             $kredit = $this->input->post('kredit3');
@@ -104,7 +104,7 @@ class jps extends CI_Controller
                     'no_transaksi'    =>  $no_transaksi
                 )
             );
-            $this->db->insert_batch('jps', $data);
+            $this->db->insert_batch('jurnal_penyesuaian', $data);
             redirect('jps/index');
         } elseif ($pil == 4) {
             $kredit = $this->input->post('kredit4');
@@ -128,7 +128,7 @@ class jps extends CI_Controller
                     'no_transaksi'    =>  $no_transaksi
                 )
             );
-            $this->db->insert_batch('jps', $data);
+            $this->db->insert_batch('jurnal_penyesuaian', $data);
             redirect('jps/index');
         } elseif ($pil == 5) {
             $kredit = $this->input->post('kredit5');
@@ -152,7 +152,7 @@ class jps extends CI_Controller
                     'no_transaksi'    =>  $no_transaksi
                 )
             );
-            $this->db->insert_batch('jps', $data);
+            $this->db->insert_batch('jurnal_penyesuaian', $data);
             redirect('jps/index');
         } elseif ($pil == 6) {
             $kredit = $this->input->post('kredit6');
@@ -176,7 +176,7 @@ class jps extends CI_Controller
                     'no_transaksi'    =>  $no_transaksi
                 )
             );
-            $this->db->insert_batch('jps', $data);
+            $this->db->insert_batch('jurnal_penyesuaian', $data);
             redirect('jps/index');
         } elseif ($pil == 7) {
             $kredit = $this->input->post('kredit7');
@@ -200,7 +200,7 @@ class jps extends CI_Controller
                     'no_transaksi'    =>  $no_transaksi
                 )
             );
-            $this->db->insert_batch('jps', $data);
+            $this->db->insert_batch('jurnal_penyesuaian', $data);
             redirect('jps/index');
         }
 
@@ -208,7 +208,7 @@ class jps extends CI_Controller
 
     public function edit($no_transaksi)
     {
-        $data['jps'] = $this->db->query("SELECT * FROM jps WHERE no_transaksi = '$no_transaksi' ")->row();
+        $data['jps'] = $this->db->query("SELECT * FROM jurnal_penyesuaian WHERE no_transaksi = '$no_transaksi' ")->row();
         $data['piutang_dagang'] = $this->db->query("SELECT * FROM piutang_dagang ")->result();
 $data['akun'] = [10, 9];
         $this->load->view('templates/header');
@@ -258,8 +258,8 @@ $data['akun'] = [10, 9];
                     'id_syarat'    =>  0
                 )
             );
-            // $this->db->update_batch('jps', $data);
-            $this->db->update_batch('jps', $data, 'id_jps');
+            // $this->db->update_batch('jurnal_penyesuaian', $data);
+            $this->db->update_batch('jurnal_penyesuaian', $data, 'id_jps');
             redirect('jurnal/jps/index');
 
         } elseif ($pil == 2) {
@@ -312,8 +312,8 @@ $data['akun'] = [10, 9];
                     'id_syarat'    =>  0
                 )
             );
-            // $this->db->update_batch('jps', $data);
-            $this->db->update_batch('jps', $data, 'id_jps');
+            // $this->db->update_batch('jurnal_penyesuaian', $data);
+            $this->db->update_batch('jurnal_penyesuaian', $data, 'id_jps');
             redirect('jurnal/jps/index');
 
         } elseif ($pil == 3) {
@@ -356,15 +356,15 @@ $data['akun'] = [10, 9];
                     'id_syarat'    =>  0
                 )
             );
-            // $this->db->update_batch('jps', $data);
-            $this->db->update_batch('jps', $data, 'id_jps');
+            // $this->db->update_batch('jurnal_penyesuaian', $data);
+            $this->db->update_batch('jurnal_penyesuaian', $data, 'id_jps');
             redirect('jurnal/jps/index');
         }
 
     }
 
     public function hapus($no_transaksi){
-        $this->db->delete('jps', array('no_transaksi' => $no_transaksi));
+        $this->db->delete('jurnal_penyesuaian', array('no_transaksi' => $no_transaksi));
         redirect('jurnal/jps/index');
 
     }

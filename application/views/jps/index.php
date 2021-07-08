@@ -36,7 +36,7 @@
                             <td><?= $ak->tanggal ?></td>
                             <td>
                                 <?php
-                                $qq = "SELECT  akun.nama_akun as nama_akun FROM jps JOIN akun ON jps.no_akun = akun.no_akun  WHERE jps.no_transaksi = '$ak->no_transaksi' ";
+                                $qq = "SELECT  akun.nama_akun as nama_akun FROM jurnal_penyesuaian JOIN akun ON jurnal_penyesuaian.no_akun = akun.no_akun  WHERE jurnal_penyesuaian.no_transaksi = '$ak->no_transaksi' ";
                                 $gg = $this->db->query($qq)->row_array();
                                 echo $gg['nama_akun'];
                                 ?>
@@ -62,7 +62,7 @@
                             <td></td>
                             <td></td>
                             <td><?php
-                                $q2 = "SELECT  jps.kredit, akun.nama_akun as nama_akun FROM jps JOIN akun ON jps.no_akun = akun.no_akun  WHERE jps.no_transaksi = '$ak->no_transaksi' AND jps.no_akun != $ak->no_akun";
+                                $q2 = "SELECT  jurnal_penyesuaian.kredit, akun.nama_akun as nama_akun FROM jurnal_penyesuaian JOIN akun ON jurnal_penyesuaian.no_akun = akun.no_akun  WHERE jurnal_penyesuaian.no_transaksi = '$ak->no_transaksi' AND jurnal_penyesuaian.no_akun != $ak->no_akun";
                                 $g2 = $this->db->query($q2)->row_array();
 
                                 ?>
@@ -86,7 +86,7 @@
                         <td></td>
                         <td>
                             <?php
-                            $qk = "SELECT SUM(debet) as total_debet, SUM(kredit) as total_kredit FROM jps ";
+                            $qk = "SELECT SUM(debet) as total_debet, SUM(kredit) as total_kredit FROM jurnal_penyesuaian ";
                             $gk = $this->db->query($qk)->row_array();
                             echo rupiah($gk['total_debet']);
                             ?>

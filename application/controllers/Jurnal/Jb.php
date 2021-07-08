@@ -16,7 +16,7 @@ class Jb extends CI_Controller
 
     public function tambah()
     {
-        // $data['jb'] = $this->db->query("SELECT * FROM jb ORDER BY no_jb ASC")->result();
+        // $data['jurnal_pembelian'] = $this->db->query("SELECT * FROM jurnal_pembelian ORDER BY no_jurnal_pembelian ASC")->result();
         $data['utang_dagang'] = $this->db->query("SELECT * FROM utang_dagang ORDER BY nama_utang_dagang ASC")->result();
         $this->load->view('templates/header');
         $this->load->view('templates/sidebar');
@@ -122,7 +122,7 @@ class Jb extends CI_Controller
         $no_faktur = $this->input->post('no_faktur');
 
         if ($pil == 1) {
-            
+
             $id_jb_pembelian = $this->input->post('id_jb_pembelian');
             $id_jb_akun_pembelian = $this->input->post('id_jb_akun_pembelian');
             $debet = $this->input->post('debet1');
@@ -136,7 +136,7 @@ class Jb extends CI_Controller
                 array(
                     //pembelian
                     'id_jb' => $id_jb_pembelian,
-                    'no_akun'    =>  $id_jb_akun_pembelian,
+                    'no_akun'    =>  $id_jb_pembelian,
                     'kredit' =>  0,
                     'debet' =>  $debet,
                     'tanggal'    =>  $tanggal,

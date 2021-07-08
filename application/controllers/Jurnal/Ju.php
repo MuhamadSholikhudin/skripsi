@@ -7,7 +7,7 @@ class Ju extends CI_Controller
 
     public function index()
     {
-        $data['ju'] = $this->db->query("SELECT * FROM ju GROUP BY no_transaksi ORDER BY no_transaksi ASC")->result();
+        $data['ju'] = $this->db->query("SELECT * FROM jurnal_umum GROUP BY no_transaksi ORDER BY no_transaksi ASC")->result();
         $this->load->view('templates/header');
         $this->load->view('templates/sidebar');
         $this->load->view('ju/index', $data);
@@ -16,12 +16,12 @@ class Ju extends CI_Controller
 
     public function tambah()
     {
-        // $data['ju'] = $this->db->query("SELECT * FROM ju ORDER BY no_ju ASC")->result();
+        // $data['jurnal_umum'] = $this->db->query("SELECT * FROM jurnal_umum ORDER BY no_jurnal_umum ASC")->result();
         $data['utang_dagang'] = $this->db->query("SELECT * FROM utang_dagang ORDER BY nama_utang_dagang ASC")->result();
         $data['piutang_dagang'] = $this->db->query("SELECT * FROM piutang_dagang ORDER BY nama_piutang_dagang ASC")->result();
         $this->load->view('templates/header');
         $this->load->view('templates/sidebar');
-        $this->load->view('ju/tambah', $data);
+        $this->load->view('jurnal_umum/tambah', $data);
         $this->load->view('templates/footer');
     }
 
@@ -62,7 +62,7 @@ class Ju extends CI_Controller
                     
                 )
             );
-            $this->db->insert_batch('ju', $data);
+            $this->db->insert_batch('jurnal_umum', $data);
             redirect('jurnal/ju/index');
         } elseif ($pil == 2) {
 
@@ -73,7 +73,7 @@ class Ju extends CI_Controller
 
             $data = array(
                 array(
-                    //Retur Pemjualan
+                    //Retur Pemjurnal_umumalan
                     'no_akun'    =>  412,
                     'kredit' =>  0,
                     'debet' =>  $debet,
@@ -94,14 +94,14 @@ class Ju extends CI_Controller
                     'id_utang_dagang'    =>  0
                 )
             );
-            $this->db->insert_batch('ju', $data);
-            redirect('jurnal/ju/index');
+            $this->db->insert_batch('jurnal_umum', $data);
+            redirect('ju/ju/index');
         }
     }
 
     public function edit($no_transaksi)
     {
-        $data['ju'] = $this->db->query("SELECT * FROM ju WHERE no_transaksi = '$no_transaksi' ")->row();
+        $data['ju'] = $this->db->query("SELECT * FROM jurnal_umum WHERE no_transaksi = '$no_transaksi' ")->row();
         $data['utang_dagang'] = $this->db->query("SELECT * FROM utang_dagang ORDER BY nama_utang_dagang ASC")->result();
         $data['piutang_dagang'] = $this->db->query("SELECT * FROM piutang_dagang ORDER BY nama_piutang_dagang ASC")->result();
         $data['akun'] = [5, 6];
@@ -154,7 +154,7 @@ class Ju extends CI_Controller
                     'id_piutang_dagang'    =>  0
                 )
             );
-            $this->db->update_batch('ju', $data, 'id_ju');
+            $this->db->update_batch('jurnal_umum', $data, 'id_ju');
             redirect('jurnal/ju/index');
         } elseif ($pil == 2) {
 
@@ -170,7 +170,7 @@ class Ju extends CI_Controller
 
             $data = array(
                 array(
-                    //Retur Penjualan
+                    //Retur Penjurnal_umumalan
                     'id_ju' => $id_ju_retur_penjualan,
                     'no_akun'    =>  $id_akun_retur_penjualan,
                     'kredit' =>  0,
@@ -183,7 +183,7 @@ class Ju extends CI_Controller
                 ),
                 array(
                     //piutang dagang
-                    'id_ju' => $id_ju_piutang_dagang,
+                    'id_jurnal_umum' => $id_ju_piutang_dagang,
                     'no_akun'    =>  $id_ju_akun_piutang_dagang,
                     'kredit' =>  $kredit,
                     'debet' =>  0,
@@ -193,7 +193,7 @@ class Ju extends CI_Controller
                     'id_utang_dagang'    =>  0
                 )
             );
-            $this->db->update_batch('ju', $data, 'id_ju');
+            $this->db->update_batch('jurnal_umum', $data, 'id_ju');
             redirect('jurnal/ju/index');
         }
     }

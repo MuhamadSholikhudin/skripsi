@@ -1,19 +1,19 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Model_ju extends CI_Model
+class Model_jurnal_penjualan extends CI_Model
 {
     public function tampil_data()
     {
-        return $this->db->get('ju');
+        return $this->db->get('jurnal_penjualan');
     }
 
-    public function tambah_ju($data, $table)
+    public function tambah_jurnal_penjualan($data, $table)
     {
         $this->db->insert($table, $data);
     }
 
-    public function edit_ju($where, $table)
+    public function edit_jurnal_penjualan($where, $table)
     {
         return $this->db->get_where($table, $where);
     }
@@ -31,23 +31,23 @@ class Model_ju extends CI_Model
     }
 
 
-    function get_ju($keyword)
+    function get_jurnal_penjualan($keyword)
     {
-        $query = $this->db->query("SELECT * FROM ju WHERE  kode_ju LIKE '%$keyword%' OR nama_ju LIKE '%$keyword%' ");
+        $query = $this->db->query("SELECT * FROM jurnal_penjualan WHERE  kode_jurnal_penjualan LIKE '%$keyword%' OR nama_jurnal_penjualan LIKE '%$keyword%' ");
         return $query->result();
     }
 
-    function cari_ju($nama_ju)
+    function cari_jurnal_penjualan($nama_jurnal_penjualan)
     {
-        $query = $this->db->query("SELECT * FROM ju WHERE   nama_ju LIKE '%$nama_ju%' ");
+        $query = $this->db->query("SELECT * FROM jurnal_penjualan WHERE   nama_jurnal_penjualan LIKE '%$nama_jurnal_penjualan%' ");
         return $query->result();
     }
 
     public function find($id)
     {
-        $result = $this->db->where('id_ju', $id)
+        $result = $this->db->where('id_jurnal_penjualan', $id)
             ->limit(1)
-            ->get('ju');
+            ->get('jurnal_penjualan');
         if ($result->num_rows() > 0) {
             return $result->row();
         } else {
@@ -57,7 +57,7 @@ class Model_ju extends CI_Model
 
     public function detail_brg($id_brg)
     {
-        $result = $this->db->where('id_brg', $id_brg)->get('tb_ju');
+        $result = $this->db->where('id_brg', $id_brg)->get('tb_jurnal_penjualan');
         if ($result->num_rows() > 0) {
             return $result->result();
         } else {
@@ -68,7 +68,7 @@ class Model_ju extends CI_Model
     public function get_keyword($keyword)
     {
         $this->db->select('*');
-        $this->db->from('tb_ju');
+        $this->db->from('tb_jurnal_penjualan');
         $this->db->like('nama_brg', $keyword);
         $this->db->or_like('kategori', $keyword);
         $this->db->or_like('harga', $keyword);

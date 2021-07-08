@@ -73,13 +73,13 @@
                                 <div class="col-sm-12 col-md-10">
                                     <input class="form-control" type="hidden" name="pil" value="2" required>
                                     <input class="form-control" type="hidden" name="id_akun_piutang_dagang" required>
-                                    <input class="form-control" type="number" id="jb_piutang" name="kredit2" placeholder="Jumlah piutang dagang" required>
+                                    <input class="form-control" type="number" id="jurnal_pembelian_piutang" name="kredit2" placeholder="Jumlah piutang dagang" required>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-12 col-md-2 col-form-label">syarat</label>
                                 <div class="col-sm-12 col-md-10">
-                                    <select class="custom-select col-12" name="syarat2" id="jb_syarat">
+                                    <select class="custom-select col-12" name="syarat2" id="jurnal_pembelian_syarat">
                                         <option value="1">Tidak ada</option>
                                         <option value="2">2/10, n/30</option>
                                         <option value="3">3/10, n/30</option>
@@ -90,14 +90,14 @@
                                 <label class="col-sm-12 col-md-2 col-form-label">Potongan penjualan</label>
                                 <div class="col-sm-12 col-md-10">
                                     <input class="form-control" type="hidden" name="id_akun_potongan_penjualan2" required>
-                                    <input class="form-control" type="number" id="jb_potpenj" name="debet2" placeholder="Jumlah Kas Masuk" required>
+                                    <input class="form-control" type="number" id="jurnal_pembelian_potpenj" name="debet2" placeholder="Jumlah Kas Masuk" required>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-12 col-md-2 col-form-label">KAS</label>
                                 <div class="col-sm-12 col-md-10">
                                     <input class="form-control" type="hidden" name="id_akun_kas2" required>
-                                    <input class="form-control" id="jb_kas" type="number" name="debet2" placeholder="Jumlah Kas Masuk" required>
+                                    <input class="form-control" id="jurnal_pembelian_kas" type="number" name="debet2" placeholder="Jumlah Kas Masuk" required>
                                 </div>
                             </div> -->
 
@@ -130,10 +130,10 @@
                             </div> -->
 
 
-                            <!-- <div class="form-group row jb">
-                                <label class="col-sm-12 col-md-2 col-form-label">Nama jb</label>
+                            <!-- <div class="form-group row jurnal_pembelian">
+                                <label class="col-sm-12 col-md-2 col-form-label">Nama jurnal_pembelian</label>
                                 <div class="col-sm-12 col-md-10">
-                                    <input class="form-control" type="text" name="nama_jb" placeholder="Isi Nama jb" required>
+                                    <input class="form-control" type="text" name="nama_jurnal_pembelian" placeholder="Isi Nama jurnal_pembelian" required>
                                 </div>
                             </div> -->
 
