@@ -21,13 +21,18 @@
 
         <div class="row">
             
-            <button type="button" class="btn btn-secondary btn-lg">Large Button</button>
-            <button type="button" class="btn btn-secondary btn-lg">Large Button</button>
-            <button type="button" class="btn btn-secondary btn-lg">Large Button</button>
-            <button type="button" class="btn btn-secondary btn-lg">Large Button</button>
-            <button type="button" class="btn btn-secondary btn-lg">Large Button</button>
-            <button type="button" class="btn btn-secondary btn-lg">Large Button</button>
-            <button type="button" class="btn btn-secondary btn-lg">Large Button</button>
+            <a href="<?= base_url('pilihan/menu/siklus_akuntansi/'.$bulan_pilih.'/' . $tahun_pilih) ?>" class="btn btn-secondary btn-lg">Siklus Akuntansi</a>
+           <a href="<?= base_url('pilihan/menu/jkm/'.$bulan_pilih.'/' . $tahun_pilih) ?>" class="btn btn-secondary btn-lg">Jurnal pemasukan kas</a>
+           <a href="<?= base_url('pilihan/menu/jkk/'.$bulan_pilih.'/' . $tahun_pilih) ?>" class="btn btn-secondary btn-lg">Jurnal pengeluaran kas</a>
+           <a href="<?= base_url('pilihan/menu/jb/'.$bulan_pilih.'/' . $tahun_pilih) ?>" class="btn btn-secondary btn-lg">Jurnal</a>
+           <a href="<?= base_url('pilihan/menu/jj/'.$bulan_pilih.'/' . $tahun_pilih) ?>" class="btn btn-secondary btn-lg">Jurnal</a>
+           <a href="<?= base_url('pilihan/menu/ju/'.$bulan_pilih.'/' . $tahun_pilih) ?>" class="btn btn-secondary btn-lg">Jurnal</a>
+           <a href="<?= base_url('pilihan/menu/jps/'.$bulan_pilih.'/' . $tahun_pilih) ?>" class="btn btn-secondary btn-lg">Jurnal</a>
+           <a href="<?= base_url('pilihan/menu/jurnal/'.$bulan_pilih.'/' . $tahun_pilih) ?>" class="btn btn-secondary btn-lg">Jurnal</a>           
+           <a href="<?= base_url('pilihan/menu/buku_besar/'.$bulan_pilih.'/' . $tahun_pilih) ?>" class="btn btn-secondary btn-lg">Buku Besar</a>
+           <a href="<?= base_url('pilihan/menu/kertas_kerja/'.$bulan_pilih.'/' . $tahun_pilih) ?>" class="btn btn-secondary btn-lg">Kertas kerja</a>
+           <a href="<?= base_url('pilihan/menu/laporan/'.$bulan_pilih.'/' . $tahun_pilih) ?>" class="btn btn-secondary btn-lg">Laporan</a>
+            
 
 
             <!-- isi -->
