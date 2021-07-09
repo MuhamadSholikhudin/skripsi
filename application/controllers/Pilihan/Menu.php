@@ -46,6 +46,20 @@ class Menu extends CI_Controller
         $this->load->view('templates/footer');
     }
 
+public function jkm($bulan_pilih, $tahun_pilih)
+    {
+        // $data_cek = $this->db->query("SELECT YEAR(tanggal), MONTH(tanggal) FROM jurnal_pemasukan_kas WHERE MONTH(tanggal) = $bulan_pilih AND YEAR(tanggal) = $tahun_pilih")->row();
+        $data['data_jkm'] = $this->db->query("SELECT * FROM jurnal_pemasukan_kas WHERE MONTH(tanggal) = $bulan_pilih AND YEAR(tanggal) = $tahun_pilih GROUP BY no_transaksi")->row();
+
+$data['bulan_pilih'] = [$bulan_pilih];
+$data['tahun_pilih'] = [$tahun_pilih];
+
+        $this->load->view('templates/header');
+        $this->load->view('templates/sidebar');
+        $this->load->view('menu/jkm/index', $data);
+        $this->load->view('templates/footer');
+    }
+
     public function pil()
     {
 
