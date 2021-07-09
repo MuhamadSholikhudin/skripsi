@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>SISTEM BENDAHARA DISDIKPORA</title>
+    <title>SIA TOKO NORKAYATI</title>
 
     <!-- Bootstrap -->
     <link href="<?= base_url('assets/'); ?>vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -46,7 +46,7 @@
             <div class="animate form login_form">
                 <section class="login_content">
                     <form class="text-dark" action="<?= base_url('auth/login'); ?>" method="POST" enctype="multipart/form-data">
-                        <?= $this->session->flashdata('message'); ?>
+                        <?= $this->session->flashdata('pesan'); ?>
                         <h1>Login Form</h1>
                         <div>
                             <input type="text" class="form-control" placeholder="Username" name="username" required="" />
@@ -70,7 +70,9 @@
                             <br />
 
                             <div>
-                                <h1>SILOKASPEN</h1>
+                                <h1>
+                                    <p> SIA PERUSAHAAN DAGANG TOKO NORKAYATI </p>
+                                </h1>
 
                             </div>
                         </div>

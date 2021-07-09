@@ -1,6 +1,7 @@
 <?php
 
 class Model_auth extends CI_Model{
+
     public function cek_login(){
         $username = set_value('username');
         $password = set_value('password');
@@ -8,9 +9,9 @@ class Model_auth extends CI_Model{
         $result = $this->db->where('username', $username)
                             ->where('password', $password)
                             ->where('status', 'Aktif')
-                            ->where('bagian', 'karyawan')
+                            
                             ->limit(1)
-                            ->get('user');
+                            ->get('pengguna');
         if($result->num_rows() > 0){
             return $result->row();
         }else{
@@ -27,9 +28,9 @@ class Model_auth extends CI_Model{
         $result = $this->db->where('username', $username)
             ->where('password', $password)
             ->where('status', 'Aktif')
-            ->where('bagian', 'pemilik')
+            ->where('hakakses', 'hakakses')
             ->limit(1)
-            ->get('user');
+            ->get('pengguna');
         if ($result->num_rows() > 0) {
             return $result->row();
         } else {

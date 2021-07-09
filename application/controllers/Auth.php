@@ -6,9 +6,8 @@ class Auth extends CI_Controller{
         $this->form_validation->set_rules('password', 'password', 'required', ['required' => 'Password wajib di Isi !']);
 
         if ($this->form_validation->run() == FALSE){
-            $this->load->view('login/login_karyawan');
-   
-        }else {
+            $this->load->view('form_login');
+           }else {
             $auth = $this->Model_auth->cek_login();
             if($auth == FALSE){
                 $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -21,12 +20,18 @@ class Auth extends CI_Controller{
                     redirect('auth/login');
             }else {
                 $this->session->set_userdata('username', $auth->username);
-                $this->session->set_userdata('nama_lengkap', $auth->nama_lengkap);
-                $this->session->set_userdata('bagian', $auth->bagian);
-                $this->session->set_userdata('id_user', $auth->id_user);
+                $this->session->set_userdata('nama', $auth->nama);
+                $this->session->set_userdata('hakakses', $auth->hakakses);
+                $this->session->set_userdata('id_pengguna', $auth->id_pengguna);
 
                 switch($auth->hakakses){
-                    case 'karyawan' : redirect('karyawan/dashboard');
+                    case 1 : redirect('dashboard');
+                        break;
+                    case 2:
+                        redirect('dashboard');
+                        break;
+                    case 3:
+                        redirect('dashboard');
                         break;
                     default: break;
                 }

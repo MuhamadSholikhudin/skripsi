@@ -44,16 +44,29 @@
           <!-- sidebar menu -->
           <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
             <div class="menu_section">
-              <h3>General</h3>
+              <?php
+              if ($this->session->userdata('hakakses') == 1) {
+                echo  '<h3>Pemilik</h3>';
+              } elseif ($this->session->userdata('hakakses') == 2) {
+                echo  '<h3>Bendahara</h3>';
+              } elseif ($this->session->userdata('hakakses') == 3) {
+                echo  '<h3>Kasir</h3>';
+              }
+              ?>
               <ul class="nav side-menu">
                 <li>
-                  <a href="<?= base_url('pemilik/dashboard/') ?>">
+                  <a href="<?= base_url('dashboard/') ?>">
                     <i class="fa fa-home"></i> Dashboard
                   </a>
                 </li>
                 <li class=""><a><i class="fa fa-money"></i> Akun <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu" style="display: none;">
                     <li><a href="<?= base_url('akun/') ?>">Akun</a></li>
+                  </ul>
+                </li>
+                <li class=""><a><i class="fa fa-user"></i> Pengguna <span class="fa fa-chevron-down"></span></a>
+                  <ul class="nav child_menu" style="display: none;">
+                    <li><a href="<?= base_url('pengguna/') ?>">Pengguna</a></li>
                   </ul>
                 </li>
                 <li class=""><a><i class="fa fa-desktop"></i> Jurnal <span class="fa fa-chevron-down"></span></a>
@@ -124,10 +137,10 @@
                   <li class="bg-light text-dark text-center">
                     <a class="bg-light text-dark">
                       Transaksi hari ini
-                     
-                   
+
+
                       <h5>
-                        
+
                       </h5>
                     </a>
                   </li>
@@ -164,9 +177,9 @@
                   <li class="bg-light text-dark text-center">
                     <a class="bg-light text-dark">
                       Transaksi hari ini
-                    
+
                       <h5>
-                        
+
                       </h5>
                     </a>
                   </li>
