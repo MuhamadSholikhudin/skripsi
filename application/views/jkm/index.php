@@ -7,7 +7,14 @@
 
         <div class="row">
             <div class="col-md-4">
-                <a class="btn btn-primary" href="<?= base_url('jurnal/jkm/tambah') ?>" role="button">Tambah jkm</a>
+                <?php
+                if ($pilihan[0] == 'menu') { ?>
+                    <a class="btn btn-primary" href="<?= base_url('pilihan/jkm/tambah/' . $bulan_pilih[0] . '/' . $tahun_pilih[0]) ?>" role="button">Tambah jkm</a>
+                <?php } else { ?>
+                    <a class="btn btn-primary" href="<?= base_url('jurnal/jkm/tambah') ?>" role="button">Tambah jkm</a>
+                <?php } ?>
+
+
             </div>
             <!-- <div class="col-md-12">
                 <h3>Data jkm</h3>
@@ -15,6 +22,7 @@
 
             <br>
             <div class="col-md-12 text-center">
+
                 <h5>Toko Norkayati</h5>
                 <h5>Jurnal Penerimaan Kas</h5>
                 <h5>Periode <?= date('m-Y') ?> </h5>
@@ -69,17 +77,33 @@
                                 <td>
 
                                 </td>
-                                <td>
-                                    <div class="dropdown">
-                                        <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
-                                            <i class="dw dw-more"></i>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                                            <a class="dropdown-item" href="<?= base_url('jurnal/jkm/edit/') . $ak->no_transaksi ?>"><i class="fa fa-edit"></i> Ubah</a>
-                                            <a class="dropdown-item" href="<?= base_url('jurnal/jkm/hapus/') . $ak->no_transaksi ?>"><i class="fa fa-trash"></i> Hapus</a>
+                                <?php if ($pilihan[0] == 'menu') { ?>
+                                    <td>
+                                        <div class="dropdown">
+                                            <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                                                <i class="dw dw-more"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                                                <a class="dropdown-item" href="<?= base_url('pilihan/jkm/edit/') . $ak->no_transaksi . '/' . $bulan_pilih[0] ?>"><i class="fa fa-edit"></i> Ubah</a>
+                                                <a class="dropdown-item" href="<?= base_url('pilihan/jkm/hapus/') . $ak->no_transaksi . '/' . $bulan_pilih[0] ?>"><i class="fa fa-trash"></i> Hapus</a>
+                                            </div>
                                         </div>
-                                    </div>
-                                </td>
+                                    </td>
+                                <?php } elseif ($pilihan[0] == 'samping') { ?>
+                                    <td>
+                                        <div class="dropdown">
+                                            <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                                                <i class="dw dw-more"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                                                <a class="dropdown-item" href="<?= base_url('jurnal/jkm/edit/') . $ak->no_transaksi  ?>"><i class="fa fa-edit"></i> Ubah</a>
+                                                <a class="dropdown-item" href="<?= base_url('jurnal/jkm/hapus/') . $ak->no_transaksi  ?>"><i class="fa fa-trash"></i> Hapus</a>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                <?php } ?>
+
                             </tr>
                         <?php    } elseif ($ak->no_akun == 113) { ?>
                             <tr>
@@ -109,7 +133,6 @@
                                     if ($gk['debet'] > 0) {
                                         echo rupiah($gk['debet']);
                                     } else {
-
                                     }
 
                                     ?></td>
@@ -120,17 +143,33 @@
                                 <td>
 
                                 </td>
-                                <td>
-                                    <div class="dropdown">
-                                        <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
-                                            <i class="dw dw-more"></i>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                                            <a class="dropdown-item" href="<?= base_url('jurnal/jkm/edit/') . $ak->no_transaksi ?>"><i class="fa fa-edit"></i> Ubah</a>
-                                            <a class="dropdown-item" href="<?= base_url('jurnal/jkm/hapus/') . $ak->no_transaksi ?>"><i class="fa fa-trash"></i> Hapus</a>
+                                <?php if ($pilihan[0] == 'menu') { ?>
+                                    <td>
+                                        <div class="dropdown">
+                                            <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                                                <i class="dw dw-more"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                                                <a class="dropdown-item" href="<?= base_url('pilihan/jkm/edit/') . $ak->no_transaksi . '/' . $bulan_pilih[0] ?>"><i class="fa fa-edit"></i> Ubah</a>
+                                                <a class="dropdown-item" href="<?= base_url('pilihan/jkm/hapus/') . $ak->no_transaksi . '/' . $bulan_pilih[0] ?>"><i class="fa fa-trash"></i> Hapus</a>
+                                            </div>
                                         </div>
-                                    </div>
-                                </td>
+                                    </td>
+                                <?php } elseif ($pilihan[0] == 'samping') { ?>
+                                    <td>
+                                        <div class="dropdown">
+                                            <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                                                <i class="dw dw-more"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                                                <a class="dropdown-item" href="<?= base_url('jurnal/jkm/edit/') . $ak->no_transaksi  ?>"><i class="fa fa-edit"></i> Ubah</a>
+                                                <a class="dropdown-item" href="<?= base_url('jurnal/jkm/hapus/') . $ak->no_transaksi  ?>"><i class="fa fa-trash"></i> Hapus</a>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                <?php } ?>
+
                             </tr>
 
                         <?php } else { ?>
@@ -162,17 +201,36 @@
                                 <td>
                                     <?= rupiah($ak->kredit) ?>
                                 </td>
-                                <td>
-                                    <div class="dropdown">
-                                        <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
-                                            <i class="dw dw-more"></i>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                                            <a class="dropdown-item" href="<?= base_url('jurnal/jkm/edit/') . $ak->no_transaksi ?>"><i class="fa fa-edit"></i> Ubah</a>
-                                            <a class="dropdown-item" href="<?= base_url('jurnal/jkm/hapus/') . $ak->no_transaksi ?>"><i class="fa fa-trash"></i> Hapus</a>
+
+                                <?php if ($pilihan[0] == 'menu') { ?>
+                                    <td>
+                                        <div class="dropdown">
+                                            <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                                                <i class="dw dw-more"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                                                <a class="dropdown-item" href="<?= base_url('pilihan/jkm/edit/') . $ak->no_transaksi . '/' . $bulan_pilih[0] ?>"><i class="fa fa-edit"></i> Ubah</a>
+                                                <a class="dropdown-item" href="<?= base_url('pilihan/jkm/hapus/') . $ak->no_transaksi . '/' . $bulan_pilih[0] ?>"><i class="fa fa-trash"></i> Hapus</a>
+                                            </div>
                                         </div>
-                                    </div>
-                                </td>
+                                    </td>
+                                <?php } elseif ($pilihan[0] == 'samping') { ?>
+                                    <td>
+                                        <div class="dropdown">
+                                            <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                                                <i class="dw dw-more"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                                                <a class="dropdown-item" href="<?= base_url('jurnal/jkm/edit/') . $ak->no_transaksi  ?>"><i class="fa fa-edit"></i> Ubah</a>
+                                                <a class="dropdown-item" href="<?= base_url('jurnal/jkm/hapus/') . $ak->no_transaksi  ?>"><i class="fa fa-trash"></i> Hapus</a>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                <?php } ?>
+
+
+
                             </tr>
                         <?php } ?>
 

@@ -8,6 +8,8 @@ class Jkm extends CI_Controller
     public function index()
     {
         $data['jkm'] = $this->db->query("SELECT * FROM jurnal_pemasukan_kas GROUP BY no_transaksi ORDER BY tanggal ASC")->result();
+        $data['pilihan'] = ['samping'];
+        
         $this->load->view('templates/header');
         $this->load->view('templates/sidebar');
         $this->load->view('jkm/index', $data);
@@ -18,6 +20,7 @@ class Jkm extends CI_Controller
     {
         // $data['jurnal_pemasukan_kas'] = $this->db->query("SELECT * FROM jurnal_pemasukan_kas ORDER BY no_jurnal_pemasukan_kas ASC")->result();
         $data['piutang_dagang'] = $this->db->query("SELECT * FROM piutang_dagang ORDER BY nama_piutang_dagang ASC")->result();
+        $data['pilihan'] = ['samping'];  
 
         $this->load->view('templates/header');
         $this->load->view('templates/sidebar');
@@ -27,15 +30,15 @@ class Jkm extends CI_Controller
 
     public function aksi_tambah()
     {
-
         $pil = $this->input->post('pil');
         $no_transaksi = strtotime(date("d-m-Y H:i:s"));
         $tanggal = $this->input->post('tanggal');
+        $id_pengguna = $this->input->post('id_pengguna');
+
         if($pil == 1){
             $kredit = $this->input->post('kredit1');
             $debet = $this->input->post('debet1');
            
-
             $data = array(
             array(
                     //penjualan
@@ -46,6 +49,7 @@ class Jkm extends CI_Controller
                     'no_transaksi'	=>  $no_transaksi,
                     'id_piutang_dagang'    =>  0,
                     'id_utang_dagang'    =>  0,
+                    'id_pengguna'    =>  $id_pengguna,
                     'id_syarat'	=>  0
 
             ),
@@ -58,6 +62,7 @@ class Jkm extends CI_Controller
                     'no_transaksi'    =>  $no_transaksi,
                     'id_piutang_dagang'    =>  0,
                     'id_utang_dagang'    =>  0,
+                    'id_pengguna'    =>  $id_pengguna,
                     'id_syarat'    =>  0
             )
         );
@@ -82,6 +87,7 @@ class Jkm extends CI_Controller
                     'no_transaksi'    =>  $no_transaksi,
                     'id_piutang_dagang'    =>  $piutang,
                     'id_utang_dagang'    =>  0,
+                    'id_pengguna'    =>  $id_pengguna,
                     'id_syarat'    =>  0
 
                 ),
@@ -94,6 +100,7 @@ class Jkm extends CI_Controller
                     'no_transaksi'    =>  $no_transaksi,
                     'id_piutang_dagang'    =>  0,
                     'id_utang_dagang'    =>  0,
+                    'id_pengguna'    =>  $id_pengguna,
                     'id_syarat'    =>  0
                 ),
                 array(
@@ -105,6 +112,7 @@ class Jkm extends CI_Controller
                     'no_transaksi'    =>  $no_transaksi,
                     'id_piutang_dagang'    =>  0,
                     'id_utang_dagang'    =>  0,
+                    'id_pengguna'    =>  $id_pengguna,
                     'id_syarat'    =>  0
                 )
             );
@@ -128,6 +136,7 @@ class Jkm extends CI_Controller
                     'no_transaksi'    =>  $no_transaksi,
                     'id_piutang_dagang'    =>  0,
                     'id_utang_dagang'    =>  0,
+                    'id_pengguna'    =>  $id_pengguna,
                     'id_syarat'    =>  0
 
                 ),
@@ -140,6 +149,7 @@ class Jkm extends CI_Controller
                     'no_transaksi'    =>  $no_transaksi,
                     'id_piutang_dagang'    =>  0,
                     'id_utang_dagang'    =>  0,
+                    'id_pengguna'    =>  $id_pengguna,
                     'id_syarat'    =>  0
                 )
             );
@@ -154,6 +164,9 @@ class Jkm extends CI_Controller
         $data['jkm'] = $this->db->query("SELECT * FROM jurnal_pemasukan_kas WHERE no_transaksi = '$no_transaksi' ")->row();
         $data['piutang_dagang'] = $this->db->query("SELECT * FROM piutang_dagang ")->result();
         $data['akun'] = [10, 9];
+        $data['pilihan'] = ['samping'];
+
+
         $this->load->view('templates/header');
         $this->load->view('templates/sidebar');
         $this->load->view('jkm/edit', $data);
@@ -166,6 +179,7 @@ class Jkm extends CI_Controller
         $pil = $this->input->post('pil');
         $no_transaksi = $this->input->post('no_transaksi');
         $tanggal = $this->input->post('tanggal');
+        $id_pengguna = $this->input->post('id_pengguna');
         
         if ($pil == 1) {
             $kredit = $this->input->post('kredit1');
@@ -185,6 +199,7 @@ class Jkm extends CI_Controller
                     'no_transaksi'    =>  $no_transaksi,
                     'id_piutang_dagang'    =>  0,
                     'id_utang_dagang'    =>  0,
+                    'id_pengguna'    =>  $id_pengguna,
                     'id_syarat'    =>  0
 
                 ),
@@ -198,6 +213,7 @@ class Jkm extends CI_Controller
                     'no_transaksi'    =>  $no_transaksi,
                     'id_piutang_dagang'    =>  0,
                     'id_utang_dagang'    =>  0,
+                    'id_pengguna'    =>  $id_pengguna,
                     'id_syarat'    =>  0
                 )
             );
@@ -227,6 +243,7 @@ class Jkm extends CI_Controller
                     'no_transaksi'    =>  $no_transaksi,
                     'id_piutang_dagang'    =>  $piutang2,
                     'id_utang_dagang'    =>  0,
+                    'id_pengguna'    =>  $id_pengguna,
                     'id_syarat'    =>  0
 
                 ),
@@ -240,6 +257,7 @@ class Jkm extends CI_Controller
                     'no_transaksi'    =>  $no_transaksi,
                     'id_piutang_dagang'    =>  0,
                     'id_utang_dagang'    =>  0,
+                    'id_pengguna'    =>  $id_pengguna,                
                     'id_syarat'    =>  0
                 ),
                 array(
@@ -252,6 +270,7 @@ class Jkm extends CI_Controller
                     'no_transaksi'    =>  $no_transaksi,
                     'id_piutang_dagang'    =>  0,
                     'id_utang_dagang'    =>  0,
+                    'id_pengguna'    =>  $id_pengguna,
                     'id_syarat'    =>  0
                 )
             );
@@ -280,6 +299,7 @@ class Jkm extends CI_Controller
                     'no_transaksi'    =>  $no_transaksi,
                     'id_piutang_dagang'    =>  0,
                     'id_utang_dagang'    =>  0,
+                    'id_pengguna'    =>  $id_pengguna,
                     'id_syarat'    =>  0
 
                 ),
@@ -293,6 +313,7 @@ class Jkm extends CI_Controller
                     'no_transaksi'    =>  $no_transaksi,
                     'id_piutang_dagang'    =>  0,
                     'id_utang_dagang'    =>  0,
+                    'id_pengguna'    =>  $id_pengguna,
                     'id_syarat'    =>  0
                 )
             );

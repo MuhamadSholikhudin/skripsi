@@ -21,17 +21,17 @@
 
         <div class="row">
             
-            <a href="<?= base_url('pilihan/menu/siklus_akuntansi/'.$bulan_pilih.'/' . $tahun_pilih) ?>" class="btn btn-secondary btn-lg">Siklus Akuntansi</a>
-           <a href="<?= base_url('pilihan/menu/jkm/'.$bulan_pilih.'/' . $tahun_pilih) ?>" class="btn btn-secondary btn-lg">Jurnal pemasukan kas</a>
-           <a href="<?= base_url('pilihan/menu/jkk/'.$bulan_pilih.'/' . $tahun_pilih) ?>" class="btn btn-secondary btn-lg">Jurnal pengeluaran kas</a>
-           <a href="<?= base_url('pilihan/menu/jb/'.$bulan_pilih.'/' . $tahun_pilih) ?>" class="btn btn-secondary btn-lg">Jurnal</a>
-           <a href="<?= base_url('pilihan/menu/jj/'.$bulan_pilih.'/' . $tahun_pilih) ?>" class="btn btn-secondary btn-lg">Jurnal</a>
-           <a href="<?= base_url('pilihan/menu/ju/'.$bulan_pilih.'/' . $tahun_pilih) ?>" class="btn btn-secondary btn-lg">Jurnal</a>
-           <a href="<?= base_url('pilihan/menu/jps/'.$bulan_pilih.'/' . $tahun_pilih) ?>" class="btn btn-secondary btn-lg">Jurnal</a>
-           <a href="<?= base_url('pilihan/menu/jurnal/'.$bulan_pilih.'/' . $tahun_pilih) ?>" class="btn btn-secondary btn-lg">Jurnal</a>           
-           <a href="<?= base_url('pilihan/menu/buku_besar/'.$bulan_pilih.'/' . $tahun_pilih) ?>" class="btn btn-secondary btn-lg">Buku Besar</a>
-           <a href="<?= base_url('pilihan/menu/kertas_kerja/'.$bulan_pilih.'/' . $tahun_pilih) ?>" class="btn btn-secondary btn-lg">Kertas kerja</a>
-           <a href="<?= base_url('pilihan/menu/laporan/'.$bulan_pilih.'/' . $tahun_pilih) ?>" class="btn btn-secondary btn-lg">Laporan</a>
+            <a href="<?= base_url('pilihan/siklus_akuntansi/index/'.$data_menu->bulan.'/' . $data_menu->tahun) ?>" class="btn btn-secondary btn-lg">Siklus Akuntansi</a>
+           <a href="<?= base_url('pilihan/jkm/index/'. $data_menu->bulan.'/' . $data_menu->tahun) ?>" class="btn btn-secondary btn-lg">Jurnal pemasukan kas</a>
+           <a href="<?= base_url('pilihan/jkk/index/'. $data_menu->bulan.'/' . $data_menu->tahun) ?>" class="btn btn-secondary btn-lg">Jurnal pengeluaran kas</a>
+           <a href="<?= base_url('pilihan/jb/index/'. $data_menu->bulan.'/' . $data_menu->tahun) ?>" class="btn btn-secondary btn-lg">Jurnal Pembelian</a>
+           <a href="<?= base_url('pilihan/jj/index/'. $data_menu->bulan.'/' . $data_menu->tahun) ?>" class="btn btn-secondary btn-lg">Jurnal Penjualan</a>
+           <a href="<?= base_url('pilihan/ju/index/'. $data_menu->bulan.'/' . $data_menu->tahun) ?>" class="btn btn-secondary btn-lg">Jurnal Umum</a>
+           <a href="<?= base_url('pilihan/jps/index/'. $data_menu->bulan.'/' . $data_menu->tahun) ?>" class="btn btn-secondary btn-lg">Jurnal Penyesuaian</a>
+           <a href="<?= base_url('pilihan/jurnal/index/'. $data_menu->bulan.'/' . $data_menu->tahun) ?>" class="btn btn-secondary btn-lg">Jurnal</a>           
+           <a href="<?= base_url('pilihan/buku_besar/index/'. $data_menu->bulan.'/' . $data_menu->tahun) ?>" class="btn btn-secondary btn-lg">Buku Besar</a>
+           <a href="<?= base_url('pilihan/kertas_kerja/index/'. $data_menu->bulan.'/' . $data_menu->tahun) ?>" class="btn btn-secondary btn-lg">Kertas kerja</a>
+           <a href="<?= base_url('pilihan/laporan/index/'. $data_menu->bulan.'/' . $data_menu->tahun) ?>" class="btn btn-secondary btn-lg">Laporan</a>
             
 
 

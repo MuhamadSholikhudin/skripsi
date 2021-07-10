@@ -8,16 +8,24 @@ class Jkk extends CI_Controller
     public function index($bulan_pilih, $tahun_pilih)
     {
         $data['jkk'] = $this->db->query("SELECT * FROM jurnal_pengeluaran_kas WHERE MONTH(tanggal) = $bulan_pilih AND YEAR(tanggal) = $tahun_pilih GROUP BY no_transaksi ORDER BY tanggal ASC")->result();
+
+        $data['pilihan'] = ['menu'];
+        $data['bulan_pilih'] = [$bulan_pilih];
+        $data['tahun_pilih'] = [$tahun_pilih];
+
         $this->load->view('templates/header');
         $this->load->view('templates/sidebar');
         $this->load->view('jkk/index', $data);
         $this->load->view('templates/footer');
     }
 
-    public function tambah()
+    public function tambah($bulan_pilih, $tahun_pilih)
     {
         // $data['jurnal_pengeluaran_kas'] = $this->db->query("SELECT * FROM jurnal_pengeluaran_kas ORDER BY no_jurnal_pengeluaran_kas ASC")->result();
         $data['utang_dagang'] = $this->db->query("SELECT * FROM utang_dagang ORDER BY nama_utang_dagang ASC")->result();
+        $data['pilihan'] = ['menu'];
+        $data['bulan_pilih'] = [$bulan_pilih];
+        $data['tahun_pilih'] = [$tahun_pilih];
 
         $this->load->view('templates/header');
         $this->load->view('templates/sidebar');
@@ -32,6 +40,12 @@ class Jkk extends CI_Controller
         $pil = $this->input->post('pil');
         $no_transaksi = strtotime(date("d-m-Y H:i:s"));
         $tanggal = $this->input->post('tanggal');
+
+        $id_pengguna = $this->input->post('id_pengguna');
+
+        $bulan_pilih = $this->input->post('bulan_pilih');
+        $tahun_pilih = $this->input->post('tahun_pilih');
+
         if ($pil == 1) {
             $debet = $this->input->post('debet1');
             $kredit = $this->input->post('kredit1');
@@ -48,6 +62,7 @@ class Jkk extends CI_Controller
                     'no_transaksi'    =>  $no_transaksi,
                     'id_piutang_dagang'    =>  0,
                     'id_utang_dagang'    =>  $utang_dagang,
+                    'id_pengguna'    =>  $id_pengguna,
                     'id_syarat'    =>  0
 
                 ),
@@ -60,11 +75,12 @@ class Jkk extends CI_Controller
                     'no_transaksi'    =>  $no_transaksi,
                     'id_piutang_dagang'    =>  0,
                     'id_utang_dagang'    =>  0,
+                    'id_pengguna'    =>  $id_pengguna,
                     'id_syarat'    =>  0
                 )
             );
             $this->db->insert_batch('jurnal_pengeluaran_kas', $data);
-            redirect('pilihan/jkk/index');
+            redirect('jurnal/jkk/index/' . $bulan_pilih . '/' . $tahun_pilih);
         } elseif ($pil == 2) {
 
             $debet = $this->input->post('debet2');
@@ -82,6 +98,7 @@ class Jkk extends CI_Controller
                     'no_transaksi'    =>  $no_transaksi,
                     'id_piutang_dagang'    =>  0,
                     'id_utang_dagang'    =>  0,
+                    'id_pengguna'    =>  $id_pengguna,
                     'id_syarat'    =>  0
                 ),
                 array(
@@ -93,6 +110,7 @@ class Jkk extends CI_Controller
                     'no_transaksi'    =>  $no_transaksi,
                     'id_piutang_dagang'    =>  0,
                     'id_utang_dagang'    =>  0,
+                    'id_pengguna'    =>  $id_pengguna,
                     'id_syarat'    =>  0
                 ),
                 array(
@@ -104,16 +122,16 @@ class Jkk extends CI_Controller
                     'no_transaksi'    =>  $no_transaksi,
                     'id_piutang_dagang'    =>  0,
                     'id_utang_dagang'    =>  0,
+                    'id_pengguna'    =>  $id_pengguna,
                     'id_syarat'    =>  0
                 )
             );
             $this->db->insert_batch('jurnal_pengeluaran_kas', $data);
-            redirect('jurnal/jkk/index');
-        } elseif ($pil == 3) {
+            redirect('jurnal/jkk/index/' . $bulan_pilih . '/' . $tahun_pilih);
 
+        } elseif ($pil == 3) {
             $jkk_id_akun_serba = $this->input->post('jkk_id_akun_serba');
             $kredit3 = $this->input->post('kredit3');
-
             $debet3 = $this->input->post('debet3');
 
 
@@ -127,6 +145,7 @@ class Jkk extends CI_Controller
                     'no_transaksi'    =>  $no_transaksi,
                     'id_piutang_dagang'    =>  0,
                     'id_utang_dagang'    =>  0,
+                    'id_pengguna'    =>  $id_pengguna,
                     'id_syarat'    =>  0
 
                 ),
@@ -139,11 +158,12 @@ class Jkk extends CI_Controller
                     'no_transaksi'    =>  $no_transaksi,
                     'id_piutang_dagang'    =>  0,
                     'id_utang_dagang'    =>  0,
+                    'id_pengguna'    =>  $id_pengguna,
                     'id_syarat'    =>  0
                 )
             );
             $this->db->insert_batch('jurnal_pengeluaran_kas', $data);
-            redirect('pilihan/jkk/index');
+            redirect('jurnal/jkk/index/' . $bulan_pilih . '/' . $tahun_pilih);
         }
     }
 
@@ -153,6 +173,7 @@ class Jkk extends CI_Controller
         $data['jkk'] = $this->db->query("SELECT * FROM jurnal_pengeluaran_kas WHERE no_transaksi = '$no_transaksi' ")->row();
         $data['utang_dagang'] = $this->db->query("SELECT * FROM utang_dagang ")->result();
         $data['akun'] = [18, 19, 20, 21];
+        $data['pilihan'] = ['menu'];
 
         $this->load->view('templates/header');
         $this->load->view('templates/sidebar');
@@ -165,7 +186,12 @@ class Jkk extends CI_Controller
         $pil = $this->input->post('pil');
         $no_transaksi = $this->input->post('no_transaksi');
         $tanggal = $this->input->post('tanggal');
+        $id_pengguna = $this->input->post('id_pengguna');
 
+        $cek_data = $this->db->query("SELECT MONTH(tanggal) as bulan, YEAR(tanggal) as tahun FROM jurnal_pengeluaran_kas WHERE no_transaksi = '$no_transaksi'  ")->row();
+        // $bulan = $this->input->post('bulan');
+        // $tahun = $this->input->post('tahun');
+        $data['pilihan'] = ['menu'];
         if ($pil == 1) {
 
             $kredit = $this->input->post('kredit1');
@@ -182,20 +208,21 @@ class Jkk extends CI_Controller
             $data = array(
                 array(
                     //utang dagang
+                    'id_jkk'    =>  $id_jkk_akun_utang_dagang,
                     'no_akun' => $id_jkk_utang_dagang,
-                    'id_akun'    =>  $id_jkk_akun_utang_dagang,
                     'kredit' =>  0,
                     'debet' =>  $debet,
                     'tanggal'    =>  $tanggal,
                     'no_transaksi'    =>  $no_transaksi,
                     'id_piutang_dagang'    =>  0,
                     'id_utang_dagang'    =>  $id_utang_dagang,
+                    'id_pengguna'    => $id_pengguna,
                     'id_syarat'    =>  0
 
                 ),
                 array(
                     //Kas
-                    'id_jurnal_pengeluaran_kas' => $id_jkk_kas,
+                    'id_jkk' => $id_jkk_kas,
                     'no_akun'    =>  $id_jkk_akun_kas,
                     'kredit' =>  $kredit,
                     'debet' =>  0,
@@ -203,12 +230,14 @@ class Jkk extends CI_Controller
                     'no_transaksi'    =>  $no_transaksi,
                     'id_piutang_dagang'    =>  0,
                     'id_utang_dagang'    =>  0,
+                    'id_pengguna'    => $id_pengguna,
                     'id_syarat'    =>  0
                 )
             );
             // $this->db->update_batch('jkm', $data);
-            $this->db->update_batch('jurnal_pengeluaran_kas', $data, 'id_jurnal_pengeluaran_kas');
-            redirect('jurnal/jkk/index');
+            $this->db->update_batch('jurnal_pengeluaran_kas', $data, 'id_jkk');
+            redirect('pilihan/jkk/index/' . $cek_data->bulan . '/' . $cek_data->tahun);
+            
         } elseif ($pil == 2) {
 
             $id_jkk_pembelian = $this->input->post('id_jkk_pembelian');
@@ -234,6 +263,7 @@ class Jkk extends CI_Controller
                     'no_transaksi'    =>  $no_transaksi,
                     'id_piutang_dagang'    =>  0,
                     'id_utang_dagang'    =>  0,
+                    'id_pengguna'    => $id_pengguna,
                     'id_syarat'    =>  0
                 ),
                 array(
@@ -246,6 +276,7 @@ class Jkk extends CI_Controller
                     'no_transaksi'    =>  $no_transaksi,
                     'id_piutang_dagang'    =>  0,
                     'id_utang_dagang'    =>  0,
+                    'id_pengguna'    => $id_pengguna,
                     'id_syarat'    =>  0
                 ),
                 array(
@@ -258,12 +289,15 @@ class Jkk extends CI_Controller
                     'no_transaksi'    =>  $no_transaksi,
                     'id_piutang_dagang'    =>  0,
                     'id_utang_dagang'    =>  0,
+                    'id_pengguna'    => $id_pengguna,
                     'id_syarat'    =>  0
                 )
             );
             // $this->db->update_batch('jkm', $data);
             $this->db->update_batch('jurnal_pengeluaran_kas', $data, 'id_jkk');
-            redirect('pilihan/jkk/index');
+            redirect('pilihan/jkk/index/' . $cek_data->bulan . '/' . $cek_data->tahun);
+
+
         } elseif ($pil == 3) {
 
             $id_jkk_serba = $this->input->post('id_jkk_serba');
@@ -286,6 +320,7 @@ class Jkk extends CI_Controller
                     'no_transaksi'    =>  $no_transaksi,
                     'id_piutang_dagang'    =>  0,
                     'id_utang_dagang'    =>  0,
+                    'id_pengguna'    => $id_pengguna,
                     'id_syarat'    =>  0
 
                 ),
@@ -299,12 +334,22 @@ class Jkk extends CI_Controller
                     'no_transaksi'    =>  $no_transaksi,
                     'id_piutang_dagang'    =>  0,
                     'id_utang_dagang'    =>  0,
+                    'id_pengguna'    => $id_pengguna,
                     'id_syarat'    =>  0
                 )
             );
             // $this->db->update_batch('jkm', $data);
             $this->db->update_batch('jurnal_pengeluaran_kas', $data, 'id_jkk');
-            redirect('pilihan/jkk/index');
+            redirect('pilihan/jkk/index/' . $cek_data->bulan . '/' . $cek_data->tahun);
         }
+    }
+
+    public function hapus($no_transaksi, $bulan_pilih)
+    {
+        $cek_data = $this->db->query("SELECT MONTH(tanggal) as bulan, YEAR(tanggal) as tahun FROM jurnal_pengeluaran_kas WHERE no_transaksi = '$no_transaksi'  AND MONTH(tanggal) = $bulan_pilih")->row();
+        $this->db->delete('jurnal_pengeluaran_kas', array('no_transaksi' => $no_transaksi));
+
+        // redirect('pilihan/jkm/index');
+        redirect('pilihan/jkk/index/' . $cek_data->bulan . '/' . $cek_data->tahun);
     }
 }

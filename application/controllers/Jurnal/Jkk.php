@@ -3,10 +3,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Jkk extends CI_Controller
 {
-
-
     public function index()
     {
+        $data['pilihan'] = ['samping'];
         $data['jkk'] = $this->db->query("SELECT * FROM jurnal_pengeluaran_kas GROUP BY no_transaksi ORDER BY tanggal ASC")->result();
         $this->load->view('templates/header');
         $this->load->view('templates/sidebar');
@@ -18,6 +17,7 @@ class Jkk extends CI_Controller
     {
         // $data['jurnal_pengeluaran_kas'] = $this->db->query("SELECT * FROM jurnal_pengeluaran_kas ORDER BY no_jurnal_pengeluaran_kas ASC")->result();
         $data['utang_dagang'] = $this->db->query("SELECT * FROM utang_dagang ORDER BY nama_utang_dagang ASC")->result();
+        $data['pilihan'] = ['samping'];
 
         $this->load->view('templates/header');
         $this->load->view('templates/sidebar');
@@ -32,6 +32,8 @@ class Jkk extends CI_Controller
         $pil = $this->input->post('pil');
         $no_transaksi = strtotime(date("d-m-Y H:i:s"));
         $tanggal = $this->input->post('tanggal');
+        $id_pengguna = $this->input->post('id_pengguna');
+
         if ($pil == 1) {
             $debet = $this->input->post('debet1');
             $kredit = $this->input->post('kredit1');
@@ -48,6 +50,7 @@ class Jkk extends CI_Controller
                     'no_transaksi'    =>  $no_transaksi,
                     'id_piutang_dagang'    =>  0,
                     'id_utang_dagang'    =>  $utang_dagang,
+                    'id_pengguna'    => $id_pengguna,
                     'id_syarat'    =>  0
 
                 ),
@@ -60,6 +63,7 @@ class Jkk extends CI_Controller
                     'no_transaksi'    =>  $no_transaksi,
                     'id_piutang_dagang'    =>  0,
                     'id_utang_dagang'    =>  0,
+                    'id_pengguna'    => $id_pengguna,
                     'id_syarat'    =>  0
                 )
             );
@@ -82,6 +86,7 @@ class Jkk extends CI_Controller
                     'no_transaksi'    =>  $no_transaksi,
                     'id_piutang_dagang'    =>  0,
                     'id_utang_dagang'    =>  0,
+                    'id_pengguna'    => $id_pengguna,
                     'id_syarat'    =>  0
                 ),
                 array(
@@ -93,6 +98,7 @@ class Jkk extends CI_Controller
                     'no_transaksi'    =>  $no_transaksi,
                     'id_piutang_dagang'    =>  0,
                     'id_utang_dagang'    =>  0,
+                    'id_pengguna'    => $id_pengguna,
                     'id_syarat'    =>  0
                 ),
                 array(
@@ -104,6 +110,7 @@ class Jkk extends CI_Controller
                     'no_transaksi'    =>  $no_transaksi,
                     'id_piutang_dagang'    =>  0,
                     'id_utang_dagang'    =>  0,
+                    'id_pengguna'    => $id_pengguna,
                     'id_syarat'    =>  0
                 )
             );
@@ -127,6 +134,7 @@ class Jkk extends CI_Controller
                     'no_transaksi'    =>  $no_transaksi,
                     'id_piutang_dagang'    =>  0,
                     'id_utang_dagang'    =>  0,
+                    'id_pengguna'    => $id_pengguna,
                     'id_syarat'    =>  0
 
                 ),
@@ -139,6 +147,7 @@ class Jkk extends CI_Controller
                     'no_transaksi'    =>  $no_transaksi,
                     'id_piutang_dagang'    =>  0,
                     'id_utang_dagang'    =>  0,
+                    'id_pengguna'    => $id_pengguna,
                     'id_syarat'    =>  0
                 )
             );
@@ -153,6 +162,7 @@ class Jkk extends CI_Controller
         $data['jkk'] = $this->db->query("SELECT * FROM jurnal_pengeluaran_kas WHERE no_transaksi = '$no_transaksi' ")->row();
         $data['utang_dagang'] = $this->db->query("SELECT * FROM utang_dagang ")->result();
         $data['akun'] = [18, 19, 20, 21];
+        $data['pilihan'] = ['samping'];
 
         $this->load->view('templates/header');
         $this->load->view('templates/sidebar');
@@ -165,6 +175,9 @@ class Jkk extends CI_Controller
         $pil = $this->input->post('pil');
         $no_transaksi = $this->input->post('no_transaksi');
         $tanggal = $this->input->post('tanggal');
+
+        $id_pengguna = $this->input->post('id_pengguna');
+
 
         if ($pil == 1) {
 
