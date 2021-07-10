@@ -7,6 +7,7 @@ class Jb extends CI_Controller
 
     public function index()
     {
+$data['pilihan'] = ['samping'];
         $data['jb'] = $this->db->query("SELECT * FROM jurnal_pembelian GROUP BY no_transaksi ORDER BY tanggal ASC")->result();
         $this->load->view('templates/header');
         $this->load->view('templates/sidebar');
@@ -18,7 +19,8 @@ class Jb extends CI_Controller
     {
         // $data['jurnal_pembelian'] = $this->db->query("SELECT * FROM jurnal_pembelian ORDER BY no_jurnal_pembelian ASC")->result();
         $data['utang_dagang'] = $this->db->query("SELECT * FROM utang_dagang ORDER BY nama_utang_dagang ASC")->result();
-        $this->load->view('templates/header');
+     $data['pilihan'] = ['samping'];   
+$this->load->view('templates/header');
         $this->load->view('templates/sidebar');
         $this->load->view('jb/tambah', $data);
         $this->load->view('templates/footer');
@@ -30,6 +32,7 @@ class Jb extends CI_Controller
         $no_transaksi = strtotime(date("d-m-Y H:i:s"));
         $tanggal = $this->input->post('tanggal');
         $no_faktur = $this->input->post('no_faktur');
+
         if ($pil == 1) {
             $debet = $this->input->post('debet1');
             $kredit = $this->input->post('kredit1');
@@ -46,6 +49,7 @@ class Jb extends CI_Controller
                     'no_transaksi'    =>  $no_transaksi,
                     'no_faktur'    =>  $no_faktur,
                     'id_utang_dagang'    =>  0,
+                    'id_pengguna'    =>  $id_pengguna,
                     'id_syarat'    =>  0
 
                 ),
@@ -58,6 +62,7 @@ class Jb extends CI_Controller
                     'no_transaksi'    =>  $no_transaksi,
                     'no_faktur'    =>  $no_faktur,                  
                     'id_utang_dagang'    =>  $utang_dagang,
+                    'id_pengguna'    =>  $id_pengguna,
                     'id_syarat'    =>  0
                 )
             );
@@ -82,6 +87,7 @@ class Jb extends CI_Controller
                     'no_transaksi'    =>  $no_transaksi,
                     'no_faktur'    =>  $no_faktur,
                     'id_utang_dagang'    =>  0,
+                    'id_pengguna'    =>  $id_pengguna,
                     'id_syarat'    =>  0
 
                 ),
@@ -94,6 +100,7 @@ class Jb extends CI_Controller
                     'no_transaksi'    =>  $no_transaksi,
                     'no_faktur'    =>  $no_faktur,
                     'id_utang_dagang'    =>  $utang_dagang,
+                    'id_pengguna'    =>  $id_pengguna,
                     'id_syarat'    =>  0
                 )
             );
@@ -107,6 +114,7 @@ class Jb extends CI_Controller
         $data['jb'] = $this->db->query("SELECT * FROM jurnal_pembelian WHERE no_transaksi = '$no_transaksi' ")->row();
         $data['utang_dagang'] = $this->db->query("SELECT * FROM utang_dagang ")->result();
         $data['akun'] = [5, 6];
+$data['pilihan'] = ['samping'];
 
         $this->load->view('templates/header');
         $this->load->view('templates/sidebar');
@@ -143,6 +151,7 @@ class Jb extends CI_Controller
                     'no_transaksi'    =>  $no_transaksi,
                     'no_faktur'    =>  $no_faktur,
                     'id_utang_dagang'    =>  0,
+
                     'id_syarat'    =>  0
 
                 ),
@@ -156,6 +165,7 @@ class Jb extends CI_Controller
                     'no_transaksi'    =>  $no_transaksi,
                     'no_faktur'    =>  $no_faktur,
                     'id_utang_dagang'    =>  $id_utang_dagang,
+                    'id_pengguna'    =>  $id_pengguna,
                     'id_syarat'    =>  0
                 )
             );
@@ -187,6 +197,7 @@ class Jb extends CI_Controller
                     'no_transaksi'    =>  $no_transaksi,
                     'no_faktur'    =>  $no_faktur,
                     'id_utang_dagang'    =>  0,
+                    'id_pengguna'    =>  $id_pengguna,
                     'id_syarat'    =>  0
                 ),
                 array(
@@ -199,6 +210,7 @@ class Jb extends CI_Controller
                     'no_transaksi'    =>  $no_transaksi,
                     'no_faktur'    =>  $no_faktur,
                     'id_utang_dagang'    =>  $id__utang,
+                    'id_pengguna'    =>  $id_pengguna,
                     'id_syarat'    =>  0
                 )
             );
