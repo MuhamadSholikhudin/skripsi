@@ -13,10 +13,17 @@
                     </div>
                     <div class="x_content">
                         <br>
+<?php
+if($pilihan[0] == 'menu'){ ?>
+                <form class="bg-white pd-20" action="<?= base_url('pilihan/jb/aksi_tambah') ?>" method="POST" enctype="multipart/form-data">
+<?php }else{ ?>
                         <form class="bg-white pd-20" action="<?= base_url('jurnal/jb/aksi_tambah') ?>" method="POST" enctype="multipart/form-data">
+<?php } ?>
+
+                        
                             <div class="form-group row">
                                 <label class="col-sm-12 col-md-2 col-form-label">Kas Masuk Pada</label>
-                                <div class="col-sm-12 col-md-10">
+                                 <form class="bg-white pd-20" action="<?= base_url('jurnal/jb/aksi_tambah') ?>" method="POST" enctype="multipart/form-data">                       <div class="col-sm-12 col-md-10">
                                     <select class="custom-select col-12" name="kategori" id="kategori_jb">
                                         <option value="pembelian">Pembelian</option>
                                         <option value="akun">Akun serba-serbi</option>

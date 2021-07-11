@@ -7,7 +7,13 @@
 
         <div class="row">
             <div class="col-md-4">
+<?php
+if($pilihan[0] == 'menu'){ ?>
+                <a class="btn btn-primary" href="<?= base_url('jurnal/jb/tambah/'. $bulan_pilih. '/'. $tahun_pilih) ?>" role="button">Tambah jurnal_pembelian</a>
+<?php }else{ ?>
                 <a class="btn btn-primary" href="<?= base_url('jurnal/jb/tambah') ?>" role="button">Tambah jurnal_pembelian</a>
+<?php } ?>
+   
             </div>
             <br>
             <div class="col-md-12 text-center">
@@ -78,6 +84,21 @@
                                     echo rupiah($gk['kredit']);
                                     ?>
                                 </td>
+
+<?php
+if($pilihan[0] == 'menu'){ ?>
+                                <td>
+                                    <div class="dropdown">
+                                        <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                                            <i class="dw dw-more"></i>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                                            <a class="dropdown-item" href="<?= base_url('pilihan/jb/edit/') . $ak->no_transaksi. '/'. $bulan_pilih ?>"><i class="fa fa-edit"></i> Ubah</a>
+                                            <a class="dropdown-item" href="<?= base_url('pilihan/jb/hapus/') . $ak->no_transaksi. '/'. $bulan_pilih ?>"><i class="fa fa-trash"></i> Hapus</a>
+                                        </div>
+                                    </div>
+                                </td>
+<?php }else{ ?>
                                 <td>
                                     <div class="dropdown">
                                         <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
@@ -89,6 +110,8 @@
                                         </div>
                                     </div>
                                 </td>
+<?php } ?>
+                                
                             </tr>
                         <?php    } else { ?>
                             <tr>
@@ -131,6 +154,21 @@
                                     echo rupiah($gkh['kredit']);
                                     ?>
                                 </td>
+
+<?php
+if($pilihan[0] == 'menu'){ ?>
+                                <td>
+                                    <div class="dropdown">
+                                        <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                                            <i class="dw dw-more"></i>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                                            <a class="dropdown-item" href="<?= base_url('pilihan/jb/edit/') . $ak->no_transaksi. '/'. $bulan_pilih ?>"><i class="fa fa-edit"></i> Ubah</a>
+                                            <a class="dropdown-item" href="<?= base_url('pilihan/jb/hapus/') . $ak->no_transaksi. '/'. $bulan_pilih ?>"><i class="fa fa-trash"></i> Hapus</a>
+                                        </div>
+                                    </div>
+                                </td>
+<?php }else{ ?>
                                 <td>
                                     <div class="dropdown">
                                         <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
@@ -142,6 +180,7 @@
                                         </div>
                                     </div>
                                 </td>
+<?php } ?>
                             </tr>
                         <?php } ?>
 

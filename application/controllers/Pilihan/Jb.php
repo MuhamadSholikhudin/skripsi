@@ -5,21 +5,29 @@ class Jb extends CI_Controller
 {
 
 
-    public function index()
+    public function index($bulan_pilih, $tahun_pilih)
     {
-$data['pilihan'] = ['samping'];
-        $data['jb'] = $this->db->query("SELECT * FROM jurnal_pembelian GROUP BY no_transaksi ORDER BY tanggal ASC")->result();
-        $this->load->view('templates/header');
+        $data['jb'] = $this->db->query("SELECT * FROM jurnal_pembelian WHERE MONTH(tanggal) = $bulan_pilih AND YEAR(tanggal) = $tahun_ini GROUP BY no_transaksi ORDER BY tanggal ASC")->result();
+        
+$data['pilihan'] = ['menu'];
+$data['bulan_pilih'] = [$bulan_pilih];
+$data['tahun_pilih'] = [$tahun_pilih];
+
+$this->load->view('templates/header');
         $this->load->view('templates/sidebar');
         $this->load->view('jb/index', $data);
         $this->load->view('templates/footer');
     }
 
-    public function tambah()
+    public function tambah($bulan_pilih, $tahun_pilih)
     {
         // $data['jurnal_pembelian'] = $this->db->query("SELECT * FROM jurnal_pembelian ORDER BY no_jurnal_pembelian ASC")->result();
         $data['utang_dagang'] = $this->db->query("SELECT * FROM utang_dagang ORDER BY nama_utang_dagang ASC")->result();
-     $data['pilihan'] = ['samping'];   
+        $data['pilihan'] = ['menu'];
+$data['bulan_pilih'] = [$bulan_pilih];
+$data['tahun_pilih'] = [$tahun_pilih];
+
+
 $this->load->view('templates/header');
         $this->load->view('templates/sidebar');
         $this->load->view('jb/tambah', $data);
@@ -32,6 +40,12 @@ $this->load->view('templates/header');
         $no_transaksi = strtotime(date("d-m-Y H:i:s"));
         $tanggal = $this->input->post('tanggal');
         $no_faktur = $this->input->post('no_faktur');
+$id_pengguna = $this->input->post('id_pengguna');
+
+$bulan_pilih = $this->input->post('bulan_pilih');
+$tahun_pilih = $this->input->post('tahun_pilih');
+
+
 
         if ($pil == 1) {
             $debet = $this->input->post('debet1');
@@ -67,7 +81,7 @@ $this->load->view('templates/header');
                 )
             );
             $this->db->insert_batch('jurnal_pembelian', $data);
-            redirect('jurnal/jb/index');
+            redirect('jurnal/jb/index/'. $bulan_pilih.'/'. $tahun_pilih);
         } elseif ($pil == 2) {
 
             $debet = $this->input->post('debet2');
@@ -105,16 +119,19 @@ $this->load->view('templates/header');
                 )
             );
             $this->db->insert_batch('jurnal_pembelian', $data);
-            redirect('jurnal/jb/index');
+            redirect('jurnal/jb/index/'. $bulan_pilih.'/'. $tahun_pilih);
         }
     }
 
-    public function edit($no_transaksi)
+    public function edit($no_transaksi, $bulan_pilih)
     {
         $data['jb'] = $this->db->query("SELECT * FROM jurnal_pembelian WHERE no_transaksi = '$no_transaksi' ")->row();
         $data['utang_dagang'] = $this->db->query("SELECT * FROM utang_dagang ")->result();
         $data['akun'] = [5, 6];
-$data['pilihan'] = ['samping'];
+
+$data['pilihan'] = ['menu'];
+$data['bulan_pilih'] = [$bulan_pilih];
+$data['tahun_pilih'] = [$tahun_pilih];
 
         $this->load->view('templates/header');
         $this->load->view('templates/sidebar');
@@ -128,6 +145,9 @@ $data['pilihan'] = ['samping'];
         $no_transaksi = $this->input->post('no_transaksi');
         $tanggal = $this->input->post('tanggal');
         $no_faktur = $this->input->post('no_faktur');
+$id_pengguna = $this->input->post('id_pengguna');
+
+$cek_data =  $this->db->query("SELECT MONTH(tanggal) as bulan, YEAR(tanggal) as tahun FROM jurnal_pembelian WHERE no_transaksi = '$no_transaksi' ")->row();
 
         if ($pil == 1) {
 
@@ -151,7 +171,7 @@ $data['pilihan'] = ['samping'];
                     'no_transaksi'    =>  $no_transaksi,
                     'no_faktur'    =>  $no_faktur,
                     'id_utang_dagang'    =>  0,
-
+                    'id_pengguna'    =>  $id_pengguna,
                     'id_syarat'    =>  0
 
                 ),
@@ -171,7 +191,7 @@ $data['pilihan'] = ['samping'];
             );
             // $this->db->update_batch('jkm', $data);
             $this->db->update_batch('jurnal_pembelian', $data, 'id_jb');
-            redirect('jurnal/jb/index');
+            redirect('jurnal/jb/index/'. $cek_data->bulan.'/'. $cek_data->tahun);
         } elseif ($pil == 2) {
 
             $id_jb_akun = $this->input->post('id_jb_akun');
@@ -210,13 +230,12 @@ $data['pilihan'] = ['samping'];
                     'no_transaksi'    =>  $no_transaksi,
                     'no_faktur'    =>  $no_faktur,
                     'id_utang_dagang'    =>  $id__utang,
-                    'id_pengguna'    =>  $id_pengguna,
                     'id_syarat'    =>  0
                 )
             );
             // $this->db->update_batch('jkm', $data);
             $this->db->update_batch('jurnal_pembelian', $data, 'id_jb');
-            redirect('jurnal/jb/index');
+            redirect('jurnal/jb/index/'. $cek_data->bulan.'/'. $cek_data->tahun);
         }
     }
 }
