@@ -8,7 +8,7 @@
             <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2>Form Tambah Data Barang</h2>
+                        <h2>Form Tambah Data Jural Kas Masuk</h2>
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
@@ -35,11 +35,11 @@
                                     <label class="col-sm-12 col-md-2 col-form-label">Tanggal</label>
                                     <div class="col-sm-12 col-md-10">
 
-                                        <input class="form-control" type="hidden" name="id_pengguna" value="<?= $this->session->userdata('id_pengguna') ?>" required>
+                            <input class="form-control" type="text" name="id_pengguna" value="<?= $this->session->userdata('id_pengguna') ?>" required>
                                         <?php
                                         if ($pilihan[0] == 'menu') { ?>
                                             <?php
-                                            $date = date_create("$tahun_pilih[0]-$bulan_pilih[0]-30");
+                                            $date = date_create("$tahun_pilih[0]-$bulan_pilih[0]-15");
                                             $date_pilih = date_format($date, "Y-m-d");
                                             ?>
                                             <input class="form-control" type="date" id="tanggal" name="tanggal" value="<?= $date_pilih ?>" required>

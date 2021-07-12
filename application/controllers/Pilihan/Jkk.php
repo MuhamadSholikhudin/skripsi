@@ -3,7 +3,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Jkk extends CI_Controller
 {
-
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->helper('tgl_indo');
+    }
 
     public function index($bulan_pilih, $tahun_pilih)
     {
@@ -23,6 +27,8 @@ class Jkk extends CI_Controller
     {
         // $data['jurnal_pengeluaran_kas'] = $this->db->query("SELECT * FROM jurnal_pengeluaran_kas ORDER BY no_jurnal_pengeluaran_kas ASC")->result();
         $data['utang_dagang'] = $this->db->query("SELECT * FROM utang_dagang ORDER BY nama_utang_dagang ASC")->result();
+        $data['akun'] = $this->db->query("SELECT * FROM akun WHERE no_akun LIKE '6%' OR no_akun = 115 OR no_akun =121 OR no_akun = 312 OR no_akun = 412")->result();
+        
         $data['pilihan'] = ['menu'];
         $data['bulan_pilih'] = [$bulan_pilih];
         $data['tahun_pilih'] = [$tahun_pilih];
@@ -80,7 +86,7 @@ class Jkk extends CI_Controller
                 )
             );
             $this->db->insert_batch('jurnal_pengeluaran_kas', $data);
-            redirect('jurnal/jkk/index/' . $bulan_pilih . '/' . $tahun_pilih);
+            redirect('pilihan/jkk/index/' . $bulan_pilih . '/' . $tahun_pilih);
         } elseif ($pil == 2) {
 
             $debet = $this->input->post('debet2');
@@ -127,7 +133,7 @@ class Jkk extends CI_Controller
                 )
             );
             $this->db->insert_batch('jurnal_pengeluaran_kas', $data);
-            redirect('jurnal/jkk/index/' . $bulan_pilih . '/' . $tahun_pilih);
+            redirect('pilihan/jkk/index/' . $bulan_pilih . '/' . $tahun_pilih);
 
         } elseif ($pil == 3) {
             $jkk_id_akun_serba = $this->input->post('jkk_id_akun_serba');
@@ -163,7 +169,7 @@ class Jkk extends CI_Controller
                 )
             );
             $this->db->insert_batch('jurnal_pengeluaran_kas', $data);
-            redirect('jurnal/jkk/index/' . $bulan_pilih . '/' . $tahun_pilih);
+            redirect('pilihan/jkk/index/' . $bulan_pilih . '/' . $tahun_pilih);
         }
     }
 
@@ -172,7 +178,8 @@ class Jkk extends CI_Controller
     {
         $data['jkk'] = $this->db->query("SELECT * FROM jurnal_pengeluaran_kas WHERE no_transaksi = '$no_transaksi' ")->row();
         $data['utang_dagang'] = $this->db->query("SELECT * FROM utang_dagang ")->result();
-        $data['akun'] = [18, 19, 20, 21];
+        $data['akun'] = $this->db->query("SELECT * FROM akun WHERE no_akun LIKE '6%' OR no_akun = 115 OR no_akun =121 OR no_akun = 312 OR no_akun = 412")->result();
+        
         $data['pilihan'] = ['menu'];
 
         $this->load->view('templates/header');
@@ -208,8 +215,8 @@ class Jkk extends CI_Controller
             $data = array(
                 array(
                     //utang dagang
-                    'id_jkk'    =>  $id_jkk_akun_utang_dagang,
-                    'no_akun' => $id_jkk_utang_dagang,
+                    'id_jkk'    =>  $id_jkk_utang_dagang,
+                    'no_akun' => $id_jkk_akun_utang_dagang,
                     'kredit' =>  0,
                     'debet' =>  $debet,
                     'tanggal'    =>  $tanggal,

@@ -16,7 +16,7 @@
             <div class="col-md-12 text-center">
                 <h5>Toko Norkayati</h5>
                 <h5>Buku Besar</h5>
-                <h5>Periode <?= date('m-Y') ?> </h5>
+
             </div>
 
 

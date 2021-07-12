@@ -16,9 +16,11 @@
                 <table class="display text-dark" style="width:100%" border="1" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
                     <thead>
                         <tr role="row">
-                            <th>Kode pengguna</th>
-                            <th>No pengguna</th>
+                            <th>ID pengguna</th>
                             <th>Nama pengguna</th>
+                            <th>Username</th>
+                            <th>Bagian</th>
+                            <th>Status</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -29,6 +31,8 @@
                                 <td class="table-plus sorting_1" tabindex="0"><?= $no++ ?></td>
                                 <td><?= $ak->id_pengguna ?></td>
                                 <td><?= $ak->nama ?></td>
+                                <td><?= $ak->username ?></td>
+                                <td><?= $ak->status ?></td>
                                 <td>
                                     <div class="dropdown">
                                         <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">

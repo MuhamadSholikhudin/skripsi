@@ -21,11 +21,53 @@
             </div> -->
 
             <br>
+
+
+
             <div class="col-md-12 text-center">
 
                 <h5>Toko Norkayati</h5>
                 <h5>Jurnal Penerimaan Kas</h5>
-                <h5>Periode <?= date('m-Y') ?> </h5>
+
+                <?php
+                if ($pilihan[0] == 'menu') { ?>
+                    <h5>Periode
+                        <?php
+                        if ($bulan_pilih[0] == 1) {
+                            echo "Januari";
+                        } elseif ($bulan_pilih[0] == 2) {
+                            echo "Februari";
+                        } elseif ($bulan_pilih[0] == 3) {
+                            echo "Maret";
+                        } elseif ($bulan_pilih[0] == 4) {
+                            echo "April";
+                        } elseif ($bulan_pilih[0] == 5) {
+                            echo "Mei";
+                        } elseif ($bulan_pilih[0] == 6) {
+                            echo "Juni";
+                        } elseif ($bulan_pilih[0] == 7) {
+                            echo "Juli";
+                        } elseif ($bulan_pilih[0] == 8) {
+                            echo "Agustus";
+                        } elseif ($bulan_pilih[0] == 9) {
+                            echo "September";
+                        } elseif ($bulan_pilih[0] == 10) {
+                            echo "Oktober";
+                        } elseif ($bulan_pilih[0] == 11) {
+                            echo "November";
+                        } elseif ($bulan_pilih[0] == 12) {
+                            echo "Desember";
+                        }
+                        ?>
+                        <?= $tahun_pilih[0] ?>
+                    </h5>
+                <?php } else { ?>
+
+                <?php } ?>
+
+
+
+
             </div>
 
             <table class="display text-dark" style="width:100%" border="1" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
@@ -58,7 +100,13 @@
                         if ($ak->no_akun == 411) { ?>
                             <tr>
                                 <td class="table-plus sorting_1" tabindex="0">
-                                    <a href="<?= base_url('jurnal/jkm/edit/' . $ak->no_transaksi) ?>"><?= $ak->tanggal ?></a>
+                                    <?php
+                                    if ($pilihan[0] == 'menu') { ?>
+
+                                        <?= tanggal_pilih($ak->tanggal) ?>
+                                    <?php } else { ?>
+                                        <?= $ak->tanggal ?>
+                                    <?php } ?>
                                 </td>
                                 <td></td>
                                 <td></td>
@@ -108,7 +156,13 @@
                         <?php    } elseif ($ak->no_akun == 113) { ?>
                             <tr>
                                 <td class="table-plus sorting_1" tabindex="0">
-                                    <a href="<?= base_url('jurnal/jkm/edit/' . $ak->no_transaksi) ?>"><?= $ak->tanggal ?></a>
+                                    <?php
+                                    if ($pilihan[0] == 'menu') { ?>
+
+                                        <?= tanggal_pilih($ak->tanggal) ?>
+                                    <?php } else { ?>
+                                        <?= $ak->tanggal ?>
+                                    <?php } ?>
                                 </td>
                                 <td><?php
                                     $qk = "SELECT piutang_dagang.nama_piutang_dagang as nama_piutang_dagang FROM jurnal_pemasukan_kas JOIN piutang_dagang ON jurnal_pemasukan_kas.id_piutang_dagang = piutang_dagang.id_piutang_dagang  WHERE jurnal_pemasukan_kas.no_transaksi = '$ak->no_transaksi' AND jurnal_pemasukan_kas.no_akun = 113";
@@ -175,7 +229,13 @@
                         <?php } else { ?>
                             <tr>
                                 <td class="table-plus sorting_1" tabindex="0">
-                                    <a href="<?= base_url('jurnal/jkm/edit/' . $ak->no_transaksi) ?>"><?= $ak->tanggal ?></a>
+                                    <?php
+                                    if ($pilihan[0] == 'menu') { ?>
+
+                                        <?= tanggal_pilih($ak->tanggal) ?>
+                                    <?php } else { ?>
+                                        <?= $ak->tanggal ?>
+                                    <?php } ?>
                                 </td>
                                 <td></td>
                                 <td></td>
@@ -235,46 +295,91 @@
                         <?php } ?>
 
                     <?php endforeach; ?>
+                    <?php
+                    if ($pilihan[0] == 'menu') { ?>
+                        <tr role="row" class="odd">
+                            <td colspan="3" class="text-center">Jumlah</td>
 
-                    <tr role="row" class="odd">
-                        <td colspan="3" class="text-center">Jumlah</td>
+                            <td>
+                                <?php
+                                $qk = "SELECT SUM(debet) as kas FROM jurnal_pemasukan_kas WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND no_akun = 111";
+                                $gk = $this->db->query($qk)->row_array();
+                                echo rupiah($gk['kas']);
+                                ?>
+                            </td>
+                            <td>
+                                <?php
+                                $qk = "SELECT SUM(debet) as potongan_penjualan FROM jurnal_pemasukan_kas WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND no_akun = 413";
+                                $gk = $this->db->query($qk)->row_array();
+                                echo rupiah($gk['potongan_penjualan']);
+                                ?>
+                            </td>
+                            <td><?php
+                                $qk = "SELECT SUM(kredit) as piutang_dagang FROM jurnal_pemasukan_kas WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND no_akun = 113";
+                                $gk = $this->db->query($qk)->row_array();
+                                echo rupiah($gk['piutang_dagang']);
+                                ?></td>
+                            <td><?php
+                                $qk = "SELECT SUM(kredit) as penjualan FROM jurnal_pemasukan_kas WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND no_akun = 411";
+                                $gk = $this->db->query($qk)->row_array();
+                                echo rupiah($gk['penjualan']);
+                                ?>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <?php
+                                $qk = "SELECT SUM(kredit) as total FROM jurnal_pemasukan_kas WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND no_akun != 411 AND no_akun != 113 AND no_akun != 413 AND no_akun != 111";
+                                $gk = $this->db->query($qk)->row_array();
+                                echo rupiah($gk['total']);
+                                ?>
+                            </td>
+                            <td></td>
+                        </tr>
+                    <?php } else { ?>
+                        <tr role="row" class="odd">
+                            <td colspan="3" class="text-center">Jumlah</td>
 
-                        <td>
-                            <?php
-                            $qk = "SELECT SUM(debet) as kas FROM jurnal_pemasukan_kas WHERE no_akun = 111";
-                            $gk = $this->db->query($qk)->row_array();
-                            echo rupiah($gk['kas']);
-                            ?>
-                        </td>
-                        <td>
-                            <?php
-                            $qk = "SELECT SUM(debet) as potongan_penjualan FROM jurnal_pemasukan_kas WHERE no_akun = 413";
-                            $gk = $this->db->query($qk)->row_array();
-                            echo rupiah($gk['potongan_penjualan']);
-                            ?>
-                        </td>
-                        <td><?php
-                            $qk = "SELECT SUM(kredit) as piutang_dagang FROM jurnal_pemasukan_kas WHERE no_akun = 113";
-                            $gk = $this->db->query($qk)->row_array();
-                            echo rupiah($gk['piutang_dagang']);
-                            ?></td>
-                        <td><?php
-                            $qk = "SELECT SUM(kredit) as penjualan FROM jurnal_pemasukan_kas WHERE no_akun = 411";
-                            $gk = $this->db->query($qk)->row_array();
-                            echo rupiah($gk['penjualan']);
-                            ?>
-                        </td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <?php
-                            $qk = "SELECT SUM(kredit) as total FROM jurnal_pemasukan_kas WHERE no_akun != 411 AND no_akun != 113 AND no_akun != 413 AND no_akun != 111";
-                            $gk = $this->db->query($qk)->row_array();
-                            echo rupiah($gk['total']);
-                            ?>
-                        </td>
-                        <td></td>
-                    </tr>
+                            <td>
+                                <?php
+                                $qk = "SELECT SUM(debet) as kas FROM jurnal_pemasukan_kas WHERE no_akun = 111";
+                                $gk = $this->db->query($qk)->row_array();
+                                echo rupiah($gk['kas']);
+                                ?>
+                            </td>
+                            <td>
+                                <?php
+                                $qk = "SELECT SUM(debet) as potongan_penjualan FROM jurnal_pemasukan_kas WHERE no_akun = 413";
+                                $gk = $this->db->query($qk)->row_array();
+                                echo rupiah($gk['potongan_penjualan']);
+                                ?>
+                            </td>
+                            <td><?php
+                                $qk = "SELECT SUM(kredit) as piutang_dagang FROM jurnal_pemasukan_kas WHERE no_akun = 113";
+                                $gk = $this->db->query($qk)->row_array();
+                                echo rupiah($gk['piutang_dagang']);
+                                ?></td>
+                            <td><?php
+                                $qk = "SELECT SUM(kredit) as penjualan FROM jurnal_pemasukan_kas WHERE no_akun = 411";
+                                $gk = $this->db->query($qk)->row_array();
+                                echo rupiah($gk['penjualan']);
+                                ?>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <?php
+                                $qk = "SELECT SUM(kredit) as total FROM jurnal_pemasukan_kas WHERE no_akun != 411 AND no_akun != 113 AND no_akun != 413 AND no_akun != 111";
+                                $gk = $this->db->query($qk)->row_array();
+                                echo rupiah($gk['total']);
+                                ?>
+                            </td>
+                            <td></td>
+                        </tr>
+                    <?php } ?>
+
+
+
                 </tbody>
             </table>
 

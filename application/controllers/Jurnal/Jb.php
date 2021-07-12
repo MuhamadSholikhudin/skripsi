@@ -3,7 +3,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Jb extends CI_Controller
 {
-
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->helper('tgl_indo');
+    }
 
     public function index()
     {
@@ -19,7 +23,9 @@ $data['pilihan'] = ['samping'];
     {
         // $data['jurnal_pembelian'] = $this->db->query("SELECT * FROM jurnal_pembelian ORDER BY no_jurnal_pembelian ASC")->result();
         $data['utang_dagang'] = $this->db->query("SELECT * FROM utang_dagang ORDER BY nama_utang_dagang ASC")->result();
-     $data['pilihan'] = ['samping'];   
+     $data['pilihan'] = ['samping'];
+        $data['akun'] = $this->db->query("SELECT * FROM akun WHERE no_akun = 115 OR no_akun = 121")->result();
+
 $this->load->view('templates/header');
         $this->load->view('templates/sidebar');
         $this->load->view('jb/tambah', $data);
@@ -32,6 +38,8 @@ $this->load->view('templates/header');
         $no_transaksi = strtotime(date("d-m-Y H:i:s"));
         $tanggal = $this->input->post('tanggal');
         $no_faktur = $this->input->post('no_faktur');
+        $id_pengguna = $this->input->post('id_pengguna');
+
 
         if ($pil == 1) {
             $debet = $this->input->post('debet1');
@@ -113,7 +121,8 @@ $this->load->view('templates/header');
     {
         $data['jb'] = $this->db->query("SELECT * FROM jurnal_pembelian WHERE no_transaksi = '$no_transaksi' ")->row();
         $data['utang_dagang'] = $this->db->query("SELECT * FROM utang_dagang ")->result();
-        $data['akun'] = [5, 6];
+        $data['akun'] = $this->db->query("SELECT * FROM akun WHERE no_akun = 115 OR no_akun = 121")->result();
+
 $data['pilihan'] = ['samping'];
 
         $this->load->view('templates/header');
@@ -128,6 +137,8 @@ $data['pilihan'] = ['samping'];
         $no_transaksi = $this->input->post('no_transaksi');
         $tanggal = $this->input->post('tanggal');
         $no_faktur = $this->input->post('no_faktur');
+        $id_pengguna = $this->input->post('id_pengguna');
+
 
         if ($pil == 1) {
 

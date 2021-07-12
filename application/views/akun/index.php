@@ -15,7 +15,7 @@
             <div class="col-md-12 col-sm-12" border="1">
                 <table class="display text-dark" style="width:100%" border="1" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
                     <thead>
-                        <tr role="row">
+                        <tr>
                             <th>Kode akun</th>
                             <th>No akun</th>
                             <th>Nama akun</th>

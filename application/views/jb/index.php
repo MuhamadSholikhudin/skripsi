@@ -7,19 +7,53 @@
 
         <div class="row">
             <div class="col-md-4">
-<?php
-if($pilihan[0] == 'menu'){ ?>
-                <a class="btn btn-primary" href="<?= base_url('jurnal/jb/tambah/'. $bulan_pilih. '/'. $tahun_pilih) ?>" role="button">Tambah jurnal_pembelian</a>
-<?php }else{ ?>
-                <a class="btn btn-primary" href="<?= base_url('jurnal/jb/tambah') ?>" role="button">Tambah jurnal_pembelian</a>
-<?php } ?>
-   
+                <?php
+                if ($pilihan[0] == 'menu') { ?>
+                    <a class="btn btn-primary" href="<?= base_url('pilihan/jb/tambah/' . $bulan_pilih[0]  . '/' . $tahun_pilih[0]) ?>" role="button">Tambah jurnal_pembelian</a>
+                <?php } else { ?>
+                    <a class="btn btn-primary" href="<?= base_url('jurnal/jb/tambah') ?>" role="button">Tambah jurnal_pembelian</a>
+                <?php } ?>
+
             </div>
             <br>
             <div class="col-md-12 text-center">
                 <h5>Toko Norkayati</h5>
                 <h5>Jurnal Pembelian Kas</h5>
-                <h5>Periode <?= date('m-Y') ?> </h5>
+                <?php
+                if ($pilihan[0] == 'menu') { ?>
+                    <h5>Periode
+                        <?php
+                        if ($bulan_pilih[0] == 1) {
+                            echo "Januari";
+                        } elseif ($bulan_pilih[0] == 2) {
+                            echo "Februari";
+                        } elseif ($bulan_pilih[0] == 3) {
+                            echo "Maret";
+                        } elseif ($bulan_pilih[0] == 4) {
+                            echo "April";
+                        } elseif ($bulan_pilih[0] == 5) {
+                            echo "Mei";
+                        } elseif ($bulan_pilih[0] == 6) {
+                            echo "Juni";
+                        } elseif ($bulan_pilih[0] == 7) {
+                            echo "Juli";
+                        } elseif ($bulan_pilih[0] == 8) {
+                            echo "Agustus";
+                        } elseif ($bulan_pilih[0] == 9) {
+                            echo "September";
+                        } elseif ($bulan_pilih[0] == 10) {
+                            echo "Oktober";
+                        } elseif ($bulan_pilih[0] == 11) {
+                            echo "November";
+                        } elseif ($bulan_pilih[0] == 12) {
+                            echo "Desember";
+                        }
+                        ?>
+                        <?= $tahun_pilih[0] ?>
+                    </h5>
+                <?php } else { ?>
+
+                <?php } ?>
             </div>
 
             <table class="display text-dark" style="width:100%" border="1" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
@@ -54,7 +88,13 @@ if($pilihan[0] == 'menu'){ ?>
                         if ($ak->no_akun == 511) { ?>
                             <tr>
                                 <td class="table-plus sorting_1" tabindex="0">
-                                    <a href="<?= base_url('jurnal/jb/edit/' . $ak->no_transaksi) ?>"><?= $ak->tanggal ?></a>
+                                    <?php
+                                    if ($pilihan[0] == 'menu') { ?>
+
+                                        <?= tanggal_pilih($ak->tanggal) ?>
+                                    <?php } else { ?>
+                                        <?= $ak->tanggal ?>
+                                    <?php } ?>
                                 </td>
                                 <td><?= $ak->no_faktur ?></td>
                                 <td>
@@ -85,38 +125,44 @@ if($pilihan[0] == 'menu'){ ?>
                                     ?>
                                 </td>
 
-<?php
-if($pilihan[0] == 'menu'){ ?>
-                                <td>
-                                    <div class="dropdown">
-                                        <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
-                                            <i class="dw dw-more"></i>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                                            <a class="dropdown-item" href="<?= base_url('pilihan/jb/edit/') . $ak->no_transaksi. '/'. $bulan_pilih ?>"><i class="fa fa-edit"></i> Ubah</a>
-                                            <a class="dropdown-item" href="<?= base_url('pilihan/jb/hapus/') . $ak->no_transaksi. '/'. $bulan_pilih ?>"><i class="fa fa-trash"></i> Hapus</a>
+                                <?php
+                                if ($pilihan[0] == 'menu') { ?>
+                                    <td>
+                                        <div class="dropdown">
+                                            <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                                                <i class="dw dw-more"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                                                <a class="dropdown-item" href="<?= base_url('pilihan/jb/edit/') . $ak->no_transaksi . '/' . $bulan_pilih[0] ?>"><i class="fa fa-edit"></i> Ubah</a>
+                                                <a class="dropdown-item" href="<?= base_url('pilihan/jb/hapus/') . $ak->no_transaksi . '/' . $bulan_pilih[0] ?>"><i class="fa fa-trash"></i> Hapus</a>
+                                            </div>
                                         </div>
-                                    </div>
-                                </td>
-<?php }else{ ?>
-                                <td>
-                                    <div class="dropdown">
-                                        <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
-                                            <i class="dw dw-more"></i>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                                            <a class="dropdown-item" href="<?= base_url('jurnal/jb/edit/') . $ak->no_transaksi ?>"><i class="fa fa-edit"></i> Ubah</a>
-                                            <a class="dropdown-item" href="<?= base_url('jurnal/jb/hapus/') . $ak->no_transaksi ?>"><i class="fa fa-trash"></i> Hapus</a>
+                                    </td>
+                                <?php } else { ?>
+                                    <td>
+                                        <div class="dropdown">
+                                            <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                                                <i class="dw dw-more"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                                                <a class="dropdown-item" href="<?= base_url('jurnal/jb/edit/') . $ak->no_transaksi ?>"><i class="fa fa-edit"></i> Ubah</a>
+                                                <a class="dropdown-item" href="<?= base_url('jurnal/jb/hapus/') . $ak->no_transaksi ?>"><i class="fa fa-trash"></i> Hapus</a>
+                                            </div>
                                         </div>
-                                    </div>
-                                </td>
-<?php } ?>
-                                
+                                    </td>
+                                <?php } ?>
+
                             </tr>
                         <?php    } else { ?>
                             <tr>
                                 <td class="table-plus sorting_1" tabindex="0">
-                                    <a href="<?= base_url('jurnal/jb/edit/' . $ak->no_transaksi) ?>"><?= $ak->tanggal ?></a>
+                                    <?php
+                                    if ($pilihan[0] == 'menu') { ?>
+
+                                        <?= tanggal_pilih($ak->tanggal) ?>
+                                    <?php } else { ?>
+                                        <?= $ak->tanggal ?>
+                                    <?php } ?>
                                 </td>
                                 <td>
                                     <?= $ak->no_faktur ?>
@@ -155,67 +201,104 @@ if($pilihan[0] == 'menu'){ ?>
                                     ?>
                                 </td>
 
-<?php
-if($pilihan[0] == 'menu'){ ?>
-                                <td>
-                                    <div class="dropdown">
-                                        <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
-                                            <i class="dw dw-more"></i>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                                            <a class="dropdown-item" href="<?= base_url('pilihan/jb/edit/') . $ak->no_transaksi. '/'. $bulan_pilih ?>"><i class="fa fa-edit"></i> Ubah</a>
-                                            <a class="dropdown-item" href="<?= base_url('pilihan/jb/hapus/') . $ak->no_transaksi. '/'. $bulan_pilih ?>"><i class="fa fa-trash"></i> Hapus</a>
+                                <?php
+                                if ($pilihan[0] == 'menu') { ?>
+                                    <td>
+                                        <div class="dropdown">
+                                            <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                                                <i class="dw dw-more"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                                                <a class="dropdown-item" href="<?= base_url('pilihan/jb/edit/') . $ak->no_transaksi . '/' . $bulan_pilih[0] ?>"><i class="fa fa-edit"></i> Ubah</a>
+                                                <a class="dropdown-item" href="<?= base_url('pilihan/jb/hapus/') . $ak->no_transaksi . '/' . $bulan_pilih[0] ?>"><i class="fa fa-trash"></i> Hapus</a>
+                                            </div>
                                         </div>
-                                    </div>
-                                </td>
-<?php }else{ ?>
-                                <td>
-                                    <div class="dropdown">
-                                        <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
-                                            <i class="dw dw-more"></i>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                                            <a class="dropdown-item" href="<?= base_url('jurnal/jb/edit/') . $ak->no_transaksi ?>"><i class="fa fa-edit"></i> Ubah</a>
-                                            <a class="dropdown-item" href="<?= base_url('jurnal/jb/hapus/') . $ak->no_transaksi ?>"><i class="fa fa-trash"></i> Hapus</a>
+                                    </td>
+                                <?php } else { ?>
+                                    <td>
+                                        <div class="dropdown">
+                                            <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                                                <i class="dw dw-more"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                                                <a class="dropdown-item" href="<?= base_url('jurnal/jb/edit/') . $ak->no_transaksi ?>"><i class="fa fa-edit"></i> Ubah</a>
+                                                <a class="dropdown-item" href="<?= base_url('jurnal/jb/hapus/') . $ak->no_transaksi ?>"><i class="fa fa-trash"></i> Hapus</a>
+                                            </div>
                                         </div>
-                                    </div>
-                                </td>
-<?php } ?>
+                                    </td>
+                                <?php } ?>
                             </tr>
                         <?php } ?>
 
                     <?php endforeach; ?>
 
-                    <tr role="row" class="odd">
-                        <td colspan="3" class="text-center">Jumlah</td>
-                        <td></td>
-                        <td>
-                            <?php
-                            $qk = "SELECT SUM(debet) as pembelian FROM jurnal_pembelian WHERE no_akun = 511";
-                            $gk = $this->db->query($qk)->row_array();
-                            echo rupiah($gk['pembelian']);
-                            ?>
-                        </td>
+                    <?php
+                    if ($pilihan[0] == 'menu') { ?>
+                        <tr role="row" class="odd">
+                            <td colspan="3" class="text-center">Jumlah</td>
+                            <td></td>
+                            <td>
+                                <?php
+                                $qk = "SELECT SUM(debet) as pembelian FROM jurnal_pembelian WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND no_akun = 511";
+                                $gk = $this->db->query($qk)->row_array();
+                                echo rupiah($gk['pembelian']);
+                                ?>
+                            </td>
 
 
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <?php
-                            $qk = "SELECT SUM(debet) as total FROM jurnal_pembelian WHERE no_akun != 511 AND no_akun != 211 ";
-                            $gk = $this->db->query($qk)->row_array();
-                            echo rupiah($gk['total']);
-                            ?>
-                        </td>
-                        <td>
-                            <?php
-                            $qk = "SELECT SUM(kredit) as utang_dagang FROM jurnal_pembelian WHERE no_akun = 211";
-                            $gk = $this->db->query($qk)->row_array();
-                            echo rupiah($gk['utang_dagang']);
-                            ?>
-                        </td>
-                        <td></td>
-                    </tr>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <?php
+                                $qk = "SELECT SUM(debet) as total FROM jurnal_pembelian WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND no_akun != 511 AND no_akun != 211 ";
+                                $gk = $this->db->query($qk)->row_array();
+                                echo rupiah($gk['total']);
+                                ?>
+                            </td>
+                            <td>
+                                <?php
+                                $qk = "SELECT SUM(kredit) as utang_dagang FROM jurnal_pembelian  WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND no_akun = 211";
+                                $gk = $this->db->query($qk)->row_array();
+                                echo rupiah($gk['utang_dagang']);
+                                ?>
+                            </td>
+                            <td></td>
+                        </tr>
+
+                    <?php } else { ?>
+                        <tr role="row" class="odd">
+                            <td colspan="3" class="text-center">Jumlah</td>
+                            <td></td>
+                            <td>
+                                <?php
+                                $qk = "SELECT SUM(debet) as pembelian FROM jurnal_pembelian WHERE no_akun = 511";
+                                $gk = $this->db->query($qk)->row_array();
+                                echo rupiah($gk['pembelian']);
+                                ?>
+                            </td>
+
+
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <?php
+                                $qk = "SELECT SUM(debet) as total FROM jurnal_pembelian WHERE no_akun != 511 AND no_akun != 211 ";
+                                $gk = $this->db->query($qk)->row_array();
+                                echo rupiah($gk['total']);
+                                ?>
+                            </td>
+                            <td>
+                                <?php
+                                $qk = "SELECT SUM(kredit) as utang_dagang FROM jurnal_pembelian WHERE no_akun = 211";
+                                $gk = $this->db->query($qk)->row_array();
+                                echo rupiah($gk['utang_dagang']);
+                                ?>
+                            </td>
+                            <td></td>
+                        </tr>
+                    <?php } ?>
+
+
                 </tbody>
 
             </table>

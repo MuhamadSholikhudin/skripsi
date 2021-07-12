@@ -3,11 +3,15 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Jb extends CI_Controller
 {
-
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->helper('tgl_indo');
+    }
 
     public function index($bulan_pilih, $tahun_pilih)
     {
-        $data['jb'] = $this->db->query("SELECT * FROM jurnal_pembelian WHERE MONTH(tanggal) = $bulan_pilih AND YEAR(tanggal) = $tahun_ini GROUP BY no_transaksi ORDER BY tanggal ASC")->result();
+        $data['jb'] = $this->db->query("SELECT * FROM jurnal_pembelian WHERE MONTH(tanggal) = $bulan_pilih AND YEAR(tanggal) = $tahun_pilih GROUP BY no_transaksi ORDER BY tanggal ASC")->result();
         
 $data['pilihan'] = ['menu'];
 $data['bulan_pilih'] = [$bulan_pilih];
@@ -26,7 +30,7 @@ $this->load->view('templates/header');
         $data['pilihan'] = ['menu'];
 $data['bulan_pilih'] = [$bulan_pilih];
 $data['tahun_pilih'] = [$tahun_pilih];
-
+        $data['akun'] = $this->db->query("SELECT * FROM akun WHERE no_akun = 115 OR no_akun = 121")->result();
 
 $this->load->view('templates/header');
         $this->load->view('templates/sidebar');
@@ -81,7 +85,7 @@ $tahun_pilih = $this->input->post('tahun_pilih');
                 )
             );
             $this->db->insert_batch('jurnal_pembelian', $data);
-            redirect('jurnal/jb/index/'. $bulan_pilih.'/'. $tahun_pilih);
+            redirect('pilihan/jb/index/'. $bulan_pilih.'/'. $tahun_pilih);
         } elseif ($pil == 2) {
 
             $debet = $this->input->post('debet2');
@@ -119,7 +123,7 @@ $tahun_pilih = $this->input->post('tahun_pilih');
                 )
             );
             $this->db->insert_batch('jurnal_pembelian', $data);
-            redirect('jurnal/jb/index/'. $bulan_pilih.'/'. $tahun_pilih);
+            redirect('pilihan/jb/index/'. $bulan_pilih.'/'. $tahun_pilih);
         }
     }
 
@@ -127,11 +131,12 @@ $tahun_pilih = $this->input->post('tahun_pilih');
     {
         $data['jb'] = $this->db->query("SELECT * FROM jurnal_pembelian WHERE no_transaksi = '$no_transaksi' ")->row();
         $data['utang_dagang'] = $this->db->query("SELECT * FROM utang_dagang ")->result();
-        $data['akun'] = [5, 6];
+        $data['akun'] = $this->db->query("SELECT * FROM akun WHERE no_akun = 115 OR no_akun = 121")->result();
+       
 
 $data['pilihan'] = ['menu'];
 $data['bulan_pilih'] = [$bulan_pilih];
-$data['tahun_pilih'] = [$tahun_pilih];
+// $data['tahun_pilih'] = [$tahun_pilih];
 
         $this->load->view('templates/header');
         $this->load->view('templates/sidebar');
@@ -164,7 +169,7 @@ $cek_data =  $this->db->query("SELECT MONTH(tanggal) as bulan, YEAR(tanggal) as 
                 array(
                     //pembelian
                     'id_jb' => $id_jb_pembelian,
-                    'no_akun'    =>  $id_jb_pembelian,
+                    'no_akun'    =>  $id_jb_akun_pembelian,
                     'kredit' =>  0,
                     'debet' =>  $debet,
                     'tanggal'    =>  $tanggal,
@@ -235,7 +240,17 @@ $cek_data =  $this->db->query("SELECT MONTH(tanggal) as bulan, YEAR(tanggal) as 
             );
             // $this->db->update_batch('jkm', $data);
             $this->db->update_batch('jurnal_pembelian', $data, 'id_jb');
-            redirect('jurnal/jb/index/'. $cek_data->bulan.'/'. $cek_data->tahun);
+            redirect('pilihan/jb/index/'. $cek_data->bulan.'/'. $cek_data->tahun);
         }
+    }
+
+
+    public function hapus($no_transaksi, $bulan_pilih)
+    {
+        $cek_data = $this->db->query("SELECT MONTH(tanggal) as bulan, YEAR(tanggal) as tahun FROM jurnal_pembelian WHERE no_transaksi = '$no_transaksi'  AND MONTH(tanggal) = $bulan_pilih")->row();
+        $this->db->delete('jurnal_pembelian', array('no_transaksi' => $no_transaksi));
+
+        // redirect('pilihan/jkm/index');
+        redirect('pilihan/jb/index/' . $cek_data->bulan . '/' . $cek_data->tahun);
     }
 }

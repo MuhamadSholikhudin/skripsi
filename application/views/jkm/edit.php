@@ -56,9 +56,6 @@
                                 </div>
 
                                 <?php if ($jkm->no_akun == 411) { ?>
-
-
-
                                     <div id='jkmapp1'>
                                         <div class='form-group row penj1'><label class='col-sm-12 col-md-2 col-form-label'>Penjualan</label>
                                             <div class='col-sm-12 col-md-10'>

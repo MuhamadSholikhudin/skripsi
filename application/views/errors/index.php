@@ -70,19 +70,21 @@
 		<i class="far fa-question-circle fa-spin"></i>
 		<div class="err2">4</div>
 		<div class="msg">Maybe this page moved? Got deleted? Is hiding out in quarantine? Never existed in the first place?
-			<p>Let's go 
-			<?php
-			// if($this->session->userdata('hakakses') == 3){
+			<p>Let's go
+				<?php
+				if ($this->session->userdata('hakakses') == 3) { ?>
+					<a href="<?= base_url('dashboard/') ?>">Dashboard</a>
+				<?php } elseif ($this->session->userdata('hakakses') == 2) { ?>
+					<a href="<?= base_url('dashboard/') ?>">Dashboard</a>
 
-			// }elseif($this->session->userdata('hakakses') == 2){
-				
-			// }elseif($this->session->userdata('hakakses') == 1){
-				
-			// }
-			?>
-			<a href="<?= base_url('dashboard/') ?>">home</a> 
-			and try from there.
-		</p>
+				<?php } elseif ($this->session->userdata('hakakses') == 1) { ?>
+					<a href="<?= base_url('dashboard/') ?>">Dashboard</a>
+				<?php } else { ?>
+					<a href="<?= base_url('auth/login/') ?>">home</a>
+				<?php }
+				?>
+				and try from there.
+			</p>
 		</div>
 	</div>
 

@@ -3,7 +3,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Jkm extends CI_Controller
 {
-
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->helper('tgl_indo');
+    }
 
     public function index()
     {
@@ -20,8 +24,8 @@ class Jkm extends CI_Controller
     {
         // $data['jurnal_pemasukan_kas'] = $this->db->query("SELECT * FROM jurnal_pemasukan_kas ORDER BY no_jurnal_pemasukan_kas ASC")->result();
         $data['piutang_dagang'] = $this->db->query("SELECT * FROM piutang_dagang ORDER BY nama_piutang_dagang ASC")->result();
-        $data['pilihan'] = ['samping'];  
-
+        $data['pilihan'] = ['samping'];
+        $data['akun'] = $this->db->query("SELECT * FROM akun WHERE no_akun = 311 OR no_akun = 512")->result();
         $this->load->view('templates/header');
         $this->load->view('templates/sidebar');
         $this->load->view('jkm/tambah' ,$data);
@@ -163,7 +167,8 @@ class Jkm extends CI_Controller
     {
         $data['jkm'] = $this->db->query("SELECT * FROM jurnal_pemasukan_kas WHERE no_transaksi = '$no_transaksi' ")->row();
         $data['piutang_dagang'] = $this->db->query("SELECT * FROM piutang_dagang ")->result();
-        $data['akun'] = [10, 9];
+        $data['akun'] = $this->db->query("SELECT * FROM akun WHERE no_akun = 512  OR no_akun = 311")->result();
+        
         $data['pilihan'] = ['samping'];
 
 

@@ -92,8 +92,8 @@
                                         <div class='form-group row'>
                                             <label class='col-sm-12 col-md-2 col-form-label'>Pembelian</label>
                                             <div class='col-sm-12 col-md-10'><input class='form-control' type='hidden' name='pil' value='2' required>
-                                                <input class='form-control' type='hidden' name='id_jkk_pembelian' required>
-                                                <input class='form-control' type='hidden' name='id_jkk_akun_pembelian' required>
+                                                <input class='form-control' type='text' name='id_jkk_pembelian' value="<?= $jkk->id_jkk ?>" required>
+                                                <input class='form-control' type='text' name='id_jkk_akun_pembelian' value="<?= $jkk->no_akun ?>" required>
                                                 <input class='form-control' type='number' id='jkk_beli' name='debet2' value='<?= $jkk->debet ?>' placeholder='Jumlah Pembelian' required>
                                             </div>
                                         </div>
@@ -144,29 +144,15 @@
                                             <div class='col-sm-12 col-md-10'>
                                                 <select class='custom-select col-12' name='id_jkk_akun_serba' id='no_akun'>
                                                     <?php foreach ($akun as $aku) : ?>
-                                                        <?php if ($aku == $jkk->no_akun) { ?>
-                                                            <option value='<?= $aku ?>' selected>
-                                                                <?php if ($aku == 18) {
-                                                                    echo 'Beban sewa';
-                                                                } elseif ($aku == 19) {
-                                                                    echo 'Beban Iklan';
-                                                                } elseif ($aku == 20) {
-                                                                    echo 'Beban Gaji';
-                                                                } elseif ($aku == 21) {
-                                                                    echo 'Beban Macam-macam';
-                                                                } ?>
+                                                        <?php if ($aku->no_akun == $jkk->no_akun) { ?>
+                                                            <option value='<?= $aku->no_akun ?>' selected>
+                                                               
+                                                                <?= $aku->nama_akun ?>
                                                             </option>
                                                         <?php } else { ?>
-                                                            <option value='<?= $aku ?>'>
-                                                                <?php if ($aku == 18) {
-                                                                    echo 'Beban sewa';
-                                                                } elseif ($aku == 19) {
-                                                                    echo 'Beban Iklan';
-                                                                } elseif ($aku == 20) {
-                                                                    echo 'Beban Gaji';
-                                                                } elseif ($aku == 21) {
-                                                                    echo 'Beban Macam-macam';
-                                                                } ?>
+                                                            <option value='<?= $aku->no_akun ?>'>
+                                                                <?= $aku->nama_akun ?>
+
                                                             </option>
                                                         <?php } ?>
                                                     <?php endforeach; ?>

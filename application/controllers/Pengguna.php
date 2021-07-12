@@ -31,22 +31,30 @@ class Pengguna extends CI_Controller
     public function tambah()
     {
         // $data['pengguna'] = $this->db->query("SELECT * FROM pengguna ORDER BY id_pengguna ASC")->result();
-
+        $data['hakakses'] = [1, 2, 3];
+        $data['status'] = ['Aktif', 'Tidak Aktif'];
         $this->load->view('templates/header');
         $this->load->view('templates/sidebar');
-        $this->load->view('pengguna/tambah');
+        $this->load->view('pengguna/tambah', $data);
         $this->load->view('templates/footer');
     }
 
     public function aksi_tambah()
     {
-        $id_pengguna = $this->input->post('id_pengguna');
+        // $id_pengguna = $this->input->post('id_pengguna');
         $nama = $this->input->post('nama');
+        $username = $this->input->post('username');
+        $password = $this->input->post('password');
+        $hakakses = $this->input->post('hakakses');
+        $status = $this->input->post('status');
 
             $data = array(
-                'id_pengguna' => $id_pengguna,
-                'nama' => $nama,
-               
+            
+            'nama' => $nama,
+            'username' => $username,
+            'password' => $password,
+            'hakakses' => $hakakses,
+            'status' => $status
             );
 
             $this->Model_pengguna->tambah_pengguna($data, 'pengguna');
@@ -58,7 +66,8 @@ class Pengguna extends CI_Controller
     public function edit($id_pengguna)
     {
         $data['pengguna'] = $this->db->query("SELECT * FROM pengguna WHERE id_pengguna = '$id_pengguna' ")->row();
-
+$data['hakakses'] = [1, 2, 3];
+        $data['status'] = ['Aktif', 'Tidak Aktif'];
         $this->load->view('templates/header');
         $this->load->view('templates/sidebar');
         $this->load->view('pengguna/edit', $data);
@@ -67,20 +76,38 @@ class Pengguna extends CI_Controller
 
     public function aksi_edit()
     {
-        $id_pengguna_lama = $this->input->post('id_pengguna_lama');
+        // $id_pengguna_lama = $this->input->post('id_pengguna_lama');
 
         $id_pengguna = $this->input->post('id_pengguna');
         $nama = $this->input->post('nama');
+        $username = $this->input->post('username');
+        $password = $this->input->post('password');
+        $hakakses = $this->input->post('hakakses');
+        $status = $this->input->post('status');
               
         $data = [
-            'id_pengguna' => $id_pengguna,
-            'nama' => $nama
+            // 'id_pengguna' => $id_pengguna,
+            'nama' => $nama,
+            'username' => $username,
+            'password' => $password,
+            'hakakses' => $hakakses,
+            'status' => $status
         ];
 
         $this->db->set($data);
-        $this->db->where('id_pengguna', $id_pengguna_lama);
+        $this->db->where('id_pengguna', $id_pengguna);
         $this->db->update('pengguna');
 
-        redirect('pengguna/');
+        redirect('pengguna');
+    }
+
+
+    public function hapus($id_pengguna)
+    {
+        // $cek_data = $this->db->query("SELECT MONTH(tanggal) as bulan, YEAR(tanggal) as tahun FROM jurnal_pemasukan_kas WHERE no_transaksi = '$no_transaksi'  AND MONTH(tanggal) = $bulan_pilih")->row();
+        $this->db->delete('pengguna', array('id_pengguna' => $id_pengguna));
+
+        // redirect('pilihan/jkm/index');
+        redirect('pengguna');
     }
 }

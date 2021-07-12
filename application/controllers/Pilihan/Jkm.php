@@ -3,6 +3,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Jkm extends CI_Controller
 {
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->helper('tgl_indo');
+    }
 
 
     public function index($bulan_pilih, $tahun_pilih)
@@ -27,6 +32,8 @@ class Jkm extends CI_Controller
         $data['pilihan'] = ['menu'];
         $data['bulan_pilih'] = [$bulan_pilih];
         $data['tahun_pilih'] = [$tahun_pilih];
+
+        $data['akun'] = $this->db->query("SELECT * FROM akun WHERE no_akun = 512  OR no_akun = 311")->result();
 
         $this->load->view('templates/header');
         $this->load->view('templates/sidebar');
@@ -62,7 +69,6 @@ class Jkm extends CI_Controller
                     'id_utang_dagang'    =>  0,
                     'id_pengguna'    =>  $id_pengguna,
                     'id_syarat'	=>  0
-
             ),
             array(
                     //Kas
@@ -174,7 +180,8 @@ class Jkm extends CI_Controller
     {
         $data['jkm'] = $this->db->query("SELECT * FROM jurnal_pemasukan_kas WHERE no_transaksi = '$no_transaksi' AND MONTH(tanggal) = '$bulan_pilih' ")->row();
         $data['piutang_dagang'] = $this->db->query("SELECT * FROM piutang_dagang ")->result();
-        $data['akun'] = [10, 9];
+        $data['akun'] = $this->db->query("SELECT * FROM akun WHERE no_akun = 512  OR no_akun = 311")->result();
+       
 
         $data['pilihan'] = ['menu'];
 
