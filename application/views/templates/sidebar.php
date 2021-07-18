@@ -54,7 +54,7 @@
               }
               ?>
               <ul class="nav side-menu">
-                <li>
+                <!-- <li>
                   <a href="<?= base_url('dashboard/') ?>">
                     <i class="fa fa-home"></i> Dashboard
                   </a>
@@ -97,91 +97,125 @@
                     <li><a href="<?= base_url('bendahara/laporan_transaksi') ?>">Laporan Transaksi</a></li>
                     <li><a href="<?= base_url('bendahara/laporan_pajak') ?>">Laporan Pajak</a></li>
                   </ul>
-                </li>
+                </li> -->
 
 
-                <?php if ($this->session->userdata('bagian') == 'pemilik') { ?>
+                <?php if ($this->session->userdata('hakakses') == 1) { ?>
                   <li>
-                    <a href="<?= base_url('pemilik/dashboard/') ?>">
+                    <a href="<?= base_url('dashboard/') ?>">
                       <i class="fa fa-home"></i> Dashboard
                     </a>
                   </li>
-                  <li class=""><a><i class="fa fa-money"></i> Transaksi <span class="fa fa-chevron-down"></span></a>
+                  <li class=""><a><i class="fa fa-tasks"></i> Akun <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu" style="display: none;">
-                      <li><a href="<?= base_url('pemilik/transaksi/') ?>">Tansaksi</a></li>
+                      <li><a href="<?= base_url('akun/') ?>">Akun</a></li>
                     </ul>
                   </li>
-                  <li class=""><a><i class="fa fa-desktop"></i> Barang <span class="fa fa-chevron-down"></span></a>
+                  <li class=""><a><i class="fa fa-users"></i> Pengguna <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu" style="display: none;">
-                      <li><a href="<?= base_url('pemilik/barang/') ?>">Data Barang</a></li>
-                      <li><a href="<?= base_url('pemilik/harga_barang/') ?>">Data Harga Barang</a></li>
-                      <li><a href="<?= base_url('pemilik/stok_barang/') ?>">Data Stok Barang</a></li>
-                      <li><a href="<?= base_url('pemilik/tempat_barang/') ?>">Data Tempat Barang</a></li>
+                      <li><a href="<?= base_url('pengguna/') ?>">Pengguna</a></li>
                     </ul>
                   </li>
-                  <li class=""><a><i class="fa fa-sliders"></i> Data <span class="fa fa-chevron-down"></span></a>
+                  <li class=""><a><i class="fa fa-ellipsis-v"></i> Piutang and Utang <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu" style="display: none;">
-                      <li><a href="<?= base_url('pemilik/wa/') ?>">Data WA</a></li>
-                      <li><a href="<?= base_url('pemilik/promosi/') ?>">Data promosi</a></li>
+                      <li><a href="<?= base_url('piutang_dagang/') ?>">Piutang Dagang</a></li>
+                      <li><a href="<?= base_url('utang_dagang/') ?>">Utang Dagang</a></li>
+                    </ul>
+                  </li>
+                  <li class=""><a><i class="fa fa-folder-open"></i> Jurnal <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu" style="display: none;">
+                      <li><a href="<?= base_url('jurnal/jkm/') ?>">Kas Masuk</a></li>
+                      <li><a href="<?= base_url('jurnal/jkk/') ?>">Kas Keluar</a></li>
+                      <li><a href="<?= base_url('jurnal/jb/') ?>">Pembelian</a></li>
+                      <li><a href="<?= base_url('jurnal/jj/') ?>">Penjualan</a></li>
+                      <li><a href="<?= base_url('jurnal/ju/') ?>">Umum</a></li>
+                    </ul>
+                  </li>
+                  <li class=""><a><i class="fa fa-book"></i> Buku <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu" style="display: none;">
+                      <li><a href="<?= base_url('buku/besar') ?>">Buku Besar</a></li>
+                      <li><a href="<?= base_url('buku/besar_pembantu/') ?>">Buku Besar Pembantu</a></li>
+                    </ul>
+                  </li>
+
+                  <li class=""><a><i class="fa fa-paper-plane-o"></i> Neraca <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu" style="display: none;">
+                      <li><a href="<?= base_url('neraca_saldo/') ?>">Neraca Saldo</a></li>
+                      <li><a href="<?= base_url('buku/besar_pembantu/') ?>">Buku Besar Pembantu</a></li>
+                    </ul>
+                  </li>
+                  <li class=""><a><i class="fa fa-file-excel-o"></i> Kertas Kerja <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu" style="display: none;">
+                      <li><a href="<?= base_url('kertas_kerja') ?>">Neraca saldo</a></li>
                     </ul>
                   </li>
                   <li class=""><a><i class="fa fa-file"></i> Laporan <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu" style="display: none;">
-                      <li><a href="<?= base_url('bendahara/bku') ?>">Laporan BKU</a></li>
-                      <li><a href="<?= base_url('bendahara/laporan_saldo') ?>">Laporan Data Saldo</a></li>
-                      <li><a href="<?= base_url('bendahara/laporan_transaksi') ?>">Laporan Transaksi</a></li>
-                      <li><a href="<?= base_url('bendahara/laporan_pajak') ?>">Laporan Pajak</a></li>
+                      <li><a href="<?= base_url('laporan_keuangan') ?>">Laporan Keuangan</a></li>
                     </ul>
                   </li>
-
-                  <li class="bg-light text-dark text-center">
-                    <a class="bg-light text-dark">
-                      Transaksi hari ini
-
-
-                      <h5>
-
-                      </h5>
-                    </a>
-                  </li>
-                <?php } elseif ($this->session->userdata('bagian') == 'karyawan') { ?>
+                <?php } elseif ($this->session->userdata('hakakses') == 2) { ?>
                   <li>
-                    <a href="<?= base_url('karyawan/dashboard/') ?>">
+                    <a href="<?= base_url('dashboard/') ?>">
                       <i class="fa fa-home"></i> Dashboard
                     </a>
                   </li>
-                  <li class=""><a><i class="fa fa-money"></i> Transaksi <span class="fa fa-chevron-down"></span></a>
+                  <li class=""><a><i class="fa fa-ellipsis-v"></i> Piutang and Utang <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu" style="display: none;">
-                      <li><a href="<?= base_url('karyawan/transaksi/') ?>">Tansaksi</a></li>
+                      <li><a href="<?= base_url('piutang_dagang/') ?>">Piutang Dagang</a></li>
+                      <li><a href="<?= base_url('utang_dagang/') ?>">Utang Dagang</a></li>
                     </ul>
                   </li>
-                  <li class=""><a><i class="fa fa-desktop"></i> Barang <span class="fa fa-chevron-down"></span></a>
+                  <li class=""><a><i class="fa fa-folder-open"></i> Jurnal <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu" style="display: none;">
-                      <li><a href="<?= base_url('karyawan/barang/') ?>">Data Barang</a></li>
-                      <li><a href="<?= base_url('karyawan/harga_barang/') ?>">Data Harga Barang</a></li>
-                      <li><a href="<?= base_url('karyawan/tempat_barang/') ?>">Data Tempat Barang</a></li>
+                      <li><a href="<?= base_url('jurnal/jkm/') ?>">Kas Masuk</a></li>
+                      <li><a href="<?= base_url('jurnal/jkk/') ?>">Kas Keluar</a></li>
+                      <li><a href="<?= base_url('jurnal/jb/') ?>">Pembelian</a></li>
+                      <li><a href="<?= base_url('jurnal/jj/') ?>">Penjualan</a></li>
+                      <li><a href="<?= base_url('jurnal/ju/') ?>">Umum</a></li>
+                    </ul>
+                  </li>
+                  <li class=""><a><i class="fa fa-book"></i> Buku <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu" style="display: none;">
+                      <li><a href="<?= base_url('buku/besar') ?>">Buku Besar</a></li>
+                      <li><a href="<?= base_url('buku/besar_pembantu/') ?>">Buku Besar Pembantu</a></li>
                     </ul>
                   </li>
 
-
-
+                  <li class=""><a><i class="fa fa-paper-plane-o"></i> Neraca <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu" style="display: none;">
+                      <li><a href="<?= base_url('neraca_saldo/') ?>">Neraca Saldo</a></li>
+                      <li><a href="<?= base_url('buku/besar_pembantu/') ?>">Buku Besar Pembantu</a></li>
+                    </ul>
+                  </li>
+                  <li class=""><a><i class="fa fa-file-excel-o"></i> Kertas Kerja <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu" style="display: none;">
+                      <li><a href="<?= base_url('kertas_kerja') ?>">Neraca saldo</a></li>
+                    </ul>
+                  </li>
                   <li class=""><a><i class="fa fa-file"></i> Laporan <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu" style="display: none;">
-                      <li><a href="<?= base_url('karyawan/bku') ?>">Laporan BKU</a></li>
-                      <li><a href="<?= base_url('karyawan/laporan_saldo') ?>">Laporan Data Saldo</a></li>
-                      <li><a href="<?= base_url('karyawan/laporan_transaksi') ?>">Laporan Transaksi</a></li>
-                      <li><a href="<?= base_url('karyawan/laporan_pajak') ?>">Laporan Pajak</a></li>
+                      <li><a href="<?= base_url('laporan_keuangan') ?>">Laporan Keuangan</a></li>
                     </ul>
                   </li>
-
-                  <li class="bg-light text-dark text-center">
-                    <a class="bg-light text-dark">
-                      Transaksi hari ini
-
-                      <h5>
-
-                      </h5>
+                <?php } elseif ($this->session->userdata('hakakses') == 3) { ?>
+                  <li>
+                    <a href="<?= base_url('dashboard/') ?>">
+                      <i class="fa fa-home"></i> Dashboard
                     </a>
+                  </li>
+                  <li class=""><a><i class="fa fa-folder-open"></i> Jurnal <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu" style="display: none;">
+                      <li><a href="<?= base_url('jurnal/jkm/') ?>">Kas Masuk</a></li>
+                      <li><a href="<?= base_url('jurnal/jj/') ?>">Penjualan</a></li>
+                      <li><a href="<?= base_url('jurnal/ju/') ?>">Umum</a></li>
+                    </ul>
+                  </li>
+                  <li class=""><a><i class="fa fa-ellipsis-v"></i> Piutang and Utang <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu" style="display: none;">
+                      <li><a href="<?= base_url('piutang_dagang/') ?>">Piutang Dagang</a></li>
+                      <li><a href="<?= base_url('utang_dagang/') ?>">Utang Dagang</a></li>
+                    </ul>
                   </li>
                 <?php } ?>
               </ul>

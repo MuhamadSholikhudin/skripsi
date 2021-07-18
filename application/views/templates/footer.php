@@ -284,27 +284,38 @@
 
             if (kategori_ju == 'utang_dagang') {
               alert(kategori_ju);
-              var txt = "<div id='pil_ju1'><div class='form-group row utg'><label class='col-sm-12 col-md-2 col-form-label'>Akun Utang Dagang</label><div class='col-sm-12 col-md-10'><select class='custom-select col-12' name='id_akun_utang_dagang' id='id_utang' required><?php foreach ($utang_dagang as $utang) : ?><option value='<?= $utang->id_utang_dagang ?>'> <?= $utang->nama_utang_dagang ?></option><?php endforeach; ?></select></div></div><div class='form-group row utg'><label class='col-sm-12 col-md-2 col-form-label'>Utang Dagang</label><div class='col-sm-12 col-md-10'><input class='form-control' type='hidden' name='pil' value='1' required><input class='form-control' type='number' id='ju_utang' name='debet1' placeholder='Jumlah penjualan' required></div></div><div class='form-group row pemb'><label class='col-sm-12 col-md-2 col-form-label'>Retur Pembelian</label><div class='col-sm-12 col-md-10'><input class='form-control' type='hidden' name='id_akun_piutang_dagang' required><input class='form-control' type='number' id='ju_retur_pembelian' name='kredit1' placeholder='Jumlah' required></div></div></div>";
+              var txt = "<div id='pil_ju1'><div class='form-group row utg'><label class='col-sm-12 col-md-2 col-form-label'>Akun Utang Dagang</label><div class='col-sm-12 col-md-10'><select class='custom-select col-12' name='id_akun_utang_dagang' id='id_utang' required><?php foreach ($utang_dagang as $utang) : ?><option value='<?= $utang->id_utang_dagang ?>'> <?= $utang->nama_utang_dagang ?></option><?php endforeach; ?></select></div></div><div class='form-group row utg'><label class='col-sm-12 col-md-2 col-form-label'>Utang Dagang</label><div class='col-sm-12 col-md-10'><input class='form-control' type='hidden' name='pil' value='1' required><input class='form-control' type='number' id='ju_utang12' name='debet1' placeholder='Jumlah penjualan' required></div></div><div class='form-group row pemb'><label class='col-sm-12 col-md-2 col-form-label'>Retur Pembelian</label><div class='col-sm-12 col-md-10'><input class='form-control' type='hidden' name='id_akun_piutang_dagang' required><input class='form-control' type='number' id='ju_retur_pembelian' name='kredit1' placeholder='Jumlah' required></div></div></div>";
 
               $(".utg").remove();
               $("#pil_ju2").remove();
               $("#juapp").append(txt);
+
+              $("#ju_utang12").keydown(function() {
+                var jumlah = $(this).val();
+                $("#ju_retur_pembelian").val(jumlah);
+              });
+              $("#ju_utang12").keyup(function() {
+                var jumlah = $(this).val();
+                $("#ju_retur_pembelian").val(jumlah);
+              });
+
+
             } else if (kategori_ju == 'retur_penjualan') {
               alert(kategori_ju);
-              var txt = "<div id='pil_ju2'><div class='form-group row'><label class='col-sm-12 col-md-2 col-form-label'>Retur Penjualan</label><div class='col-sm-12 col-md-10'><input class='form-control' type='hidden' name='pil' value='2' required><input class='form-control' type='number' id='ju_retur_penj1' name='debet2' placeholder='Jumlah' required></div></div><div class='form-group row'><label class='col-sm-12 col-md-2 col-form-label'>Akun Piutang Dagang</label><div class='col-sm-12 col-md-10'><select class='custom-select col-12' name='id_akun_piutang_dagang2' id='id_piutang'><?php foreach ($piutang_dagang as $piutang) : ?><option value='<?= $piutang->id_piutang_dagang ?>'> <?= $piutang->nama_piutang_dagang ?></option><?php endforeach; ?></select></div></div><div class='form-group row pemb'><label class='col-sm-12 col-md-2 col-form-label'>Piutang Dagang</label><div class='col-sm-12 col-md-10'><input class='form-control' type='number' id='ju_piutang1' name='kredit2' placeholder='Jumlah' required></div></div></div>";
-              
-              $("#ju_retur_penj").keydown(function() {
-                var jumlah = $(this).val();
-                $("#ju_piutang1").val(jumlah);
-              });
-              $("#ju_retur_penj").keyup(function() {
-                var jumlah = $(this).val();
-                $("#ju_piutang1").val(jumlah);
-              });
+              var txt = "<div id='pil_ju2'><div class='form-group row'><label class='col-sm-12 col-md-2 col-form-label'>Retur Penjualan</label><div class='col-sm-12 col-md-10'><input class='form-control' type='hidden' name='pil' value='2' required><input class='form-control' type='number' id='ju_ret_penj' name='debet2' placeholder='Jumlah' required></div></div><div class='form-group row'><label class='col-sm-12 col-md-2 col-form-label'>Akun Piutang Dagang</label><div class='col-sm-12 col-md-10'><select class='custom-select col-12' name='id_akun_piutang_dagang2' id='id_piutang'><?php foreach ($piutang_dagang as $piutang) : ?><option value='<?= $piutang->id_piutang_dagang ?>'> <?= $piutang->nama_piutang_dagang ?></option><?php endforeach; ?></select></div></div><div class='form-group row pemb'><label class='col-sm-12 col-md-2 col-form-label'>Piutang Dagang</label><div class='col-sm-12 col-md-10'><input class='form-control' type='number' id='ju_piu' name='kredit2' placeholder='Jumlah' required></div></div></div>";
 
               $(".utg").remove();
               $("#pil_ju1").remove();
               $("#juapp").append(txt);
+
+              $("#ju_ret_penj").keydown(function() {
+                var jumlah = $(this).val();
+                $("#ju_piu").val(jumlah);
+              });
+              $("#ju_ret_penj").keyup(function() {
+                var jumlah = $(this).val();
+                $("#ju_piu").val(jumlah);
+              });
             }
 
           });

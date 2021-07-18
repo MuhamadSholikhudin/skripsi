@@ -6,6 +6,17 @@ class Ju extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        if ($this->session->userdata('hakakses') != 1 or $this->session->userdata('hakakses') != 2 or $this->session->userdata('hakakses') != 3) {
+            $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Anda Belum Login
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>');
+            // $this->session->sess_destroy();
+            redirect('dashboard/error');
+        }
+
         $this->load->helper('tgl_indo');
     }
 
@@ -107,7 +118,7 @@ class Ju extends CI_Controller
                 )
             );
             $this->db->insert_batch('jurnal_umum', $data);
-            redirect('ju/ju/index');
+            redirect('jurnal/ju/index');
         }
     }
 
@@ -139,7 +150,7 @@ class Ju extends CI_Controller
             $debet = $this->input->post('debet1');
 
             $id_ju_retur_pembelian = $this->input->post('id_ju_retur_pembelian');
-            $id_akun_returpembelian = $this->input->post('id_akun_returpembelian');
+            $no_akun_returpembelian = $this->input->post('no_akun_returpembelian');
             $kredit = $this->input->post('kredit1');
 
             $id_utang_dagang = $this->input->post('id_utang_dagang');
@@ -160,7 +171,7 @@ class Ju extends CI_Controller
                 array(
                     //Retur pembelian
                     'id_ju' => $id_ju_retur_pembelian,
-                    'no_akun'    =>  $id_akun_returpembelian,
+                    'no_akun'    =>  $no_akun_returpembelian,
                     'kredit' =>  $kredit,
                     'debet' =>  0,
                     'tanggal'    =>  $tanggal,
@@ -200,7 +211,7 @@ class Ju extends CI_Controller
                 ),
                 array(
                     //piutang dagang
-                    'id_jurnal_umum' => $id_ju_piutang_dagang,
+                    'id_ju' => $id_ju_piutang_dagang,
                     'no_akun'    =>  $id_ju_akun_piutang_dagang,
                     'kredit' =>  $kredit,
                     'debet' =>  0,
@@ -214,5 +225,11 @@ class Ju extends CI_Controller
             $this->db->update_batch('jurnal_umum', $data, 'id_ju');
             redirect('jurnal/ju/index');
         }
+    }
+
+    public function hapus($no_transaksi)
+    {
+        $this->db->delete('jurnal_umum', array('no_transaksi' => $no_transaksi));
+        redirect('jurnal/ju/index');
     }
 }

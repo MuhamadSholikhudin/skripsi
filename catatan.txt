@@ -1,6 +1,183 @@
-                    <?php
-                    if ($pilihan[0] == 'menu') { ?>
-                     
-                    <?php } else { ?>
+<?php
+if ($pilihan[0] == 'menu') { ?>
+    
+<?php } else { ?>
 
-                    <?php } ?>
+<?php } ?>
+
+<?php if (($sg1['debet'] + $sg2['debet'] + $sg3['debet'] + $sg4['debet'] + $sg5['debet'] + $sg6['debet']) > ($sg1['kredit'] + $sg2['kredit'] + $sg3['kredit'] + $sg4['kredit'] + $sg5['kredit'] + $sg6['kredit'])) { ?>
+                                <tr>
+                                    <td><?= $g1['tanggal'] ?></td>
+                                    <td>Posting</td>
+                                    <td>Saldo</td>
+                                    <td><?= $saldo_bulan_kemarin ?> </td>
+                                    <td> </td>
+                                    <td><?= $saldo_bulan_kemarin ?></td>
+                                    <td> </td>
+                                </tr>
+                            <?php } elseif (($sg1['debet'] + $sg2['debet'] + $sg3['debet'] + $sg4['debet'] + $sg5['debet'] + $sg6['debet']) < ($sg1['kredit'] + $sg2['kredit'] + $sg3['kredit'] + $sg4['kredit'] + $sg5['kredit'] + $sg6['kredit'])) { ?>
+                                <tr>
+                                    <td><?= $g1['tanggal'] ?></td>
+                                    <td>Posting</td>
+                                    <td>Saldo</td>
+                                    <td> </td>
+                                    <td><?= $saldo_bulan_kemarin ?> </td>
+                                    <td></td>
+                                    <td><?= $saldo_bulan_kemarin ?> </td>
+                                </tr>
+                            <?php } else { ?>
+
+                            <?php } ?>
+
+                            <!-- <tr>
+                                <td></td>
+                                <td>Saldo</td>
+                                <td></td>
+                                <td>
+
+                                </td>
+                                <td>
+
+                                </td>
+                                <td></td>
+                                <td></td>
+                            </tr> -->
+
+                            <?php if ($g1['debet'] != $g1['kredit']) { ?>
+                                <tr>
+                                    <td><?= $g1['tanggal'] ?></td>
+                                    <td>Posting</td>
+                                    <td>jurnal_pemasukan_kas</td>
+                                    <td>
+                                        <?= $g1['debet'] ?>
+                                    </td>
+                                    <td>
+                                        <?= $g1['kredit'] ?>
+                                    </td>
+
+                                    <?php if ($debet_bulan_kemarin + $g1['debet']  > $kredit_bulan_kemarin + $g1['kredit']) {
+                                        $a_debet = $g1['debet'];
+                                        $a_kredit = $g1['kredit'];
+                                    ?>
+                                        <td><?= $debet_bulan_kemarin + $g1['debet'] -  $kredit_bulan_kemarin + $g1['kredit'] ?></td>
+                                        <td></td>
+                                    <?php } elseif ($debet_bulan_kemarin + $g1['debet'] < $kredit_bulan_kemarin + $g1['kredit']) {
+
+                                    ?>
+                                        <td></td>
+                                        <td><?= $kredit_bulan_kemarin + $g1['kredit'] - $debet_bulan_kemarin + $g1['debet'] ?></td>
+                                    <?php } ?>
+
+                                </tr>
+                            <?php } else { ?>
+
+                            <?php } ?>
+
+                            <?php if ($g2['debet'] != $g2['kredit']) { ?>
+                                <tr>
+                                    <td><?= $g2['tanggal'] ?></td>
+                                    <td>Posting</td>
+                                    <td>jurnal_pengeluaran_kas</td>
+                                    <td>
+                                        <?php
+                                        echo $g2['debet'];
+                                        ?>
+                                    </td>
+                                    <td>
+                                        <?= $g2['kredit'] ?>
+                                    </td>
+
+                                    <?php if (($debet_bulan_kemarin + $g1['debet'] + $g2['debet']) > ($kredit_bulan_kemarin + $g1['kredit'] + $g2['kredit'])) { ?>
+                                        <td><?= ($debet_bulan_kemarin + $g1['debet'] + $g2['debet']) - ($kredit_bulan_kemarin + $g1['kredit'] + $g2['kredit']) ?></td>
+                                        <td></td>
+
+                                    <?php } elseif (($debet_bulan_kemarin + $g1['debet'] + $g2['debet']) < ($kredit_bulan_kemarin + $g1['kredit'] + $g2['kredit'])) { ?>
+                                        <td></td>
+                                        <td><?= ($kredit_bulan_kemarin + $g1['kredit'] + $g2['kredit']) - ($debet_bulan_kemarin + $g1['debet'] + $g2['debet']) ?></td>
+                                    <?php } ?>
+
+                                </tr>
+                            <?php } else { ?>
+
+                            <?php } ?>
+
+                            <?php if ($g3['debet'] != $g3['kredit']) { ?>
+                                <tr>
+                                    <td><?= $g3['tanggal'] ?></td>
+                                    <td>Posting</td>
+                                    <td>jurnal_pembelian</td>
+                                    <td>
+                                        <?php
+                                        echo $g3['debet'];
+                                        ?>
+                                    </td>
+                                    <td>
+                                        <?= $g3['kredit'] ?>
+                                    </td>
+
+                                    <?php if (($debet_bulan_kemarin + $g1['debet'] + $g2['debet'] + $g3['debet']) > ($kredit_bulan_kemarin + $g1['kredit'] + $g2['kredit'] + $g3['kredit'])) { ?>
+                                        <td><?= ($debet_bulan_kemarin + $g1['debet'] + $g2['debet'] + $g3['debet']) - ($kredit_bulan_kemarin + $g1['kredit'] + $g2['kredit'] + $g3['kredit']) ?></td>
+                                        <td></td>
+
+                                    <?php } elseif (($debet_bulan_kemarin + $g1['debet'] + $g2['debet'] + $g3['debet']) < ($g1['kredit'] + $g2['kredit'] + $g3['kredit'])) { ?>
+                                        <td></td>
+                                        <td><?= ($kredit_bulan_kemarin + $g1['kredit'] + $g2['kredit'] + $g3['kredit']) - ($debet_bulan_kemarin + $g1['debet'] + $g2['debet'] + $g3['debet']) ?></td>
+                                    <?php } ?>
+
+                                </tr>
+                            <?php } else { ?>
+
+                            <?php } ?>
+
+                            <?php if ($g4['debet'] != $g4['kredit']) { ?>
+                                <tr>
+                                    <td><?= $g4['tanggal'] ?></td>
+                                    <td>Posting</td>
+                                    <td>JP</td>
+                                    <td>
+                                        <?php
+                                        echo $g4['debet'];
+                                        ?>
+                                    </td>
+                                    <td>
+                                        <?= $g4['kredit'] ?>
+                                    </td>
+
+                                    <?php if (($debet_bulan_kemarin + $g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet']) > ($kredit_bulan_kemarin + $g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'])) { ?>
+                                        <td><?= ($debet_bulan_kemarin + $g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet']) - ($kredit_bulan_kemarin +  $g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit']) ?></td>
+                                        <td></td>
+
+                                    <?php } elseif (($debet_bulan_kemarin + $g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet']) < ($kredit_bulan_kemarin + $g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'])) { ?>
+                                        <td></td>
+                                        <td><?= ($kredit_bulan_kemarin + $g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit']) - ($debet_bulan_kemarin + $g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet']) ?></td>
+                                    <?php } ?>
+                                </tr>
+                            <?php } else { ?>
+
+                            <?php } ?>
+
+                            <?php if ($g5['debet'] != $g5['kredit']) { ?>
+                                <tr>
+                                    <td><?= $g5['tanggal'] ?></td>
+                                    <td>Posting</td>
+                                    <td>JU</td>
+                                    <td>
+                                        <?php
+                                        echo $g5['debet'];
+                                        ?>
+                                    </td>
+                                    <td>
+                                        <?= $g5['kredit'] ?>
+                                    </td>
+                                    <?php if (($debet_bulan_kemarin + $g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) > ($kredit_bulan_kemarin + $g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit'])) { ?>
+                                        <td><?= ($debet_bulan_kemarin + $g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) - ($kredit_bulan_kemarin + $g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit']) ?></td>
+                                        <td></td>
+
+                                    <?php } elseif (($debet_bulan_kemarin + $g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) < ($kredit_bulan_kemarin + $g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit'])) { ?>
+                                        <td></td>
+                                        <td><?= ($kredit_bulan_kemarin + $g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit']) - ($debet_bulan_kemarin + $g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) ?></td>
+                                    <?php } ?>
+                                </tr>
+                            <?php } else { ?>
+
+                            <?php } ?>

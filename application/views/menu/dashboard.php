@@ -2,10 +2,45 @@
     <div class>
         <div class="page-title">
             <div class="title_left">
-                <h3>Users <small>Some examples to get you started</small></h3>
+                <h3 class="text-center">Berikut Data pada
+                    <?php
+                    if ($pilihan[0] == 'menu') { ?>
+                        Periode
+                        <?php
+                        if ($bulan_pilih[0] == 1) {
+                            echo "Januari";
+                        } elseif ($bulan_pilih[0] == 2) {
+                            echo "Februari";
+                        } elseif ($bulan_pilih[0] == 3) {
+                            echo "Maret";
+                        } elseif ($bulan_pilih[0] == 4) {
+                            echo "April";
+                        } elseif ($bulan_pilih[0] == 5) {
+                            echo "Mei";
+                        } elseif ($bulan_pilih[0] == 6) {
+                            echo "Juni";
+                        } elseif ($bulan_pilih[0] == 7) {
+                            echo "Juli";
+                        } elseif ($bulan_pilih[0] == 8) {
+                            echo "Agustus";
+                        } elseif ($bulan_pilih[0] == 9) {
+                            echo "September";
+                        } elseif ($bulan_pilih[0] == 10) {
+                            echo "Oktober";
+                        } elseif ($bulan_pilih[0] == 11) {
+                            echo "November";
+                        } elseif ($bulan_pilih[0] == 12) {
+                            echo "Desember";
+                        }
+                        ?>
+                        <?= $tahun_pilih[0] ?>
+                </h3>
+            <?php } else { ?>
+
+            <?php } ?>
             </div>
 
-            <div class="title_right">
+            <!-- <div class="title_right">
                 <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="Search for...">
@@ -14,25 +49,25 @@
                         </span>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
 
         <div class="clearfix"></div>
 
         <div class="row">
-            
-            <a href="<?= base_url('pilihan/siklus_akuntansi/index/'.$data_menu->bulan.'/' . $data_menu->tahun) ?>" class="btn btn-secondary btn-lg">Siklus Akuntansi</a>
-           <a href="<?= base_url('pilihan/jkm/index/'. $data_menu->bulan.'/' . $data_menu->tahun) ?>" class="btn btn-secondary btn-lg">Jurnal pemasukan kas</a>
-           <a href="<?= base_url('pilihan/jkk/index/'. $data_menu->bulan.'/' . $data_menu->tahun) ?>" class="btn btn-secondary btn-lg">Jurnal pengeluaran kas</a>
-           <a href="<?= base_url('pilihan/jb/index/'. $data_menu->bulan.'/' . $data_menu->tahun) ?>" class="btn btn-secondary btn-lg">Jurnal Pembelian</a>
-           <a href="<?= base_url('pilihan/jj/index/'. $data_menu->bulan.'/' . $data_menu->tahun) ?>" class="btn btn-secondary btn-lg">Jurnal Penjualan</a>
-           <a href="<?= base_url('pilihan/ju/index/'. $data_menu->bulan.'/' . $data_menu->tahun) ?>" class="btn btn-secondary btn-lg">Jurnal Umum</a>
-           <a href="<?= base_url('pilihan/jps/index/'. $data_menu->bulan.'/' . $data_menu->tahun) ?>" class="btn btn-secondary btn-lg">Jurnal Penyesuaian</a>
-           <a href="<?= base_url('pilihan/jurnal/index/'. $data_menu->bulan.'/' . $data_menu->tahun) ?>" class="btn btn-secondary btn-lg">Jurnal</a>           
-           <a href="<?= base_url('pilihan/buku_besar/index/'. $data_menu->bulan.'/' . $data_menu->tahun) ?>" class="btn btn-secondary btn-lg">Buku Besar</a>
-           <a href="<?= base_url('pilihan/kertas_kerja/index/'. $data_menu->bulan.'/' . $data_menu->tahun) ?>" class="btn btn-secondary btn-lg">Kertas kerja</a>
-           <a href="<?= base_url('pilihan/laporan/index/'. $data_menu->bulan.'/' . $data_menu->tahun) ?>" class="btn btn-secondary btn-lg">Laporan</a>
-            
+
+            <!-- <a href="<?= base_url('pilihan/siklus_akuntansi/index/' . $data_menu->bulan . '/' . $data_menu->tahun) ?>" class="btn btn-secondary btn-lg">Siklus Akuntansi</a> -->
+            <a href="<?= base_url('pilihan/jkm/index/' . $data_menu->bulan . '/' . $data_menu->tahun) ?>" class="btn btn-secondary btn-lg">Jurnal pemasukan kas</a> <p></p>
+            <a href="<?= base_url('pilihan/jkk/index/' . $data_menu->bulan . '/' . $data_menu->tahun) ?>" class="btn btn-secondary btn-lg">Jurnal pengeluaran kas</a><br>
+            <a href="<?= base_url('pilihan/jb/index/' . $data_menu->bulan . '/' . $data_menu->tahun) ?>" class="btn btn-secondary btn-lg">Jurnal Pembelian</a> <br>
+            <a href="<?= base_url('pilihan/jj/index/' . $data_menu->bulan . '/' . $data_menu->tahun) ?>" class="btn btn-secondary btn-lg">Jurnal Penjualan</a> <br>
+            <a href="<?= base_url('pilihan/ju/index/' . $data_menu->bulan . '/' . $data_menu->tahun) ?>" class="btn btn-secondary btn-lg">Jurnal Umum</a> <br>
+            <a href="<?= base_url('pilihan/jps/index/' . $data_menu->bulan . '/' . $data_menu->tahun) ?>" class="btn btn-secondary btn-lg">Jurnal Penyesuaian</a> <br>
+            <a href="<?= base_url('pilihan/neraca_saldo/index/' . $data_menu->bulan . '/' . $data_menu->tahun) ?>" class="btn btn-secondary btn-lg">Neraca Saldo</a> <br>
+            <a href="<?= base_url('pilihan/buku_besar/index/' . $data_menu->bulan . '/' . $data_menu->tahun) ?>" class="btn btn-secondary btn-lg">Buku Besar</a> <br>
+            <a href="<?= base_url('pilihan/kertas_kerja/index/' . $data_menu->bulan . '/' . $data_menu->tahun) ?>" class="btn btn-secondary btn-lg">Kertas kerja</a> <br>
+            <a href="<?= base_url('pilihan/laporan/index/' . $data_menu->bulan . '/' . $data_menu->tahun) ?>" class="btn btn-secondary btn-lg">Laporan</a> <br>
+
 
 
             <!-- isi -->

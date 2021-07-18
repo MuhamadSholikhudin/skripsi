@@ -152,7 +152,7 @@ class Ju extends CI_Controller
             $debet = $this->input->post('debet1');
 
             $id_ju_retur_pembelian = $this->input->post('id_ju_retur_pembelian');
-            $id_akun_returpembelian = $this->input->post('id_akun_returpembelian');
+            $no_akun_returpembelian = $this->input->post('no_akun_returpembelian');
             $kredit = $this->input->post('kredit1');
 
             $id_utang_dagang = $this->input->post('id_utang_dagang');
@@ -173,7 +173,7 @@ class Ju extends CI_Controller
                 array(
                     //Retur pembelian
                     'id_ju' => $id_ju_retur_pembelian,
-                    'no_akun'    =>  $id_akun_returpembelian,
+                    'no_akun'    =>  $no_akun_returpembelian,
                     'kredit' =>  $kredit,
                     'debet' =>  0,
                     'tanggal'    =>  $tanggal,
@@ -210,16 +210,17 @@ class Ju extends CI_Controller
                     'id_piutang_dagang'    =>  0,
                     'id_pengguna'    =>  $id_pengguna,
                     'id_utang_dagang'    =>  0
-                    
+
                 ),
                 array(
                     //piutang dagang
-                    'id_jurnal_umum' => $id_ju_piutang_dagang,
+                    'id_ju' => $id_ju_piutang_dagang,
                     'no_akun'    =>  $id_ju_akun_piutang_dagang,
                     'kredit' =>  $kredit,
                     'debet' =>  0,
                     'tanggal'    =>  $tanggal,
                     'no_transaksi'    =>  $no_transaksi,
+                    'id_pengguna'    =>  $id_pengguna,
                     'id_piutang_dagang'    =>  $id_akun_piutang_dagang2,
                     'id_utang_dagang'    =>  0
                 )

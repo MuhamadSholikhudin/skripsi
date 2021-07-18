@@ -207,7 +207,21 @@
 	    }
 	}
 
+//Long date indo Format
+if (!function_exists('tanggal_bulan')) {
+	function tanggal_bulan($tanggal)
+	{
+		$ubah = gmdate($tanggal, time() + 60 * 60 * 8);
+		$pecah = explode("-", $ubah);
+		$tgl = $pecah[2];
+		$bln = $pecah[1];
+		$thn = $pecah[0];
+		$bulan = bulan($pecah[1]);
 
+	
+		return  $bulan ;
+	}
+}
 
 
 //Long date medium indo Format
@@ -239,7 +253,22 @@ if (!function_exists('tanggal_pilih')) {
 		$bulan = bulan($pecah[1]);
 
 
-		return  $tgl;
+		return  $bln;
+	}
+}
+
+if (!function_exists('bulan')) {
+	function bulan($tanggal)
+	{
+		$ubah = gmdate($tanggal, time() + 60 * 60 * 8);
+		$pecah = explode("-", $ubah);
+		$tgl = $pecah[2];
+		$bln = $pecah[1];
+		$thn = $pecah[0];
+		$bulan = bulan($pecah[1]);
+
+
+		return  $bulan;
 	}
 }
 

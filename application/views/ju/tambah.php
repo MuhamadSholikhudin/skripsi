@@ -8,7 +8,7 @@
             <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2>Form Tambah Data Barang</h2>
+                        <h2>Form Tambah Data Jurnal Umum</h2>
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
@@ -30,9 +30,6 @@
                                         </select>
                                     </div>
                                 </div>
-
-
-
 
                                 <div class="form-group row">
                                     <label class="col-sm-12 col-md-2 col-form-label">Tanggal</label>
@@ -67,7 +64,7 @@
                                 <div class='form-group row utg'>
                                     <label class='col-sm-12 col-md-2 col-form-label'>Akun Utang Dagang</label>
                                     <div class='col-sm-12 col-md-10'>
-                                        <select class='custom-select col-12' name='no_akun_utang_dagang' id='id_utang' required>
+                                        <select class='custom-select col-12' name='id_akun_piutang_dagang2' id='id_utang' required>
                                             <?php foreach ($utang_dagang as $utang) : ?>
                                                 <option value='<?= $utang->id_utang_dagang ?>'> <?= $utang->nama_utang_dagang ?></option>
                                             <?php endforeach; ?>
@@ -96,19 +93,7 @@
                                         var jumlah = $(this).val();
                                         $("#ju_retur_pem").val(jumlah);
                                     });
-
-                                    $("#ju_retur_penj1").keydown(function() {
-                                        var jumlah = $(this).val();
-                                        $("#ju_piutang1").val(jumlah);
-                                    });
-                                    $("#ju_retur_penj1").keyup(function() {
-                                        var jumlah = $(this).val();
-                                        $("#ju_piutang1").val(jumlah);
-                                    });
                                 </script>
-
-
-
                                 <!-- <div class="form-group row ">
                                 <label class="col-sm-12 col-md-2 col-form-label">Retur Penjualan</label>
                                 <div class="col-sm-12 col-md-10">

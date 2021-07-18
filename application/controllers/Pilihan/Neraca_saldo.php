@@ -1,22 +1,20 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Besar extends CI_Controller
+class Neraca_saldo extends CI_Controller
 {
-    public function __construct()
-    {
-        parent::__construct();
-        $this->load->helper('tgl_indo');
-    }
 
 
-    public function index()
+    public function index($bulan_pilih, $tahun_pilih)
     {
-        $data['akun'] = $this->db->query("SELECT * FROM akun ORDER BY no_akun ASC")->result();
-        $data['pilihan'] = ['samping'];  
+        $data['akun'] = $this->db->query("SELECT * FROM akun  ORDER BY no_akun ASC")->result();
+        $data['pilihan'] = ['menu'];
+        $data['bulan_pilih'] = [$bulan_pilih];
+        $data['tahun_pilih'] = [$tahun_pilih]; 
+        
         $this->load->view('templates/header');
         $this->load->view('templates/sidebar');
-        $this->load->view('buku_besar/index', $data);
+        $this->load->view('neraca_saldo/index', $data);
         $this->load->view('templates/footer');
     }
 

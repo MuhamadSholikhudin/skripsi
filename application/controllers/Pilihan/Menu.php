@@ -4,28 +4,19 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Menu extends CI_Controller
 {
 
-    // public function __construct()
-    // {
-    //     parent::__construct();
-
-    //     if ($this->session->userdata('hakakses') != 1) {
-    //         $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-    //                 Anda Belum Login
-    //                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    //                     <span aria-hidden="true">&times;</span>
-    //                 </button>
-    //                 </div>');
-    //         // $this->session->sess_destroy();
-    //         redirect('dashboard/error');
-    //     }
-    // }
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->helper('tgl_indo');
+    }
 
     public function index($bulan_pilih, $tahun_pilih)
     {
                 // $data_cek = $this->db->query("SELECT YEAR(tanggal), MONTH(tanggal) FROM jurnal_pemasukan_kas WHERE MONTH(tanggal) = $bulan_pilih AND YEAR(tanggal) = $tahun_pilih")->row();
         $data['data_menu'] = $this->db->query("SELECT YEAR(tanggal) as tahun, MONTH(tanggal) as bulan FROM jurnal_pemasukan_kas WHERE MONTH(tanggal) = $bulan_pilih AND YEAR(tanggal) = $tahun_pilih")->row();
-
-       
+        $data['pilihan'] = ['menu'];
+        $data['bulan_pilih'] = [$bulan_pilih];
+        $data['tahun_pilih'] = [$tahun_pilih];        
 
         $this->load->view('templates/header');
         $this->load->view('templates/sidebar');
@@ -37,7 +28,9 @@ class Menu extends CI_Controller
     {
         // $data_cek = $this->db->query("SELECT YEAR(tanggal), MONTH(tanggal) FROM jurnal_pemasukan_kas WHERE MONTH(tanggal) = $bulan_pilih AND YEAR(tanggal) = $tahun_pilih")->row();
         $data['data_menu'] = $this->db->query("SELECT YEAR(tanggal) as tahun, MONTH(tanggal) as bulan FROM jurnal_pemasukan_kas WHERE MONTH(tanggal) = $bulan_pilih AND YEAR(tanggal) = $tahun_pilih")->row();
-
+        $data['pilihan'] = ['menu'];
+        $data['bulan_pilih'] = [$bulan_pilih];
+        $data['tahun_pilih'] = [$tahun_pilih]; 
 
 
         $this->load->view('templates/header');

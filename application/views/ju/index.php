@@ -77,12 +77,12 @@
                                 <td>
 
                                     <?php
-                                if ($pilihan[0] == 'menu') { ?>
-                                    <?= tanggal_pilih($ak->tanggal) ?>
+                                    if ($pilihan[0] == 'menu') { ?>
+                                        <?= tanggal_pilih($ak->tanggal) ?>
                                     <?php } else { ?>
                                         <?= $ak->tanggal ?>
-                                        <?php } ?>
-                                    </td>
+                                    <?php } ?>
+                                </td>
 
                                 <td>
                                     <?php
@@ -96,17 +96,35 @@
                                 <td></td>
                                 <td><?= rupiah($ak->debet) ?></td>
                                 <td></td>
-                                <td>
-                                    <div class="dropdown">
-                                        <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
-                                            <i class="dw dw-more"></i>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                                            <a class="dropdown-item" href="<?= base_url('jurnal/ju/edit/') . $ak->no_transaksi ?>"><i class="fa fa-edit"></i> Ubah</a>
-                                            <a class="dropdown-item" href="<?= base_url('jurnal/ju/hapus/') . $ak->no_transaksi ?>"><i class="fa fa-trash"></i> Hapus</a>
+
+
+
+                                <?php if ($pilihan[0] == 'menu') { ?>
+                                    <td>
+                                        <div class="dropdown">
+                                            <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                                                <i class="dw dw-more"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                                                <a class="dropdown-item" href="<?= base_url('pilihan/ju/edit/') . $ak->no_transaksi . '/' . $bulan_pilih[0] ?>"><i class="fa fa-edit"></i> Ubah</a>
+                                                <a class="dropdown-item" href="<?= base_url('pilihan/ju/hapus/') . $ak->no_transaksi . '/' . $bulan_pilih[0] ?>"><i class="fa fa-trash"></i> Hapus</a>
+                                            </div>
                                         </div>
-                                    </div>
-                                </td>
+                                    </td>
+                                <?php } elseif ($pilihan[0] == 'samping') { ?>
+                                    <td>
+                                        <div class="dropdown">
+                                            <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                                                <i class="dw dw-more"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                                                <a class="dropdown-item" href="<?= base_url('jurnal/ju/edit/') . $ak->no_transaksi  ?>"><i class="fa fa-edit"></i> Ubah</a>
+                                                <a class="dropdown-item" href="<?= base_url('jurnal/ju/hapus/') . $ak->no_transaksi  ?>"><i class="fa fa-trash"></i> Hapus</a>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                <?php } ?>
                             </tr>
                             <tr>
                                 <td></td>
@@ -147,15 +165,14 @@
                         <?php } elseif ($ak->no_akun == 412) { ?>
                             <tr>
                                 <td>
-
                                     <?php
-                                if ($pilihan[0] == 'menu') { ?>
+                                    if ($pilihan[0] == 'menu') { ?>
 
-<?= tanggal_pilih($ak->tanggal) ?>
-<?php } else { ?>
-    <?= $ak->tanggal ?>
-    <?php } ?>
-</td>
+                                        <?= tanggal_pilih($ak->tanggal) ?>
+                                    <?php } else { ?>
+                                        <?= $ak->tanggal ?>
+                                    <?php } ?>
+                                </td>
                                 <td>
                                     <?php
                                     $qq = "SELECT   akun.nama_akun as nama_akun FROM jurnal_umum JOIN akun ON jurnal_umum.no_akun = akun.no_akun  WHERE jurnal_umum.no_transaksi = '$ak->no_transaksi' AND jurnal_umum.no_akun = 412";
@@ -168,17 +185,36 @@
                                 <td></td>
                                 <td><?= rupiah($ak->debet) ?></td>
                                 <td></td>
-                                <td>
-                                    <div class="dropdown">
-                                        <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
-                                            <i class="dw dw-more"></i>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                                            <a class="dropdown-item" href="<?= base_url('jurnal/ju/edit/') . $ak->no_transaksi ?>"><i class="fa fa-edit"></i> Ubah</a>
-                                            <a class="dropdown-item" href="<?= base_url('jurnal/ju/hapus/') . $ak->no_transaksi ?>"><i class="fa fa-trash"></i> Hapus</a>
+
+
+
+
+                                <?php if ($pilihan[0] == 'menu') { ?>
+                                    <td>
+                                        <div class="dropdown">
+                                            <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                                                <i class="dw dw-more"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                                                <a class="dropdown-item" href="<?= base_url('pilihan/ju/edit/') . $ak->no_transaksi . '/' . $bulan_pilih[0] ?>"><i class="fa fa-edit"></i> Ubah</a>
+                                                <a class="dropdown-item" href="<?= base_url('pilihan/ju/hapus/') . $ak->no_transaksi . '/' . $bulan_pilih[0] ?>"><i class="fa fa-trash"></i> Hapus</a>
+                                            </div>
                                         </div>
-                                    </div>
-                                </td>
+                                    </td>
+                                <?php } elseif ($pilihan[0] == 'samping') { ?>
+                                    <td>
+                                        <div class="dropdown">
+                                            <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                                                <i class="dw dw-more"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                                                <a class="dropdown-item" href="<?= base_url('jurnal/ju/edit/') . $ak->no_transaksi  ?>"><i class="fa fa-edit"></i> Ubah</a>
+                                                <a class="dropdown-item" href="<?= base_url('jurnal/ju/hapus/') . $ak->no_transaksi  ?>"><i class="fa fa-trash"></i> Hapus</a>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                <?php } ?>
                             </tr>
                             <tr>
                                 <td></td>
@@ -218,13 +254,17 @@
                             </tr>
                         <?php } else { ?>
                             <tr>
-                                <?php
-                                if ($pilihan[0] == 'menu') { ?>
+                                <td>
+                                    <?php
 
-                                    <?= tanggal_pilih($ak->tanggal) ?>
-                                <?php } else { ?>
-                                    <?= $ak->tanggal ?>
-                                <?php } ?>
+                                    if ($pilihan[0] == 'menu') { ?>
+
+                                        <?= tanggal_pilih($ak->tanggal) ?>
+                                    <?php } else { ?>
+                                        <?= $ak->tanggal ?>
+                                    <?php } ?>
+                                </td>
+
 
                                 <td>
                                     <?php
@@ -236,6 +276,7 @@
                                 <td><?= rupiah($ak->debet) ?></td>
                                 <td><?= $gg['no_piutang_dagang']; ?></td>
                                 <td></td>
+
                                 <td>
                                     <div class="dropdown">
                                         <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
