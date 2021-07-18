@@ -129,6 +129,7 @@
                       <li><a href="<?= base_url('jurnal/jb/') ?>">Pembelian</a></li>
                       <li><a href="<?= base_url('jurnal/jj/') ?>">Penjualan</a></li>
                       <li><a href="<?= base_url('jurnal/ju/') ?>">Umum</a></li>
+                      <li><a href="<?= base_url('jps') ?>">Penyesuaian</a></li>
                     </ul>
                   </li>
                   <li class=""><a><i class="fa fa-book"></i> Buku <span class="fa fa-chevron-down"></span></a>
@@ -173,6 +174,8 @@
                       <li><a href="<?= base_url('jurnal/jb/') ?>">Pembelian</a></li>
                       <li><a href="<?= base_url('jurnal/jj/') ?>">Penjualan</a></li>
                       <li><a href="<?= base_url('jurnal/ju/') ?>">Umum</a></li>
+                      <li><a href="<?= base_url('jps') ?>">Penyesuaian</a></li>
+
                     </ul>
                   </li>
                   <li class=""><a><i class="fa fa-book"></i> Buku <span class="fa fa-chevron-down"></span></a>

@@ -18,7 +18,7 @@
             <br>
             <div class="col-md-12 text-center">
                 <h5>Toko Norkayati</h5>
-                <h5>Jurnal Pembelian Kas</h5>
+                <h5>Jurnal Penjualan</h5>
                 <?php
                 if ($pilihan[0] == 'menu') { ?>
                     <h5>Periode
