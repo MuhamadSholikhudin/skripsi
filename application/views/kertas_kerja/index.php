@@ -47,6 +47,8 @@
                 <?php } else { ?>
 
                 <?php } ?>
+
+
             </div>
 
             <table class="display text-dark" style="width:100%" border="1" role="grid" aria-describedby="DataTables_Table_0_info">
@@ -228,119 +230,132 @@
                             <?php } ?>
 
 
-
-
-
-                            <?php if (($debet_bulan_kemarin  + $g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) > ($kredit_bulan_kemarin  + $g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit'])) { ?>
-
+                        <?php if($pilihan[0] == 'menu'){ ?>
+                                <?php if (($debet_bulan_kemarin  + $g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) > ($kredit_bulan_kemarin  + $g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit'])) { ?>
                                 <?php if (($debet_bulan_kemarin  + $g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) > ($g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit'])) { ?>
                                     <td><?= ($debet_bulan_kemarin  + $g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) - ($kredit_bulan_kemarin  + $g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit']) ?></td>
                                     <td></td>
-
                                 <?php } elseif (($debet_bulan_kemarin  + $g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) < ($kredit_bulan_kemarin  + $g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit'])) { ?>
                                     <td></td>
                                     <td><?= ($kredit_bulan_kemarin  + $g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit']) - ($debet_bulan_kemarin  + $g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) ?></td>
                                 <?php } ?>
-
-                            <?php } elseif (($debet_bulan_kemarin  + $g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) < ($kredit_bulan_kemarin  + $g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit'])) { ?>
-
+                                <?php } elseif (($debet_bulan_kemarin  + $g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) < ($kredit_bulan_kemarin  + $g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit'])) { ?>
                                 <?php if (($debet_bulan_kemarin  + $g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) > ($kredit_bulan_kemarin  + $g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit'])) { ?>
                                     <td><?= ($debet_bulan_kemarin  + $g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) - ($kredit_bulan_kemarin  + $g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit']) ?></td>
                                     <td></td>
-
                                 <?php } elseif (($debet_bulan_kemarin  + $g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) < ($kredit_bulan_kemarin  + $g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit'])) { ?>
                                     <td></td>
                                     <td><?= ($kredit_bulan_kemarin  + $g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit']) - ($debet_bulan_kemarin  + $g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) ?></td>
                                 <?php } ?>
+                                <?php } else { ?>
+                                <td></td>
+                                <td></td>
+                                <?php } ?>
 
+
+                        <?php }else{ ?>
+                            <?php if (($g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) > ($g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit'])) { ?>
+                            <?php if (( $g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) > ($g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit'])) { ?>
+                                <td><?= ( $g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) - ($g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit']) ?></td>
+                                <td></td>
+                            <?php } elseif (($g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) < ($g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit'])) { ?>
+                                <td></td>
+                                <td><?= ($g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit']) - ($g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) ?></td>
+                            <?php } ?>
+                            <?php } elseif (($g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) < ($g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit'])) { ?>
+                            <?php if (( $g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) > ($g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit'])) { ?>
+                                <td><?= ($g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) - ( $g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit']) ?></td>
+                                <td></td>
+                            <?php } elseif (( $g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) < ($g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit'])) { ?>
+                                <td></td>
+                                <td><?= ( $g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit']) - ( $g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) ?></td>
+                            <?php } ?>
                             <?php } else { ?>
-                                <td></td>
-                                <td></td>
+                            <td></td>
+                            <td></td>
                             <?php } ?>
 
+                        <?php } ?>
+
                             <!-- Jurnal Penyesuaian -->
+                            <?php if ($pilihan[0] == 'menu') { ?>
+                                        <?php
+                                        $jps1 = $this->db->query("SELECT SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_penyesuaian WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND no_akun = $ak->no_akun ");
+                                        $jpsr = $jps1->row();
+                                        if ($jps1->num_rows() > 0) {
+                                            if ($jpsr->debet > 0) { ?>
+                                                <td>
+                                                    <?php if ($jpsr->debet > 0) {
+                                                        echo $jpsr->debet;
+                                                    } else {
+                                                    } ?>
+                                                </td>
+                                                <td>
+                                                    <?php if ($jpsr->kredit > 0) {
+                                                        echo $jpsr->kredit;
+                                                    } else {
+                                                    } ?>
+                                                </td>
+                                            <?php } else { ?>
+                                                <td>
+                                                    <?php if ($jpsr->debet > 0) {
+                                                        echo $jpsr->debet;
+                                                    } else {
+                                                    } ?>
+                                                </td>
+                                                <td>
+                                                    <?php if ($jpsr->kredit > 0) {
+                                                        echo $jpsr->kredit;
+                                                    } else {
+                                                    } ?>
+                                                </td>
+                                            <?php }
+                                        } else { ?>
 
-
-
-                            <?php
-                            if ($pilihan[0] == 'menu') { ?>
-                                <?php
-                                $jps1 = $this->db->query("SELECT SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_penyesuaian WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND no_akun = $ak->no_akun ");
-                                $jpsr = $jps1->row();
-                                if ($jps1->num_rows() > 0) {
-                                    if ($jpsr->debet > 0) { ?>
-                                        <td>
-                                            <?php if ($jpsr->debet > 0) {
-                                                echo $jpsr->debet;
-                                            } else {
-                                            } ?>
-                                        </td>
-                                        <td>
-                                            <?php if ($jpsr->kredit > 0) {
-                                                echo $jpsr->kredit;
-                                            } else {
-                                            } ?>
-                                        </td>
-                                    <?php } else { ?>
-                                        <td>
-                                            <?php if ($jpsr->debet > 0) {
-                                                echo $jpsr->debet;
-                                            } else {
-                                            } ?>
-                                        </td>
-                                        <td>
-                                            <?php if ($jpsr->kredit > 0) {
-                                                echo $jpsr->kredit;
-                                            } else {
-                                            } ?>
-                                        </td>
-                                    <?php }
-                                } else { ?>
-
-                                    <td></td>
-                                    <td></td>
-                                <?php
-                                }
-                                ?>
+                                            <td></td>
+                                            <td></td>
+                                        <?php
+                                        }
+                                        ?>
                             <?php } else { ?>
-                                <?php
-                                $jps1 = $this->db->query("SELECT SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_penyesuaian WHERE no_akun = $ak->no_akun ");
-                                $jpsr = $jps1->row();
-                                if ($jps1->num_rows() > 0) {
-                                    if ($jpsr->debet > 0) { ?>
-                                        <td>
-                                            <?php if ($jpsr->debet > 0) {
-                                                echo $jpsr->debet;
-                                            } else {
-                                            } ?>
-                                        </td>
-                                        <td>
-                                            <?php if ($jpsr->kredit > 0) {
-                                                echo $jpsr->kredit;
-                                            } else {
-                                            } ?>
-                                        </td>
-                                    <?php } else { ?>
-                                        <td>
-                                            <?php if ($jpsr->debet > 0) {
-                                                echo $jpsr->debet;
-                                            } else {
-                                            } ?>
-                                        </td>
-                                        <td>
-                                            <?php if ($jpsr->kredit > 0) {
-                                                echo $jpsr->kredit;
-                                            } else {
-                                            } ?>
-                                        </td>
-                                    <?php }
-                                } else { ?>
+                                    <?php
+                                    $jps1 = $this->db->query("SELECT SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_penyesuaian WHERE no_akun = $ak->no_akun ");
+                                    $jpsr = $jps1->row();
+                                    if ($jps1->num_rows() > 0) {
+                                        if ($jpsr->debet > 0) { ?>
+                                            <td>
+                                                <?php if ($jpsr->debet > 0) {
+                                                    echo $jpsr->debet;
+                                                } else {
+                                                } ?>
+                                            </td>
+                                            <td>
+                                                <?php if ($jpsr->kredit > 0) {
+                                                    echo $jpsr->kredit;
+                                                } else {
+                                                } ?>
+                                            </td>
+                                        <?php } else { ?>
+                                            <td>
+                                                <?php if ($jpsr->debet > 0) {
+                                                    echo $jpsr->debet;
+                                                } else {
+                                                } ?>
+                                            </td>
+                                            <td>
+                                                <?php if ($jpsr->kredit > 0) {
+                                                    echo $jpsr->kredit;
+                                                } else {
+                                                } ?>
+                                            </td>
+                                        <?php }
+                                    } else { ?>
 
-                                    <td></td>
-                                    <td></td>
-                                <?php
-                                }
-                                ?>
+                                        <td></td>
+                                        <td></td>
+                                    <?php
+                                    }
+                                    ?>
                             <?php } ?>
 
 
@@ -348,8 +363,15 @@
                             <!-- NSD -->
 
                             <?php
-                            $nsdebet = $debet_bulan_kemarin  +  $g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet'];
-                            $nsdkredit = $kredit_bulan_kemarin  +  $g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit'];
+                            if($pilihan[0] == 'menu'){
+                                $nsdebet = $debet_bulan_kemarin  +  $g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet'];
+                                $nsdkredit = $kredit_bulan_kemarin  +  $g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit'];
+                                
+                            }else{
+                                $nsdebet = $g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet'];
+                                $nsdkredit =  $g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit'];
+                                
+                            }
 
                             if (($nsdebet + $jpsr->debet) > ($nsdkredit + $jpsr->kredit)) { ?>
                                 <td><?= rupiah1(($nsdebet + $jpsr->debet) - ($nsdkredit + $jpsr->kredit)) ?></td>

@@ -7,7 +7,7 @@ class Jkk extends CI_Controller
     {
         parent::__construct();
 
-        if ($this->session->userdata('hakakses') != 1 or $this->session->userdata('hakakses') != 2 ) {
+        if ($this->session->userdata('hakakses') == " ") {
             $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dismissible fade show" role="alert">
                     Anda Belum Login
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
