@@ -1,4 +1,4 @@
-<div class="right_col" role="main" style="min-height: 4546px; ">
+<div class="right_col bg-white" role="main" style="min-height: 4546px; ">
     <div class>
 
 
@@ -17,7 +17,7 @@
             </div>
             <br>
             <div class="col-md-12 text-center">
-                <?= $pilihan[0] ?>
+                
                 <h5>Toko Norkayati</h5>
                 <h5>Jurnal Pengeluaran Kas</h5>
                 <?php

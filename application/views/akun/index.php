@@ -1,4 +1,4 @@
-<div class="right_col" role="main" style="min-height: 4546px; ">
+<div class="right_col bg-white" role="main" style="min-height: 4546px; ">
     <div class>
 
 

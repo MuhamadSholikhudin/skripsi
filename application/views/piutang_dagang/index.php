@@ -1,8 +1,5 @@
-<div class="right_col" role="main" style="min-height: 4546px; ">
+<div class="right_col bg-white" role="main" style="min-height: 4546px; ">
     <div class>
-
-
-
         <div class="clearfix"></div>
 
         <div class="row">
@@ -10,15 +7,15 @@
                 <a class="btn btn-primary" href="<?= base_url('piutang_dagang/tambah') ?>" role="button">Tambah piutang_dagang</a>
             </div>
             <div class="col-md-8">
-                <h3>Data piutang_dagang</h3>
+                <h3>Data Piutang Dagang</h3>
             </div>
             <div class="col-md-12 col-sm-12" border="1">
                 <table class="display text-dark" style="width:100%" border="1" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
                     <thead>
                         <tr role="row">
-                            <th>Kode piutang_dagang</th>
-                            <th>No piutang_dagang</th>
-                            <th>Nama piutang_dagang</th>
+                            <th>Kode piutang dagang</th>
+                            <th>No piutang dagang</th>
+                            <th>Nama piutang dagang</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>

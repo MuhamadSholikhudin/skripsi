@@ -1,8 +1,5 @@
-<div class="right_col" role="main" style="min-height: 4546px; ">
+<div class="right_col bg-white" role="main" style="min-height: 4546px; ">
     <div class>
-
-
-
         <div class="clearfix"></div>
 
         <div class="row">
@@ -69,7 +66,12 @@
 
 
             </div>
-
+<!-- <div class="col-lg-6">
+    a
+</div>
+<div class="col-lg-6">
+    a
+</div> -->
             <table class="display text-dark" style="width:100%" border="1" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
                 <thead class="text-center">
                     <tr>

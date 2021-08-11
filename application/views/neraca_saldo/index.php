@@ -1,13 +1,13 @@
-<div class="right_col" role="main" style="min-height: 4546px; ">
+<div class="right_col bg-white" role="main" style="min-height: 4546px; ">
     <div class>
 
-        <div class="page-title">
+        <!-- <div class="page-title">
             <div class="title_center">
                 <h3>Selamat datang, </h3>
 
             </div>
 
-        </div>
+        </div> -->
 
         <div class="clearfix"></div>
         <br>
@@ -57,10 +57,10 @@
                 <thead>
                     <tr>
 
-                        <th>No Akun</th>
-                        <th>Nama Akun</th>
-                        <th>Debet</th>
-                        <th>Kredit</th>
+                        <th class="text-center">No Akun</th>
+                        <th class="text-center">Nama Akun</th>
+                        <th class="text-center">Debet</th>
+                        <th class="text-center">Kredit</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -137,12 +137,12 @@
                                 <td><?= $ak->no_akun ?></td>
                                 <td><?= $ak->nama_akun ?></td>
                                 <?php if (($g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) > ($g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit'])) { ?>
-                                    <td><?= ($g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) - ($g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit']) ?></td>
+                                    <td class="text-right"><?= rupiah1(($g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) - ($g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit'])) ?></td>
                                     <td></td>
 
                                 <?php } elseif (($g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) < ($g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit'])) { ?>
                                     <td></td>
-                                    <td><?= ($g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit']) - ($g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) ?></td>
+                                    <td class="text-right"><?= rupiah1(($g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit']) - ($g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet'])) ?></td>
                                 <?php } ?>
                             </tr>
                         <?php } elseif (($g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) < ($g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit'])) { ?>
@@ -150,12 +150,12 @@
                                 <td><?= $ak->no_akun ?></td>
                                 <td><?= $ak->nama_akun ?></td>
                                 <?php if (($g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) > ($g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit'])) { ?>
-                                    <td><?= ($g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) - ($g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit']) ?></td>
+                                    <td class="text-right"><?= rupiah1(($g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) - ($g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit'])) ?></td>
                                     <td></td>
 
                                 <?php } elseif (($g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) < ($g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit'])) { ?>
                                     <td></td>
-                                    <td><?= ($g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit']) - ($g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) ?></td>
+                                    <td class="text-right"><?= rupiah1(($g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit']) - ($g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet'])) ?></td>
                                 <?php } ?>
                             </tr>
                         <?php } else { ?>
@@ -168,7 +168,7 @@
                         <td>
                         </td>
                         <td>Total</td>
-                        <td>
+                        <td class="text-right">
                             <?php if ($pilihan[0] == 'menu') { ?>
                                 <?php $total_debet = 0;
                                 foreach ($akun as $ak) : ?>
@@ -212,7 +212,7 @@
                                     } ?>
 
                                 <?php endforeach;
-                                echo $total_debet;
+                                echo rupiah1($total_debet);
                                 ?>
                             <?php } elseif ($pilihan[0] == 'samping') { ?>
                                 <?php $total_debet = 0;
@@ -257,13 +257,13 @@
                                     } ?>
 
                                 <?php endforeach;
-                                echo $total_debet;
+                                echo rupiah1($total_debet);
                                 ?>
                             <?php } ?>
 
 
                         </td>
-                        <td>
+                        <td class="text-right">
                             <?php if ($pilihan[0] == 'menu') { ?>
                                 <?php $total_kredit = 0;
                                 foreach ($akun as $ak) : ?>
@@ -306,7 +306,7 @@
                                     } ?>
 
                                 <?php endforeach;
-                                echo $total_kredit;
+                                echo rupiah1($total_kredit);
                                 ?>
                             <?php } elseif ($pilihan[0] == 'samping') { ?>
                                 <?php $total_kredit = 0;
@@ -350,7 +350,7 @@
                                     } ?>
 
                                 <?php endforeach;
-                                echo $total_kredit;
+                                echo rupiah1($total_kredit);
                                 ?>
                             <?php } ?>
 
@@ -396,15 +396,15 @@
                     ?>
                     <?php if (($g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) > ($g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit'])) { ?>
                         <?php if (($g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) > ($g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit'])) { ?>
-                            <?= ($g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) - ($g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit']) ?>
+                            <?= rupiah1(($g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) - ($g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit'])) ?>
                         <?php } elseif (($g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) < ($g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit'])) { ?>
                             <?= ($g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit']) - ($g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) ?>
                         <?php } ?>
                     <?php } elseif (($g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) < ($g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit'])) { ?>
                         <?php if (($g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) > ($g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit'])) { ?>
-                            <?= ($g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) - ($g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit']) ?>
+                            <?= rupiah1(($g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) - ($g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit'])) ?>
                         <?php } elseif (($g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) < ($g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit'])) { ?>
-                            <?= ($g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit']) - ($g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) ?>
+                            <?= rupiah1(($g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit']) - ($g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet'])) ?>
                         <?php } ?>
                     <?php } else {
                     } ?>
