@@ -1,12 +1,12 @@
-<div class="right_col" role="main" style="min-height: 4546px; ">
+<div class="right_col bg-white" role="main" style="min-height: 4546px; ">
     <div class>
 
         <div class="page-title">
-            <div class="title_center">
+            <!-- <div class="title_center">
                 <h3>Selamat datang,
 
                 </h3>
-            </div>
+            </div> -->
         </div>
 
         <div class="clearfix"></div>
@@ -81,9 +81,9 @@
                         <tbody>
                             <?php if ($pilihan[0] == 'menu') { ?>
                                 <?php
-                                $q1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_pemasukan_kas WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND no_akun = $ak->no_akun";
+                                $q1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_penerimaan_kas WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND no_akun = $ak->no_akun";
                                 $g1 = $this->db->query($q1)->row_array();
-                                $n1 = $this->db->query("SELECT * FROM jurnal_pemasukan_kas WHERE no_akun = $ak->no_akun")->num_rows();
+                                $n1 = $this->db->query("SELECT * FROM jurnal_penerimaan_kas WHERE no_akun = $ak->no_akun")->num_rows();
                                 // perhitungan jumlah 
                                 $a = $g1['debet'] + $g1['kredit'];
 
@@ -113,8 +113,8 @@
 
 
                                 // Data saldo bulam kemarin
-                                $s1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_pemasukan_kas WHERE MONTH(tanggal) < $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND no_akun = $ak->no_akun";
-                                $sn1 = $this->db->query("SELECT * FROM jurnal_pemasukan_kas WHERE no_akun = $ak->no_akun")->num_rows();
+                                $s1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_penerimaan_kas WHERE MONTH(tanggal) < $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND no_akun = $ak->no_akun";
+                                $sn1 = $this->db->query("SELECT * FROM jurnal_penerimaan_kas WHERE no_akun = $ak->no_akun")->num_rows();
                                 if ($sn1 > 0) {
                                     $sg1 = $this->db->query($s1)->row_array();
                                 } else {
@@ -192,9 +192,9 @@
                                 ?>
                             <?php } elseif ($pilihan[0] == 'samping') { ?>
                                 <?php
-                                $q1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_pemasukan_kas WHERE no_akun = $ak->no_akun ORDER BY tanggal DESC";
+                                $q1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_penerimaan_kas WHERE no_akun = $ak->no_akun ORDER BY tanggal DESC";
                                 $g1 = $this->db->query($q1)->row_array();
-                                $n1 = $this->db->query("SELECT * FROM jurnal_pemasukan_kas WHERE no_akun = $ak->no_akun")->num_rows();
+                                $n1 = $this->db->query("SELECT * FROM jurnal_penerimaan_kas WHERE no_akun = $ak->no_akun")->num_rows();
                                 // perhitungan jumlah 
                                 $a = $g1['debet'] + $g1['kredit'];
 

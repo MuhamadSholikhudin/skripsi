@@ -77,8 +77,8 @@
                             $penber_kredit = 0;
                             foreach ($penjualan as $jual) : ?>
                                 <?php
-                                $q1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_pemasukan_kas WHERE  MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND  no_akun = $jual->no_akun ";
-                                $n1 = $this->db->query("SELECT * FROM jurnal_pemasukan_kas WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND  no_akun = $jual->no_akun")->num_rows();
+                                $q1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_penerimaan_kas WHERE  MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND  no_akun = $jual->no_akun ";
+                                $n1 = $this->db->query("SELECT * FROM jurnal_penerimaan_kas WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND  no_akun = $jual->no_akun")->num_rows();
                                 if ($n1 > 0) {
                                     $g1 = $this->db->query($q1)->row_array();
                                 } else {
@@ -196,9 +196,9 @@
                             $penber_kredit = 0;
                             foreach ($penjualan as $jual) : ?>
                                 <?php
-                                $q1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_pemasukan_kas WHERE no_akun = $jual->no_akun ";
+                                $q1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_penerimaan_kas WHERE no_akun = $jual->no_akun ";
                                 $g1 = $this->db->query($q1)->row_array();
-                                $n1 = $this->db->query("SELECT * FROM jurnal_pemasukan_kas WHERE no_akun = $jual->no_akun")->num_rows();
+                                $n1 = $this->db->query("SELECT * FROM jurnal_penerimaan_kas WHERE no_akun = $jual->no_akun")->num_rows();
                                 // perhitungan jumlah 
                                 $a = $g1['debet'] + $g1['kredit'];
 
@@ -315,9 +315,9 @@
                             <?php
                             if ($pilihan[0] == 'menu') { ?>
                                 <?php
-                                $q1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_pemasukan_kas WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND no_akun = $beli->no_akun ";
+                                $q1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_penerimaan_kas WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND no_akun = $beli->no_akun ";
                                 $g1 = $this->db->query($q1)->row_array();
-                                $n1 = $this->db->query("SELECT * FROM jurnal_pemasukan_kas WHERE no_akun = $beli->no_akun")->num_rows();
+                                $n1 = $this->db->query("SELECT * FROM jurnal_penerimaan_kas WHERE no_akun = $beli->no_akun")->num_rows();
                                 // perhitungan jumlah 
                                 $a = $g1['debet'] + $g1['kredit'];
 
@@ -348,9 +348,9 @@
                                 ?>
                             <?php } else { ?>
                                 <?php
-                                $q1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_pemasukan_kas WHERE no_akun = $beli->no_akun ";
+                                $q1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_penerimaan_kas WHERE no_akun = $beli->no_akun ";
                                 $g1 = $this->db->query($q1)->row_array();
-                                $n1 = $this->db->query("SELECT * FROM jurnal_pemasukan_kas WHERE no_akun = $beli->no_akun")->num_rows();
+                                $n1 = $this->db->query("SELECT * FROM jurnal_penerimaan_kas WHERE no_akun = $beli->no_akun")->num_rows();
                                 // perhitungan jumlah 
                                 $a = $g1['debet'] + $g1['kredit'];
 
@@ -520,8 +520,8 @@
                             if ($pilihan[0] == 'menu') { ?>
 
                                 <?php
-                                $q1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_pemasukan_kas WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND  no_akun = $beb->no_akun ";
-                                $n1 = $this->db->query("SELECT * FROM jurnal_pemasukan_kas WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND  no_akun = $beb->no_akun")->num_rows();
+                                $q1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_penerimaan_kas WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND  no_akun = $beb->no_akun ";
+                                $n1 = $this->db->query("SELECT * FROM jurnal_penerimaan_kas WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND  no_akun = $beb->no_akun")->num_rows();
                                 // perhitungan jumlah 
                                 if ($n1 > 0) {
                                     $g1 = $this->db->query($q1)->row_array();
@@ -582,9 +582,9 @@
                             <?php } else { ?>
 
                                 <?php
-                                $q1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_pemasukan_kas WHERE no_akun = $beb->no_akun ";
+                                $q1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_penerimaan_kas WHERE no_akun = $beb->no_akun ";
                                 $g1 = $this->db->query($q1)->row_array();
-                                $n1 = $this->db->query("SELECT * FROM jurnal_pemasukan_kas WHERE no_akun = $beb->no_akun")->num_rows();
+                                $n1 = $this->db->query("SELECT * FROM jurnal_penerimaan_kas WHERE no_akun = $beb->no_akun")->num_rows();
                                 // perhitungan jumlah 
                                 $a = $g1['debet'] + $g1['kredit'];
 
@@ -758,8 +758,8 @@
                                 <?php
                                 if ($pilihan[0] == 'menu') { ?>
                                     <?php
-                                    $mo1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_pemasukan_kas WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND no_akun = 311 ";
-                                    $mn1 = $this->db->query("SELECT * FROM jurnal_pemasukan_kas WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND  no_akun = 311")->num_rows();
+                                    $mo1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_penerimaan_kas WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND no_akun = 311 ";
+                                    $mn1 = $this->db->query("SELECT * FROM jurnal_penerimaan_kas WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND  no_akun = 311")->num_rows();
                                     if ($mn1 > 0) {
                                         $mi1 = $this->db->query($mo1)->row_array();
                                     } else {
@@ -829,9 +829,9 @@
                                     ?>
                                 <?php } else { ?>
                                     <?php
-                                    $mo1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_pemasukan_kas WHERE no_akun = 311 ";
+                                    $mo1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_penerimaan_kas WHERE no_akun = 311 ";
                                     $mi1 = $this->db->query($mo1)->row_array();
-                                    $mn1 = $this->db->query("SELECT * FROM jurnal_pemasukan_kas WHERE no_akun = 311")->num_rows();
+                                    $mn1 = $this->db->query("SELECT * FROM jurnal_penerimaan_kas WHERE no_akun = 311")->num_rows();
                                     // perhitungan jumlah 
 
 
@@ -884,9 +884,9 @@
 
 
                                 <?php
-                                $pro1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_pemasukan_kas WHERE no_akun = 312 ";
+                                $pro1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_penerimaan_kas WHERE no_akun = 312 ";
                                 $pri1 = $this->db->query($pro1)->row_array();
-                                $prn1 = $this->db->query("SELECT * FROM jurnal_pemasukan_kas WHERE no_akun = 312")->num_rows();
+                                $prn1 = $this->db->query("SELECT * FROM jurnal_penerimaan_kas WHERE no_akun = 312")->num_rows();
                                 // perhitungan jumlah 
 
 
@@ -1009,8 +1009,8 @@
                                 <?php
                                 if ($pilihan[0] == 'menu') { ?>
                                     <?php
-                                    $q1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_pemasukan_kas WHERE  MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND  no_akun = $akti->no_akun ";
-                                    $n1 = $this->db->query("SELECT * FROM jurnal_pemasukan_kas WHERE no_akun = $akti->no_akun")->num_rows();
+                                    $q1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_penerimaan_kas WHERE  MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND  no_akun = $akti->no_akun ";
+                                    $n1 = $this->db->query("SELECT * FROM jurnal_penerimaan_kas WHERE no_akun = $akti->no_akun")->num_rows();
                                     // perhitungan jumlah
                                     if ($n1 > 0) {
                                         $g1 = $this->db->query($q1)->row_array();
@@ -1077,9 +1077,9 @@
                                     ?>
                                 <?php } else { ?>
                                     <?php
-                                    $q1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_pemasukan_kas WHERE no_akun = $akti->no_akun ";
+                                    $q1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_penerimaan_kas WHERE no_akun = $akti->no_akun ";
                                     $g1 = $this->db->query($q1)->row_array();
-                                    $n1 = $this->db->query("SELECT * FROM jurnal_pemasukan_kas WHERE no_akun = $akti->no_akun")->num_rows();
+                                    $n1 = $this->db->query("SELECT * FROM jurnal_penerimaan_kas WHERE no_akun = $akti->no_akun")->num_rows();
                                     // perhitungan jumlah 
                                     $a = $g1['debet'] + $g1['kredit'];
 
@@ -1199,8 +1199,8 @@
                             foreach ($pasiva as $pasi) : ?>
                                 <?php if ($pilihan[0] == 'menu') { ?>
                                     <?php
-                                    $q1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_pemasukan_kas WHERE  MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND  no_akun = $pasi->no_akun ";
-                                    $n1 = $this->db->query("SELECT * FROM jurnal_pemasukan_kas WHERE no_akun = $pasi->no_akun")->num_rows();
+                                    $q1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_penerimaan_kas WHERE  MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND  no_akun = $pasi->no_akun ";
+                                    $n1 = $this->db->query("SELECT * FROM jurnal_penerimaan_kas WHERE no_akun = $pasi->no_akun")->num_rows();
                                     // perhitungan jumlah
                                     if ($n1 > 0) {
                                         $g1 = $this->db->query($q1)->row_array();
@@ -1267,9 +1267,9 @@
                                     ?>
                                 <?php } else { ?>
                                     <?php
-                                    $q1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_pemasukan_kas WHERE no_akun = $pasi->no_akun ";
+                                    $q1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_penerimaan_kas WHERE no_akun = $pasi->no_akun ";
                                     $g1 = $this->db->query($q1)->row_array();
-                                    $n1 = $this->db->query("SELECT * FROM jurnal_pemasukan_kas WHERE no_akun = $pasi->no_akun")->num_rows();
+                                    $n1 = $this->db->query("SELECT * FROM jurnal_penerimaan_kas WHERE no_akun = $pasi->no_akun")->num_rows();
                                     // perhitungan jumlah 
                                     $a = $g1['debet'] + $g1['kredit'];
 

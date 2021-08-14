@@ -9,7 +9,7 @@ public function index(){
 
 
     $data['bulan'] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10 , 11, 12];
-        $data['tahun'] = $this->db->query(" SELECT YEAR(tanggal) as tahun FROM jurnal_pemasukan_kas GROUP BY YEAR(tanggal) ")->result();
+        $data['tahun'] = $this->db->query(" SELECT YEAR(tanggal) as tahun FROM jurnal_penerimaan_kas GROUP BY YEAR(tanggal) ")->result();
 
        
 
@@ -21,7 +21,7 @@ public function index(){
         } else {
             $bulan_pilih = $this->input->post("bulan_pilih");
             $tahun_pilih = $this->input->post("tahun_pilih");
-            $cek_data = $this->db->query("SELECT YEAR(tanggal), MONTH(tanggal) FROM jurnal_pemasukan_kas WHERE MONTH(tanggal) = $bulan_pilih AND YEAR(tanggal) = $tahun_pilih");
+            $cek_data = $this->db->query("SELECT YEAR(tanggal), MONTH(tanggal) FROM jurnal_penerimaan_kas WHERE MONTH(tanggal) = $bulan_pilih AND YEAR(tanggal) = $tahun_pilih");
             $cek_benar = $cek_data->row();
             // $auth = $this->Model_auth->cek_login();
             if ($cek_data->num_rows() < 1) {

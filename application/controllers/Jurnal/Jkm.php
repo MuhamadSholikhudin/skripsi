@@ -23,7 +23,7 @@ class Jkm extends CI_Controller
 
     public function index()
     {
-        $data['jkm'] = $this->db->query("SELECT * FROM jurnal_pemasukan_kas GROUP BY no_transaksi ORDER BY tanggal ASC")->result();
+        $data['jkm'] = $this->db->query("SELECT * FROM jurnal_penerimaan_kas GROUP BY no_transaksi ORDER BY tanggal ASC")->result();
         $data['pilihan'] = ['samping'];
         
         $this->load->view('templates/header');
@@ -34,7 +34,7 @@ class Jkm extends CI_Controller
 
     public function tambah()
     {
-        // $data['jurnal_pemasukan_kas'] = $this->db->query("SELECT * FROM jurnal_pemasukan_kas ORDER BY no_jurnal_pemasukan_kas ASC")->result();
+        // $data['jurnal_penerimaan_kas'] = $this->db->query("SELECT * FROM jurnal_penerimaan_kas ORDER BY no_jurnal_penerimaan_kas ASC")->result();
         $data['piutang_dagang'] = $this->db->query("SELECT * FROM piutang_dagang ORDER BY nama_piutang_dagang ASC")->result();
         $data['pilihan'] = ['samping'];
         $data['akun'] = $this->db->query("SELECT * FROM akun WHERE no_akun = 311 OR no_akun = 512")->result();
@@ -82,7 +82,7 @@ class Jkm extends CI_Controller
                     'id_syarat'    =>  0
             )
         );
-            $this->db->insert_batch('jurnal_pemasukan_kas', $data); 
+            $this->db->insert_batch('jurnal_penerimaan_kas', $data); 
             redirect('jurnal/jkm/index');
 
         }elseif($pil == 2){
@@ -132,7 +132,7 @@ class Jkm extends CI_Controller
                     'id_syarat'    =>  0
                 )
             );
-            $this->db->insert_batch('jurnal_pemasukan_kas', $data);
+            $this->db->insert_batch('jurnal_penerimaan_kas', $data);
             redirect('jurnal/jkm/index');
         }elseif($pil == 3){
 
@@ -169,7 +169,7 @@ class Jkm extends CI_Controller
                     'id_syarat'    =>  0
                 )
             );
-            $this->db->insert_batch('jurnal_pemasukan_kas', $data);
+            $this->db->insert_batch('jurnal_penerimaan_kas', $data);
             redirect('jurnal/jkm/index');
         }
 
@@ -177,7 +177,7 @@ class Jkm extends CI_Controller
 
     public function edit($no_transaksi)
     {
-        $data['jkm'] = $this->db->query("SELECT * FROM jurnal_pemasukan_kas WHERE no_transaksi = '$no_transaksi' ")->row();
+        $data['jkm'] = $this->db->query("SELECT * FROM jurnal_penerimaan_kas WHERE no_transaksi = '$no_transaksi' ")->row();
         $data['piutang_dagang'] = $this->db->query("SELECT * FROM piutang_dagang ")->result();
         $data['akun'] = $this->db->query("SELECT * FROM akun WHERE no_akun = 512  OR no_akun = 311")->result();
         
@@ -235,7 +235,7 @@ class Jkm extends CI_Controller
                 )
             );
             
-            $this->db->update_batch('jurnal_pemasukan_kas', $data, 'id_jkm');
+            $this->db->update_batch('jurnal_penerimaan_kas', $data, 'id_jkm');
             redirect('jurnal/jkm/index');
 
         } elseif ($pil == 2) {
@@ -292,7 +292,7 @@ class Jkm extends CI_Controller
                 )
             );
             
-            $this->db->update_batch('jurnal_pemasukan_kas', $data, 'id_jkm');
+            $this->db->update_batch('jurnal_penerimaan_kas', $data, 'id_jkm');
             redirect('jurnal/jkm/index');
 
         } elseif ($pil == 3) {
@@ -334,15 +334,15 @@ class Jkm extends CI_Controller
                     'id_syarat'    =>  0
                 )
             );
-            // $this->db->update_batch('jurnal_pemasukan_kas', $data);
-            $this->db->update_batch('jurnal_pemasukan_kas', $data, 'id_jurnal_pemasukan_kas');
+            // $this->db->update_batch('jurnal_penerimaan_kas', $data);
+            $this->db->update_batch('jurnal_penerimaan_kas', $data, 'id_jurnal_penerimaan_kas');
             redirect('jurnal/jkm/index');
         }
 
     }
 
     public function hapus($no_transaksi){
-        $this->db->delete('jurnal_pemasukan_kas', array('no_transaksi' => $no_transaksi));
+        $this->db->delete('jurnal_penerimaan_kas', array('no_transaksi' => $no_transaksi));
         redirect('jurnal/jkm/index');
 
     }

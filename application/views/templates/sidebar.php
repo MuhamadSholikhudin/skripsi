@@ -147,7 +147,7 @@
                   </li>
                   <li class=""><a><i class="fa fa-file-excel-o"></i> Kertas Kerja <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu" style="display: none;">
-                      <li><a href="<?= base_url('kertas_kerja') ?>">Neraca saldo</a></li>
+                      <li><a href="<?= base_url('kertas_kerja') ?>">Kertas kerja</a></li>
                     </ul>
                   </li>
                   <li class=""><a><i class="fa fa-file"></i> Laporan <span class="fa fa-chevron-down"></span></a>
