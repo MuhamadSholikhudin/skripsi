@@ -52,39 +52,98 @@
 
                 <?php } ?>
             </div>
+            <div class="col-lg-6">
+                <h3 class="text-center">Data Piutang Dagang</h3>
+                <?php foreach ($piutang as $piu) : ?>
+                    <div class="col-md-6 text-left">
+                        <strong><?= $piu->nama_piutang_dagang ?></strong>
+                    </div>
+                    <div class="col-md-6 text-right">
+                        <strong> No : <?= $piu->no_piutang_dagang ?> </strong>
+                    </div>
+                    
+                    <table class="display mb-3" width="100%">
+                        <thead>
+                            <tr>
+                                <th>Tanggal</th>
+                                <th>Keterangan</th>
+                                <th>REF</th>
+                                <th>DEBET</th>
+                                <th>KREDIT</th>
+                            </tr>
+                        </thead>
+                        <tbody>
 
-            <table class="display" width="100%">
-                <thead>
-                    <tr>
-                        <th>No Piutang Dagang</th>
-                        <th>Nama Piutang Dagang</th>
-                        <th>DEBET</th>
-                        <th>KREDIT</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($piutang as $piu) : ?>
-                        <tr>
-                            <td><?= $piu->no_piutang_dagang ?></td>
-                            <td><?= $piu->nama_piutang_dagang ?></td>
-                            <?php
-                            $pjkm = $this->db->query("SELECT SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_penerimaan_kas WHERE id_piutang_dagang = $piu->id_piutang_dagang")->row();
-                            $pjj = $this->db->query("SELECT SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_penjualan WHERE id_piutang_dagang = $piu->id_piutang_dagang")->row();
-                            $pju = $this->db->query("SELECT SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_umum WHERE id_piutang_dagang = $piu->id_piutang_dagang")->row();
-                            echo $debet = $pjkm->debet + $pjj->debet + $pju->debet;
-                            echo $kredit = $pjkm->kredit +  $pjkm->kredit  + $pju->kredit;
-                            ?>
-                            <?php
-                                if (($debet) > ($kredit)){
-                                    echo '<td>'. $debet - $kredit.'</td>';
-                                    echo '<td> </td>';
-                                }elseif(($debet) < ($kredit)){
-                                    echo '<td> </td>';
-                                echo '<td>' .  $kredit - $debet . '</td>';
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <?php
+                                $pjkm = $this->db->query("SELECT COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_penerimaan_kas WHERE id_piutang_dagang = $piu->id_piutang_dagang")->row();
+                                $pjj = $this->db->query("SELECT COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0)  as kredit FROM jurnal_penjualan WHERE id_piutang_dagang = $piu->id_piutang_dagang")->row();
+                                $pju = $this->db->query("SELECT COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_umum WHERE id_piutang_dagang = $piu->id_piutang_dagang")->row();
+                                $debet = $pjkm->debet + $pjj->debet + $pju->debet;
+                                $kredit = $pjkm->kredit +  $pjj->kredit  + $pju->kredit;
+                                ?>
+                                <?php
+                                if (($pjkm->debet + $pjj->debet + $pju->debet) > ($pjkm->kredit +  $pjj->kredit  + $pju->kredit)) { ?>
+
+                                    <td><?= ($pjkm->debet + $pjj->debet + $pju->debet) - ($pjkm->kredit + $pjj->kredit + $pju->kredit) ?> </td>
+                                    <td></td>
+                                <?php
+                                } elseif (($pjkm->debet + $pjj->debet + $pju->debet) < ($pjkm->kredit +  $pjj->kredit  + $pju->kredit)) { ?>
+                                    <td></td>
+                                    <td><?= ($pjkm->kredit + $pjj->kredit + $pju->kredit) - ($pjkm->debet + $pjj->debet + $pju->debet) ?> </td>
+
+                                <?php
                                 }
+                                ?>
 
-                            ?>
-                            <!-- <td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                <?php endforeach ?>
+            </div>
+
+
+            <div class="col-lg-6">
+                <h3 class="text-center">Data Utang Dagang</h3>
+                <table class="display" width="100%">
+                    <thead>
+                        <tr>
+                            <th>No Utang Dagang</th>
+                            <th>Nama Utang Dagang</th>
+                            <th>DEBET</th>
+                            <th>KREDIT</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($utang as $piu) : ?>
+                            <tr>
+                                <td><?= $piu->no_utang_dagang ?></td>
+                                <td><?= $piu->nama_utang_dagang ?></td>
+                                <?php
+                                $pjkk = $this->db->query("SELECT COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_pengeluaran_kas WHERE id_utang_dagang = $piu->id_utang_dagang")->row();
+                                $pjb = $this->db->query("SELECT COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0)  as kredit FROM jurnal_pembelian WHERE id_utang_dagang = $piu->id_utang_dagang")->row();
+                                $pju = $this->db->query("SELECT COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_umum WHERE id_utang_dagang = $piu->id_utang_dagang")->row();
+                                $debet = $pjkk->debet + $pjb->debet + $pju->debet;
+                                $kredit = $pjkk->kredit +  $pjb->kredit  + $pju->kredit;
+                                ?>
+                                <?php
+                                if (($pjkk->debet + $pjb->debet + $pju->debet) > ($pjkk->kredit +  $pjb->kredit  + $pju->kredit)) { ?>
+
+                                    <td><?= ($pjkk->debet + $pjb->debet + $pju->debet) - ($pjkk->kredit + $pjb->kredit + $pju->kredit) ?> </td>
+                                    <td></td>
+                                <?php
+                                } elseif (($pjkk->debet + $pjb->debet + $pju->debet) < ($pjkk->kredit +  $pjb->kredit  + $pju->kredit)) { ?>
+                                    <td></td>
+                                    <td><?= ($pjkk->kredit + $pjb->kredit + $pju->kredit) - ($pjkk->debet + $pjb->debet + $pju->debet) ?> </td>
+
+                                <?php
+                                }
+                                ?>
+                                <!-- <td>
 
                                 <?= $pjkm->debet ?> /
                                 <?= $pjj->debet ?> /
@@ -96,11 +155,11 @@
                                 <?= $pjkm->kredit ?> /
                                 <?= $pju->kredit ?> /
                             </td> -->
-                        </tr>
-                    <?php endforeach ?>
-                </tbody>
-            </table>
-
+                            </tr>
+                        <?php endforeach ?>
+                    </tbody>
+                </table>
+            </div>
 
         </div>
     </div>

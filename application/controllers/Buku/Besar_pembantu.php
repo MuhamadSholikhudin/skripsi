@@ -14,6 +14,7 @@ class Besar_pembantu extends CI_Controller
     {
         $data['akun'] = $this->db->query("SELECT * FROM akun ORDER BY no_akun ASC")->result();
         $data['piutang'] = $this->db->query("SELECT * FROM piutang_dagang WHERE id_piutang_dagang <> 0 ORDER BY id_piutang_dagang ASC")->result();
+        $data['utang'] = $this->db->query("SELECT * FROM utang_dagang WHERE id_utang_dagang <> 0 ORDER BY id_utang_dagang ASC")->result();
         $data['pilihan'] = ['samping'];  
         $this->load->view('templates/header');
         $this->load->view('templates/sidebar');
