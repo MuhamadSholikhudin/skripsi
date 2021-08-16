@@ -61,8 +61,8 @@
                                         <label class="col-sm-12 col-md-2 col-form-label">Utang Dagang</label>
                                         <div class="col-sm-12 col-md-10">
                                             <input class="form-control" type="hidden" name="pil" value="1" required>
-                                            <input class="form-control" type="number" id="id_ju_utang1" name="id_ju_utang" value="<?= $ju->id_ju ?>" placeholder="Jumlah penjualan" required>
-                                            <input class="form-control" type="number" id="id_ju_akun_utang1" name="id_ju_akun_utang1" value="<?= $ju->no_akun ?>" placeholder="Jumlah penjualan" required>
+                                            <input class="form-control d-none" type="number" id="id_ju_utang1" name="id_ju_utang" value="<?= $ju->id_ju ?>" placeholder="Jumlah penjualan" required>
+                                            <input class="form-control d-none" type="number" id="id_ju_akun_utang1" name="id_ju_akun_utang1" value="<?= $ju->no_akun ?>" placeholder="Jumlah penjualan" required>
                                             <input class="form-control" type="number" id="ju_utang1" name="debet1" value="<?= $ju->debet ?>" placeholder="Jumlah penjualan" required>
                                         </div>
                                     </div>
@@ -73,8 +73,8 @@
                                             $juretur = "SELECT * FROM jurnal_umum WHERE no_transaksi = '$ju->no_transaksi' AND no_akun != 211";
                                             $jure = $this->db->query($juretur)->row_array();
                                             ?>
-                                            <input class="form-control" type="number" id="id_ju_retur_pembelian" name="id_ju_retur_pembelian" value="<?= $jure['id_ju'] ?>" placeholder="Jumlah" required>
-                                            <input class="form-control" type="number" id="no_akun_pembelian" name="no_akun_returpembelian" value="<?= $jure['no_akun'] ?>" placeholder="Jumlah" required>
+                                            <input class="form-control d-none" type="number" id="id_ju_retur_pembelian" name="id_ju_retur_pembelian" value="<?= $jure['id_ju'] ?>" placeholder="Jumlah" required>
+                                            <input class="form-control d-none" type="number" id="no_akun_pembelian" name="no_akun_returpembelian" value="<?= $jure['no_akun'] ?>" placeholder="Jumlah" required>
                                             <input class="form-control" type="number" id="ju_retur_pem" name="kredit1" value="<?= $jure['kredit'] ?>" placeholder="Jumlah" required>
                                         </div>
                                     </div>
@@ -92,9 +92,9 @@
                                     <div class="form-group row ">
                                         <label class="col-sm-12 col-md-2 col-form-label">Retur Penjualan</label>
                                         <div class="col-sm-12 col-md-10">
-                                            <input class="form-control" type="hidden" name="pil" value="2" required>
-                                            <input class="form-control" type="number" id="id_ju_retur_penjualan" name="id_ju_retur_penjualan" value="<?= $ju->id_ju ?>" placeholder="Jumlah" required>
-                                            <input class="form-control" type="number" id="no_akun_retur_penjualan" name="id_akun_retur_penjualan" value="<?= $ju->no_akun ?>" placeholder="Jumlah" required>
+                                            <input class="form-control d-none" type="hidden" name="pil" value="2" required>
+                                            <input class="form-control d-none" type="number" id="id_ju_retur_penjualan" name="id_ju_retur_penjualan" value="<?= $ju->id_ju ?>" placeholder="Jumlah" required>
+                                            <input class="form-control d-none" type="number" id="no_akun_retur_penjualan" name="id_akun_retur_penjualan" value="<?= $ju->no_akun ?>" placeholder="Jumlah" required>
                                             <input class="form-control" type="number" id="ju_retur_penj12" name="debet2" value="<?= $ju->debet ?>" placeholder="Jumlah" required>
                                         </div>
                                     </div>
@@ -121,8 +121,8 @@
                                     <div class="form-group row ">
                                         <label class="col-sm-12 col-md-2 col-form-label">Piutang Dagang</label>
                                         <div class="col-sm-12 col-md-10">
-                                            <input class="form-control" type="number" name="id_ju_piutang_dagang" value="<?= $ju_1['id_ju'] ?>" required>
-                                            <input class="form-control" type="number" name="id_ju_akun_piutang_dagang" value="<?= $ju_1['no_akun'] ?>" required>
+                                            <input class="form-control d-none" type="number" name="id_ju_piutang_dagang" value="<?= $ju_1['id_ju'] ?>" required>
+                                            <input class="form-control d-none" type="number" name="id_ju_akun_piutang_dagang" value="<?= $ju_1['no_akun'] ?>" required>
                                             <input class="form-control" type="number" id="ju_piutang12" name="kredit2" value="<?= $ju_1['kredit'] ?>" placeholder="Jumlah" required>
                                         </div>
                                     </div>

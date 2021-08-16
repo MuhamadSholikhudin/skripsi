@@ -56,12 +56,7 @@
 
             <?php foreach ($akun as $ak) : ?>
 
-                <div class="col-md-6 text-left">
-                    <strong><?= $ak->nama_akun ?></strong>
-                </div>
-                <div class="col-md-6 text-right">
-                    <strong> No : <?= $ak->no_akun ?> </strong>
-                </div>
+               
                 <div class="col-sm-12">
                     <table class="display text-dark" style="width:100%" border="1" role="grid" aria-describedby="DataTables_Table_0_info">
                         <thead>

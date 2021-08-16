@@ -93,7 +93,7 @@
 
                                         <?= tanggal_pilih($ak->tanggal) ?>
                                     <?php } else { ?>
-                                        <?= $ak->tanggal ?>
+                                        <?= tgl_bln_thn($ak->tanggal) ?>
                                     <?php } ?>
                                 </td>
                                 <td><?= $ak->no_faktur ?></td>
@@ -161,7 +161,7 @@
 
                                         <?= tanggal_pilih($ak->tanggal) ?>
                                     <?php } else { ?>
-                                        <?= $ak->tanggal ?>
+                                        <?= tgl_bln_thn($ak->tanggal) ?>
                                     <?php } ?>
                                 </td>
                                 <td>

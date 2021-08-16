@@ -45,15 +45,6 @@
                                                 <input class='form-control' type='text' id='jb_faktur' name='no_faktur' value='<?= $jb->no_faktur ?>' placeholder='Tulis faktur Pembelian' required>
                                             </div>
                                         </div>
-                                        <div class='form-group row penj1'>
-                                            <label class='col-sm-12 col-md-2 col-form-label'>Pembelian</label>
-                                            <div class='col-sm-12 col-md-10'>
-                                                <input class='form-control' type='hidden' name='pil' value='1' required>
-                                                <input class='form-control' type='hidden' name='id_jb_pembelian' value='<?= $jb->id_jb ?>' required>
-                                                <input class='form-control' type='hidden' name='id_jb_akun_pembelian' value='<?= $jb->no_akun ?>' required>
-                                                <input class='form-control' id='jb_beli1' type='number' name='debet1' value='<?= $jb->debet ?>' placeholder='Jumlah Pembelian' required>
-                                            </div>
-                                        </div>
                                         <div class='form-group row pemb'>
                                             <label class='col-sm-12 col-md-2 col-form-label'>Akun Utang Dagang</label>
                                             <div class='col-sm-12 col-md-10'>
@@ -76,6 +67,16 @@
                                                 </select>
                                             </div>
                                         </div>
+                                        <div class='form-group row penj1'>
+                                            <label class='col-sm-12 col-md-2 col-form-label'>Pembelian</label>
+                                            <div class='col-sm-12 col-md-10'>
+                                                <input class='form-control' type='hidden' name='pil' value='1' required>
+                                                <input class='form-control' type='hidden' name='id_jb_pembelian' value='<?= $jb->id_jb ?>' required>
+                                                <input class='form-control' type='hidden' name='id_jb_akun_pembelian' value='<?= $jb->no_akun ?>' required>
+                                                <input class='form-control' id='jb_beli1' type='number' name='debet1' value='<?= $jb->debet ?>' placeholder='Jumlah Pembelian' required>
+                                            </div>
+                                        </div>
+
                                         <div class='form-group row penj_kas'>
                                             <label class='col-sm-12 col-md-2 col-form-label'>Utang Dagang</label>
                                             <div class='col-sm-12 col-md-10'>
@@ -115,20 +116,11 @@
                                                             </option>
                                                         <?php } else { ?>
                                                             <option value="<?= $aku->no_akun ?>">
-                                                                <?=  $aku->nama_akun ?>
+                                                                <?= $aku->nama_akun ?>
                                                             </option>
                                                         <?php } ?>
                                                     <?php endforeach; ?>
                                                 </select>
-                                            </div>
-                                        </div>
-                                        <div class='form-group row'>
-                                            <label class='col-sm-12 col-md-2 col-form-label'>Nominal Akun</label>
-                                            <div class='col-sm-12 col-md-10'>
-                                                <input class='form-control' type='hidden' name='pil' value='2' required>
-                                                <input class='form-control' type='hidden' name='id_jb_akun' value='<?= $jb->id_jb ?>' required>
-                                                <!-- <input class='form-control' type='hidden' name='id_jb_akun_serba_serbi' value='<?= $jb->no_akun ?>' required> -->
-                                                <input class='form-control' id='akun_serba' type='text' name='debet2' value='<?= $jb->debet ?>' placeholder='Jumlah' required>
                                             </div>
                                         </div>
                                         <div class='form-group row '>
@@ -154,10 +146,20 @@
                                             </div>
                                         </div>
                                         <div class='form-group row'>
+                                            <label class='col-sm-12 col-md-2 col-form-label'>Nominal Akun</label>
+                                            <div class='col-sm-12 col-md-10'>
+                                                <input class='form-control' type='hidden' name='pil' value='2' required>
+                                                <input class='form-control' type='hidden' name='id_jb_akun' value='<?= $jb->id_jb ?>' required>
+                                                <!-- <input class='form-control' type='hidden' name='id_jb_akun_serba_serbi' value='<?= $jb->no_akun ?>' required> -->
+                                                <input class='form-control' id='akun_serba' type='text' name='debet2' value='<?= $jb->debet ?>' placeholder='Jumlah' required>
+                                            </div>
+                                        </div>
+
+                                        <div class='form-group row'>
                                             <label class='col-sm-12 col-md-2 col-form-label'>Utang Dagang</label>
                                             <div class='col-sm-12 col-md-10'>
-                                                <input class='form-control' type='number' name='id_jb_utang_dagang' value='<?= $jb_12['id_jb'] ?>' required>
-                                                <input class='form-control' type='number' name='id_jb_akun_utang_dagang' value='<?= $jb_12['no_akun'] ?>' required>
+                                                <input class='form-control d-none' type='number' name='id_jb_utang_dagang' value='<?= $jb_12['id_jb'] ?>' required>
+                                                <input class='form-control d-none' type='number' name='id_jb_akun_utang_dagang' value='<?= $jb_12['no_akun'] ?>' required>
                                                 <input class='form-control' id='jb_utang' type='number' name='kredit2' value='<?= $jb_12['kredit'] ?>' placeholder='Jumlah Kas Masuk' required>
                                             </div>
                                         </div>

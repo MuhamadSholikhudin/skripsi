@@ -94,7 +94,7 @@
 
                                         <?= tanggal_pilih($ak->tanggal) ?>
                                     <?php } else { ?>
-                                        <?= $ak->tanggal ?>
+                                        <?= tgl_bln_thn($ak->tanggal) ?>
                                     <?php } ?>
                                 </td>
                                 <td><?php
@@ -160,7 +160,7 @@
 
                                         <?= tanggal_pilih($ak->tanggal) ?>
                                     <?php } else { ?>
-                                        <?= $ak->tanggal ?>
+                                        <?= tgl_bln_thn($ak->tanggal) ?>
                                     <?php } ?>
                                 </td>
                                 <td>
@@ -229,7 +229,7 @@
 
                                         <?= tanggal_pilih($ak->tanggal) ?>
                                     <?php } else { ?>
-                                        <?= $ak->tanggal ?>
+                                        <?= tgl_bln_thn($ak->tanggal) ?>
                                     <?php } ?>
                                 </td>
                                 <td></td>

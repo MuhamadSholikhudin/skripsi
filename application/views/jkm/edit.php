@@ -143,25 +143,20 @@
                                                 <select class='custom-select col-12' name='no_akun'>
 
                                                     <?php foreach ($akun as $aku) : ?>
-                                                        <?php if ($aku == $jkm->no_akun) { ?>
-                                                            <option value='<?= $aku ?>' selected>
-                                                                <?php if ($aku == 10) {
-                                                                    echo 'Modal';
-                                                                } elseif ($aku == 9) {
-                                                                    echo 'Utang Bank';
-                                                                } ?>
+                                                        <?php if ($aku->no_akun == $jkm->no_akun) { ?>
+                                                            <option value='<?= $aku->no_akun ?>' selected>
+                                                                <?= $aku->nama_akun ?>
                                                             </option>
                                                         <?php } else { ?>
-                                                            <option value='<?= $aku ?>'>
-                                                                <?php if ($aku == 10) {
-                                                                    echo 'Modal';
-                                                                } elseif ($aku == 9) {
-                                                                    echo 'Utang Bank';
-                                                                } ?>
+                                                            <option value='<?= $aku->no_akun ?>'>
+                                                                <?= $aku->nama_akun ?>
+
                                                             </option>
                                                         <?php } ?>
                                                     <?php endforeach; ?>
-                                                </select></div>
+
+                                                </select>
+                                            </div>
                                         </div>
                                         <div class='form-group row'><label class='col-sm-12 col-md-2 col-form-label'>Jumlah Nominal</label>
                                             <div class='col-sm-12 col-md-10'>

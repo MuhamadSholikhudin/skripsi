@@ -21,7 +21,7 @@ class Utang_dagang extends CI_Controller
 
     public function index()
     {
-        $data['utang_dagang'] = $this->db->query("SELECT * FROM utang_dagang ORDER BY no_utang_dagang ASC")->result();
+        $data['utang_dagang'] = $this->db->query("SELECT * FROM utang_dagang WHERE id_utang_dagang <> 0 ORDER BY no_utang_dagang ASC")->result();
         $this->load->view('templates/header');
         $this->load->view('templates/sidebar');
         $this->load->view('utang_dagang/index', $data);

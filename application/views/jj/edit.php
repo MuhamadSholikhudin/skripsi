@@ -85,7 +85,7 @@
                                     <label class="col-sm-12 col-md-2 col-form-label">Piutang Dagang (D)</label>
                                     <div class="col-sm-12 col-md-10">
                                         <!-- <input class="form-control" type="hidden" name="id_akun_piutang_dagang" required> -->
-                                        <input class="form-control" type="text" name="jj_id_piutang" value="<?= $jb_1['id_jj'] ?>" placeholder="Jumlah" required>
+                                        <input class="form-control d-none" type="text" name="jj_id_piutang" value="<?= $jb_1['id_jj'] ?>" placeholder="Jumlah" required>
                                         <input class="form-control" type="number" id="jj_piutang" name="debet" value="<?= $jb_1['debet'] ?>" placeholder="Jumlah" required>
                                     </div>
                                 </div>

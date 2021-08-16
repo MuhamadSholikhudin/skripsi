@@ -12,8 +12,8 @@ class Menu extends CI_Controller
 
     public function index($bulan_pilih, $tahun_pilih)
     {
-                // $data_cek = $this->db->query("SELECT YEAR(tanggal), MONTH(tanggal) FROM jurnal_pemasukan_kas WHERE MONTH(tanggal) = $bulan_pilih AND YEAR(tanggal) = $tahun_pilih")->row();
-        $data['data_menu'] = $this->db->query("SELECT YEAR(tanggal) as tahun, MONTH(tanggal) as bulan FROM jurnal_pemasukan_kas WHERE MONTH(tanggal) = $bulan_pilih AND YEAR(tanggal) = $tahun_pilih")->row();
+                // $data_cek = $this->db->query("SELECT YEAR(tanggal), MONTH(tanggal) FROM jurnal_penerimaan_kas WHERE MONTH(tanggal) = $bulan_pilih AND YEAR(tanggal) = $tahun_pilih")->row();
+        $data['data_menu'] = $this->db->query("SELECT YEAR(tanggal) as tahun, MONTH(tanggal) as bulan FROM jurnal_penerimaan_kas WHERE MONTH(tanggal) = $bulan_pilih AND YEAR(tanggal) = $tahun_pilih")->row();
         $data['pilihan'] = ['menu'];
         $data['bulan_pilih'] = [$bulan_pilih];
         $data['tahun_pilih'] = [$tahun_pilih];        
@@ -26,8 +26,8 @@ class Menu extends CI_Controller
 
     public function ada($bulan_pilih, $tahun_pilih)
     {
-        // $data_cek = $this->db->query("SELECT YEAR(tanggal), MONTH(tanggal) FROM jurnal_pemasukan_kas WHERE MONTH(tanggal) = $bulan_pilih AND YEAR(tanggal) = $tahun_pilih")->row();
-        $data['data_menu'] = $this->db->query("SELECT YEAR(tanggal) as tahun, MONTH(tanggal) as bulan FROM jurnal_pemasukan_kas WHERE MONTH(tanggal) = $bulan_pilih AND YEAR(tanggal) = $tahun_pilih")->row();
+        // $data_cek = $this->db->query("SELECT YEAR(tanggal), MONTH(tanggal) FROM jurnal_penerimaan_kas WHERE MONTH(tanggal) = $bulan_pilih AND YEAR(tanggal) = $tahun_pilih")->row();
+        $data['data_menu'] = $this->db->query("SELECT YEAR(tanggal) as tahun, MONTH(tanggal) as bulan FROM jurnal_penerimaan_kas WHERE MONTH(tanggal) = $bulan_pilih AND YEAR(tanggal) = $tahun_pilih")->row();
         $data['pilihan'] = ['menu'];
         $data['bulan_pilih'] = [$bulan_pilih];
         $data['tahun_pilih'] = [$tahun_pilih]; 
@@ -41,8 +41,8 @@ class Menu extends CI_Controller
 
 public function jkm($bulan_pilih, $tahun_pilih)
     {
-        // $data_cek = $this->db->query("SELECT YEAR(tanggal), MONTH(tanggal) FROM jurnal_pemasukan_kas WHERE MONTH(tanggal) = $bulan_pilih AND YEAR(tanggal) = $tahun_pilih")->row();
-        $data['data_jkm'] = $this->db->query("SELECT * FROM jurnal_pemasukan_kas WHERE MONTH(tanggal) = $bulan_pilih AND YEAR(tanggal) = $tahun_pilih GROUP BY no_transaksi")->row();
+        // $data_cek = $this->db->query("SELECT YEAR(tanggal), MONTH(tanggal) FROM jurnal_penerimaan_kas WHERE MONTH(tanggal) = $bulan_pilih AND YEAR(tanggal) = $tahun_pilih")->row();
+        $data['data_jkm'] = $this->db->query("SELECT * FROM jurnal_penerimaan_kas WHERE MONTH(tanggal) = $bulan_pilih AND YEAR(tanggal) = $tahun_pilih GROUP BY no_transaksi")->row();
 
 $data['bulan_pilih'] = [$bulan_pilih];
 $data['tahun_pilih'] = [$tahun_pilih];
@@ -63,7 +63,7 @@ $data['tahun_pilih'] = [$tahun_pilih];
             $this->load->view('form_login');
         } else {
 
-$cek_data = $this->db->query("SELECT YEAR(tanggal), MONTH(tanggal) FROM jurnal_pemasukan_kas WHERE MONTH(tanggal) = $bulan_pilih AND YEAR(tanggal) = $tahun_pilih");
+$cek_data = $this->db->query("SELECT YEAR(tanggal), MONTH(tanggal) FROM jurnal_penerimaan_kas WHERE MONTH(tanggal) = $bulan_pilih AND YEAR(tanggal) = $tahun_pilih");
 $cek_benar = $cek_data->row();
             // $auth = $this->Model_auth->cek_login();
             if ($cek_data->num_rows() < 1) {

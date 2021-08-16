@@ -52,6 +52,60 @@
 
                 <?php } ?>
             </div>
+
+
+            <?php
+
+
+
+            $cars = array(
+                array("jurnal_pemasukan_kas", "no_transaksi", "2021-07-08"),
+                array("jurnal_pemasukan_kas", "no_transaksi", "2021-07-08"),
+                array("jurnal_pemasukan_kas", "no_transaksi", "2021-11-11"),
+                array("jurnal_pemasukan_kas", "no_transaksi", "2021-05-08")
+            );
+
+            echo "SELECT * FROM " . $cars[0][0] . " WHERE no_transaksi = '" . $cars[0][1] . "' AND tanggal = '" . $cars[0][2] . "'.<br>";
+            echo $cars[0][0] . ": In stock: " . $cars[0][1] . ", sold: " . $cars[0][2] . ".<br>";
+            echo $cars[1][0] . ": In stock: " . $cars[1][1] . ", sold: " . $cars[1][2] . ".<br>";
+            echo $cars[2][0] . ": In stock: " . $cars[2][1] . ", sold: " . $cars[2][2] . ".<br>";
+            echo $cars[3][0] . ": In stock: " . $cars[3][1] . ", sold: " . $cars[3][2] . ".<br>";
+
+
+            $arr = array('2021-07-15', '01-01-2014', '01-01-2015', '09-02-2013', '01-01-2013');
+            function date_sort($a, $b)
+            {
+                return strtotime($a) - strtotime($b);
+            }
+            usort($arr, "date_sort");
+
+
+            foreach ($arr as $ra) :
+                $jkma = $this->db->query("SELECT * FROM jurnal_penerimaan_kas WHERE tanggal = '$ra' ")->num_rows();
+                echo $jkma;
+                echo '<br>';
+            endforeach;
+
+            $jkms = $this->db->query("SELECT tanggal, no_transaksi FROM jurnal_penerimaan_kas ")->result();
+
+            // foreach($jkms as $hj):
+            // echo "array('". $hj->tanggal."', ". "'" . $hj->no_transaksi . "', " . "'" . $hj->debet . "', " . "'" . $hj->kredit . "'), <br>";
+
+            // echo 'aku';
+            // endforeach;
+
+            print_r($jkms);
+            // $arr = array('Hello', 'World!', 'Beautiful', 'Day!');
+            // echo implode(" ", $jkms);
+
+echo '<br>';
+            $str = "I am simple boy!";
+            print_r(explode(" ", $str));
+            
+            ?>
+
+
+
             <div class="col-lg-6">
                 <h3 class="text-center">Data Piutang Dagang</h3>
                 <?php foreach ($piutang as $piu) : ?>
@@ -61,7 +115,7 @@
                     <div class="col-md-6 text-right">
                         <strong> No : <?= $piu->no_piutang_dagang ?> </strong>
                     </div>
-                    
+
                     <table class="display mb-3" width="100%">
                         <thead>
                             <tr>

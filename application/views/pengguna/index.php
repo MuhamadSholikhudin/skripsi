@@ -16,7 +16,7 @@
                 <table class="display text-dark" style="width:100%" border="1" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
                     <thead>
                         <tr role="row">
-                            <th>ID pengguna</th>
+                            <th>NO</th>
                             <th>Nama pengguna</th>
                             <th>Username</th>
                             <th>Bagian</th>
@@ -29,9 +29,21 @@
                         foreach ($pengguna as $ak) : ?>
                             <tr role="row" class="odd">
                                 <td class="table-plus sorting_1" tabindex="0"><?= $no++ ?></td>
-                                <td><?= $ak->id_pengguna ?></td>
                                 <td><?= $ak->nama ?></td>
                                 <td><?= $ak->username ?></td>
+                                <td>
+                                <?php
+if($ak->hakakses == 1){
+echo 'Pemilik';
+}elseif($ak->hakakses == 2){
+echo 'Bendahara';
+}elseif($ak->hakakses == 3){
+echo 'Kasir';
+}
+
+?>
+                                
+                                </td>
                                 <td><?= $ak->status ?></td>
                                 <td>
                                     <div class="dropdown">

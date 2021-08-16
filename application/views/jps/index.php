@@ -81,7 +81,7 @@
 
                                     <?= tanggal_pilih($ak->tanggal) ?>
                                 <?php } else { ?>
-                                    <?= $ak->tanggal ?>
+                                    <?= tgl_bln_thn($ak->tanggal) ?>
                                 <?php } ?>
                             </td>
                             <td>
@@ -152,10 +152,7 @@
 
                         <?php
                         if ($pilihan[0] == 'menu') { ?>
-
                             <td>
-
-
                                 <?php
                                 $qk = "SELECT SUM(debet) as total_debet, SUM(kredit) as total_kredit FROM jurnal_penyesuaian WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] ";
                                 $gk = $this->db->query($qk)->row_array();
@@ -164,15 +161,11 @@
                             </td>
                             <td>
                                 <?php
-
                                 echo rupiah($gk['total_kredit']);
                                 ?>
                             </td>
-                        <?php  } else { ?>
-
+                       <?php  } else { ?>
                             <td>
-
-
                                 <?php
                                 $qk = "SELECT SUM(debet) as total_debet, SUM(kredit) as total_kredit FROM jurnal_penyesuaian ";
                                 $gk = $this->db->query($qk)->row_array();
@@ -181,7 +174,6 @@
                             </td>
                             <td>
                                 <?php
-
                                 echo rupiah($gk['total_kredit']);
                                 ?>
                             </td>

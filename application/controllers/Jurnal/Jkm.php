@@ -179,10 +179,9 @@ class Jkm extends CI_Controller
     {
         $data['jkm'] = $this->db->query("SELECT * FROM jurnal_penerimaan_kas WHERE no_transaksi = '$no_transaksi' ")->row();
         $data['piutang_dagang'] = $this->db->query("SELECT * FROM piutang_dagang ")->result();
-        $data['akun'] = $this->db->query("SELECT * FROM akun WHERE no_akun = 512  OR no_akun = 311")->result();
+        $data['akun'] = $this->db->query("SELECT * FROM akun WHERE no_akun = 221  OR no_akun = 311")->result();
         
         $data['pilihan'] = ['samping'];
-
 
         $this->load->view('templates/header');
         $this->load->view('templates/sidebar');
