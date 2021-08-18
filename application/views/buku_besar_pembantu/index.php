@@ -104,8 +104,6 @@ echo '<br>';
             
             ?>
 
-
-
             <div class="col-lg-6">
                 <h3 class="text-center">Data Piutang Dagang</h3>
                 <?php foreach ($piutang as $piu) : ?>
