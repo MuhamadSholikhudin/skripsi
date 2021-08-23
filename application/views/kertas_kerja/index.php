@@ -4,8 +4,16 @@
 
 
         <div class="clearfix"></div>
+
+        <?php
+        if($pilihan[0] == 'menu'){ ?>
+            <a href="<?= base_url('pilihan/kertas_kerja/cetak/'.$bulan_pilih[0].'/'.$tahun_pilih[0]) ?>" target="_blank" class="btn btn-dark"><i class="fa fa-print"></i>Cetak</a>
+        <?php }else{ ?>
+            <a href="<?= base_url('kertas_kerja/cetak') ?>" target="_blank" class="btn btn-dark"><i class="fa fa-print"></i>Cetak</a>
+        <?php }
+
+        ?>
         <!-- <a href="<?= base_url('kertas_kerja/cetak') ?>" type="button" class="btn btn-primary">Cancel</a> -->
-        <a href="<?= base_url('kertas_kerja/cetak') ?>" target="_blank" class="btn btn-dark"><i class="fa fa-print"></i>Cetak</a>
         <div class="row">
 
             <br>
@@ -51,6 +59,7 @@
 
 
             </div>
+<div class="table-responsive">
 
             <table class="display text-dark" style="width:100%" border="1" role="grid" aria-describedby="DataTables_Table_0_info">
                 <thead class="text-center">
@@ -87,31 +96,31 @@
                             if ($pilihan[0] == 'menu') { ?>
 
                                 <?php
-                                $q1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_penerimaan_kas WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND no_akun = $ak->no_akun ";
+                                $q1 = "SELECT tanggal, COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_penerimaan_kas WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND no_akun = $ak->no_akun ";
                                 $g1 = $this->db->query($q1)->row_array();
                                 $n1 = $this->db->query("SELECT * FROM jurnal_penerimaan_kas WHERE no_akun = $ak->no_akun")->num_rows();
                                 // perhitungan jumlah 
                                 $a = $g1['debet'] + $g1['kredit'];
 
-                                $q2 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_pengeluaran_kas WHERE no_akun = MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND $ak->no_akun";
+                                $q2 = "SELECT tanggal, COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_pengeluaran_kas WHERE no_akun = MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND $ak->no_akun";
                                 $n2 = $this->db->query("SELECT * FROM jurnal_pengeluaran_kas WHERE no_akun = $ak->no_akun")->num_rows();
                                 $g2 = $this->db->query($q2)->row_array();
                                 // perhitungan jumlah 
                                 $b = $g2['debet'] + $g2['kredit'];
 
-                                $q3 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_pembelian WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND no_akun = $ak->no_akun";
+                                $q3 = "SELECT tanggal, COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_pembelian WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND no_akun = $ak->no_akun";
                                 $g3 = $this->db->query($q3)->row_array();
                                 $n3 = $this->db->query("SELECT * FROM jurnal_pembelian WHERE no_akun = $ak->no_akun")->num_rows();
                                 // perhitungan jumlah 
                                 $c = $g3['debet'] + $g3['kredit'];
 
-                                $q4 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_penjualan WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND no_akun = $ak->no_akun";
+                                $q4 = "SELECT tanggal, COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_penjualan WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND no_akun = $ak->no_akun";
                                 $g4 = $this->db->query($q4)->row_array();
                                 $n4 = $this->db->query("SELECT * FROM jurnal_penjualan WHERE no_akun = $ak->no_akun")->num_rows();
                                 // perhitungan jumlah 
                                 $d = $g4['debet'] + $g4['kredit'];
 
-                                $q5 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_umum WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND no_akun = $ak->no_akun";
+                                $q5 = "SELECT tanggal, COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_umum WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND no_akun = $ak->no_akun";
                                 $g5 = $this->db->query($q5)->row_array();
                                 $n5 = $this->db->query("SELECT * FROM jurnal_umum WHERE no_akun = $ak->no_akun")->num_rows();
                                 // perhitungan jumlah 
@@ -119,7 +128,7 @@
 
 
                                 // Data saldo bulan kemarin
-                                $s1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_penerimaan_kas WHERE MONTH(tanggal) < $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND no_akun = $ak->no_akun";
+                                $s1 = "SELECT tanggal, COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_penerimaan_kas WHERE MONTH(tanggal) < $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND no_akun = $ak->no_akun";
                                 $sn1 = $this->db->query("SELECT * FROM jurnal_penerimaan_kas WHERE no_akun = $ak->no_akun")->num_rows();
                                 if ($sn1 > 0) {
                                     $sg1 = $this->db->query($s1)->row_array();
@@ -131,7 +140,7 @@
                                 // perhitungan jumlah 
                                 $a = $sg1['debet'] + $sg1['kredit'];
 
-                                $s2 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_pengeluaran_kas WHERE MONTH(tanggal) < $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND no_akun = $ak->no_akun";
+                                $s2 = "SELECT tanggal, COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_pengeluaran_kas WHERE MONTH(tanggal) < $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND no_akun = $ak->no_akun";
                                 $sn2 = $this->db->query("SELECT * FROM jurnal_pengeluaran_kas WHERE no_akun = $ak->no_akun")->num_rows();
                                 // perhitungan jumlah
                                 if ($sn2 > 0) {
@@ -142,7 +151,7 @@
                                 }
                                 $b = $sg2['debet'] + $sg2['kredit'];
 
-                                $s3 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_pembelian WHERE MONTH(tanggal) < $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND  no_akun = $ak->no_akun";
+                                $s3 = "SELECT tanggal, COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_pembelian WHERE MONTH(tanggal) < $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND  no_akun = $ak->no_akun";
                                 $sn3 = $this->db->query("SELECT * FROM jurnal_pembelian WHERE no_akun = $ak->no_akun")->num_rows();
                                 // perhitungan jumlah 
                                 if ($sn2 > 0) {
@@ -153,7 +162,7 @@
                                 }
                                 $c = $sg3['debet'] + $sg3['kredit'];
 
-                                $s4 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_penjualan WHERE MONTH(tanggal) < $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND  no_akun = $ak->no_akun";
+                                $s4 = "SELECT tanggal, COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_penjualan WHERE MONTH(tanggal) < $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND  no_akun = $ak->no_akun";
                                 $sn4 = $this->db->query("SELECT * FROM jurnal_penjualan WHERE no_akun = $ak->no_akun")->num_rows();
                                 // perhitungan jumlah 
                                 if ($sn4 > 0) {
@@ -164,7 +173,7 @@
                                 }
                                 $d = $sg4['debet'] + $sg4['kredit'];
 
-                                $s5 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_umum WHERE MONTH(tanggal) < $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND  no_akun = $ak->no_akun";
+                                $s5 = "SELECT tanggal, COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_umum WHERE MONTH(tanggal) < $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND  no_akun = $ak->no_akun";
                                 $sn5 = $this->db->query("SELECT * FROM jurnal_umum WHERE no_akun = $ak->no_akun")->num_rows();
                                 // perhitungan jumlah 
                                 if ($sn5 > 0) {
@@ -175,7 +184,7 @@
                                 }
                                 $e = $sg5['debet'] + $sg5['kredit'];
 
-                                $s6 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_penyesuaian WHERE MONTH(tanggal) < $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND  no_akun = $ak->no_akun";
+                                $s6 = "SELECT tanggal, COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_penyesuaian WHERE MONTH(tanggal) < $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND  no_akun = $ak->no_akun";
                                 $sn6 = $this->db->query("SELECT * FROM jurnal_penyesuaian WHERE no_akun = $ak->no_akun")->num_rows();
                                 // perhitungan jumlah 
                                 if ($sn6 > 0) {
@@ -198,31 +207,31 @@
                                 ?>
                             <?php } else { ?>
                                 <?php
-                                $q1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_penerimaan_kas WHERE no_akun = $ak->no_akun ";
+                                $q1 = "SELECT tanggal, COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_penerimaan_kas WHERE no_akun = $ak->no_akun ";
                                 $g1 = $this->db->query($q1)->row_array();
                                 $n1 = $this->db->query("SELECT * FROM jurnal_penerimaan_kas WHERE no_akun = $ak->no_akun")->num_rows();
                                 // perhitungan jumlah 
                                 $a = $g1['debet'] + $g1['kredit'];
 
-                                $q2 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_pengeluaran_kas WHERE no_akun = $ak->no_akun";
+                                $q2 = "SELECT tanggal, COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_pengeluaran_kas WHERE no_akun = $ak->no_akun";
                                 $n2 = $this->db->query("SELECT * FROM jurnal_pengeluaran_kas WHERE no_akun = $ak->no_akun")->num_rows();
                                 $g2 = $this->db->query($q2)->row_array();
                                 // perhitungan jumlah 
                                 $b = $g2['debet'] + $g2['kredit'];
 
-                                $q3 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_pembelian WHERE no_akun = $ak->no_akun";
+                                $q3 = "SELECT tanggal, COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_pembelian WHERE no_akun = $ak->no_akun";
                                 $g3 = $this->db->query($q3)->row_array();
                                 $n3 = $this->db->query("SELECT * FROM jurnal_pembelian WHERE no_akun = $ak->no_akun")->num_rows();
                                 // perhitungan jumlah 
                                 $c = $g3['debet'] + $g3['kredit'];
 
-                                $q4 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_penjualan WHERE no_akun = $ak->no_akun";
+                                $q4 = "SELECT tanggal, COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_penjualan WHERE no_akun = $ak->no_akun";
                                 $g4 = $this->db->query($q4)->row_array();
                                 $n4 = $this->db->query("SELECT * FROM jurnal_penjualan WHERE no_akun = $ak->no_akun")->num_rows();
                                 // perhitungan jumlah 
                                 $d = $g4['debet'] + $g4['kredit'];
 
-                                $q5 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_umum WHERE no_akun = $ak->no_akun";
+                                $q5 = "SELECT tanggal, COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_umum WHERE no_akun = $ak->no_akun";
                                 $g5 = $this->db->query($q5)->row_array();
                                 $n5 = $this->db->query("SELECT * FROM jurnal_umum WHERE no_akun = $ak->no_akun")->num_rows();
                                 // perhitungan jumlah 
@@ -234,19 +243,19 @@
                             <?php if ($pilihan[0] == 'menu') { ?>
                                 <?php if (($debet_bulan_kemarin  + $g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) > ($kredit_bulan_kemarin  + $g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit'])) { ?>
                                     <?php if (($debet_bulan_kemarin  + $g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) > ($g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit'])) { ?>
-                                        <td><?= rupiah1($debet_bulan_kemarin  + $g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) - ($kredit_bulan_kemarin  + $g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit']) ?></td>
+                                        <td><?= rupiah1(($debet_bulan_kemarin  + $g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet'])  - ($kredit_bulan_kemarin  + $g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit']) ) ?></td>
                                         <td></td>
                                     <?php } elseif (($debet_bulan_kemarin  + $g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) < ($kredit_bulan_kemarin  + $g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit'])) { ?>
                                         <td></td>
-                                        <td><?= rupiah1($kredit_bulan_kemarin  + $g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit']) - ($debet_bulan_kemarin  + $g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) ?></td>
+                                        <td><?= rupiah1(($kredit_bulan_kemarin  + $g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit']) - ($debet_bulan_kemarin  + $g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet'])) ?></td>
                                     <?php } ?>
                                 <?php } elseif (($debet_bulan_kemarin  + $g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) < ($kredit_bulan_kemarin  + $g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit'])) { ?>
                                     <?php if (($debet_bulan_kemarin  + $g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) > ($kredit_bulan_kemarin  + $g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit'])) { ?>
-                                        <td><?= rupiah1($debet_bulan_kemarin  + $g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) - ($kredit_bulan_kemarin  + $g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit']) ?></td>
+                                        <td><?= rupiah1(($debet_bulan_kemarin  + $g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) - ($kredit_bulan_kemarin  + $g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit'])) ?></td>
                                         <td></td>
                                     <?php } elseif (($debet_bulan_kemarin  + $g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) < ($kredit_bulan_kemarin  + $g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit'])) { ?>
                                         <td></td>
-                                        <td><?= rupiah1($kredit_bulan_kemarin  + $g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit']) - ($debet_bulan_kemarin  + $g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) ?></td>
+                                        <td><?= rupiah1(($kredit_bulan_kemarin  + $g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit']) - ($debet_bulan_kemarin  + $g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet'])) ?></td>
                                     <?php } ?>
                                 <?php } else { ?>
                                     <td></td>
@@ -281,7 +290,7 @@
                             <!-- Jurnal Penyesuaian -->
                             <?php if ($pilihan[0] == 'menu') { ?>
                                 <?php
-                                $jps1 = $this->db->query("SELECT SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_penyesuaian WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND no_akun = $ak->no_akun ");
+                                $jps1 = $this->db->query("SELECT COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_penyesuaian WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND no_akun = $ak->no_akun ");
                                 $jpsr = $jps1->row();
                                 if ($jps1->num_rows() > 0) {
                                     if ($jpsr->debet > 0) { ?>
@@ -321,7 +330,7 @@
                                 ?>
                             <?php } else { ?>
                                 <?php
-                                $jps1 = $this->db->query("SELECT SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_penyesuaian WHERE no_akun = $ak->no_akun ");
+                                $jps1 = $this->db->query("SELECT COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_penyesuaian WHERE no_akun = $ak->no_akun ");
                                 $jpsr = $jps1->row();
                                 if ($jps1->num_rows() > 0) {
                                     if ($jpsr->debet > 0) { ?>
@@ -453,31 +462,31 @@
                                 <?php $total_debet = 0;
                                 foreach ($akun as $ak) : ?>
                                     <?php
-                                    $q1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_penerimaan_kas WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND   no_akun = $ak->no_akun ";
+                                    $q1 = "SELECT tanggal, COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_penerimaan_kas WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND   no_akun = $ak->no_akun ";
                                     $g1 = $this->db->query($q1)->row_array();
                                     $n1 = $this->db->query("SELECT * FROM jurnal_penerimaan_kas WHERE no_akun = $ak->no_akun")->num_rows();
                                     // perhitungan jumlah 
                                     $a = $g1['debet'] + $g1['kredit'];
 
-                                    $q2 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_pengeluaran_kas WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND   no_akun = $ak->no_akun";
+                                    $q2 = "SELECT tanggal, COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_pengeluaran_kas WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND   no_akun = $ak->no_akun";
                                     $n2 = $this->db->query("SELECT * FROM jurnal_pengeluaran_kas WHERE no_akun = $ak->no_akun")->num_rows();
                                     $g2 = $this->db->query($q2)->row_array();
                                     // perhitungan jumlah 
                                     $b = $g2['debet'] + $g2['kredit'];
 
-                                    $q3 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_pembelian WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND   no_akun = $ak->no_akun";
+                                    $q3 = "SELECT tanggal, COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_pembelian WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND   no_akun = $ak->no_akun";
                                     $g3 = $this->db->query($q3)->row_array();
                                     $n3 = $this->db->query("SELECT * FROM jurnal_pembelian WHERE no_akun = $ak->no_akun")->num_rows();
                                     // perhitungan jumlah 
                                     $c = $g3['debet'] + $g3['kredit'];
 
-                                    $q4 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_penjualan WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND   no_akun = $ak->no_akun";
+                                    $q4 = "SELECT tanggal, COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_penjualan WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND   no_akun = $ak->no_akun";
                                     $g4 = $this->db->query($q4)->row_array();
                                     $n4 = $this->db->query("SELECT * FROM jurnal_penjualan WHERE no_akun = $ak->no_akun")->num_rows();
                                     // perhitungan jumlah 
                                     $d = $g4['debet'] + $g4['kredit'];
 
-                                    $q5 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_umum WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND   no_akun = $ak->no_akun";
+                                    $q5 = "SELECT tanggal, COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_umum WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND   no_akun = $ak->no_akun";
                                     $g5 = $this->db->query($q5)->row_array();
                                     $n5 = $this->db->query("SELECT * FROM jurnal_umum WHERE no_akun = $ak->no_akun")->num_rows();
                                     // perhitungan jumlah 
@@ -499,31 +508,31 @@
                                 <?php $total_debet = 0;
                                 foreach ($akun as $ak) : ?>
                                     <?php
-                                    $q1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_penerimaan_kas WHERE no_akun = $ak->no_akun ";
+                                    $q1 = "SELECT tanggal, COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_penerimaan_kas WHERE no_akun = $ak->no_akun ";
                                     $g1 = $this->db->query($q1)->row_array();
                                     $n1 = $this->db->query("SELECT * FROM jurnal_penerimaan_kas WHERE no_akun = $ak->no_akun")->num_rows();
                                     // perhitungan jumlah 
                                     $a = $g1['debet'] + $g1['kredit'];
 
-                                    $q2 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_pengeluaran_kas WHERE no_akun = $ak->no_akun";
+                                    $q2 = "SELECT tanggal, COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_pengeluaran_kas WHERE no_akun = $ak->no_akun";
                                     $n2 = $this->db->query("SELECT * FROM jurnal_pengeluaran_kas WHERE no_akun = $ak->no_akun")->num_rows();
                                     $g2 = $this->db->query($q2)->row_array();
                                     // perhitungan jumlah 
                                     $b = $g2['debet'] + $g2['kredit'];
 
-                                    $q3 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_pembelian WHERE no_akun = $ak->no_akun";
+                                    $q3 = "SELECT tanggal, COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_pembelian WHERE no_akun = $ak->no_akun";
                                     $g3 = $this->db->query($q3)->row_array();
                                     $n3 = $this->db->query("SELECT * FROM jurnal_pembelian WHERE no_akun = $ak->no_akun")->num_rows();
                                     // perhitungan jumlah 
                                     $c = $g3['debet'] + $g3['kredit'];
 
-                                    $q4 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_penjualan WHERE no_akun = $ak->no_akun";
+                                    $q4 = "SELECT tanggal, COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_penjualan WHERE no_akun = $ak->no_akun";
                                     $g4 = $this->db->query($q4)->row_array();
                                     $n4 = $this->db->query("SELECT * FROM jurnal_penjualan WHERE no_akun = $ak->no_akun")->num_rows();
                                     // perhitungan jumlah 
                                     $d = $g4['debet'] + $g4['kredit'];
 
-                                    $q5 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_umum WHERE no_akun = $ak->no_akun";
+                                    $q5 = "SELECT tanggal, COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_umum WHERE no_akun = $ak->no_akun";
                                     $g5 = $this->db->query($q5)->row_array();
                                     $n5 = $this->db->query("SELECT * FROM jurnal_umum WHERE no_akun = $ak->no_akun")->num_rows();
                                     // perhitungan jumlah 
@@ -552,31 +561,31 @@
                                 <?php $total_kredit = 0;
                                 foreach ($akun as $ak) : ?>
                                     <?php
-                                    $q1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_penerimaan_kas WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND  no_akun = $ak->no_akun ";
+                                    $q1 = "SELECT tanggal, COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_penerimaan_kas WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND  no_akun = $ak->no_akun ";
                                     $g1 = $this->db->query($q1)->row_array();
                                     $n1 = $this->db->query("SELECT * FROM jurnal_penerimaan_kas WHERE no_akun = $ak->no_akun")->num_rows();
                                     // perhitungan jumlah 
                                     $a = $g1['debet'] + $g1['kredit'];
 
-                                    $q2 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_pengeluaran_kas WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND  no_akun = $ak->no_akun";
+                                    $q2 = "SELECT tanggal, COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_pengeluaran_kas WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND  no_akun = $ak->no_akun";
                                     $n2 = $this->db->query("SELECT * FROM jurnal_pengeluaran_kas WHERE no_akun = $ak->no_akun")->num_rows();
                                     $g2 = $this->db->query($q2)->row_array();
                                     // perhitungan jumlah 
                                     $b = $g2['debet'] + $g2['kredit'];
 
-                                    $q3 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_pembelian WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND  no_akun = $ak->no_akun";
+                                    $q3 = "SELECT tanggal, COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_pembelian WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND  no_akun = $ak->no_akun";
                                     $g3 = $this->db->query($q3)->row_array();
                                     $n3 = $this->db->query("SELECT * FROM jurnal_pembelian WHERE no_akun = $ak->no_akun")->num_rows();
                                     // perhitungan jumlah 
                                     $c = $g3['debet'] + $g3['kredit'];
 
-                                    $q4 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_penjualan WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND  no_akun = $ak->no_akun";
+                                    $q4 = "SELECT tanggal, COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_penjualan WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND  no_akun = $ak->no_akun";
                                     $g4 = $this->db->query($q4)->row_array();
                                     $n4 = $this->db->query("SELECT * FROM jurnal_penjualan WHERE no_akun = $ak->no_akun")->num_rows();
                                     // perhitungan jumlah 
                                     $d = $g4['debet'] + $g4['kredit'];
 
-                                    $q5 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_umum WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND  no_akun = $ak->no_akun";
+                                    $q5 = "SELECT tanggal, COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_umum WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND  no_akun = $ak->no_akun";
                                     $g5 = $this->db->query($q5)->row_array();
                                     $n5 = $this->db->query("SELECT * FROM jurnal_umum WHERE no_akun = $ak->no_akun")->num_rows();
                                     // perhitungan jumlah 
@@ -597,31 +606,31 @@
                                 <?php $total_kredit = 0;
                                 foreach ($akun as $ak) : ?>
                                     <?php
-                                    $q1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_penerimaan_kas WHERE no_akun = $ak->no_akun ";
+                                    $q1 = "SELECT tanggal, COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_penerimaan_kas WHERE no_akun = $ak->no_akun ";
                                     $g1 = $this->db->query($q1)->row_array();
                                     $n1 = $this->db->query("SELECT * FROM jurnal_penerimaan_kas WHERE no_akun = $ak->no_akun")->num_rows();
                                     // perhitungan jumlah 
                                     $a = $g1['debet'] + $g1['kredit'];
 
-                                    $q2 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_pengeluaran_kas WHERE no_akun = $ak->no_akun";
+                                    $q2 = "SELECT tanggal, COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_pengeluaran_kas WHERE no_akun = $ak->no_akun";
                                     $n2 = $this->db->query("SELECT * FROM jurnal_pengeluaran_kas WHERE no_akun = $ak->no_akun")->num_rows();
                                     $g2 = $this->db->query($q2)->row_array();
                                     // perhitungan jumlah 
                                     $b = $g2['debet'] + $g2['kredit'];
 
-                                    $q3 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_pembelian WHERE no_akun = $ak->no_akun";
+                                    $q3 = "SELECT tanggal, COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_pembelian WHERE no_akun = $ak->no_akun";
                                     $g3 = $this->db->query($q3)->row_array();
                                     $n3 = $this->db->query("SELECT * FROM jurnal_pembelian WHERE no_akun = $ak->no_akun")->num_rows();
                                     // perhitungan jumlah 
                                     $c = $g3['debet'] + $g3['kredit'];
 
-                                    $q4 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_penjualan WHERE no_akun = $ak->no_akun";
+                                    $q4 = "SELECT tanggal, COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_penjualan WHERE no_akun = $ak->no_akun";
                                     $g4 = $this->db->query($q4)->row_array();
                                     $n4 = $this->db->query("SELECT * FROM jurnal_penjualan WHERE no_akun = $ak->no_akun")->num_rows();
                                     // perhitungan jumlah 
                                     $d = $g4['debet'] + $g4['kredit'];
 
-                                    $q5 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_umum WHERE no_akun = $ak->no_akun";
+                                    $q5 = "SELECT tanggal, COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_umum WHERE no_akun = $ak->no_akun";
                                     $g5 = $this->db->query($q5)->row_array();
                                     $n5 = $this->db->query("SELECT * FROM jurnal_umum WHERE no_akun = $ak->no_akun")->num_rows();
                                     // perhitungan jumlah 
@@ -676,37 +685,37 @@
                             $nsdtotal_debet = 0;
                             $nsdtotal_kredit = 0;
                             foreach ($akun as $ak) :
-                                $q1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_penerimaan_kas WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND  no_akun = $ak->no_akun ";
+                                $q1 = "SELECT tanggal, COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_penerimaan_kas WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND  no_akun = $ak->no_akun ";
                                 $g1 = $this->db->query($q1)->row_array();
                                 $n1 = $this->db->query("SELECT * FROM jurnal_penerimaan_kas WHERE no_akun = $ak->no_akun")->num_rows();
                                 // perhitungan jumlah
                                 $a = $g1['debet'] + $g1['kredit'];
 
-                                $q2 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_pengeluaran_kas WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND  no_akun = $ak->no_akun";
+                                $q2 = "SELECT tanggal, COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_pengeluaran_kas WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND  no_akun = $ak->no_akun";
                                 $n2 = $this->db->query("SELECT * FROM jurnal_pengeluaran_kas WHERE no_akun = $ak->no_akun")->num_rows();
                                 $g2 = $this->db->query($q2)->row_array();
                                 // perhitungan jumlah
                                 $b = $g2['debet'] + $g2['kredit'];
 
-                                $q3 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_pembelian WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND  no_akun = $ak->no_akun";
+                                $q3 = "SELECT tanggal, COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_pembelian WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND  no_akun = $ak->no_akun";
                                 $g3 = $this->db->query($q3)->row_array();
                                 $n3 = $this->db->query("SELECT * FROM jurnal_pembelian WHERE no_akun = $ak->no_akun")->num_rows();
                                 // perhitungan jumlah
                                 $c = $g3['debet'] + $g3['kredit'];
 
-                                $q4 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_penjualan WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND  no_akun = $ak->no_akun";
+                                $q4 = "SELECT tanggal, COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_penjualan WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND  no_akun = $ak->no_akun";
                                 $g4 = $this->db->query($q4)->row_array();
                                 $n4 = $this->db->query("SELECT * FROM jurnal_penjualan WHERE no_akun = $ak->no_akun")->num_rows();
                                 // perhitungan jumlah
                                 $d = $g4['debet'] + $g4['kredit'];
 
-                                $q5 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_umum WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND  no_akun = $ak->no_akun";
+                                $q5 = "SELECT tanggal, COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_umum WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND  no_akun = $ak->no_akun";
                                 $g5 = $this->db->query($q5)->row_array();
                                 $n5 = $this->db->query("SELECT * FROM jurnal_umum WHERE no_akun = $ak->no_akun")->num_rows();
                                 // perhitungan jumlah
                                 $e = $g5['debet'] + $g5['kredit'];
 
-                                $jps1 = $this->db->query("SELECT SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_penyesuaian WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND  no_akun = $ak->no_akun ");
+                                $jps1 = $this->db->query("SELECT COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_penyesuaian WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND  no_akun = $ak->no_akun ");
                                 $jpsr = $jps1->row();
 
                                 $nsddebet = $g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet'];
@@ -728,37 +737,37 @@
                             $nsdtotal_debet = 0;
                             $nsdtotal_kredit = 0;
                             foreach ($akun as $ak) :
-                                $q1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_penerimaan_kas WHERE no_akun = $ak->no_akun ";
+                                $q1 = "SELECT tanggal, COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_penerimaan_kas WHERE no_akun = $ak->no_akun ";
                                 $g1 = $this->db->query($q1)->row_array();
                                 $n1 = $this->db->query("SELECT * FROM jurnal_penerimaan_kas WHERE no_akun = $ak->no_akun")->num_rows();
                                 // perhitungan jumlah
                                 $a = $g1['debet'] + $g1['kredit'];
 
-                                $q2 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_pengeluaran_kas WHERE no_akun = $ak->no_akun";
+                                $q2 = "SELECT tanggal, COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_pengeluaran_kas WHERE no_akun = $ak->no_akun";
                                 $n2 = $this->db->query("SELECT * FROM jurnal_pengeluaran_kas WHERE no_akun = $ak->no_akun")->num_rows();
                                 $g2 = $this->db->query($q2)->row_array();
                                 // perhitungan jumlah
                                 $b = $g2['debet'] + $g2['kredit'];
 
-                                $q3 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_pembelian WHERE no_akun = $ak->no_akun";
+                                $q3 = "SELECT tanggal, COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_pembelian WHERE no_akun = $ak->no_akun";
                                 $g3 = $this->db->query($q3)->row_array();
                                 $n3 = $this->db->query("SELECT * FROM jurnal_pembelian WHERE no_akun = $ak->no_akun")->num_rows();
                                 // perhitungan jumlah
                                 $c = $g3['debet'] + $g3['kredit'];
 
-                                $q4 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_penjualan WHERE no_akun = $ak->no_akun";
+                                $q4 = "SELECT tanggal, COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_penjualan WHERE no_akun = $ak->no_akun";
                                 $g4 = $this->db->query($q4)->row_array();
                                 $n4 = $this->db->query("SELECT * FROM jurnal_penjualan WHERE no_akun = $ak->no_akun")->num_rows();
                                 // perhitungan jumlah
                                 $d = $g4['debet'] + $g4['kredit'];
 
-                                $q5 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_umum WHERE no_akun = $ak->no_akun";
+                                $q5 = "SELECT tanggal, COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_umum WHERE no_akun = $ak->no_akun";
                                 $g5 = $this->db->query($q5)->row_array();
                                 $n5 = $this->db->query("SELECT * FROM jurnal_umum WHERE no_akun = $ak->no_akun")->num_rows();
                                 // perhitungan jumlah
                                 $e = $g5['debet'] + $g5['kredit'];
 
-                                $jps1 = $this->db->query("SELECT SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_penyesuaian WHERE no_akun = $ak->no_akun ");
+                                $jps1 = $this->db->query("SELECT COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_penyesuaian WHERE no_akun = $ak->no_akun ");
                                 $jpsr = $jps1->row();
 
                                 $nsddebet = $g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet'];
@@ -796,22 +805,22 @@
                             $nrtotal_debet = 0;
                             $nrtotal_kredit = 0;
                             foreach ($akun as $ak) :
-                                $q1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_penerimaan_kas WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND  no_akun = $ak->no_akun ";
+                                $q1 = "SELECT tanggal, COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_penerimaan_kas WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND  no_akun = $ak->no_akun ";
                                 $g1 = $this->db->query($q1)->row_array();
 
-                                $q2 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_pengeluaran_kas WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND  no_akun = $ak->no_akun";
+                                $q2 = "SELECT tanggal, COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_pengeluaran_kas WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND  no_akun = $ak->no_akun";
                                 $g2 = $this->db->query($q2)->row_array();
 
-                                $q3 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_pembelian WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND  no_akun = $ak->no_akun";
+                                $q3 = "SELECT tanggal, COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_pembelian WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND  no_akun = $ak->no_akun";
                                 $g3 = $this->db->query($q3)->row_array();
 
-                                $q4 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_penjualan WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND  no_akun = $ak->no_akun";
+                                $q4 = "SELECT tanggal, COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_penjualan WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND  no_akun = $ak->no_akun";
                                 $g4 = $this->db->query($q4)->row_array();
 
-                                $q5 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_umum WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND  no_akun = $ak->no_akun";
+                                $q5 = "SELECT tanggal, COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_umum WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND  no_akun = $ak->no_akun";
                                 $g5 = $this->db->query($q5)->row_array();
 
-                                $jps1 = $this->db->query("SELECT SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_penyesuaian WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND  no_akun = $ak->no_akun ");
+                                $jps1 = $this->db->query("SELECT COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_penyesuaian WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND  no_akun = $ak->no_akun ");
                                 $jpsr = $jps1->row();
 
                                 $nsddebet = $g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet'];
@@ -853,22 +862,22 @@
                             $nrtotal_debet = 0;
                             $nrtotal_kredit = 0;
                             foreach ($akun as $ak) :
-                                $q1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_penerimaan_kas WHERE no_akun = $ak->no_akun ";
+                                $q1 = "SELECT tanggal, COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_penerimaan_kas WHERE no_akun = $ak->no_akun ";
                                 $g1 = $this->db->query($q1)->row_array();
 
-                                $q2 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_pengeluaran_kas WHERE no_akun = $ak->no_akun";
+                                $q2 = "SELECT tanggal, COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_pengeluaran_kas WHERE no_akun = $ak->no_akun";
                                 $g2 = $this->db->query($q2)->row_array();
 
-                                $q3 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_pembelian WHERE no_akun = $ak->no_akun";
+                                $q3 = "SELECT tanggal, COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_pembelian WHERE no_akun = $ak->no_akun";
                                 $g3 = $this->db->query($q3)->row_array();
 
-                                $q4 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_penjualan WHERE no_akun = $ak->no_akun";
+                                $q4 = "SELECT tanggal, COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_penjualan WHERE no_akun = $ak->no_akun";
                                 $g4 = $this->db->query($q4)->row_array();
 
-                                $q5 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_umum WHERE no_akun = $ak->no_akun";
+                                $q5 = "SELECT tanggal, COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_umum WHERE no_akun = $ak->no_akun";
                                 $g5 = $this->db->query($q5)->row_array();
 
-                                $jps1 = $this->db->query("SELECT SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_penyesuaian WHERE no_akun = $ak->no_akun ");
+                                $jps1 = $this->db->query("SELECT COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_penyesuaian WHERE no_akun = $ak->no_akun ");
                                 $jpsr = $jps1->row();
 
                                 $nsddebet = $g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet'];
@@ -915,6 +924,8 @@
                     </tr>
                 </tbody>
             </table>
+</div>
+
             <br>
 
             <!-- <table>
@@ -952,37 +963,37 @@
                 $nsdtotal_debet = 0;
                 // $nsdtotal_kredit = 0;
                 foreach ($akun as $ak) :
-                    $q1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_penerimaan_kas WHERE no_akun = $ak->no_akun ";
+                    $q1 = "SELECT tanggal, COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_penerimaan_kas WHERE no_akun = $ak->no_akun ";
                     $g1 = $this->db->query($q1)->row_array();
                     $n1 = $this->db->query("SELECT * FROM jurnal_penerimaan_kas WHERE no_akun = $ak->no_akun")->num_rows();
                     // perhitungan jumlah
                     $a = $g1['debet'] + $g1['kredit'];
 
-                    $q2 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_pengeluaran_kas WHERE no_akun = $ak->no_akun";
+                    $q2 = "SELECT tanggal, COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_pengeluaran_kas WHERE no_akun = $ak->no_akun";
                     $n2 = $this->db->query("SELECT * FROM jurnal_pengeluaran_kas WHERE no_akun = $ak->no_akun")->num_rows();
                     $g2 = $this->db->query($q2)->row_array();
                     // perhitungan jumlah
                     $b = $g2['debet'] + $g2['kredit'];
 
-                    $q3 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_pembelian WHERE no_akun = $ak->no_akun";
+                    $q3 = "SELECT tanggal, COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_pembelian WHERE no_akun = $ak->no_akun";
                     $g3 = $this->db->query($q3)->row_array();
                     $n3 = $this->db->query("SELECT * FROM jurnal_pembelian WHERE no_akun = $ak->no_akun")->num_rows();
                     // perhitungan jumlah
                     $c = $g3['debet'] + $g3['kredit'];
 
-                    $q4 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_penjualan WHERE no_akun = $ak->no_akun";
+                    $q4 = "SELECT tanggal, COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_penjualan WHERE no_akun = $ak->no_akun";
                     $g4 = $this->db->query($q4)->row_array();
                     $n4 = $this->db->query("SELECT * FROM jurnal_penjualan WHERE no_akun = $ak->no_akun")->num_rows();
                     // perhitungan jumlah
                     $d = $g4['debet'] + $g4['kredit'];
 
-                    $q5 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_umum WHERE no_akun = $ak->no_akun";
+                    $q5 = "SELECT tanggal, COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_umum WHERE no_akun = $ak->no_akun";
                     $g5 = $this->db->query($q5)->row_array();
                     $n5 = $this->db->query("SELECT * FROM jurnal_umum WHERE no_akun = $ak->no_akun")->num_rows();
                     // perhitungan jumlah
                     $e = $g5['debet'] + $g5['kredit'];
 
-                    $jps1 = $this->db->query("SELECT SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_penyesuaian WHERE no_akun = $ak->no_akun ");
+                    $jps1 = $this->db->query("SELECT COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_penyesuaian WHERE no_akun = $ak->no_akun ");
                     $jpsr = $jps1->row();
 
                     $nsddebet = $g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet'];
@@ -1013,37 +1024,37 @@
                 // $nsdtotal_debet = 0;
                 $nsdtotal_kredit = 0;
                 foreach ($akun as $ak) :
-                    $q1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_penerimaan_kas WHERE no_akun = $ak->no_akun ";
+                    $q1 = "SELECT tanggal, COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_penerimaan_kas WHERE no_akun = $ak->no_akun ";
                     $g1 = $this->db->query($q1)->row_array();
                     $n1 = $this->db->query("SELECT * FROM jurnal_penerimaan_kas WHERE no_akun = $ak->no_akun")->num_rows();
                     // perhitungan jumlah
                     $a = $g1['debet'] + $g1['kredit'];
 
-                    $q2 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_pengeluaran_kas WHERE no_akun = $ak->no_akun";
+                    $q2 = "SELECT tanggal, COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_pengeluaran_kas WHERE no_akun = $ak->no_akun";
                     $n2 = $this->db->query("SELECT * FROM jurnal_pengeluaran_kas WHERE no_akun = $ak->no_akun")->num_rows();
                     $g2 = $this->db->query($q2)->row_array();
                     // perhitungan jumlah
                     $b = $g2['debet'] + $g2['kredit'];
 
-                    $q3 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_pembelian WHERE no_akun = $ak->no_akun";
+                    $q3 = "SELECT tanggal, COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_pembelian WHERE no_akun = $ak->no_akun";
                     $g3 = $this->db->query($q3)->row_array();
                     $n3 = $this->db->query("SELECT * FROM jurnal_pembelian WHERE no_akun = $ak->no_akun")->num_rows();
                     // perhitungan jumlah
                     $c = $g3['debet'] + $g3['kredit'];
 
-                    $q4 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_penjualan WHERE no_akun = $ak->no_akun";
+                    $q4 = "SELECT tanggal, COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_penjualan WHERE no_akun = $ak->no_akun";
                     $g4 = $this->db->query($q4)->row_array();
                     $n4 = $this->db->query("SELECT * FROM jurnal_penjualan WHERE no_akun = $ak->no_akun")->num_rows();
                     // perhitungan jumlah
                     $d = $g4['debet'] + $g4['kredit'];
 
-                    $q5 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_umum WHERE no_akun = $ak->no_akun";
+                    $q5 = "SELECT tanggal, COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_umum WHERE no_akun = $ak->no_akun";
                     $g5 = $this->db->query($q5)->row_array();
                     $n5 = $this->db->query("SELECT * FROM jurnal_umum WHERE no_akun = $ak->no_akun")->num_rows();
                     // perhitungan jumlah
                     $e = $g5['debet'] + $g5['kredit'];
 
-                    $jps1 = $this->db->query("SELECT SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_penyesuaian WHERE no_akun = $ak->no_akun ");
+                    $jps1 = $this->db->query("SELECT COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_penyesuaian WHERE no_akun = $ak->no_akun ");
                     $jpsr = $jps1->row();
 
                     $nsddebet = $g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet'];

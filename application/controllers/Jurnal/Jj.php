@@ -34,7 +34,7 @@ class Jj extends CI_Controller
         $data['pilihan'] = ['samping'];
 
         // $data['jurnal_penjualan'] = $this->db->query("SELECT * FROM jurnal_penjualan ORDER BY no_jurnal_penjualan ASC")->result();
-        $data['piutang_dagang'] = $this->db->query("SELECT * FROM piutang_dagang ORDER BY nama_piutang_dagang ASC")->result();
+        $data['piutang_dagang'] = $this->db->query("SELECT * FROM piutang_dagang WHERE id_piutang_dagang != 0 ORDER BY nama_piutang_dagang ASC")->result();
         $this->load->view('templates/header');
         $this->load->view('templates/sidebar');
         $this->load->view('jj/tambah', $data);

@@ -1,11 +1,35 @@
-<div class="right_col bg-white" role="main" style="min-height: 4546px; ">
-    <div class>
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>SIA TOKO NORKAYATI</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</head>
 
+<body>
+    <?php
+    function rupiah($angka)
+    {
 
-        <div class="clearfix"></div>
-        <!-- <a href="<?= base_url('kertas_kerja/cetak') ?>" type="button" class="btn btn-primary">Cancel</a> -->
-        <a href="<?= base_url('kertas_kerja/cetak') ?>" target="_blank" class="btn btn-dark"><i class="fa fa-print"></i>Cetak</a>
+        $hasil_rupiah = "Rp " . number_format($angka, 2, ',', '.');
+        return $hasil_rupiah;
+    }
+
+    function rupiah1($angka)
+    {
+
+        $hasil_rupiah = number_format($angka, 0, ',', '.');
+        return $hasil_rupiah;
+    }
+    ?>
+
+    <div class="p-2">
+
+   
         <div class="row">
 
             <br>
@@ -52,7 +76,7 @@
 
             </div>
 
-            <table class="display text-dark" style="width:100%" border="1" role="grid" aria-describedby="DataTables_Table_0_info">
+            <table class="table table-bordered border-dark" style="width:100%" border="1" role="grid" aria-describedby="DataTables_Table_0_info">
                 <thead class="text-center">
                     <tr>
                         <th rowspan="2">No Akun</th>
@@ -87,9 +111,9 @@
                             if ($pilihan[0] == 'menu') { ?>
 
                                 <?php
-                                $q1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_pemasukan_kas WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND no_akun = $ak->no_akun ";
+                                $q1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_penerimaan_kas WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND no_akun = $ak->no_akun ";
                                 $g1 = $this->db->query($q1)->row_array();
-                                $n1 = $this->db->query("SELECT * FROM jurnal_pemasukan_kas WHERE no_akun = $ak->no_akun")->num_rows();
+                                $n1 = $this->db->query("SELECT * FROM jurnal_penerimaan_kas WHERE no_akun = $ak->no_akun")->num_rows();
                                 // perhitungan jumlah 
                                 $a = $g1['debet'] + $g1['kredit'];
 
@@ -119,8 +143,8 @@
 
 
                                 // Data saldo bulan kemarin
-                                $s1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_pemasukan_kas WHERE MONTH(tanggal) < $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND no_akun = $ak->no_akun";
-                                $sn1 = $this->db->query("SELECT * FROM jurnal_pemasukan_kas WHERE no_akun = $ak->no_akun")->num_rows();
+                                $s1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_penerimaan_kas WHERE MONTH(tanggal) < $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND no_akun = $ak->no_akun";
+                                $sn1 = $this->db->query("SELECT * FROM jurnal_penerimaan_kas WHERE no_akun = $ak->no_akun")->num_rows();
                                 if ($sn1 > 0) {
                                     $sg1 = $this->db->query($s1)->row_array();
                                 } else {
@@ -198,9 +222,9 @@
                                 ?>
                             <?php } else { ?>
                                 <?php
-                                $q1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_pemasukan_kas WHERE no_akun = $ak->no_akun ";
+                                $q1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_penerimaan_kas WHERE no_akun = $ak->no_akun ";
                                 $g1 = $this->db->query($q1)->row_array();
-                                $n1 = $this->db->query("SELECT * FROM jurnal_pemasukan_kas WHERE no_akun = $ak->no_akun")->num_rows();
+                                $n1 = $this->db->query("SELECT * FROM jurnal_penerimaan_kas WHERE no_akun = $ak->no_akun")->num_rows();
                                 // perhitungan jumlah 
                                 $a = $g1['debet'] + $g1['kredit'];
 
@@ -234,19 +258,19 @@
                             <?php if ($pilihan[0] == 'menu') { ?>
                                 <?php if (($debet_bulan_kemarin  + $g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) > ($kredit_bulan_kemarin  + $g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit'])) { ?>
                                     <?php if (($debet_bulan_kemarin  + $g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) > ($g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit'])) { ?>
-                                        <td><?= ($debet_bulan_kemarin  + $g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) - ($kredit_bulan_kemarin  + $g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit']) ?></td>
+                                        <td><?= rupiah1(($debet_bulan_kemarin  + $g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) - ($kredit_bulan_kemarin  + $g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit'])) ?></td>
                                         <td></td>
                                     <?php } elseif (($debet_bulan_kemarin  + $g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) < ($kredit_bulan_kemarin  + $g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit'])) { ?>
                                         <td></td>
-                                        <td><?= ($kredit_bulan_kemarin  + $g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit']) - ($debet_bulan_kemarin  + $g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) ?></td>
+                                        <td><?= rupiah1(($kredit_bulan_kemarin  + $g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit']) - ($debet_bulan_kemarin  + $g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet'])) ?></td>
                                     <?php } ?>
                                 <?php } elseif (($debet_bulan_kemarin  + $g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) < ($kredit_bulan_kemarin  + $g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit'])) { ?>
                                     <?php if (($debet_bulan_kemarin  + $g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) > ($kredit_bulan_kemarin  + $g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit'])) { ?>
-                                        <td><?= ($debet_bulan_kemarin  + $g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) - ($kredit_bulan_kemarin  + $g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit']) ?></td>
+                                        <td><?= rupiah1(($debet_bulan_kemarin  + $g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) - ($kredit_bulan_kemarin  + $g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit'])) ?></td>
                                         <td></td>
                                     <?php } elseif (($debet_bulan_kemarin  + $g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) < ($kredit_bulan_kemarin  + $g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit'])) { ?>
                                         <td></td>
-                                        <td><?= ($kredit_bulan_kemarin  + $g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit']) - ($debet_bulan_kemarin  + $g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) ?></td>
+                                        <td><?= rupiah1(($kredit_bulan_kemarin  + $g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit']) - ($debet_bulan_kemarin  + $g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet'])) ?></td>
                                     <?php } ?>
                                 <?php } else { ?>
                                     <td></td>
@@ -257,19 +281,19 @@
                             <?php } else { ?>
                                 <?php if (($g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) > ($g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit'])) { ?>
                                     <?php if (($g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) > ($g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit'])) { ?>
-                                        <td><?= ($g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) - ($g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit']) ?></td>
+                                        <td><?= rupiah1(($g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) - ($g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit'])) ?></td>
                                         <td></td>
                                     <?php } elseif (($g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) < ($g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit'])) { ?>
                                         <td></td>
-                                        <td><?= ($g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit']) - ($g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) ?></td>
+                                        <td><?= rupiah1(($g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit']) - ($g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet'])) ?></td>
                                     <?php } ?>
                                 <?php } elseif (($g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) < ($g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit'])) { ?>
                                     <?php if (($g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) > ($g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit'])) { ?>
-                                        <td><?= ($g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) - ($g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit']) ?></td>
+                                        <td><?= rupiah1(($g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) - ($g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit'])) ?></td>
                                         <td></td>
                                     <?php } elseif (($g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) < ($g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit'])) { ?>
                                         <td></td>
-                                        <td><?= ($g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit']) - ($g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) ?></td>
+                                        <td><?= rupiah1(($g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit']) - ($g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet'])) ?></td>
                                     <?php } ?>
                                 <?php } else { ?>
                                     <td></td>
@@ -287,26 +311,26 @@
                                     if ($jpsr->debet > 0) { ?>
                                         <td>
                                             <?php if ($jpsr->debet > 0) {
-                                                echo $jpsr->debet;
+                                                echo rupiah1($jpsr->debet);
                                             } else {
                                             } ?>
                                         </td>
                                         <td>
                                             <?php if ($jpsr->kredit > 0) {
-                                                echo $jpsr->kredit;
+                                                echo rupiah1($jpsr->kredit);
                                             } else {
                                             } ?>
                                         </td>
                                     <?php } else { ?>
                                         <td>
                                             <?php if ($jpsr->debet > 0) {
-                                                echo $jpsr->debet;
+                                                echo rupiah1($jpsr->debet);
                                             } else {
                                             } ?>
                                         </td>
                                         <td>
                                             <?php if ($jpsr->kredit > 0) {
-                                                echo $jpsr->kredit;
+                                                echo rupiah1($jpsr->kredit);
                                             } else {
                                             } ?>
                                         </td>
@@ -315,6 +339,7 @@
 
                                     <td></td>
                                     <td></td>
+
                                 <?php
                                 }
                                 ?>
@@ -326,26 +351,26 @@
                                     if ($jpsr->debet > 0) { ?>
                                         <td>
                                             <?php if ($jpsr->debet > 0) {
-                                                echo $jpsr->debet;
+                                                echo rupiah1($jpsr->debet);
                                             } else {
                                             } ?>
                                         </td>
                                         <td>
                                             <?php if ($jpsr->kredit > 0) {
-                                                echo $jpsr->kredit;
+                                                echo rupiah1($jpsr->kredit);
                                             } else {
                                             } ?>
                                         </td>
                                     <?php } else { ?>
                                         <td>
                                             <?php if ($jpsr->debet > 0) {
-                                                echo $jpsr->debet;
+                                                echo rupiah1($jpsr->debet);
                                             } else {
                                             } ?>
                                         </td>
                                         <td>
                                             <?php if ($jpsr->kredit > 0) {
-                                                echo $jpsr->kredit;
+                                                echo rupiah1($jpsr->kredit);
                                             } else {
                                             } ?>
                                         </td>
@@ -361,6 +386,9 @@
 
 
 
+
+
+
                             <!-- NSD -->
 
                             <?php
@@ -371,15 +399,16 @@
                                 $nsdebet = $g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet'];
                                 $nsdkredit =  $g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit'];
                             }
-
                             if (($nsdebet + $jpsr->debet) > ($nsdkredit + $jpsr->kredit)) { ?>
                                 <td><?= rupiah1(($nsdebet + $jpsr->debet) - ($nsdkredit + $jpsr->kredit)) ?></td>
-                                <td>0</td>
+                                <td></td>
 
                             <?php } else { ?>
-                                <td>0</td>
+                                <td></td>
                                 <td><?= rupiah1(($nsdkredit + $jpsr->kredit) - ($nsdebet + $jpsr->debet)); ?> </td>
                             <?php }  ?>
+
+
 
 
                             <!-- Laba rugi -->
@@ -390,10 +419,10 @@
                             <?php } else { ?>
                                 <?php if (($nsdebet + $jpsr->debet) > ($nsdkredit + $jpsr->kredit)) { ?>
                                     <td><?= rupiah1(($nsdebet + $jpsr->debet) - ($nsdkredit + $jpsr->kredit)) ?></td>
-                                    <td>0</td>
+                                    <td></td>
 
                                 <?php } else { ?>
-                                    <td>0</td>
+                                    <td></td>
                                     <td><?= rupiah1(($nsdkredit + $jpsr->kredit) - ($nsdebet + $jpsr->debet)); ?> </td>
                                 <?php }  ?>
                             <?php } ?>
@@ -408,10 +437,10 @@
                             <?php } else { ?>
                                 <?php if (($nsdebet + $jpsr->debet) > ($nsdkredit + $jpsr->kredit)) { ?>
                                     <td><?= rupiah1(($nsdebet + $jpsr->debet) - ($nsdkredit + $jpsr->kredit)) ?></td>
-                                    <td>0</td>
+                                    <td></td>
 
                                 <?php } else { ?>
-                                    <td>0</td>
+                                    <td></td>
                                     <td><?= rupiah1(($nsdkredit + $jpsr->kredit) - ($nsdebet + $jpsr->debet)); ?> </td>
                                 <?php }  ?>
                             <?php } ?>
@@ -419,20 +448,38 @@
                     <?php endforeach; ?>
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                     <!-- Total Bawah -->
                     <tr>
                         <td></td>
                         <td></td>
-                        <!-- Total Neraca saldo -->
+                        <!-- PILIHAN Total Neraca saldo RUMUS-->
                         <td>
                             <?php
                             if ($pilihan[0] == 'menu') { ?>
                                 <?php $total_debet = 0;
                                 foreach ($akun as $ak) : ?>
                                     <?php
-                                    $q1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_pemasukan_kas WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND   no_akun = $ak->no_akun ";
+                                    $q1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_penerimaan_kas WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND   no_akun = $ak->no_akun ";
                                     $g1 = $this->db->query($q1)->row_array();
-                                    $n1 = $this->db->query("SELECT * FROM jurnal_pemasukan_kas WHERE no_akun = $ak->no_akun")->num_rows();
+                                    $n1 = $this->db->query("SELECT * FROM jurnal_penerimaan_kas WHERE no_akun = $ak->no_akun")->num_rows();
                                     // perhitungan jumlah 
                                     $a = $g1['debet'] + $g1['kredit'];
 
@@ -469,15 +516,16 @@
                                     } ?>
 
                                 <?php endforeach;
-                                echo $total_debet;
+                                echo rupiah1($total_debet);
                                 ?>
+                                <!-- Total Neraca saldo RUMUS -->
                             <?php } else { ?>
                                 <?php $total_debet = 0;
                                 foreach ($akun as $ak) : ?>
                                     <?php
-                                    $q1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_pemasukan_kas WHERE no_akun = $ak->no_akun ";
+                                    $q1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_penerimaan_kas WHERE no_akun = $ak->no_akun ";
                                     $g1 = $this->db->query($q1)->row_array();
-                                    $n1 = $this->db->query("SELECT * FROM jurnal_pemasukan_kas WHERE no_akun = $ak->no_akun")->num_rows();
+                                    $n1 = $this->db->query("SELECT * FROM jurnal_penerimaan_kas WHERE no_akun = $ak->no_akun")->num_rows();
                                     // perhitungan jumlah 
                                     $a = $g1['debet'] + $g1['kredit'];
 
@@ -514,7 +562,7 @@
                                     } ?>
 
                                 <?php endforeach;
-                                echo $total_debet;
+                                echo rupiah1($total_debet);
                                 ?>
                             <?php } ?>
 
@@ -528,9 +576,9 @@
                                 <?php $total_kredit = 0;
                                 foreach ($akun as $ak) : ?>
                                     <?php
-                                    $q1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_pemasukan_kas WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND  no_akun = $ak->no_akun ";
+                                    $q1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_penerimaan_kas WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND  no_akun = $ak->no_akun ";
                                     $g1 = $this->db->query($q1)->row_array();
-                                    $n1 = $this->db->query("SELECT * FROM jurnal_pemasukan_kas WHERE no_akun = $ak->no_akun")->num_rows();
+                                    $n1 = $this->db->query("SELECT * FROM jurnal_penerimaan_kas WHERE no_akun = $ak->no_akun")->num_rows();
                                     // perhitungan jumlah 
                                     $a = $g1['debet'] + $g1['kredit'];
 
@@ -566,15 +614,16 @@
                                     } ?>
 
                                 <?php endforeach;
-                                echo $total_kredit;
+                                echo rupiah1($total_kredit);
                                 ?>
+                                <!-- TOTAL NSD  -->
                             <?php } else { ?>
                                 <?php $total_kredit = 0;
                                 foreach ($akun as $ak) : ?>
                                     <?php
-                                    $q1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_pemasukan_kas WHERE no_akun = $ak->no_akun ";
+                                    $q1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_penerimaan_kas WHERE no_akun = $ak->no_akun ";
                                     $g1 = $this->db->query($q1)->row_array();
-                                    $n1 = $this->db->query("SELECT * FROM jurnal_pemasukan_kas WHERE no_akun = $ak->no_akun")->num_rows();
+                                    $n1 = $this->db->query("SELECT * FROM jurnal_penerimaan_kas WHERE no_akun = $ak->no_akun")->num_rows();
                                     // perhitungan jumlah 
                                     $a = $g1['debet'] + $g1['kredit'];
 
@@ -610,7 +659,7 @@
                                     } ?>
 
                                 <?php endforeach;
-                                echo $total_kredit;
+                                echo rupiah1($total_kredit);
                                 ?>
 
 
@@ -638,27 +687,22 @@
                         <?php } ?>
 
                         <td>
-                            <?= $jpsg1['debet_jps'] ?>
+                            <?= rupiah1($jpsg1['debet_jps']) ?>
                         </td>
                         <td>
-                            <?= $jpsg1['kredit_jps'] ?>
+                            <?= rupiah1($jpsg1['kredit_jps']) ?>
                         </td>
 
-                        <!-- Total NSD -->
-
-
-
-
-
+                        <!-- PILIHAN Total NSD -->
                         <?php
                         if ($pilihan[0] == 'menu') { ?>
                             <?php
                             $nsdtotal_debet = 0;
                             $nsdtotal_kredit = 0;
                             foreach ($akun as $ak) :
-                                $q1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_pemasukan_kas WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND  no_akun = $ak->no_akun ";
+                                $q1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_penerimaan_kas WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND  no_akun = $ak->no_akun ";
                                 $g1 = $this->db->query($q1)->row_array();
-                                $n1 = $this->db->query("SELECT * FROM jurnal_pemasukan_kas WHERE no_akun = $ak->no_akun")->num_rows();
+                                $n1 = $this->db->query("SELECT * FROM jurnal_penerimaan_kas WHERE no_akun = $ak->no_akun")->num_rows();
                                 // perhitungan jumlah
                                 $a = $g1['debet'] + $g1['kredit'];
 
@@ -708,9 +752,9 @@
                             $nsdtotal_debet = 0;
                             $nsdtotal_kredit = 0;
                             foreach ($akun as $ak) :
-                                $q1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_pemasukan_kas WHERE no_akun = $ak->no_akun ";
+                                $q1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_penerimaan_kas WHERE no_akun = $ak->no_akun ";
                                 $g1 = $this->db->query($q1)->row_array();
-                                $n1 = $this->db->query("SELECT * FROM jurnal_pemasukan_kas WHERE no_akun = $ak->no_akun")->num_rows();
+                                $n1 = $this->db->query("SELECT * FROM jurnal_penerimaan_kas WHERE no_akun = $ak->no_akun")->num_rows();
                                 // perhitungan jumlah
                                 $a = $g1['debet'] + $g1['kredit'];
 
@@ -767,7 +811,7 @@
                             <?= rupiah1($nsdtotal_kredit) ?>
                         </td>
 
-                        <!-- Total Laba Rugi -->
+                        <!-- PILIHAN Total Laba Rugi -->
                         <?php
                         if ($pilihan[0] == 'menu') { ?>
                             <?php
@@ -776,7 +820,7 @@
                             $nrtotal_debet = 0;
                             $nrtotal_kredit = 0;
                             foreach ($akun as $ak) :
-                                $q1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_pemasukan_kas WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND  no_akun = $ak->no_akun ";
+                                $q1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_penerimaan_kas WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND  no_akun = $ak->no_akun ";
                                 $g1 = $this->db->query($q1)->row_array();
 
                                 $q2 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_pengeluaran_kas WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND  no_akun = $ak->no_akun";
@@ -833,7 +877,7 @@
                             $nrtotal_debet = 0;
                             $nrtotal_kredit = 0;
                             foreach ($akun as $ak) :
-                                $q1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_pemasukan_kas WHERE no_akun = $ak->no_akun ";
+                                $q1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_penerimaan_kas WHERE no_akun = $ak->no_akun ";
                                 $g1 = $this->db->query($q1)->row_array();
 
                                 $q2 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_pengeluaran_kas WHERE no_akun = $ak->no_akun";
@@ -896,6 +940,26 @@
                 </tbody>
             </table>
             <br>
+
+            <!-- <table>
+                <thead>
+                    <tr>
+                        <th>
+                            <?= rupiah1($latotal_kredit - $latotal_debet) ?>
+                        </th>
+                    </tr>
+
+
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <?= rupiah1($latotal_kredit - $latotal_debet) ?>
+                        </td>
+                    </tr>
+                </tbody>
+
+            </table>
             <p>
                 Selisih-nya : <?= rupiah1($latotal_kredit - $latotal_debet) ?>
             </p>
@@ -905,16 +969,16 @@
             <p>
                 Selisih-nya : <?= rupiah1($nrtotal_debet - $nrtotal_kredit) ?>
             </p>
-            <!--  
+            
             <div>
                 Ini Debet :
                 <?php
                 $nsdtotal_debet = 0;
                 // $nsdtotal_kredit = 0;
                 foreach ($akun as $ak) :
-                    $q1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_pemasukan_kas WHERE no_akun = $ak->no_akun ";
+                    $q1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_penerimaan_kas WHERE no_akun = $ak->no_akun ";
                     $g1 = $this->db->query($q1)->row_array();
-                    $n1 = $this->db->query("SELECT * FROM jurnal_pemasukan_kas WHERE no_akun = $ak->no_akun")->num_rows();
+                    $n1 = $this->db->query("SELECT * FROM jurnal_penerimaan_kas WHERE no_akun = $ak->no_akun")->num_rows();
                     // perhitungan jumlah
                     $a = $g1['debet'] + $g1['kredit'];
 
@@ -973,9 +1037,9 @@
                 // $nsdtotal_debet = 0;
                 $nsdtotal_kredit = 0;
                 foreach ($akun as $ak) :
-                    $q1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_pemasukan_kas WHERE no_akun = $ak->no_akun ";
+                    $q1 = "SELECT tanggal, SUM(debet) as debet, SUM(kredit) as kredit FROM jurnal_penerimaan_kas WHERE no_akun = $ak->no_akun ";
                     $g1 = $this->db->query($q1)->row_array();
-                    $n1 = $this->db->query("SELECT * FROM jurnal_pemasukan_kas WHERE no_akun = $ak->no_akun")->num_rows();
+                    $n1 = $this->db->query("SELECT * FROM jurnal_penerimaan_kas WHERE no_akun = $ak->no_akun")->num_rows();
                     // perhitungan jumlah
                     $a = $g1['debet'] + $g1['kredit'];
 
@@ -1032,5 +1096,9 @@
         </div>
 
     </div>
-</div>
-</div>
+    </div>
+
+
+</body>
+
+</html>

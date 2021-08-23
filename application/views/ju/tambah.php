@@ -25,8 +25,14 @@
                                     <label class="col-sm-12 col-md-2 col-form-label">pilih</label>
                                     <div class="col-sm-12 col-md-10">
                                         <select class="custom-select col-12" id="kategori_ju">
-                                            <option value="utang_dagang">Utang Dagang</option>
-                                            <option value="retur_penjualan">Retur Penjualan</option>
+                                            <?php if ($this->session->userdata('hakakses') == 3) { ?>
+
+                                                <option value="retur_penjualan">Retur Penjualan</option>
+                                            <?php } else { ?>
+
+                                                <option value="retur_penjualan">Retur Penjualan</option>
+                                                <option value="utang_dagang">Utang Dagang</option>
+                                            <?php } ?>
                                         </select>
                                     </div>
                                 </div>
@@ -35,7 +41,7 @@
                                     <label class="col-sm-12 col-md-2 col-form-label">Tanggal</label>
                                     <div class="col-sm-12 col-md-10">
 
-                                        <input class="form-control" type="text" name="id_pengguna" value="<?= $this->session->userdata('id_pengguna') ?>" required>
+                                        <input class="form-control" type="hidden" name="id_pengguna" value="<?= $this->session->userdata('id_pengguna') ?>" required>
                                         <?php
                                         if ($pilihan[0] == 'menu') { ?>
                                             <?php
@@ -60,7 +66,22 @@
                                 </div>
 
 
+                                <div class="utg">
+                                    <div class='form-group row'><label class='col-sm-12 col-md-2 col-form-label'>Retur Penjualan</label>
+                                        <div class='col-sm-12 col-md-10'><input class='form-control' type='hidden' name='pil' value='2' required><input class='form-control' type='number' id='ju_ret_penj' name='debet2' placeholder='Jumlah' required></div>
+                                    </div>
+                                    <div class='form-group row'><label class='col-sm-12 col-md-2 col-form-label'>Akun Piutang Dagang</label>
+                                        <div class='col-sm-12 col-md-10'><select class='custom-select col-12' name='id_akun_piutang_dagang2' id='id_piutang'><?php foreach ($piutang_dagang as $piutang) : ?><option value='<?= $piutang->id_piutang_dagang ?>'> <?= $piutang->nama_piutang_dagang ?></option><?php endforeach; ?></select></div>
+                                    </div>
+                                    <div class='form-group row pemb'><label class='col-sm-12 col-md-2 col-form-label'>Piutang Dagang</label>
+                                        <div class='col-sm-12 col-md-10'><input class='form-control' type='number' id='ju_piu' name='kredit2' placeholder='Jumlah' required></div>
+                                    </div>
+                                </div>
 
+
+
+
+                                <!-- 
                                 <div class='form-group row utg'>
                                     <label class='col-sm-12 col-md-2 col-form-label'>Akun Utang Dagang</label>
                                     <div class='col-sm-12 col-md-10'>
@@ -83,15 +104,26 @@
                                     <div class="col-sm-12 col-md-10">
                                         <input class="form-control" type="number" id="ju_retur_pem" name="kredit1" placeholder="Jumlah" required>
                                     </div>
-                                </div>
+                                </div> -->
+
+
                                 <script>
-                                    $("#ju_utang1").keydown(function() {
+                                    // $("#ju_utang1").keydown(function() {
+                                    //     var jumlah = $(this).val();
+                                    //     $("#ju_retur_pem").val(jumlah);
+                                    // });
+                                    // $("#ju_utang1").keyup(function() {
+                                    //     var jumlah = $(this).val();
+                                    //     $("#ju_retur_pem").val(jumlah);
+                                    // });
+
+                                    $("#ju_ret_penj").keydown(function() {
                                         var jumlah = $(this).val();
-                                        $("#ju_retur_pem").val(jumlah);
+                                        $("#ju_piu").val(jumlah);
                                     });
-                                    $("#ju_utang1").keyup(function() {
+                                    $("#ju_ret_penj").keyup(function() {
                                         var jumlah = $(this).val();
-                                        $("#ju_retur_pem").val(jumlah);
+                                        $("#ju_piu").val(jumlah);
                                     });
                                 </script>
                                 <!-- <div class="form-group row ">

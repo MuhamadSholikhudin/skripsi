@@ -66,12 +66,14 @@
 
 
             </div>
-<!-- <div class="col-lg-6">
+            <!-- <div class="col-lg-6">
     a
 </div>
 <div class="col-lg-6">
     a
 </div> -->
+
+
             <table class="display text-dark" style="width:100%" border="1" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
                 <thead class="text-center">
                     <tr>
@@ -228,78 +230,90 @@
                             </tr>
 
                         <?php } else { ?>
-                            <tr>
-                                <td class="table-plus sorting_1" tabindex="0">
-                                    <?php
-                                    if ($pilihan[0] == 'menu') { ?>
+                            <?php if ($this->session->userdata('hakakses') == 3) { ?>
 
-                                        <?= tanggal_pilih($ak->tanggal) ?>
-                                    <?php } else { ?>
-                                        <?= tgl_bln_thn($ak->tanggal) ?>
+                            <?php } else { ?>
+
+
+                                <tr>
+                                    <td class="table-plus sorting_1" tabindex="0">
+                                        <?php
+                                        if ($pilihan[0] == 'menu') { ?>
+
+                                            <?= tanggal_pilih($ak->tanggal) ?>
+                                        <?php } else { ?>
+                                            <?= tgl_bln_thn($ak->tanggal) ?>
+                                        <?php } ?>
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>
+                                        <?php
+                                        $qk = "SELECT * FROM jurnal_penerimaan_kas WHERE no_transaksi = $ak->no_transaksi AND no_akun = 111";
+                                        $gk = $this->db->query($qk)->row_array();
+                                        echo rupiah($gk['debet']);
+                                        ?>
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>
+
+                                        <?php
+                                        $qk = "SELECT akun.nama_akun as nama_akun FROM jurnal_penerimaan_kas JOIN akun ON jurnal_penerimaan_kas.no_akun = akun.no_akun WHERE jurnal_penerimaan_kas.no_transaksi = $ak->no_transaksi AND jurnal_penerimaan_kas.no_akun != 111";
+                                        $gk = $this->db->query($qk)->row_array();
+                                        echo $gk['nama_akun'];
+                                        ?>
+                                    </td>
+                                    <td></td>
+                                    <td>
+                                        <?= rupiah($ak->kredit) ?>
+                                    </td>
+
+                                    <?php if ($pilihan[0] == 'menu') { ?>
+                                        <td>
+                                            <div class="dropdown">
+                                                <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                                                    <i class="dw dw-more"></i>
+                                                </a>
+                                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                                                    <a class="dropdown-item" href="<?= base_url('pilihan/jkm/edit/') . $ak->no_transaksi . '/' . $bulan_pilih[0] ?>"><i class="fa fa-edit"></i> Ubah</a>
+                                                    <a class="dropdown-item" href="<?= base_url('pilihan/jkm/hapus/') . $ak->no_transaksi . '/' . $bulan_pilih[0] ?>"><i class="fa fa-trash"></i> Hapus</a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    <?php } elseif ($pilihan[0] == 'samping') { ?>
+                                        <td>
+
+                                            <?php if ($this->session->userdata('hakakses') == 3) { ?>
+
+                                            <?php } else { ?>
+
+                                                <div class="dropdown">
+                                                    <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                                                        <i class="dw dw-more"></i>
+                                                    </a>
+                                                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                                                        <a class="dropdown-item" href="<?= base_url('jurnal/jkm/edit/') . $ak->no_transaksi  ?>"><i class="fa fa-edit"></i> Ubah</a>
+                                                        <a class="dropdown-item" href="<?= base_url('jurnal/jkm/hapus/') . $ak->no_transaksi  ?>"><i class="fa fa-trash"></i> Hapus</a>
+                                                    </div>
+                                                </div>
+                                            <?php } ?>
+
+                                        </td>
+
                                     <?php } ?>
-                                </td>
-                                <td></td>
-                                <td></td>
-                                <td>
-                                    <?php
-                                    $qk = "SELECT * FROM jurnal_penerimaan_kas WHERE no_transaksi = $ak->no_transaksi AND no_akun = 111";
-                                    $gk = $this->db->query($qk)->row_array();
-                                    echo rupiah($gk['debet']);
-                                    ?>
-                                </td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td>
-
-                                    <?php
-                                    $qk = "SELECT akun.nama_akun as nama_akun FROM jurnal_penerimaan_kas JOIN akun ON jurnal_penerimaan_kas.no_akun = akun.no_akun WHERE jurnal_penerimaan_kas.no_transaksi = $ak->no_transaksi AND jurnal_penerimaan_kas.no_akun != 111";
-                                    $gk = $this->db->query($qk)->row_array();
-                                    echo $gk['nama_akun'];
-                                    ?>
-                                </td>
-                                <td></td>
-                                <td>
-                                    <?= rupiah($ak->kredit) ?>
-                                </td>
-
-                                <?php if ($pilihan[0] == 'menu') { ?>
-                                    <td>
-                                        <div class="dropdown">
-                                            <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
-                                                <i class="dw dw-more"></i>
-                                            </a>
-                                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                                                <a class="dropdown-item" href="<?= base_url('pilihan/jkm/edit/') . $ak->no_transaksi . '/' . $bulan_pilih[0] ?>"><i class="fa fa-edit"></i> Ubah</a>
-                                                <a class="dropdown-item" href="<?= base_url('pilihan/jkm/hapus/') . $ak->no_transaksi . '/' . $bulan_pilih[0] ?>"><i class="fa fa-trash"></i> Hapus</a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                <?php } elseif ($pilihan[0] == 'samping') { ?>
-                                    <td>
-                                        <div class="dropdown">
-                                            <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
-                                                <i class="dw dw-more"></i>
-                                            </a>
-                                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                                                <a class="dropdown-item" href="<?= base_url('jurnal/jkm/edit/') . $ak->no_transaksi  ?>"><i class="fa fa-edit"></i> Ubah</a>
-                                                <a class="dropdown-item" href="<?= base_url('jurnal/jkm/hapus/') . $ak->no_transaksi  ?>"><i class="fa fa-trash"></i> Hapus</a>
-                                            </div>
-                                        </div>
-                                    </td>
-
-                                <?php } ?>
-
-
-
-                            </tr>
+                                </tr>
+                            <?php } ?>
                         <?php } ?>
 
                     <?php endforeach; ?>
                     <?php
                     if ($pilihan[0] == 'menu') { ?>
-                        <tr role="row" class="odd">
-                            <td colspan="3" class="text-center">Jumlah</td>
+                        <tr role="row">
+                            <td class="text-center"></td>
+                            <td class="text-center"></td>
+                            <td class="text-center">Jumlah</td>
 
                             <td>
                                 <?php
@@ -338,36 +352,45 @@
                             <td></td>
                         </tr>
                     <?php } else { ?>
-                        <tr role="row" class="odd">
-                            <td colspan="3" class="text-center">Jumlah</td>
+                <tfoot>
 
-                            <td>
-                                <?php
-                                $qk = "SELECT SUM(debet) as kas FROM jurnal_penerimaan_kas WHERE no_akun = 111";
-                                $gk = $this->db->query($qk)->row_array();
-                                echo rupiah($gk['kas']);
-                                ?>
-                            </td>
-                            <td>
-                                <?php
-                                $qk = "SELECT SUM(debet) as potongan_penjualan FROM jurnal_penerimaan_kas WHERE no_akun = 413";
-                                $gk = $this->db->query($qk)->row_array();
-                                echo rupiah($gk['potongan_penjualan']);
-                                ?>
-                            </td>
-                            <td><?php
-                                $qk = "SELECT SUM(kredit) as piutang_dagang FROM jurnal_penerimaan_kas WHERE no_akun = 113";
-                                $gk = $this->db->query($qk)->row_array();
-                                echo rupiah($gk['piutang_dagang']);
-                                ?></td>
-                            <td><?php
-                                $qk = "SELECT SUM(kredit) as penjualan FROM jurnal_penerimaan_kas WHERE no_akun = 411";
-                                $gk = $this->db->query($qk)->row_array();
-                                echo rupiah($gk['penjualan']);
-                                ?>
-                            </td>
+
+                    <tr role="row">
+                        <td class="text-center"></td>
+                        <td class="text-center"></td>
+                        <td class="text-center">Jumlah</td>
+                        <td>
+                            <?php
+                            $qk = "SELECT SUM(debet) as kas FROM jurnal_penerimaan_kas WHERE no_akun = 111";
+                            $gk = $this->db->query($qk)->row_array();
+                            echo rupiah($gk['kas']);
+                            ?>
+                        </td>
+                        <td>
+                            <?php
+                            $qk = "SELECT SUM(debet) as potongan_penjualan FROM jurnal_penerimaan_kas WHERE no_akun = 413";
+                            $gk = $this->db->query($qk)->row_array();
+                            echo rupiah($gk['potongan_penjualan']);
+                            ?>
+                        </td>
+                        <td><?php
+                            $qk = "SELECT SUM(kredit) as piutang_dagang FROM jurnal_penerimaan_kas WHERE no_akun = 113";
+                            $gk = $this->db->query($qk)->row_array();
+                            echo rupiah($gk['piutang_dagang']);
+                            ?></td>
+                        <td><?php
+                            $qk = "SELECT SUM(kredit) as penjualan FROM jurnal_penerimaan_kas WHERE no_akun = 411";
+                            $gk = $this->db->query($qk)->row_array();
+                            echo rupiah($gk['penjualan']);
+                            ?>
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <?php if ($this->session->userdata('hakakses') == 3) { ?>
                             <td></td>
-                            <td></td>
+
+                        <?php } else { ?>
+
                             <td>
                                 <?php
                                 $qk = "SELECT SUM(kredit) as total FROM jurnal_penerimaan_kas WHERE no_akun != 411 AND no_akun != 113 AND no_akun != 413 AND no_akun != 111";
@@ -375,13 +398,15 @@
                                 echo rupiah($gk['total']);
                                 ?>
                             </td>
-                            <td></td>
-                        </tr>
-                    <?php } ?>
+                        <?php } ?>
+                        <td></td>
+                    </tr>
+                </tfoot>
+            <?php } ?>
 
 
 
-                </tbody>
+            </tbody>
             </table>
 
 

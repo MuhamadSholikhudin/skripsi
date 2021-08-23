@@ -35,7 +35,7 @@ class Jkm extends CI_Controller
     public function tambah()
     {
         // $data['jurnal_penerimaan_kas'] = $this->db->query("SELECT * FROM jurnal_penerimaan_kas ORDER BY no_jurnal_penerimaan_kas ASC")->result();
-        $data['piutang_dagang'] = $this->db->query("SELECT * FROM piutang_dagang ORDER BY nama_piutang_dagang ASC")->result();
+        $data['piutang_dagang'] = $this->db->query("SELECT * FROM piutang_dagang WHERE id_piutang_dagang != 0 ORDER BY nama_piutang_dagang ASC")->result();
         $data['pilihan'] = ['samping'];
         $data['akun'] = $this->db->query("SELECT * FROM akun WHERE no_akun = 311 OR no_akun = 512")->result();
         $this->load->view('templates/header');

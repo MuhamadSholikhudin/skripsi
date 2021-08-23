@@ -29,4 +29,13 @@ class Kertas_kerja extends CI_Controller
         $this->load->view('templates/footer');
     }
 
+    public function cetak()
+    {
+        $data['akun'] = $this->db->query("SELECT * FROM akun  ORDER BY no_akun ASC")->result();
+        $data['pilihan'] = ['samping'];
+
+      
+        $this->load->view('kertas_kerja/cetak', $data);
+        
+    }
 }

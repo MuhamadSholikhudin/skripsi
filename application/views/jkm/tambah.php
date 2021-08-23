@@ -35,7 +35,7 @@
                                     <label class="col-sm-12 col-md-2 col-form-label">Tanggal</label>
                                     <div class="col-sm-12 col-md-10">
 
-                            <input class="form-control" type="text" name="id_pengguna" value="<?= $this->session->userdata('id_pengguna') ?>" required>
+                                        <input class="form-control" type="hidden" name="id_pengguna" value="<?= $this->session->userdata('id_pengguna') ?>" required>
                                         <?php
                                         if ($pilihan[0] == 'menu') { ?>
                                             <?php
@@ -45,9 +45,9 @@
                                             <input class="form-control" type="date" id="tanggal" name="tanggal" value="<?= $date_pilih ?>" required>
                                             <input class="form-control" type="hidden" name="bulan_pilih" value="<?= $bulan_pilih[0] ?>" required>
                                             <input class="form-control" type="hidden" name="tahun_pilih" value="<?= $tahun_pilih[0] ?>" required>
-                                            
-                                            <?php } else { ?>
-                                                <input class="form-control" type="date" id="tanggal" name="tanggal" value="<?= date('Y-m-d') ?>" required>
+
+                                        <?php } else { ?>
+                                            <input class="form-control" type="date" id="tanggal" name="tanggal" value="<?= date('Y-m-d') ?>" required>
 
                                         <?php }
                                         ?>

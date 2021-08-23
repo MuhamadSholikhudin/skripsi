@@ -17,7 +17,7 @@
             </div>
             <br>
             <div class="col-md-12 text-center">
-                
+
                 <h5>Toko Norkayati</h5>
                 <h5>Jurnal Pengeluaran Kas</h5>
                 <?php
@@ -292,95 +292,107 @@
 
                     <?php
                     if ($pilihan[0] == 'menu') { ?>
-                        <tr role="row" class="odd">
-                            <td colspan="3" class="text-center">Jumlah</td>
-
-                            <td>
-                                <?php
-                                $q1 = "SELECT SUM(debet) as utang_dagang FROM jurnal_pengeluaran_kas WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND no_akun = 211";
-                                $g1 = $this->db->query($q1)->row_array();
-                                echo rupiah($g1['utang_dagang']);
-                                ?>
-                            </td>
-                            <td>
-                                <?php
-                                $qk = "SELECT SUM(debet) as pembelian FROM jurnal_pengeluaran_kas WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND no_akun = 511";
-                                $gk = $this->db->query($qk)->row_array();
-                                echo rupiah($gk['pembelian']);
-                                ?>
-                            </td>
-                            <td></td>
-                            <td></td>
-                            <td>
-                                <?php
-                                $q2 = "SELECT SUM(debet) as total FROM jurnal_pengeluaran_kas WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND no_akun != 211 AND no_akun != 511 AND no_akun != 513 AND no_akun != 111";
-                                $g2 = $this->db->query($q2)->row_array();
-                                echo rupiah($g2['total']);
-                                ?>
-                            </td>
-                            <td>
-                                <?php
-                                $q3 = "SELECT SUM(kredit) as kas FROM jurnal_pengeluaran_kas WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND no_akun = 111";
-                                $g3 = $this->db->query($q3)->row_array();
-                                echo rupiah($g3['kas']);
-                                ?>
-                            </td>
-                            <td>
-                                <?php
-                                $q4 = "SELECT SUM(kredit) as pot_pemb FROM jurnal_pengeluaran_kas WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND no_akun = 513";
-                                $g4 = $this->db->query($q4)->row_array();
-                                echo rupiah($g4['pot_pemb']);
-                                ?>
-                            </td>
-                            <td></td>
-                        </tr>
-                    <?php } else { ?>
-                        <tr role="row" class="odd">
-                            <td colspan="3" class="text-center">Jumlah</td>
-
-                            <td>
-                                <?php
-                                $q1 = "SELECT SUM(debet) as utang_dagang FROM jurnal_pengeluaran_kas WHERE no_akun = 211";
-                                $g1 = $this->db->query($q1)->row_array();
-                                echo rupiah($g1['utang_dagang']);
-                                ?>
-                            </td>
-                            <td>
-                                <?php
-                                $qk = "SELECT SUM(debet) as pembelian FROM jurnal_pengeluaran_kas WHERE no_akun = 511";
-                                $gk = $this->db->query($qk)->row_array();
-                                echo rupiah($gk['pembelian']);
-                                ?>
-                            </td>
-                            <td></td>
-                            <td></td>
-                            <td>
-                                <?php
-                                $q2 = "SELECT SUM(debet) as total FROM jurnal_pengeluaran_kas WHERE no_akun != 211 AND no_akun != 511 AND no_akun != 513 AND no_akun != 111";
-                                $g2 = $this->db->query($q2)->row_array();
-                                echo rupiah($g2['total']);
-                                ?>
-                            </td>
-                            <td>
-                                <?php
-                                $q3 = "SELECT SUM(kredit) as kas FROM jurnal_pengeluaran_kas WHERE no_akun = 111";
-                                $g3 = $this->db->query($q3)->row_array();
-                                echo rupiah($g3['kas']);
-                                ?>
-                            </td>
-                            <td>
-                                <?php
-                                $q4 = "SELECT SUM(kredit) as pot_pemb FROM jurnal_pengeluaran_kas WHERE no_akun = 513";
-                                $g4 = $this->db->query($q4)->row_array();
-                                echo rupiah($g4['pot_pemb']);
-                                ?>
-                            </td>
-                            <td></td>
-                        </tr>
-                    <?php } ?>
+                <tfoot>
 
 
-                </tbody>
+                    <tr role="row" class="odd">
+                        <td></td>
+                        <td></td>
+                        <td>Jumlah</td>
+
+                        <td>
+                            <?php
+                            $q1 = "SELECT SUM(debet) as utang_dagang FROM jurnal_pengeluaran_kas WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND no_akun = 211";
+                            $g1 = $this->db->query($q1)->row_array();
+                            echo rupiah($g1['utang_dagang']);
+                            ?>
+                        </td>
+                        <td>
+                            <?php
+                            $qk = "SELECT SUM(debet) as pembelian FROM jurnal_pengeluaran_kas WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND no_akun = 511";
+                            $gk = $this->db->query($qk)->row_array();
+                            echo rupiah($gk['pembelian']);
+                            ?>
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <?php
+                            $q2 = "SELECT SUM(debet) as total FROM jurnal_pengeluaran_kas WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND no_akun != 211 AND no_akun != 511 AND no_akun != 513 AND no_akun != 111";
+                            $g2 = $this->db->query($q2)->row_array();
+                            echo rupiah($g2['total']);
+                            ?>
+                        </td>
+                        <td>
+                            <?php
+                            $q3 = "SELECT SUM(kredit) as kas FROM jurnal_pengeluaran_kas WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND no_akun = 111";
+                            $g3 = $this->db->query($q3)->row_array();
+                            echo rupiah($g3['kas']);
+                            ?>
+                        </td>
+                        <td>
+                            <?php
+                            $q4 = "SELECT SUM(kredit) as pot_pemb FROM jurnal_pengeluaran_kas WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND no_akun = 513";
+                            $g4 = $this->db->query($q4)->row_array();
+                            echo rupiah($g4['pot_pemb']);
+                            ?>
+                        </td>
+                        <td></td>
+                    </tr>
+                </tfoot>
+            <?php } else { ?>
+                <tfoot>
+
+
+                    <tr role="row">
+                        <td></td>
+                        <td></td>
+                        <td>Jumlah</td>
+
+                        <td>
+                            <?php
+                            $q1 = "SELECT SUM(debet) as utang_dagang FROM jurnal_pengeluaran_kas WHERE no_akun = 211";
+                            $g1 = $this->db->query($q1)->row_array();
+                            echo rupiah($g1['utang_dagang']);
+                            ?>
+                        </td>
+                        <td>
+                            <?php
+                            $qk = "SELECT SUM(debet) as pembelian FROM jurnal_pengeluaran_kas WHERE no_akun = 511";
+                            $gk = $this->db->query($qk)->row_array();
+                            echo rupiah($gk['pembelian']);
+                            ?>
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <?php
+                            $q2 = "SELECT SUM(debet) as total FROM jurnal_pengeluaran_kas WHERE no_akun != 211 AND no_akun != 511 AND no_akun != 513 AND no_akun != 111";
+                            $g2 = $this->db->query($q2)->row_array();
+                            echo rupiah($g2['total']);
+                            ?>
+                        </td>
+                        <td>
+                            <?php
+                            $q3 = "SELECT SUM(kredit) as kas FROM jurnal_pengeluaran_kas WHERE no_akun = 111";
+                            $g3 = $this->db->query($q3)->row_array();
+                            echo rupiah($g3['kas']);
+                            ?>
+                        </td>
+                        <td>
+                            <?php
+                            $q4 = "SELECT SUM(kredit) as pot_pemb FROM jurnal_pengeluaran_kas WHERE no_akun = 513";
+                            $g4 = $this->db->query($q4)->row_array();
+                            echo rupiah($g4['pot_pemb']);
+                            ?>
+                        </td>
+                        <td></td>
+                    </tr>
+                </tfoot>
+            <?php } ?>
+
+
+            </tbody>
 
             </table>
 

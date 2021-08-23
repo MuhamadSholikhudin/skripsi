@@ -4,7 +4,17 @@
 
 
         <div class="clearfix"></div>
-        <a href="<?= base_url('laporan_keuangan/cetak') ?>" target="_blank" class="btn btn-dark"><i class="fa fa-print"></i> Cetak</a>
+
+        <?php
+        if ($pilihan[0] == 'menu') { ?>
+            <a href="<?= base_url('pilihan/laporan_keuangan/cetak/' . $bulan_pilih[0] . '/' . $tahun_pilih[0]) ?>" target="_blank" class="btn btn-dark"><i class="fa fa-print"></i>Cetak</a>
+        <?php } else { ?>
+            <a href="<?= base_url('laporan_keuangan/cetak') ?>" target="_blank" class="btn btn-dark"><i class="fa fa-print"></i>Cetak</a>
+        <?php }
+
+        ?>
+
+
 
         <br>
         <br>
@@ -49,22 +59,17 @@
                 <?php } ?>
             </div>
             <div class="col-sm-12">
-                <table class="display text-dark" style="width:100%" border="1"  id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
-                    <!-- <thead class="text-center">
+                <table class="display" style="width:100%" border="1">
+                    <thead class="text-center">
                         <tr>
-                            <th colspan="5">Toko Norkayati</th>
+                            <th>Nama Akun</th>
+                            <th>Kredit</th>
+                            <th>Debet</th>
+                            <th>Jumlah 1</th>
+                            <th>Jumlah 2</th>
                         </tr>
-                        <tr>
-                            <th colspan="5">LAPORAN LABA RUGI</th>
-                        </tr>
-                        <tr>
-                            <th colspan="5">PERIODE <?= date('Y') ?></th>
-                        </tr>
-                    </thead> -->
+                    </thead>
                     <tbody>
-
-
-
                         <?php
                         $penjualan = $this->db->query("SELECT * FROM akun WHERE no_akun LIKE '4%'")->result();
                         ?>
@@ -153,7 +158,7 @@
                                         <?php } ?>
 
                                     <?php } elseif (($g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) < ($g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit'])) { ?>
-                                        `
+
                                         <?php if (($g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) > ($g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit'])) { ?>
                                             <td><?= rupiah(($g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) - ($g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit'])) ?></td>
                                             <td></td>
@@ -228,7 +233,7 @@
 
                                 ?>
 
-                                <tr>
+                                <tr class="text-dark">
                                     <td><?= $jual->nama_akun ?></td>
 
                                     <?php if (($g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) > ($g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit'])) { ?>
@@ -271,14 +276,15 @@
                             <td>PENJUALAN BERSIH</td>
                             <td></td>
                             <td></td>
-                            <td><?php $penjualan_bersih = ($penber_kredit - $penber_debet); echo rupiah($penjualan_bersih) ?></td>
+                            <td><?php $penjualan_bersih = ($penber_kredit - $penber_debet);
+                                echo rupiah($penjualan_bersih) ?></td>
                             <td></td>
                         </tr>
                         <?php
                         $persediaan = $this->db->query("SELECT * FROM akun WHERE no_akun = 114")->result();
                         ?>
                         <?php foreach ($persediaan as $sedia) : ?>
-                            <tr>
+                            <tr class="text-dark">
                                 <?php
                                 if ($pilihan[0] == 'menu') { ?>
                                     <?php $perbg = $this->db->query("SELECT * FROM jurnal_penyesuaian WHERE  MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND  no_akun = 114 AND kredit != 0");
@@ -380,7 +386,7 @@
                                 ?>
                             <?php } ?>
 
-                            <tr>
+                            <tr class="text-dark">
                                 <td><?= $beli->nama_akun ?></td>
                                 <?php if (($g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) > ($g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit'])) { ?>
                                     <?php if (($g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) > ($g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit'])) { ?>
@@ -490,7 +496,6 @@
                                 } else {
                                     $hpp = ($btud - 0);
                                     echo rupiah($hpp);
-
                                 }
                                 ?>
 
@@ -502,7 +507,8 @@
                             <td>LABA KOTOR</td>
                             <td></td>
                             <td></td>
-                            <td><?php $laba_kotor = ($penjualan_bersih - $hpp); echo rupiah($laba_kotor); ?></td>
+                            <td><?php $laba_kotor = ($penjualan_bersih - $hpp);
+                                echo rupiah($laba_kotor); ?></td>
                             <td></td>
                         </tr>
 
@@ -616,20 +622,20 @@
                                 ?>
                             <?php } ?>
 
-                            <tr>
+                            <tr class="text-dark">
                                 <td><?= $beb->nama_akun ?></td>
 
                                 <?php if (($g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) > ($g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit'])) { ?>
                                     <?php if (($g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) > ($g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit'])) { ?>
                                         <?php $beb_debet += (($g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) - ($g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit'])); ?>
-                                        <td><?= ($g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) - ($g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit']) ?></td>
+                                        <td><?= rupiah(($g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) - ($g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit'])) ?></td>
                                         <td></td>
                                         <td></td>
 
                                     <?php } elseif (($g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) < ($g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit'])) { ?>
                                         <?php $beb_kredit += ($g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit']) - ($g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']); ?>
                                         <td></td>
-                                        <td><?= ($g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit']) - ($g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) ?></td>
+                                        <td><?= rupiah(($g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit']) - ($g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet'])) ?></td>
                                         <td></td>
 
                                     <?php } ?>
@@ -638,7 +644,7 @@
 
                                     <?php if (($g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) > ($g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit'])) { ?>
                                         <?php $beb_debet += (($g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) - ($g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit'])); ?>
-                                        <td><?= ($g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) - ($g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit']) ?></td>
+                                        <td><?= rupiah(($g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) - ($g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit'])) ?></td>
                                         <td></td>
                                         <td></td>
 
@@ -646,7 +652,7 @@
                                     <?php } elseif (($g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) < ($g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit'])) { ?>
                                         <?php $beb_kredit += ($g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit']) - ($g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']); ?>
                                         <td></td>
-                                        <td><?= ($g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit']) - ($g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet']) ?></td>
+                                        <td><?= rupiah(($g1['kredit'] + $g2['kredit'] + $g3['kredit'] + $g4['kredit'] + $g5['kredit']) - ($g1['debet'] + $g2['debet'] + $g3['debet'] + $g4['debet'] + $g5['debet'])) ?></td>
                                         <td></td>
                                         </td>
                                         </td>
@@ -675,10 +681,11 @@
                                 </td>
                             </tr>
                         <?php endforeach; ?>
-                        <tr class="text-danger">
+                        <tr class="text-dark">
                             <td></td>
                             <td></td>
-                            <td><?php $total_beban = $beb_debet; echo rupiah($total_beban); ?> </td>
+                            <td><?php $total_beban = $beb_debet;
+                                echo rupiah($total_beban); ?> </td>
                             <td></td>
                             <td></td>
                         </tr>
@@ -687,7 +694,8 @@
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td><?php $laba_rugi = $laba_kotor - $total_beban; echo rupiah($laba_rugi); ?></td>
+                            <td><?php $laba_rugi = $laba_kotor - $total_beban;
+                                echo rupiah($laba_rugi); ?></td>
                         </tr>
                     </tbody>
                 </table>
@@ -736,22 +744,17 @@
                     <?php } ?>
                 </div>
 
-                <table class="display text-dark" style="width:100%" border="1" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
-                    <!-- <thead class="text-center">
+                <table class="display text-dark" style="width:100%" border="1" role="grid" aria-describedby="DataTables_Table_0_info">
+                    <thead class="text-center">
                         <tr>
-                            <th colspan="4">TOKO NORKAYATI</th>
+                            <th>Nama Akun</th>
+                            <th>Debet</th>
+                            <th>KREDIT</th>
                         </tr>
-                        <tr>
-                            <th colspan="4">LAPORAN PERUBAHAN MODAL</th>
-                        </tr>
-                        <tr>
-                            <th colspan="4">PERIODE <?= date("Y") ?></th>
-                        </tr>
-                    </thead> -->
+                    </thead>
                     <tbody>
                         <tr>
                             <td>MODAL AWAL</td>
-                            <td></td>
                             <td></td>
                             <td>
 
@@ -873,9 +876,9 @@
                         <tr>
                             <td>LABA</td>
                             <td>
-                                <?php $laba_rugi = $laba_kotor - $total_beban; echo rupiah($laba_rugi);  ?>
+                                <?php $laba_rugi = $laba_kotor - $total_beban;
+                                echo rupiah($laba_rugi);  ?>
                             </td>
-                            <td></td>
                             <td></td>
                         </tr>
                         <tr>
@@ -921,19 +924,18 @@
                                 ?>
                             </td>
                             <td></td>
-                            <td></td>
                         </tr>
                         <tr>
                             <td>PENAMBAHAN MODAL</td>
                             <td></td>
-                            <td></td>
-                            <td><?php $penambahan_modal = $laba_rugi + $prive_laporan; echo rupiah($penambahan_modal); ?></td>
+                            <td><?php $penambahan_modal = $laba_rugi + $prive_laporan;
+                                echo rupiah($penambahan_modal); ?></td>
                         </tr>
                         <tr>
                             <td>MODAL AKHIR</td>
                             <td></td>
-                            <td></td>
-                            <td><?php $modal_akhir = $nilai_modal_awal - $penambahan_modal; echo rupiah($modal_akhir); ?></td>
+                            <td><?php $modal_akhir = $nilai_modal_awal - $penambahan_modal;
+                                echo rupiah($modal_akhir); ?></td>
                         </tr>
                     </tbody>
                 </table>
@@ -980,18 +982,16 @@
                     <?php } ?>
                 </div>
                 <div class="col-lg-6">
-                    <table class="display text-dark" style="width:100%" border="1" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
-                        <!-- <thead class="text-center">
-                        <tr>
-                            <th colspan="4">TOKO NORKAYATI</th>
-                        </tr>
-                        <tr>
-                            <th colspan="4">LAPORAN NERACA</th>
-                        </tr>
-                        <tr>
-                            <th colspan="4">PERIODE <?= date("Y") ?></th>
-                        </tr>
-                    </thead> -->
+                    <table class="display text-dark" style="width:100%" border="1" role="grid" aria-describedby="DataTables_Table_0_info">
+                        <thead class="text-center">
+                            <tr>
+                                <th>NO AKUN</th>
+                                <th>NAMA AKUN</th>
+                                <th>DEBET</th>
+                                <th>KREDIT</th>
+
+                            </tr>
+                        </thead>
                         <tbody>
                             <?php
                             if ($pilihan[0] == 'menu') { ?>
@@ -1175,18 +1175,15 @@
 
 
                 <div class="col-lg-6">
-                    <table class="display text-dark" style="width:100%" border="1" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
-                        <!-- <thead class="text-center">
-                        <tr>
-                            <th colspan="4">TOKO NORKAYATI</th>
-                        </tr>
-                        <tr>
-                            <th colspan="4">LAPORAN NERACA</th>
-                        </tr>
-                        <tr>
-                            <th colspan="4">PERIODE <?= date("Y") ?></th>
-                        </tr>
-                    </thead> -->
+                    <table class="display text-dark" style="width:100%" border="1" role="grid" aria-describedby="DataTables_Table_0_info">
+                        <thead class="text-center">
+                            <tr>
+                                <th>NO AKUN</th>
+                                <th>NAMA AKUN</th>
+                                <th>DEBET</th>
+                                <th>KREDIT</th>
+                            </tr>
+                        </thead>
                         <tbody>
 
 

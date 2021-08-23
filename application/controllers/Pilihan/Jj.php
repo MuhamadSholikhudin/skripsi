@@ -24,7 +24,7 @@ class Jj extends CI_Controller
     public function tambah($bulan_pilih, $tahun_pilih)
     {
         // $data['jurnal_penjualan'] = $this->db->query("SELECT * FROM jurnal_penjualan ORDER BY no_jurnal_penjualan ASC")->result();
-        $data['piutang_dagang'] = $this->db->query("SELECT * FROM piutang_dagang ORDER BY nama_piutang_dagang ASC")->result();
+        $data['piutang_dagang'] = $this->db->query("SELECT * FROM piutang_dagang WHERE id_piutang_dagang != 0 ORDER BY nama_piutang_dagang ASC")->result();
         $data['pilihan'] = ['menu'];
         $data['bulan_pilih'] = [$bulan_pilih];
         $data['tahun_pilih'] = [$tahun_pilih];

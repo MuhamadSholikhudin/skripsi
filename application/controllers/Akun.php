@@ -94,4 +94,48 @@ class Akun extends CI_Controller
 
         redirect('akun/');
     }
+
+    public function excel()
+    {
+
+
+        $akun = $this->db->query("SELECT * FROM akun ORDER BY no_akun ASC")->result();
+        require(APPPATH. 'PHPExcel-1.8/Classes/PHPExcel.php');
+        require(APPPATH. 'PHPExcel-1.8/Classes/PHPExcel/Writer/Excel2007.php');
+
+        $object = new PHPExcel();
+
+        $object->getProperties()->setCreator("Muhamad Sholikhudin");
+        $object->getProperties()->setLastModifiedBy("Muhamad Sholikhudin");
+        $object->getProperties()->setTitle("Muhamad Sholikhudin");
+
+
+        $object->setActiveSheetIndex(0);
+        
+        $object->getActiveSheet()->setCellValue('A1', 'NO');
+        $object->getActiveSheet()->setCellValue('C1', 'NO Akun');
+        $object->getActiveSheet()->setCellValue('B1', 'Nama Akun');
+
+        $baris = 2;
+        $no = 1;
+        foreach($akun as $ak):
+
+            $object->getActiveSheet()->setCellValue('A'.$baris, $no++);
+            $object->getActiveSheet()->setCellValue('C'.$baris, $ak->no_akun);
+            $object->getActiveSheet()->setCellValue('B'.$baris, $ak->nama_akun);
+       $baris ++;
+        endforeach;
+
+        $filename = "Data Akun."."xlsx";
+
+        $object->getActiveSheet()->setTitle("Data Akuun");
+
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename="'.$filename.'"');
+        header('Cache-Control: max-age=0');
+
+        $writer = PHPExcel_IOFactory::createwriter($object, 'Excel2007');
+        $writer->save('php://output');
+        exit;
+    }
 }

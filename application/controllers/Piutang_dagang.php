@@ -83,4 +83,6 @@ class Piutang_dagang extends CI_Controller
 
         redirect('piutang_dagang/');
     }
+
+   
 }
