@@ -85,7 +85,7 @@
                                         <div class='form-group row'> <label class='col-sm-12 col-md-2 col-form-label'>Piutang Dagang</label>
                                             <div class='col-sm-12 col-md-10'><input class='form-control' type='hidden' name='pil' value='2' required>
                                                 <!-- <input class='form-control' type='hidden' name='no_akun_piutang_dagang' value='3' required> -->
-                                                <input class='form-control' type='number' name='akun_piutang' value='<?= $jkm->id_jkm ?>' required>
+                                                <input class='form-control' type='hidden' name='akun_piutang' value='<?= $jkm->id_jkm ?>' required>
                                                 <input class='form-control' type='number' id='jkm_piutang' name='kredit2' value='<?= $jkm->kredit ?>' placeholder='Jumlah piutang dagang' required></div>
                                         </div>
                                         <div class='form-group row'><label class='col-sm-12 col-md-2 col-form-label'>Akun Piutang DAgang</label>
@@ -101,13 +101,49 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class='form-group row'><label class='col-sm-12 col-md-2 col-form-label'>syarat</label>
+                                        <div class='form-group row'><label class='col-sm-12 col-md-2 col-form-label'>syarat </label>
                                             <div class='col-sm-12 col-md-10'>
                                                 <select class='custom-select col-12' name='syarat2' id='jkm_syarat2'>
-                                                    <option value='1'>-</option>
-                                                    <option value='2'>2/10, n/30</option>
-                                                    <option value='3'>3/10, n/30</option>
+                                                    
+                                                    <?php foreach($syarat as $sy) :
+                                                        if ($sy->id_syarat == $jkm->id_syarat) { ?>
+                                                            <option value='<?= $sy->id_syarat ?>' selected><?= $sy->syarat ?></option>
+
+                                                        <?php } else { ?>
+                                                            <option value='<?= $sy->id_syarat ?>'><?= $sy->syarat ?></option>
+
+                                                        <?php } ?>
+
+
+                                                    <?php endforeach; ?>
+
                                                 </select>
+                                                <script>
+                                                    // $("#jkm_syarat").change(function() {
+                                                    //     var n_syarat = $(this).val();
+                                                    //     var jkm_piutang = $("#jkm_piutang").val();
+
+                                                    //     // var pot = jkm_piutang * (n_syarat / 100);
+                                                    //     // var kaspot = jkm_piutang - pot;
+                                                    //     // $("#jkm_potpenj").val(pot);
+                                                    //     // $("#jkm_kas").val(kaspot);
+
+                                                    //     if (n_syarat == 1) {
+                                                    //         $("#jkm_potpenj").val(0);
+                                                    //         $("#jkm_kas").val(jkm_piutang);
+                                                    //     } else if (n_syarat == 2) {
+                                                    //         var pot = jkm_piutang * 0.02;
+                                                    //         var kaspot = jkm_piutang - pot;
+                                                    //         $("#jkm_potpenj").val(pot);
+                                                    //         $("#jkm_kas").val(kaspot);
+                                                    //     } else if (n_syarat == 3) {
+                                                    //         var pot1 = jkm_piutang * 0.03;
+                                                    //         var kaspot1 = jkm_piutang - pot1;
+                                                    //         $("#jkm_potpenj").val(pot1);
+                                                    //         $("#jkm_kas").val(kaspot1);
+                                                    //     }
+                                                    // });
+                                                </script>
                                             </div>
                                         </div>
                                         <div class='form-group row '><label class='col-sm-12 col-md-2 col-form-label'>Potongan penjualan</label>
@@ -117,7 +153,7 @@
                                                 $qk1 = "SELECT * FROM jurnal_penerimaan_kas WHERE no_transaksi = $jkm->no_transaksi AND no_akun = 413";
                                                 $gp = $this->db->query($qk1)->row_array();
                                                 ?>
-                                                <input class='form-control' type='number' name='akun_pot_pen' value='<?= $gp['id_jkm']; ?>' required>
+                                                <input class='form-control' type='hidden' name='akun_pot_pen' value='<?= $gp['id_jkm']; ?>' required>
                                                 <input class='form-control' type='number' id='jkm_potpenj' name='debet2potpenj' value='<?= $gp['debet'] ?>' placeholder='Potongan penjualan' required>
                                             </div>
                                         </div>
@@ -128,7 +164,7 @@
                                                 $qk2 = "SELECT * FROM jurnal_penerimaan_kas WHERE no_transaksi = $jkm->no_transaksi AND no_akun = 111";
                                                 $gk2 = $this->db->query($qk2)->row_array();
                                                 ?>
-                                                <input class='form-control' type='number' name='akun_kas1' value='<?= $gk2['id_jkm']; ?>' required>
+                                                <input class='form-control' type='hidden' name='akun_kas1' value='<?= $gk2['id_jkm']; ?>' required>
                                                 <input class='form-control' id='jkm_kas' type='number' name='debet2' value='<?= $gk2['debet'] ?>' placeholder='Jumlah Kas Masuk' required>
                                             </div>
                                         </div>

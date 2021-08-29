@@ -15,7 +15,7 @@
                         <br>
                         <?php
                         if ($pilihan[0] == 'menu') { ?>
-                            <form class="bg-white pd-20" action="<?= base_url('pilihan/ju/aksi_tambah') ?>" method="POST" enctype="multipart/form-data">
+                            <form class="bg-white pd-20" action="<?= base_url('pilihan/jps/aksi_tambah') ?>" method="POST" enctype="multipart/form-data">
                             <?php } else { ?>
                                 <form class="bg-white pd-20" action="<?= base_url('jps/aksi_tambah') ?>" method="POST" enctype="multipart/form-data">
                                 <?php } ?>
@@ -38,7 +38,7 @@
                                 <div class="form-group row pemb">
                                     <label class="col-sm-12 col-md-2 col-form-label">Tanggal</label>
                                     <div class="col-sm-12 col-md-10">
-                                        <input class="form-control" type="text" name="id_pengguna" value="<?= $this->session->userdata('id_pengguna') ?>" required>
+                                        <input class="form-control" type="hidden" name="id_pengguna" value="<?= $this->session->userdata('id_pengguna') ?>" required>
                                         <?php
                                         if ($pilihan[0] == 'menu') { ?>
                                             <?php

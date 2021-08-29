@@ -22,7 +22,7 @@ class Jb extends CI_Controller
     public function index()
     {
 $data['pilihan'] = ['samping'];
-        $data['jb'] = $this->db->query("SELECT * FROM jurnal_pembelian GROUP BY no_transaksi ORDER BY tanggal ASC")->result();
+        $data['jb'] = $this->db->query("SELECT * FROM jurnal_pembelian  GROUP BY no_transaksi ORDER BY tanggal ASC")->result();
         $this->load->view('templates/header');
         $this->load->view('templates/sidebar');
         $this->load->view('jb/index', $data);
@@ -32,7 +32,7 @@ $data['pilihan'] = ['samping'];
     public function tambah()
     {
         // $data['jurnal_pembelian'] = $this->db->query("SELECT * FROM jurnal_pembelian ORDER BY no_jurnal_pembelian ASC")->result();
-        $data['utang_dagang'] = $this->db->query("SELECT * FROM utang_dagang ORDER BY nama_utang_dagang ASC")->result();
+        $data['utang_dagang'] = $this->db->query("SELECT * FROM utang_dagang WHERE id_utang_dagang != 0 ORDER BY nama_utang_dagang ASC")->result();
      $data['pilihan'] = ['samping'];
         $data['akun'] = $this->db->query("SELECT * FROM akun WHERE no_akun = 115 OR no_akun = 121")->result();
 
@@ -130,7 +130,7 @@ $this->load->view('templates/header');
     public function edit($no_transaksi)
     {
         $data['jb'] = $this->db->query("SELECT * FROM jurnal_pembelian WHERE no_transaksi = '$no_transaksi' ")->row();
-        $data['utang_dagang'] = $this->db->query("SELECT * FROM utang_dagang ")->result();
+        $data['utang_dagang'] = $this->db->query("SELECT * FROM utang_dagang WHERE id_utang_dagang != 0 ")->result();
         $data['akun'] = $this->db->query("SELECT * FROM akun WHERE no_akun = 115 OR no_akun = 121")->result();
 
 $data['pilihan'] = ['samping'];
@@ -165,7 +165,7 @@ $data['pilihan'] = ['samping'];
                 array(
                     //pembelian
                     'id_jb' => $id_jb_pembelian,
-                    'no_akun'    =>  $id_jb_pembelian,
+                    'no_akun'    =>  $id_jb_akun_pembelian,
                     'kredit' =>  0,
                     'debet' =>  $debet,
                     'tanggal'    =>  $tanggal,

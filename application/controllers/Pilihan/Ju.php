@@ -28,8 +28,8 @@ class Ju extends CI_Controller
     public function tambah($bulan_pilih, $tahun_pilih)
     {
         // $data['jurnal_umum'] = $this->db->query("SELECT * FROM jurnal_umum ORDER BY no_jurnal_umum ASC")->result();
-        $data['utang_dagang'] = $this->db->query("SELECT * FROM utang_dagang ORDER BY nama_utang_dagang ASC")->result();
-        $data['piutang_dagang'] = $this->db->query("SELECT * FROM piutang_dagang ORDER BY nama_piutang_dagang ASC")->result();
+        $data['utang_dagang'] = $this->db->query("SELECT * FROM utang_dagang WHERE id_utang_dagang != 0 ORDER BY nama_utang_dagang ASC")->result();
+        $data['piutang_dagang'] = $this->db->query("SELECT * FROM piutang_dagang WHERE id_piutang_dagang != 0 ORDER BY nama_piutang_dagang ASC")->result();
         $data['pilihan'] = ['menu'];
         $data['bulan_pilih'] = [$bulan_pilih];
         $data['tahun_pilih'] = [$tahun_pilih];
@@ -55,7 +55,7 @@ class Ju extends CI_Controller
             $debet = $this->input->post('debet1');
             $kredit = $this->input->post('kredit1');
 
-            $utang_dagang = $this->input->post('id_akun_piutang_dagang2');
+            $utang_dagang = $this->input->post('id_akun_utang_dagang');
 
             $data = array(
                 array(
@@ -89,7 +89,7 @@ class Ju extends CI_Controller
             $debet = $this->input->post('debet2');
             $kredit = $this->input->post('kredit2');
 
-            $piutang_dagang = $this->input->post('id_akun_piutang_dagang');
+            $piutang_dagang = $this->input->post('id_akun_piutang_dagang2');
 
             $data = array(
                 array(

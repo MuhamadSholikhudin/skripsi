@@ -91,6 +91,7 @@ class Jkm extends CI_Controller
             $debet = $this->input->post('debet2');
             $debet2 = $this->input->post('debet2potpenj');
             $piutang = $this->input->post('id_akun_piutang_dagang');
+            $syarat2 = $this->input->post('syarat2');
 
 
             $data = array(
@@ -104,7 +105,7 @@ class Jkm extends CI_Controller
                     'id_piutang_dagang'    =>  $piutang,
                     'id_utang_dagang'    =>  0,
                     'id_pengguna'    =>  $id_pengguna,
-                    'id_syarat'    =>  0
+                    'id_syarat'    =>  $syarat2
 
                 ),
                 array(
@@ -180,6 +181,7 @@ class Jkm extends CI_Controller
         $data['jkm'] = $this->db->query("SELECT * FROM jurnal_penerimaan_kas WHERE no_transaksi = '$no_transaksi' ")->row();
         $data['piutang_dagang'] = $this->db->query("SELECT * FROM piutang_dagang ")->result();
         $data['akun'] = $this->db->query("SELECT * FROM akun WHERE no_akun = 221  OR no_akun = 311")->result();
+        $data['syarat'] = $this->db->query("SELECT * FROM syarat")->result();
         
         $data['pilihan'] = ['samping'];
 
@@ -248,6 +250,8 @@ class Jkm extends CI_Controller
             $akun_pot_pen = $this->input->post('akun_pot_pen');
             $akun_kas1 = $this->input->post('akun_kas1');
 
+            $syarat2 = $this->input->post('syarat2');
+
             $data = array(
                 array(
                     //piutang dagang
@@ -260,7 +264,7 @@ class Jkm extends CI_Controller
                     'id_piutang_dagang'    =>  $piutang2,
                     'id_utang_dagang'    =>  0,
                     'id_pengguna'    =>  $id_pengguna,
-                    'id_syarat'    =>  0
+                    'id_syarat'    =>  $syarat2
 
                 ),
                 array(

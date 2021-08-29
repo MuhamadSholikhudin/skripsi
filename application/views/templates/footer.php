@@ -248,24 +248,33 @@
             $("#jkm_kas").val(jumlah);
           });
 
+
+
           $("#jkm_syarat2").change(function() {
             var n_syarat = $(this).val();
             var jkm_piutang = $("#jkm_piutang").val();
-            if (n_syarat == 1) {
-              $("#jkm_potpenj").val(0);
-              $("#jkm_kas").val(jkm_piutang);
-            } else if (n_syarat == 2) {
-              var pot = jkm_piutang * 0.02;
-              var kaspot = jkm_piutang - pot;
-              $("#jkm_potpenj").val(pot);
-              $("#jkm_kas").val(kaspot);
-            } else if (n_syarat == 3) {
-              var pot1 = jkm_piutang * 0.03;
-              var kaspot1 = jkm_piutang - pot1;
-              $("#jkm_potpenj").val(pot1);
-              $("#jkm_kas").val(kaspot1);
-            }
+
+            var pot = jkm_piutang * (n_syarat / 100);
+            var kaspot = jkm_piutang - pot;
+            $("#jkm_potpenj").val(pot);
+            $("#jkm_kas").val(kaspot);
+
+            // if (n_syarat == 1) {
+            //   $("#jkm_potpenj").val(0);
+            //   $("#jkm_kas").val(jkm_piutang);
+            // } else if (n_syarat == 2) {
+            //   var pot = jkm_piutang * 0.02;
+            //   var kaspot = jkm_piutang - pot;
+            //   $("#jkm_potpenj").val(pot);
+            //   $("#jkm_kas").val(kaspot);
+            // } else if (n_syarat == 3) {
+            //   var pot1 = jkm_piutang * 0.03;
+            //   var kaspot1 = jkm_piutang - pot1;
+            //   $("#jkm_potpenj").val(pot1);
+            //   $("#jkm_kas").val(kaspot1);
+            // }
           });
+
           $("#akun_serba").keydown(function() {
             var jumlah = $(this).val();
             $("#jkm_kas").val(jumlah);

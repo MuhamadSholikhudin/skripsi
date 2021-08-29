@@ -232,6 +232,11 @@
 
                     <?php endforeach; ?>
 
+
+
+
+                </tbody>
+                <tfoot>
                     <?php
                     if ($pilihan[0] == 'menu') { ?>
                         <tr role="row" class="odd">
@@ -297,10 +302,7 @@
                             <td></td>
                         </tr>
                     <?php } ?>
-
-
-                </tbody>
-
+                </tfoot>
             </table>
 
         </div>

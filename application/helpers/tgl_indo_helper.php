@@ -253,7 +253,7 @@ if (!function_exists('tanggal_pilih')) {
 		$bulan = bulan($pecah[1]);
 
 
-		return  $bln;
+		return  $tgl;
 	}
 }
 

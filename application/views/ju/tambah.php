@@ -71,7 +71,13 @@
                                         <div class='col-sm-12 col-md-10'><input class='form-control' type='hidden' name='pil' value='2' required><input class='form-control' type='number' id='ju_ret_penj' name='debet2' placeholder='Jumlah' required></div>
                                     </div>
                                     <div class='form-group row'><label class='col-sm-12 col-md-2 col-form-label'>Akun Piutang Dagang</label>
-                                        <div class='col-sm-12 col-md-10'><select class='custom-select col-12' name='id_akun_piutang_dagang2' id='id_piutang'><?php foreach ($piutang_dagang as $piutang) : ?><option value='<?= $piutang->id_piutang_dagang ?>'> <?= $piutang->nama_piutang_dagang ?></option><?php endforeach; ?></select></div>
+                                        <div class='col-sm-12 col-md-10'>
+                                            <select class='custom-select col-12' name='id_akun_piutang_dagang2' id='id_piutang'>
+                                                <?php foreach ($piutang_dagang as $piutang) : ?>
+                                                <option value='<?= $piutang->id_piutang_dagang ?>'> <?= $piutang->nama_piutang_dagang ?></option>
+                                                <?php endforeach; ?>
+                                            </select>
+                                        </div>
                                     </div>
                                     <div class='form-group row pemb'><label class='col-sm-12 col-md-2 col-form-label'>Piutang Dagang</label>
                                         <div class='col-sm-12 col-md-10'><input class='form-control' type='number' id='ju_piu' name='kredit2' placeholder='Jumlah' required></div>

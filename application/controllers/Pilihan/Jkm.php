@@ -28,7 +28,7 @@ class Jkm extends CI_Controller
     public function tambah($bulan_pilih, $tahun_pilih)
     {
         // $data['jurnal_penerimaan_kas'] = $this->db->query("SELECT * FROM jurnal_penerimaan_kas ORDER BY no_jurnal_penerimaan_kas ASC")->result();
-        $data['piutang_dagang'] = $this->db->query("SELECT * FROM piutang_dagang ORDER BY nama_piutang_dagang ASC")->result();
+        $data['piutang_dagang'] = $this->db->query("SELECT * FROM piutang_dagang WHERE id_piutang_dagang != 0 ORDER BY nama_piutang_dagang ASC")->result();
         $data['pilihan'] = ['menu'];
         $data['bulan_pilih'] = [$bulan_pilih];
         $data['tahun_pilih'] = [$tahun_pilih];
@@ -51,6 +51,8 @@ class Jkm extends CI_Controller
 
         $bulan_pilih = $this->input->post('bulan_pilih');
         $tahun_pilih = $this->input->post('tahun_pilih');
+
+        $syarat2 = $this->input->post('syarat2');
         
         if($pil == 1){
             $kredit = $this->input->post('kredit1');
@@ -93,6 +95,7 @@ class Jkm extends CI_Controller
             $debet2 = $this->input->post('debet2potpenj');
             $piutang = $this->input->post('id_akun_piutang_dagang');
 
+            $syarat2 = $this->input->post('syarat2');
 
             $data = array(
                 array(
@@ -105,7 +108,7 @@ class Jkm extends CI_Controller
                     'id_piutang_dagang'    =>  $piutang,
                     'id_utang_dagang'    =>  0,
                     'id_pengguna'    =>  $id_pengguna,
-                    'id_syarat'    =>  0
+                    'id_syarat'    =>  $syarat2
 
                 ),
                 array(
@@ -179,9 +182,11 @@ class Jkm extends CI_Controller
     public function edit($no_transaksi, $bulan_pilih)
     {
         $data['jkm'] = $this->db->query("SELECT * FROM jurnal_penerimaan_kas WHERE no_transaksi = '$no_transaksi' AND MONTH(tanggal) = '$bulan_pilih' ")->row();
-        $data['piutang_dagang'] = $this->db->query("SELECT * FROM piutang_dagang ")->result();
+        $data['piutang_dagang'] = $this->db->query("SELECT * FROM piutang_dagang WHERE id_piutang_dagang != 0 ")->result();
         $data['akun'] = $this->db->query("SELECT * FROM akun WHERE no_akun = 512  OR no_akun = 311")->result();
-       
+        $data['syarat'] = $this->db->query("SELECT * FROM syarat")->result();
+      
+                                                    
 
         $data['pilihan'] = ['menu'];
 
@@ -251,11 +256,13 @@ class Jkm extends CI_Controller
             $kredit = $this->input->post('kredit2');
             $debet = $this->input->post('debet2');
             $debet2 = $this->input->post('debet2potpenj');
-            $piutang2 = $this->input->post('id_akun_piutang_dagang2');
+            $piutang2 = $this->input->post('no_akun_piutang_dagang2');
 
             $akun_piutang = $this->input->post('akun_piutang');
             $akun_pot_pen = $this->input->post('akun_pot_pen');
             $akun_kas1 = $this->input->post('akun_kas1');
+
+            $syarat2 = $this->input->post('syarat2');
 
             $data = array(
                 array(
@@ -269,7 +276,7 @@ class Jkm extends CI_Controller
                     'id_piutang_dagang'    =>  $piutang2,
                     'id_utang_dagang'    =>  0,
                     'id_pengguna'    => $id_pengguna,
-                    'id_syarat'    =>  0
+                    'id_syarat'    =>  $syarat2
 
                 ),
                 array(

@@ -23,6 +23,19 @@ class Buku_besar extends CI_Controller
         $this->load->view('templates/footer');
     }
 
+    public function coba($bulan_pilih, $tahun_pilih)
+    {
+        $data['akun'] = $this->db->query("SELECT * FROM akun ORDER BY no_akun ASC")->result();
+        $data['pilihan'] = ['menu'];
+        $data['bulan_pilih'] = [$bulan_pilih];
+        $data['tahun_pilih'] = [$tahun_pilih]; 
+        
+        $this->load->view('templates/header');
+        $this->load->view('templates/sidebar');
+        $this->load->view('buku_besar/coba', $data);
+        $this->load->view('templates/footer');
+    }
+
     public function tambah()
     {
         // $data['akun'] = $this->db->query("SELECT * FROM akun ORDER BY no_akun ASC")->result();

@@ -26,7 +26,7 @@ $this->load->view('templates/header');
     public function tambah($bulan_pilih, $tahun_pilih)
     {
         // $data['jurnal_pembelian'] = $this->db->query("SELECT * FROM jurnal_pembelian ORDER BY no_jurnal_pembelian ASC")->result();
-        $data['utang_dagang'] = $this->db->query("SELECT * FROM utang_dagang ORDER BY nama_utang_dagang ASC")->result();
+        $data['utang_dagang'] = $this->db->query("SELECT * FROM utang_dagang WHERE id_utang_dagang != 0 ORDER BY nama_utang_dagang ASC")->result();
         $data['pilihan'] = ['menu'];
 $data['bulan_pilih'] = [$bulan_pilih];
 $data['tahun_pilih'] = [$tahun_pilih];

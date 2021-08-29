@@ -84,6 +84,8 @@
                                     <?php } ?>
                                 </td>
 
+                               
+
                                 <td>
                                     <?php
                                     $qq = "SELECT   akun.nama_akun as nama_akun FROM jurnal_umum JOIN akun ON jurnal_umum.no_akun = akun.no_akun  WHERE jurnal_umum.no_transaksi = '$ak->no_transaksi' AND jurnal_umum.no_akun = 211";
@@ -292,6 +294,10 @@
                         <?php } ?>
 
                     <?php endforeach; ?>
+
+
+                </tbody>
+                <tfoot>
                     <tr>
                         <td></td>
                         <td></td>
@@ -312,7 +318,7 @@
                         </td>
                         <td></td>
                     </tr>
-                </tbody>
+                </tfoot>
             </table>
 
         </div>

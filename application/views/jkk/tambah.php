@@ -9,7 +9,7 @@
                 <div class="x_panel">
                     <div class="x_title">
                         <h2>Form Tambah Data Barang</h2>
-                        
+
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
@@ -48,7 +48,7 @@
 
                                         <?php }
                                         ?>
-                                        <input class="form-control" type="text" name="id_pengguna" value="<?= $this->session->userdata('id_pengguna') ?>" required>
+                                        <input class="form-control" type="hidden" name="id_pengguna" value="<?= $this->session->userdata('id_pengguna') ?>" required>
 
                                         <!-- <input class="form-control" type="date" id="tanggal" name="tanggal" value="<?= date('Y-m-d') ?>" required> -->
                                     </div>

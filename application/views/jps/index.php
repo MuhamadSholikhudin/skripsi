@@ -183,6 +183,9 @@
                     </tr>
                 </tbody>
             </table>
+            <tfoot>
+                
+            </tfoot>
 
         </div>
     </div>

@@ -26,7 +26,7 @@ class Jkk extends CI_Controller
     public function tambah($bulan_pilih, $tahun_pilih)
     {
         // $data['jurnal_pengeluaran_kas'] = $this->db->query("SELECT * FROM jurnal_pengeluaran_kas ORDER BY no_jurnal_pengeluaran_kas ASC")->result();
-        $data['utang_dagang'] = $this->db->query("SELECT * FROM utang_dagang ORDER BY nama_utang_dagang ASC")->result();
+        $data['utang_dagang'] = $this->db->query("SELECT * FROM utang_dagang WHERE id_utang_dagang != 0 ORDER BY nama_utang_dagang ASC")->result();
         $data['akun'] = $this->db->query("SELECT * FROM akun WHERE no_akun LIKE '6%' OR no_akun = 115 OR no_akun =121 OR no_akun = 312 OR no_akun = 412")->result();
         
         $data['pilihan'] = ['menu'];
