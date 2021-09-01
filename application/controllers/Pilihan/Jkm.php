@@ -55,8 +55,11 @@ class Jkm extends CI_Controller
         $syarat2 = $this->input->post('syarat2');
         
         if($pil == 1){
-            $kredit = $this->input->post('kredit1');
-            $debet = $this->input->post('debet1');
+            $kredit10 = $this->input->post('kredit1');
+            $kredit = str_replace(".", "", $kredit10);
+
+            $debet10 = $this->input->post('debet1');
+            $debet = str_replace(".", "", $debet10);
            
 
             $data = array(
@@ -90,9 +93,16 @@ class Jkm extends CI_Controller
 
         }elseif($pil == 2){
 
-            $kredit = $this->input->post('kredit2');
-            $debet = $this->input->post('debet2');
-            $debet2 = $this->input->post('debet2potpenj');
+            $debet10 = $this->input->post('debet2');
+            $debet = str_replace(".", "", $debet10);
+
+            $kredit10 = $this->input->post('kredit2');
+            $kredit = str_replace(".", "", $kredit10);
+
+            $debet11 = $this->input->post('debet2potpenj');
+            $debet2 = str_replace(".", "", $debet11);
+                       
+            
             $piutang = $this->input->post('id_akun_piutang_dagang');
 
             $syarat2 = $this->input->post('syarat2');
@@ -141,9 +151,12 @@ class Jkm extends CI_Controller
         }elseif($pil == 3){
 
             $akun_kredit3 = $this->input->post('akun_kredit3');
-            $kredit3 = $this->input->post('kredit3');
 
-            $debet3 = $this->input->post('debet3');
+            $kredit10 = $this->input->post('kredit3');
+            $kredit3 = str_replace(".", "", $kredit10);
+
+            $debet10 = $this->input->post('debet3');
+            $debet3 = str_replace(".", "", $debet10);
 
 
             $data = array(
@@ -212,8 +225,11 @@ class Jkm extends CI_Controller
         $data['pilihan'] = ['menu'];
 
         if ($pil == 1) {
-            $kredit = $this->input->post('kredit1');
-            $debet = $this->input->post('debet1');
+            $debet10 = $this->input->post('debet1');
+            $debet = str_replace(".", "", $debet10);
+
+            $kredit10 = $this->input->post('kredit1');
+            $kredit = str_replace(".", "", $kredit10);
 
             $akun_penjualan = $this->input->post('akun_penjualan');
             $akun_kas = $this->input->post('akun_kas');
@@ -253,9 +269,15 @@ class Jkm extends CI_Controller
 
         } elseif ($pil == 2) {
 
-            $kredit = $this->input->post('kredit2');
-            $debet = $this->input->post('debet2');
-            $debet2 = $this->input->post('debet2potpenj');
+            $debet10 = $this->input->post('debet2');
+            $debet = str_replace(".", "", $debet10);
+
+            $kredit10 = $this->input->post('kredit2');
+            $kredit = str_replace(".", "", $kredit10);
+
+            $debet11 = $this->input->post('debet2potpenj');
+            $debet2 = str_replace(".", "", $debet11);
+
             $piutang2 = $this->input->post('no_akun_piutang_dagang2');
 
             $akun_piutang = $this->input->post('akun_piutang');
@@ -312,8 +334,11 @@ class Jkm extends CI_Controller
 
         } elseif ($pil == 3) {
 
-            $kredit = $this->input->post('kredit3');
-            $debet = $this->input->post('debet3');
+            $kredit10 = $this->input->post('kredit3');
+            $kredit = str_replace(".", "", $kredit10);
+
+            $debet10 = $this->input->post('debet3');
+            $debet = str_replace(".", "", $debet10);
         
             $akun_serba = $this->input->post('akun_serba');
             $akun_id = $this->input->post('id_akun');

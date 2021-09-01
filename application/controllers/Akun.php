@@ -57,11 +57,9 @@ class Akun extends CI_Controller
             $data = array(
                 'no_akun' => $no_akun,
                 'nama_akun' => $nama_akun,
-               
             );
 
             $this->Model_akun->tambah_akun($data, 'akun');
-
             redirect('akun/');
         
     }

@@ -37,6 +37,7 @@
         <br>
 
         <div class="row">
+            <!--
             <div class="col-md-12 text-center">
                 <h5>Toko Norkayati</h5>
                 <h5>Laporan Laba-Rugi</h5>
@@ -479,7 +480,7 @@
                             </td>
                             <td></td>
                         </tr>
-                        <!-- <?php foreach ($persediaan as $sedia) : ?>
+                         <?php foreach ($persediaan as $sedia) : ?>
                             <tr>
                                 <td><?= $sedia->nama_akun ?></td>
                                 <td>Jumlah 1</td>
@@ -487,7 +488,7 @@
                                 <td>Jumlah 3</td>
                                 <td>Jumlah 3</td>
                             </tr>
-                        <?php endforeach; ?> -->
+                        <?php endforeach; ?> 
                         <tr class="text-danger">
                             <?php
                             if ($pilihan[0] == 'menu') { ?>
@@ -725,7 +726,7 @@
                     </tbody>
                 </table>
 
-
+                                    -->
 
 
                 <hr>
@@ -971,7 +972,7 @@
                     </table>
                 </div>
                 <hr>
-
+<!--
                 <div class="col-md-12 text-center">
                     <h5>Toko Norkayati</h5>
                     <h5>Laporan Neraca</h5>
@@ -1536,7 +1537,7 @@
 
 
                     </div>
-                </div>
+                </div> -->
             </div>
 
 

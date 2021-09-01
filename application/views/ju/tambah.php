@@ -67,20 +67,24 @@
 
 
                                 <div class="utg">
-                                    <div class='form-group row'><label class='col-sm-12 col-md-2 col-form-label'>Retur Penjualan</label>
-                                        <div class='col-sm-12 col-md-10'><input class='form-control' type='hidden' name='pil' value='2' required><input class='form-control' type='number' id='ju_ret_penj' name='debet2' placeholder='Jumlah' required></div>
+                                    <div class='form-group row'>
+                                        <label class='col-sm-12 col-md-2 col-form-label'>Retur Penjualan</label>
+                                        <div class='col-sm-12 col-md-10'>
+                                            <input class='form-control' type='hidden' name='pil' value='2' required>
+                                            <input class='form-control' type='text' id='ju_ret_penj' name='debet2' placeholder='Jumlah' required>
+                                        </div>
                                     </div>
                                     <div class='form-group row'><label class='col-sm-12 col-md-2 col-form-label'>Akun Piutang Dagang</label>
                                         <div class='col-sm-12 col-md-10'>
                                             <select class='custom-select col-12' name='id_akun_piutang_dagang2' id='id_piutang'>
                                                 <?php foreach ($piutang_dagang as $piutang) : ?>
-                                                <option value='<?= $piutang->id_piutang_dagang ?>'> <?= $piutang->nama_piutang_dagang ?></option>
+                                                    <option value='<?= $piutang->id_piutang_dagang ?>'> <?= $piutang->nama_piutang_dagang ?></option>
                                                 <?php endforeach; ?>
                                             </select>
                                         </div>
                                     </div>
                                     <div class='form-group row pemb'><label class='col-sm-12 col-md-2 col-form-label'>Piutang Dagang</label>
-                                        <div class='col-sm-12 col-md-10'><input class='form-control' type='number' id='ju_piu' name='kredit2' placeholder='Jumlah' required></div>
+                                        <div class='col-sm-12 col-md-10'><input class='form-control' type='text' id='ju_piu' name='kredit2' placeholder='Jumlah' required></div>
                                     </div>
                                 </div>
 
@@ -123,14 +127,60 @@
                                     //     $("#ju_retur_pem").val(jumlah);
                                     // });
 
-                                    $("#ju_ret_penj").keydown(function() {
-                                        var jumlah = $(this).val();
-                                        $("#ju_piu").val(jumlah);
+                                    // $("#ju_ret_penj").keydown(function() {
+                                    //     var jumlah = $(this).val();
+                                    //     $("#ju_piu").val(jumlah);
+                                    // });
+                                    // $("#ju_ret_penj").keyup(function() {
+                                    //     var jumlah = $(this).val();
+                                    //     $("#ju_piu").val(jumlah);
+                                    // });
+
+                                    //JURNAL UMUM --> retur penjualan
+                                    var ju_ret_penj = document.getElementById("ju_ret_penj");
+                                    ju_ret_penj.addEventListener('keyup', function(e) {
+                                        var ju_piu = document.getElementById("ju_piu");
+                                        ju_piu.value = formatRupiah(this.value);
+                                        ju_ret_penj.value = formatRupiah(this.value);
                                     });
-                                    $("#ju_ret_penj").keyup(function() {
-                                        var jumlah = $(this).val();
-                                        $("#ju_piu").val(jumlah);
+
+                                    function formatRupiah(ju_ret_penjangka, ju_ret_penjprefix) {
+                                        var number_string = ju_ret_penjangka.replace(/[^,\d]/g, '').toString(),
+                                            split = number_string.split(','),
+                                            sisa = split[0].length % 3,
+                                            ju_ret_penj = split[0].substr(0, sisa),
+                                            ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+                                        if (ribuan) {
+                                            separator = sisa ? '.' : '';
+                                            ju_ret_penj += separator + ribuan.join('.');
+                                        }
+                                        ju_ret_penj = split[1] != undefined ? ju_ret_penj + ',' + split[1] : ju_ret_penj;
+                                        return ju_ret_penjprefix == undefined ? ju_ret_penj : (ju_ret_penj ? ju_ret_penj : '');
+                                    }
+                                </script>
+
+                                <script>
+                                    //JURNAL UMUM --> retur pembelian
+                                    var ju_utang12 = document.getElementById("ju_utang12");
+                                    ju_utang12.addEventListener('keyup', function(e) {
+                                        var ju_retur_pembelian = document.getElementById("ju_retur_pembelian");
+                                        ju_retur_pembelian.value = formatRupiah(this.value);
+                                        ju_utang12.value = formatRupiah(this.value);
                                     });
+
+                                    function formatRupiah(ju_utang12angka, ju_utang12prefix) {
+                                        var number_string = ju_utang12angka.replace(/[^,\d]/g, '').toString(),
+                                            split = number_string.split(','),
+                                            sisa = split[0].length % 3,
+                                            ju_utang12 = split[0].substr(0, sisa),
+                                            ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+                                        if (ribuan) {
+                                            separator = sisa ? '.' : '';
+                                            ju_utang12 += separator + ribuan.join('.');
+                                        }
+                                        ju_utang12 = split[1] != undefined ? ju_utang12 + ',' + split[1] : ju_utang12;
+                                        return ju_utang12prefix == undefined ? ju_utang12 : (ju_utang12 ? ju_utang12 : '');
+                                    }
                                 </script>
                                 <!-- <div class="form-group row ">
                                 <label class="col-sm-12 col-md-2 col-form-label">Retur Penjualan</label>

@@ -18,7 +18,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-12 col-md-2 col-form-label">No Akun</label>
                                 <div class="col-sm-12 col-md-10">
-                                    <input class="form-control" type="text" name="no_akun" placeholder="Isi Nomer Akun" required>
+                                    <input class="form-control" type="number" name="no_akun" placeholder="Isi Nomer Akun" required>
                                 </div>
                             </div>
                             <div class="form-group row">

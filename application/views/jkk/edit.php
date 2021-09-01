@@ -1,13 +1,10 @@
 <div class="right_col" role="main" style="min-height: 4546px; ">
     <div class>
 
-        <!-- <div class="page-title">
-            <div class="title_center">
-                <h3>Selamat datang, <?= $this->session->userdata('namalengkap') ?> <small> Bendahara Disdikpora</small></h3>
+        <div class="page-title">
+            
 
-            </div>
-
-        </div> -->
+        </div>
 
         <div class="clearfix"></div>
         <br>
@@ -65,6 +62,30 @@
                                                 <input class='form-control' id='jkk_utang' type='number' name='debet1' value='<?= $jkk->debet ?>' placeholder='Jumlah utang dagang' required>
                                             </div>
                                         </div>
+
+                                        <div class='form-group row'>
+                                            <label class='col-sm-12 col-md-2 col-form-label'>syarat</label>
+                                            <div class='col-sm-12 col-md-10'><select class='custom-select col-12' name='syarat2' id='jkk_syarat'>
+                                                    <option value='1'>Tidak ada</option>
+                                                    <option value='2'>2/10, n/30</option>
+                                                    <option value='3'>3/10, n/30</option>
+                                                </select></div>
+                                        </div>
+
+                                        <div class='form-group row '>
+                                            <label class='col-sm-12 col-md-2 col-form-label'>Potongan pembelian</label>
+                                            <div class='col-sm-12 col-md-10'>
+                                                <?php
+                                                $jkk_potpemb = "SELECT * FROM jurnal_pengeluaran_kas WHERE no_transaksi = $jkk->no_transaksi AND no_akun = 513";
+                                                $qjkk_potpemb = $this->db->query($jkk_potpemb)->row_array();
+                                                ?>
+                                                <input class='form-control' type='hidden' name='id_jkk_potongan_pembelian' value='<?= $qjkk_potpemb['id_jkk'] ?>' required>
+                                                <input class='form-control' type='hidden' name='id_jkk_akun_potongan_pembelian' value='<?= $qjkk_potpemb['no_akun'] ?>' required>
+                                                <input class='form-control' type='number' id='jkk_potpemb' name='kredit2potpemb' value='<?= $qjkk_potpemb['kredit'] ?>' placeholder='Jumlah Kas Masuk' required>
+                                            </div>
+                                        </div>
+
+
                                         <div class='form-group row penj_kas'>
                                             <label class='col-sm-12 col-md-2 col-form-label'>KAS</label>
                                             <div class='col-sm-12 col-md-10'>

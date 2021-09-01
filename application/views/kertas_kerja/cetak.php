@@ -29,7 +29,7 @@
 
     <div class="p-2">
 
-   
+
         <div class="row">
 
             <br>
@@ -1098,7 +1098,9 @@
     </div>
     </div>
 
-
+    <script>
+        window.print()
+    </script>
 </body>
 
 </html>

@@ -53,10 +53,15 @@ class Jkk extends CI_Controller
         $tahun_pilih = $this->input->post('tahun_pilih');
 
         if ($pil == 1) {
-            $debet = $this->input->post('debet1');
-            $kredit = $this->input->post('kredit1');
+            $debet10 = $this->input->post('debet1');
+            $debet = str_replace(".", "", $debet10);
+
+            $kredit10 = $this->input->post('kredit1');
+            $kredit = str_replace(".", "", $kredit10);
 
             $utang_dagang = $this->input->post('id_akun_utang_dagang');
+            $kredit2 = $this->input->post('kredit2potpemb');
+            $syarat = $this->input->post('syarat2');
 
             $data = array(
                 array(
@@ -69,8 +74,20 @@ class Jkk extends CI_Controller
                     'id_piutang_dagang'    =>  0,
                     'id_utang_dagang'    =>  $utang_dagang,
                     'id_pengguna'    =>  $id_pengguna,
-                    'id_syarat'    =>  0
+                    'id_syarat'    =>  $syarat
 
+                ),
+                array(
+                    //pot pembelian
+                    'no_akun'    =>  513,
+                    'kredit' =>  $kredit2,
+                    'debet' =>  0,
+                    'tanggal'    =>  $tanggal,
+                    'no_transaksi'    =>  $no_transaksi,
+                    'id_piutang_dagang'    =>  0,
+                    'id_utang_dagang'    =>  0,
+                    'id_pengguna'    =>  $id_pengguna,
+                    'id_syarat'    =>  0
                 ),
                 array(
                     //Kas
@@ -89,10 +106,16 @@ class Jkk extends CI_Controller
             redirect('pilihan/jkk/index/' . $bulan_pilih . '/' . $tahun_pilih);
         } elseif ($pil == 2) {
 
-            $debet = $this->input->post('debet2');
-            $kredit = $this->input->post('kredit2');
-            $kredit2 = $this->input->post('kredit2potpemb');
+            $debet10 = $this->input->post('debet2');
+            $debet = str_replace(".", "", $debet10);
+
+            $kredit10 = $this->input->post('kredit2');
+            $kredit = str_replace(".", "", $kredit10);
+
+            $kredit11 = $this->input->post('kredit2potpemb');
+            $kredit2 = str_replace(".", "", $kredit11);
             // $akun_potongan_pembelian = $this->input->post('akun_potongan_pembelian');
+            $syarat = $this->input->post('syarat2');
 
             $data = array(
                 array(
@@ -105,7 +128,7 @@ class Jkk extends CI_Controller
                     'id_piutang_dagang'    =>  0,
                     'id_utang_dagang'    =>  0,
                     'id_pengguna'    =>  $id_pengguna,
-                    'id_syarat'    =>  0
+                    'id_syarat'    =>  $syarat
                 ),
                 array(
                     //pot pembelian
@@ -137,8 +160,12 @@ class Jkk extends CI_Controller
 
         } elseif ($pil == 3) {
             $jkk_id_akun_serba = $this->input->post('jkk_id_akun_serba');
-            $kredit3 = $this->input->post('kredit3');
-            $debet3 = $this->input->post('debet3');
+
+            $kredit10 = $this->input->post('kredit3');
+            $kredit3 = str_replace(".", "", $kredit10);
+
+            $debet10 = $this->input->post('debet3');
+            $debet3 = str_replace(".", "", $debet10);
 
 
             $data = array(
@@ -177,7 +204,7 @@ class Jkk extends CI_Controller
     public function edit($no_transaksi)
     {
         $data['jkk'] = $this->db->query("SELECT * FROM jurnal_pengeluaran_kas WHERE no_transaksi = '$no_transaksi' ")->row();
-        $data['utang_dagang'] = $this->db->query("SELECT * FROM utang_dagang ")->result();
+        $data['utang_dagang'] = $this->db->query("SELECT * FROM utang_dagang WHERE id_utang_dagang != 0 ORDER BY nama_utang_dagang ASC")->result();
         $data['akun'] = $this->db->query("SELECT * FROM akun WHERE no_akun LIKE '6%' OR no_akun = 115 OR no_akun =121 OR no_akun = 312 OR no_akun = 412")->result();
         
         $data['pilihan'] = ['menu'];
@@ -201,8 +228,11 @@ class Jkk extends CI_Controller
         $data['pilihan'] = ['menu'];
         if ($pil == 1) {
 
-            $kredit = $this->input->post('kredit1');
-            $debet = $this->input->post('debet1');
+            $kredit10 = $this->input->post('kredit1');
+            $kredit = str_replace(".", "", $kredit10);
+
+            $debet10 = $this->input->post('debet1');
+            $debet = str_replace(".", "", $debet10);
 
             $id_utang_dagang = $this->input->post('id_utang_dagang');
 
@@ -255,9 +285,14 @@ class Jkk extends CI_Controller
             $id_jkk_akun_potongan_pembelian = $this->input->post('id_jkk_akun_potongan_pembelian');
             $id_jkk_akun_kas = $this->input->post('id_jkk_akun_kas');
 
-            $kredit = $this->input->post('kredit2');
-            $debet = $this->input->post('debet2');
-            $kredit2 = $this->input->post('kredit2potpemb');
+            $kredit10 = $this->input->post('kredit2');
+            $kredit = str_replace(".", "", $kredit10);
+
+            $debet10 = $this->input->post('debet2');
+            $debet = str_replace(".", "", $debet10);
+
+            $kredit22 = $this->input->post('kredit2potpemb');
+            $kredit2 = str_replace(".", "", $kredit22);
 
             $data = array(
                 array(
@@ -313,8 +348,10 @@ class Jkk extends CI_Controller
             $id_jkk_akun_serba = $this->input->post('id_jkk_akun_serba');
             $id_jkk_akun_kas = $this->input->post('id_jkk_akun_kas');
 
-            $kredit = $this->input->post('kredit3');
-            $debet = $this->input->post('debet3');
+            $kredit10 = $this->input->post('kredit3');
+            $kredit = str_replace(".", "", $kredit10);
+            $debet10 = $this->input->post('debet3');
+            $debet = str_replace(".", "", $debet10);
 
             $data = array(
                 array(

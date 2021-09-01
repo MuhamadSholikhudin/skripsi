@@ -6,6 +6,12 @@
         <div class="clearfix"></div>
 
         <div class="row">
+            <?php
+            if ($pilihan[0] == 'menu') { ?>
+                <a class="btn btn-dark" href="<?= base_url('pilihan/menu/ada/' . $bulan_pilih[0] . '/' . $tahun_pilih[0]) ?>">Kembali</a>
+            <?php } else {
+            } ?>
+
             <div class="col-md-4">
                 <?php
                 if ($pilihan[0] == 'menu') { ?>
@@ -164,7 +170,7 @@
                                 echo rupiah($gk['total_kredit']);
                                 ?>
                             </td>
-                       <?php  } else { ?>
+                        <?php  } else { ?>
                             <td>
                                 <?php
                                 $qk = "SELECT SUM(debet) as total_debet, SUM(kredit) as total_kredit FROM jurnal_penyesuaian ";
@@ -184,7 +190,7 @@
                 </tbody>
             </table>
             <tfoot>
-                
+
             </tfoot>
 
         </div>

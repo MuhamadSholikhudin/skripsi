@@ -201,27 +201,36 @@
                       <li><a href="<?= base_url('laporan_keuangan') ?>">Laporan Keuangan</a></li>
                     </ul>
                   </li>
-                  <!-- <li class="bg-white">
+               <!--    <li class="bg-white">
                     <a class="bg-light text-dark">
                       <i class="fa fa-money"></i> KAS
                       <?php
                       $kasjkm = $this->db->query(" SELECT SUM(debet) as jkm_debet, SUM(kredit) as jkm_kredit FROM jurnal_penerimaan_kas")->row();
                       $kasjkk = $this->db->query(" SELECT SUM(debet) as jkk_debet, SUM(kredit) as jkk_kredit FROM jurnal_pengeluaran_kas")->row();
 
-                      echo $kas_debet = $kasjkm->jkm_debet + $kasjkk->jkk_debet;
-                      echo $kas_kredit = $kasjkm->jkm_kredit + $kasjkk->jkk_kredit;
+                      //  echo $kas_debet = $kasjkm->jkm_debet + $kasjkk->jkk_debet;
+                      //  echo $kas_kredit = $kasjkm->jkm_kredit + $kasjkk->jkk_kredit;
+                      
+                        // echo $kas_debet = $kasjkm->jkm_debet + $kasjkk->jkk_debet;
+                        // echo $kas_kredit = $kasjkm->jkm_kredit + $kasjkk->jkk_kredit;
 
-                      if($kas_debet > $kas_kredit){
-                        $kas_akhir = $kas_debet - $kas_kredit;                    
-
-                      }elseif($kas_debet < $kas_kredit){
-                        $kas_akhir = $kas_debet - $kas_kredit;
-                      }
-                     
-                      ?>
+                      //  echo $kasjkm->jkm_debet;
+                      //  echo $kasjkm->jkm_kredit;
+                      //  echo $kasjkk->jkk_debet;
+                      //  echo $kasjkk->jkk_kredit;
+                      
+                      // if($kas_debet > $kas_kredit){
+                        //   $kas_akhir = $kas_debet - $kas_kredit;                    
+                        
+                        // }elseif($kas_debet < $kas_kredit){
+                          //   $kas_akhir = $kas_debet - $kas_kredit;
+                          // }
+                          
+                          ?>
                       <h4>
-
-                         <?= rupiah($kas_akhir) ?> 
+                        
+                         <?= rupiah($kasjkm->jkm_kredit - $kasjkk->jkk_kredit); ?>
+                         
                       </h4>
                     </a>
 

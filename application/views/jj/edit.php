@@ -2,10 +2,7 @@
     <div class>
 
         <div class="page-title">
-            <div class="title_center">
-                <h3>Selamat datang, <?= $this->session->userdata('namalengkap') ?> <small> Bendahara Disdikpora</small></h3>
-
-            </div>
+            
 
         </div>
 
@@ -46,7 +43,7 @@
                                     <div class="col-sm-12 col-md-10">
                                         <input class="form-control" type="hidden" name="no_transaksi" value="<?= $jj->no_transaksi ?>" placeholder="Jumlah penjualan" required>
                                         <input class="form-control" type="hidden" id="jj_id_jj" name="jj_id_jual" value="<?= $jj->id_jj ?>" placeholder="Jumlah penjualan" required>
-                                        <input class="form-control" type="number" id="jj_jual" name="kredit" value="<?= $jj->kredit ?>" placeholder="Jumlah penjualan" required>
+                                        <input class="form-control" type="text" id="jj_jual" name="kredit" value="<?= $jj->kredit ?>" placeholder="Jumlah penjualan" required>
                                     </div>
                                 </div>
                                 <!-- <div class="form-group row">
@@ -86,20 +83,20 @@
                                     <div class="col-sm-12 col-md-10">
                                         <!-- <input class="form-control" type="hidden" name="id_akun_piutang_dagang" required> -->
                                         <input class="form-control d-none" type="text" name="jj_id_piutang" value="<?= $jb_1['id_jj'] ?>" placeholder="Jumlah" required>
-                                        <input class="form-control" type="number" id="jj_piutang" name="debet" value="<?= $jb_1['debet'] ?>" placeholder="Jumlah" required>
+                                        <input class="form-control" type="text" id="jj_piutang" name="debet" value="<?= $jb_1['debet'] ?>" placeholder="Jumlah" required>
                                     </div>
                                 </div>
 
                                 <script>
                                     // jurnal penjualan
-                                    $("#jj_jual").keydown(function() {
-                                        var jumlah = $(this).val();
-                                        $("#jj_piutang").val(jumlah);
-                                    });
-                                    $("#jj_jual").keyup(function() {
-                                        var jumlah = $(this).val();
-                                        $("#jj_piutang").val(jumlah);
-                                    });
+                                    // $("#jj_jual").keydown(function() {
+                                    //     var jumlah = $(this).val();
+                                    //     $("#jj_piutang").val(jumlah);
+                                    // });
+                                    // $("#jj_jual").keyup(function() {
+                                    //     var jumlah = $(this).val();
+                                    //     $("#jj_piutang").val(jumlah);
+                                    // });
                                 </script>
 
                                 <div class="form-group row">

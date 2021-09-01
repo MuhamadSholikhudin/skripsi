@@ -13,7 +13,7 @@ class Jps extends CI_Controller
     public function index($bulan_pilih, $tahun_pilih)
     {
         $data['jps'] = $this->db->query("SELECT * FROM jurnal_penyesuaian GROUP BY no_transaksi ORDER BY tanggal ASC")->result();
-   $data['pilihan'] = ['menu'];  
+        $data['pilihan'] = ['menu'];  
         $data['bulan_pilih'] = [ $bulan_pilih ];  
         $data['tahun_pilih'] = [ $tahun_pilih ];  
      

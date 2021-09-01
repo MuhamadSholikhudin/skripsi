@@ -63,10 +63,10 @@
             <a href="<?= base_url('pilihan/jj/index/' . $data_menu->bulan . '/' . $data_menu->tahun) ?>" class="btn btn-secondary btn-lg">Jurnal Penjualan</a> <br>
             <a href="<?= base_url('pilihan/ju/index/' . $data_menu->bulan . '/' . $data_menu->tahun) ?>" class="btn btn-secondary btn-lg">Jurnal Umum</a> <br>
             <a href="<?= base_url('pilihan/jps/index/' . $data_menu->bulan . '/' . $data_menu->tahun) ?>" class="btn btn-secondary btn-lg">Jurnal Penyesuaian</a> <br>
-            <a href="<?= base_url('pilihan/neraca_saldo/index/' . $data_menu->bulan . '/' . $data_menu->tahun) ?>" class="btn btn-secondary btn-lg">Neraca Saldo</a> <br>
             <a href="<?= base_url('pilihan/buku_besar/index/' . $data_menu->bulan . '/' . $data_menu->tahun) ?>" class="btn btn-secondary btn-lg">Buku Besar</a> <br>
+            <a href="<?= base_url('pilihan/neraca_saldo/index/' . $data_menu->bulan . '/' . $data_menu->tahun) ?>" class="btn btn-secondary btn-lg">Neraca Saldo</a> <br>
             <a href="<?= base_url('pilihan/kertas_kerja/index/' . $data_menu->bulan . '/' . $data_menu->tahun) ?>" class="btn btn-secondary btn-lg">Kertas kerja</a> <br>
-            <a href="<?= base_url('pilihan/laporan/index/' . $data_menu->bulan . '/' . $data_menu->tahun) ?>" class="btn btn-secondary btn-lg">Laporan</a> <br>
+            <a href="<?= base_url('pilihan/laporan_keuangan/index/' . $data_menu->bulan . '/' . $data_menu->tahun) ?>" class="btn btn-secondary btn-lg">Laporan</a> <br>
 
 
 

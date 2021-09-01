@@ -51,8 +51,10 @@ class Ju extends CI_Controller
 
         // $no_faktur = $this->input->post('no_faktur');
         if ($pil == 1) {
-            $debet = $this->input->post('debet1');
-            $kredit = $this->input->post('kredit1');
+            $debet10 = $this->input->post('debet1');
+            $debet = str_replace(".", "", $debet10);
+            $kredit10 = $this->input->post('kredit1');
+            $kredit = str_replace(".", "", $kredit10);
 
             $utang_dagang = $this->input->post('id_akun_piutang_dagang2');
 
@@ -87,8 +89,10 @@ class Ju extends CI_Controller
             redirect('jurnal/ju/index');
         } elseif ($pil == 2) {
 
-            $debet = $this->input->post('debet2');
-            $kredit = $this->input->post('kredit2');
+            $debet10 = $this->input->post('debet2');
+            $debet = str_replace(".", "", $debet10);
+            $kredit10 = $this->input->post('kredit2');
+            $kredit = str_replace(".", "", $kredit10);
 
             $piutang_dagang = $this->input->post('id_akun_piutang_dagang');
 
@@ -147,11 +151,13 @@ class Ju extends CI_Controller
 
             $id_ju_utang = $this->input->post('id_ju_utang');
             $id_ju_akun_utang1 = $this->input->post('id_ju_akun_utang1');
-            $debet = $this->input->post('debet1');
+            $debet10 = $this->input->post('debet1');
+            $debet = str_replace(".", "", $debet10);
 
             $id_ju_retur_pembelian = $this->input->post('id_ju_retur_pembelian');
             $no_akun_returpembelian = $this->input->post('no_akun_returpembelian');
-            $kredit = $this->input->post('kredit1');
+            $kredit10 = $this->input->post('kredit1');
+            $kredit = str_replace(".", "", $kredit10);
 
             $id_utang_dagang = $this->input->post('id_utang_dagang');
             $data = array(
@@ -187,12 +193,14 @@ class Ju extends CI_Controller
 
             $id_ju_retur_penjualan = $this->input->post('id_ju_retur_penjualan');
             $id_akun_retur_penjualan = $this->input->post('id_akun_retur_penjualan');
-            $debet = $this->input->post('debet2');
+            $debet10 = $this->input->post('debet2');
+            $debet = str_replace(".", "", $debet10);
 
             $id_ju_piutang_dagang = $this->input->post('id_ju_piutang_dagang');
             $id_ju_akun_piutang_dagang = $this->input->post('id_ju_akun_piutang_dagang');
-            $kredit = $this->input->post('kredit2');
-
+            $kredit10 = $this->input->post('kredit2');
+            $kredit = str_replace(".", "", $kredit10);
+            
             $id_akun_piutang_dagang2 = $this->input->post('id_akun_piutang_dagang2');
 
             $data = array(

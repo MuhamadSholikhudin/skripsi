@@ -2,10 +2,7 @@
     <div class>
 
         <div class="page-title">
-            <div class="title_center">
-                <h3>Selamat datang, <?= $this->session->userdata('nama') ?> <small> </small></h3>
-
-            </div>
+          
 
         </div>
 

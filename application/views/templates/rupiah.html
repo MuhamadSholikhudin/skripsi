@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>sdf</title>
+</head>
+
+<body>
+    <h2></h2>
+</body>
+<script type="text/javascript">
+    let h2 = document.querySelector('h2')
+    let str = 'a@E92ma1@#d3 '
+    var justOneDot = str.replace(/[.](?=.*?\.)/g, '');
+    var outStr = parseFloat(justOneDot.replace(/[^0-9.]/g, ''));
+
+    h2.innerHTML = outStr;
+
+</script>
+
+</html>

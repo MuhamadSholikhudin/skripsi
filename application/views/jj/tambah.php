@@ -52,7 +52,7 @@
                                 <div class="form-group row pemb">
                                     <label class="col-sm-12 col-md-2 col-form-label">Penjualan (K)</label>
                                     <div class="col-sm-12 col-md-10">
-                                        <input class="form-control" type="number" id="jj_jual" name="kredit" placeholder="Jumlah penjualan" required>
+                                        <input class="form-control jj_jual" type="text" id="jj_jual" name="kredit" placeholder="Jumlah penjualan" required>
                                     </div>
                                 </div>
 
@@ -70,7 +70,7 @@
                                     <label class="col-sm-12 col-md-2 col-form-label">Piutang Dagang (D)</label>
                                     <div class="col-sm-12 col-md-10">
 
-                                        <input class="form-control" type="number" id="jj_piutang" name="debet" placeholder="Jumlah" required>
+                                        <input class="form-control jj_piutang" type="text" id="jj_piutang" name="debet" placeholder="Jumlah" required>
                                     </div>
                                 </div>
 
@@ -79,14 +79,43 @@
 
                 <script>
                     // jurnal penjualan
-                    $("#jj_jual").keydown(function() {
-                        var jumlah = $(this).val();
-                        $("#jj_piutang").val(jumlah);
+                    // $("#jj_jual").keydown(function() {
+                    //     var jumlah = $(this).val();
+                    //     $("#jj_piutang").val(jumlah);
+                    // });
+                    // $("#jj_jual").keyup(function() {
+                    //     var jumlah = $(this).val();
+                    //     $("#jj_piutang").val(jumlah);
+                    // });
+
+                    // $(".rupiah1").keydown(function() {
+                    //     var jumlah = $(this).val();
+                    //     alert(jumlah);
+                    // });
+
+
+
+                    //JURNAL PENJUALAN
+                    var jj_jual = document.getElementById("jj_jual");
+                    jj_jual.addEventListener('keyup', function(e) {
+                        var jj_piutang = document.getElementById("jj_piutang");
+                        jj_piutang.value = formatRupiah(this.value);
+                        jj_jual.value = formatRupiah(this.value);
                     });
-                    $("#jj_jual").keyup(function() {
-                        var jumlah = $(this).val();
-                        $("#jj_piutang").val(jumlah);
-                    });
+
+                    function formatRupiah(jj_jualangka, jj_jualprefix) {
+                        var number_string = jj_jualangka.replace(/[^,\d]/g, '').toString(),
+                            split = number_string.split(','),
+                            sisa = split[0].length % 3,
+                            jj_jual = split[0].substr(0, sisa),
+                            ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+                        if (ribuan) {
+                            separator = sisa ? '.' : '';
+                            jj_jual += separator + ribuan.join('.');
+                        }
+                        jj_jual = split[1] != undefined ? jj_jual + ',' + split[1] : jj_jual;
+                        return jj_jualprefix == undefined ? jj_jual : (jj_jual ? jj_jual : '');
+                    }
                 </script>
 
                 <div class="form-group row">

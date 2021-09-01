@@ -46,8 +46,10 @@ class Jj extends CI_Controller
         $no_transaksi = strtotime(date("d-m-Y H:i:s"));
         $tanggal = $this->input->post('tanggal');
         $no_faktur = $this->input->post('no_faktur');
-        $debet = $this->input->post('debet');
-        $kredit = $this->input->post('kredit');
+        $debet10 = $this->input->post('debet');
+        $debet = str_replace(".", "", $debet10);
+        $kredit10 = $this->input->post('kredit');
+        $kredit = str_replace(".", "", $kredit10);
         $id_pengguna = $this->input->post('id_pengguna');
 
         $piutang_dagang = $this->input->post('id_akun_piutang_dagang');
@@ -62,6 +64,7 @@ class Jj extends CI_Controller
                 'no_transaksi'    =>  $no_transaksi,
                 'no_faktur'    =>  $no_faktur,
                 'id_piutang_dagang'    =>  0,
+                'id_pengguna'    =>  $id_pengguna,
                 'id_syarat'    =>  0
 
             ),
@@ -74,6 +77,7 @@ class Jj extends CI_Controller
                 'no_transaksi'    =>  $no_transaksi,
                 'no_faktur'    =>  $no_faktur,
                 'id_piutang_dagang'    =>  $piutang_dagang,
+                'id_pengguna'    =>  $id_pengguna,                
                 'id_syarat'    =>  0
             ),
         );
@@ -104,13 +108,15 @@ class Jj extends CI_Controller
         $tanggal = $this->input->post('tanggal');
         $no_faktur = $this->input->post('no_faktur');
         $id_pengguna = $this->input->post('id_pengguna');
-        
-        $kredit = $this->input->post('kredit');
+
+        $kredit10 = $this->input->post('kredit');
+        $kredit = str_replace(".", "", $kredit10);
         $jj_id_jual = $this->input->post('jj_id_jual');
 
         $id_piu = $this->input->post('id_piu');
         $jj_id_piutang = $this->input->post('jj_id_piutang');
-        $debet = $this->input->post('debet');
+        $debet10 = $this->input->post('debet');
+        $debet = str_replace(".", "", $debet10);
 
         $data = array(
             array(

@@ -35,6 +35,29 @@ class Buku_besar extends CI_Controller
         $this->load->view('buku_besar/coba', $data);
         $this->load->view('templates/footer');
     }
+    
+    public function lihat($bulan_pilih, $tahun_pilih)
+    {
+        $data['akun'] = $this->db->query("SELECT * FROM akun ORDER BY no_akun ASC")->result();
+        $data['pilihan'] = ['menu'];
+        $data['bulan_pilih'] = [$bulan_pilih];
+        $data['tahun_pilih'] = [$tahun_pilih];
+
+        if ($bulan_pilih != 1) {
+            $bulan_sebelumnya = $bulan_pilih - 1;
+            $tahun_sebelumnya = $tahun_pilih;
+        } else {
+            $bulan_sebelumnya =  12;
+            $tahun_sebelumnya = $tahun_pilih - 1;
+        }
+
+        $data['sebelumnya'] = [$bulan_sebelumnya, $tahun_sebelumnya];
+        
+        $this->load->view('templates/header');
+        $this->load->view('templates/sidebar');
+        $this->load->view('pilihan/buku_besar/index', $data);
+        $this->load->view('templates/footer');
+    }
 
     public function tambah()
     {

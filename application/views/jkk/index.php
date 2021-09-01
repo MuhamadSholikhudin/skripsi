@@ -6,6 +6,13 @@
         <div class="clearfix"></div>
 
         <div class="row">
+
+            <?php
+            if ($pilihan[0] == 'menu') { ?>
+                <a class="btn btn-dark" href="<?= base_url('pilihan/menu/ada/' . $bulan_pilih[0] . '/' . $tahun_pilih[0]) ?>">Kembali</a>
+            <?php } else {
+            } ?>
+            
             <div class="col-md-4">
 
                 <?php
@@ -118,13 +125,17 @@
                                     <td></td>
                                     <td>
                                         <?php
-                                        $qk = "SELECT * FROM jurnal_pengeluaran_kas WHERE no_transaksi = $ak->no_transaksi AND no_akun != 211";
+                                        $qk = "SELECT * FROM jurnal_pengeluaran_kas WHERE no_transaksi = $ak->no_transaksi AND no_akun = 111";
                                         $gk = $this->db->query($qk)->row_array();
                                         echo rupiah($gk['kredit']);
                                         ?>
                                     </td>
                                     <td>
-
+                                        <?php
+                                        $jkk = "SELECT * FROM jurnal_pengeluaran_kas WHERE no_transaksi = $ak->no_transaksi AND no_akun = 513";
+                                        $jjk = $this->db->query($jkk)->row_array();
+                                        echo rupiah($jjk['kredit']);
+                                        ?>
                                     </td>
                                     <?php if ($pilihan[0] == 'menu') { ?>
                                         <td>

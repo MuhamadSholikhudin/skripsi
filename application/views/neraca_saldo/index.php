@@ -13,6 +13,13 @@
         <br>
         <br>
         <div class="row">
+            <?php
+            if ($pilihan[0] == 'menu') { ?>
+                <a class="btn btn-dark" href="<?= base_url('pilihan/menu/ada/' . $bulan_pilih[0] . '/' . $tahun_pilih[0]) ?>">Kembali</a>
+            <?php } else {
+            } ?>
+
+
             <div class="col-md-12 text-center">
                 <h5>Toko Norkayati</h5>
                 <h5>Neraca Saldo</h5>

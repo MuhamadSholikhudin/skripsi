@@ -727,7 +727,7 @@
 
 
 
-
+<!--
                 <hr>
                 <div class="col-md-12 text-center">
                     <h5>Toko Norkayati</h5>
@@ -1537,7 +1537,7 @@
 
                     </div>
                 </div>
-            </div>
+            </div> -->
 
 
 

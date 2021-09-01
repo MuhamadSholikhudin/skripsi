@@ -6,6 +6,13 @@
         <div class="clearfix"></div>
 
         <div class="row">
+            <?php
+            if ($pilihan[0] == 'menu') { ?>
+                <a class="btn btn-dark" href="<?= base_url('pilihan/menu/ada/' . $bulan_pilih[0] . '/' . $tahun_pilih[0]) ?>">Kembali</a>
+            <?php } else {
+            } ?>
+
+
             <div class="col-md-4">
                 <?php
                 if ($pilihan[0] == 'menu') { ?>
@@ -75,7 +82,6 @@
                         <?php if ($ak->no_akun == 211) { ?>
                             <tr>
                                 <td>
-
                                     <?php
                                     if ($pilihan[0] == 'menu') { ?>
                                         <?= tanggal_pilih($ak->tanggal) ?>
@@ -83,8 +89,6 @@
                                         <?= tgl_bln_thn($ak->tanggal) ?>
                                     <?php } ?>
                                 </td>
-
-                               
 
                                 <td>
                                     <?php

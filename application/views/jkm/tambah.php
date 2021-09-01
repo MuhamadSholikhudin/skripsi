@@ -68,14 +68,14 @@
                                     <div class="col-sm-12 col-md-10">
                                         <input class="form-control" type="hidden" name="pil" value="1" required>
                                         <input class="form-control" type="hidden" name="no_akun_penjualan" value="12" required>
-                                        <input class="form-control" type="number" id="jkm_jual" name="kredit1" placeholder="Jumlah penjualan" required>
+                                        <input class="form-control" type="text" id="jkm_jual" name="kredit1" placeholder="Jumlah penjualan" required>
                                     </div>
                                 </div>
                                 <div class="form-group row penj">
                                     <label class="col-sm-12 col-md-2 col-form-label">KAS</label>
                                     <div class="col-sm-12 col-md-10">
                                         <input class="form-control" type="hidden" name="no_akun_kas" value="1" required>
-                                        <input class="form-control" type="number" id="jkm_kas" name="debet1" placeholder="Jumlah Kas Masuk" required>
+                                        <input class="form-control" type="text" id="jkm_kas" name="debet1" placeholder="Jumlah Kas Masuk" required>
                                     </div>
                                 </div>
 
@@ -148,7 +148,29 @@
                                     <input class="form-control" type="text" name="nama_jkm" placeholder="Isi Nama jkm" required>
                                 </div>
                             </div> -->
+                                <script>
+                                    //JURNAL PENERIMAAN KAS --> PENJUALAN
+                                    var jkm_jual = document.getElementById("jkm_jual");
+                                    jkm_jual.addEventListener('keyup', function(e) {
+                                        var jkm_kas = document.getElementById("jkm_kas");
+                                        jkm_kas.value = formatRupiah(this.value);
+                                        jkm_jual.value = formatRupiah(this.value);
+                                    });
 
+                                    function formatRupiah(angka, prefix) {
+                                        var number_string = angka.replace(/[^,\d]/g, '').toString(),
+                                            split = number_string.split(','),
+                                            sisa = split[0].length % 3,
+                                            jkm_jual = split[0].substr(0, sisa),
+                                            ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+                                        if (ribuan) {
+                                            separator = sisa ? '.' : '';
+                                            jkm_jual += separator + ribuan.join('.');
+                                        }
+                                        jkm_jual = split[1] != undefined ? jkm_jual + ',' + split[1] : jkm_jual;
+                                        return prefix == undefined ? jkm_jual : (jkm_jual ? jkm_jual : '');
+                                    }
+                                </script>
                                 <div class="form-group row">
                                     <label class="col-sm-12 col-md-4 col-form-label">Tekan Simpan Untuk Menambahkan -></label>
                                     <div class="col-sm-12 col-md-8">

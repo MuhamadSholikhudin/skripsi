@@ -75,14 +75,32 @@
                                     <div class="col-sm-12 col-md-10">
                                         <input class="form-control" type="hidden" name="pil" value="1" required>
                                         <input class="form-control" type="hidden" name="akun_utang_dagang" required>
-                                        <input class="form-control" type="number" id="jkk_utang" name="debet1" placeholder="Jumlah penjualan" required>
+                                        <input class="form-control" type="text" id="jkk_utang" name="debet1" placeholder="Jumlah penjualan" required>
+                                    </div>
+                                </div>
+
+                                <div class='form-group row pemb d-none'>
+                                    <label class='col-sm-12 col-md-2 col-form-label'>syarat</label>
+                                    <div class='col-sm-12 col-md-10'><select class='custom-select col-12' name='syarat2' id='jkk_syarat2'>
+                                            <option value='1'>Tidak ada</option>
+                                            <option value='2'>2/10, n/30</option>
+                                            <option value='3'>3/10, n/30</option>
+                                            <option value='5'>5/10, n/30</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class='form-group row pemb d-none'>
+                                    <label class='col-sm-12 col-md-2 col-form-label'>Potongan pembelian</label>
+                                    <div class='col-sm-12 col-md-10'>
+                                        <input class='form-control' type='hidden' name='akun_potongan_pembelian' required>
+                                        <input class='form-control jkk_potpemb' type='number' id='jkk_potpemb' name='kredit2potpemb' value="0" placeholder='Jumlah Kas Masuk' required>
                                     </div>
                                 </div>
                                 <div class="form-group row pemb">
                                     <label class="col-sm-12 col-md-2 col-form-label">KAS</label>
                                     <div class="col-sm-12 col-md-10">
                                         <input class="form-control" type="hidden" name="no_akun_kas" required>
-                                        <input class="form-control" type="number" id="jkk_kas" name="kredit1" placeholder="Jumlah Kas Masuk" required>
+                                        <input class="form-control jkk_kas" type="text" id="jkk_kas" name="kredit1" placeholder="Jumlah Kas Masuk" required>
                                     </div>
                                 </div>
 
@@ -155,6 +173,30 @@
                                     <input class="form-control" type="text" name="nama_jkm" placeholder="Isi Nama jkm" required>
                                 </div>
                             </div> -->
+
+                                <script>
+                                    //JURNAL PENGELUARAN KAS --> Utang dagang
+                                    var jkk_utang = document.getElementById("jkk_utang");
+                                    jkk_utang.addEventListener('keyup', function(e) {
+                                        var jkk_kas = document.getElementById("jkk_kas");
+                                        jkk_kas.value = formatRupiah(this.value);
+                                        jkk_utang.value = formatRupiah(this.value);
+                                    });
+
+                                    function formatRupiah(jkk_utangangka, jkk_utangprefix) {
+                                        var number_string = jkk_utangangka.replace(/[^,\d]/g, '').toString(),
+                                            split = number_string.split(','),
+                                            sisa = split[0].length % 3,
+                                            jkk_utang = split[0].substr(0, sisa),
+                                            ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+                                        if (ribuan) {
+                                            separator = sisa ? '.' : '';
+                                            jkk_utang += separator + ribuan.join('.');
+                                        }
+                                        jkk_utang = split[1] != undefined ? jkk_utang + ',' + split[1] : jkk_utang;
+                                        return jkk_utangprefix == undefined ? jkk_utang : (jkk_utang ? jkk_utang : '');
+                                    }
+                                </script>
 
                                 <div class="form-group row">
                                     <label class="col-sm-12 col-md-4 col-form-label">Tekan Simpan Untuk Menambahkan -></label>

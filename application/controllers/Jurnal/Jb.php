@@ -52,8 +52,11 @@ $this->load->view('templates/header');
 
 
         if ($pil == 1) {
-            $debet = $this->input->post('debet1');
-            $kredit = $this->input->post('kredit1');
+            $debet10 = $this->input->post('debet1');
+            $debet = str_replace(".", "", $debet10);
+
+            $kredit10 = $this->input->post('kredit1');
+            $kredit = str_replace(".", "", $kredit10);
 
             $utang_dagang = $this->input->post('id_akun_utang_dagang');
 
@@ -88,8 +91,11 @@ $this->load->view('templates/header');
             redirect('jurnal/jb/index');
         } elseif ($pil == 2) {
 
-            $debet = $this->input->post('debet2');
-            $kredit = $this->input->post('kredit2');
+            $debet10 = $this->input->post('debet2');
+            $debet = str_replace(".", "", $debet10);
+            $kredit10 = $this->input->post('kredit2');
+            $kredit = str_replace(".", "", $kredit10);
+
 
             $akun_serba_serbi = $this->input->post('akun_serba_serbi');
 
@@ -154,11 +160,13 @@ $data['pilihan'] = ['samping'];
 
             $id_jb_pembelian = $this->input->post('id_jb_pembelian');
             $id_jb_akun_pembelian = $this->input->post('id_jb_akun_pembelian');
-            $debet = $this->input->post('debet1');
+            $debet10 = $this->input->post('debet1');
+            $debet = str_replace(".", "", $debet10);
 
             $id_jb_utang = $this->input->post('id_jb_utang');
             $id_jb_akun_utang = $this->input->post('id_jb_akun_utang');
-            $kredit = $this->input->post('kredit1');
+            $kredit10 = $this->input->post('kredit1');
+            $kredit = str_replace(".", "", $kredit10);
             
             $id_utang_dagang = $this->input->post('id_utang_dagang');
             $data = array(
@@ -197,11 +205,13 @@ $data['pilihan'] = ['samping'];
 
             $id_jb_akun = $this->input->post('id_jb_akun');
             $id_jb_akun_serba_serbi = $this->input->post('id_jb_akun_serba_serbi');
-            $debet = $this->input->post('debet2');
+            $debet10 = $this->input->post('debet2');
+            $debet = str_replace(".", "", $debet10);
 
             $id_jb_utang_dagang = $this->input->post('id_jb_utang_dagang');
             $id_jb_akun_utang_dagang = $this->input->post('id_jb_akun_utang_dagang');
-            $kredit = $this->input->post('kredit2');
+            $kredit10 = $this->input->post('kredit2');
+            $kredit = str_replace(".", "", $kredit10);
 
             // $kredit = $this->input->post('kredit2');
             // $debet = $this->input->post('debet2');

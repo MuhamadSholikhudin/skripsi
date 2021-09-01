@@ -1,0 +1,84 @@
+
+
+    $bulan_ini = bulan_pilih;
+    $tahun_ini = tahun_pilih;
+if($bulan_ini != 1){
+    $bulan_sebelumnya = $bulan_ini - 1;
+    $tahun_sebelumnya = tahun_pilih;
+
+}else{
+    $bulan_sebelumnya =  12;
+    $tahun_sebelumnya = tahun_pilih - 1;
+}
+
+$data['sebelumnya'] = [$bulan_sebelumnya, $tahun_sebelumnya];
+
+
+
+
+ $s1 = "SELECT tanggal,  COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_penerimaan_kas WHERE  MONTH(tanggal) < $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND  no_akun = $an->no_akun ";
+                        $sn1 = $this->db->query("SELECT * FROM jurnal_penerimaan_kas WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND no_akun = \$an->no_akun")->num_rows();
+                        // perhitungan jumlah
+                        if ($sn1 > 0) {
+                            $sg1 = $this->db->query($s1)->row_array();
+                        } else {
+                            $sg1['debet'] = 0;
+                            $sg1['kredit'] = 0;
+                        }
+                        $a = $sg1['debet'] + $sg1['kredit'];
+
+                        $s2 = "SELECT tanggal,  COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_pengeluaran_kas WHERE  MONTH(tanggal) < $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND  no_akun = $an->no_akun";
+                        $sn2 = $this->db->query("SELECT * FROM jurnal_pengeluaran_kas WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND no_akun = \$an->no_akun")->num_rows();
+                        // perhitungan jumlah 
+                        if ($sn2 > 0) {
+                            $g2 = $this->db->query($s2)->row_array();
+                        } else {
+                            $g2['debet'] = 0;
+                            $g2['kredit'] = 0;
+                        }
+                        $b = $g2['debet'] + $g2['kredit'];
+
+                        $s3 = "SELECT tanggal,  COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_pembelian WHERE  MONTH(tanggal) < $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND  no_akun = $an->no_akun";
+                        $sn3 = $this->db->query("SELECT * FROM jurnal_pembelian WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND no_akun = \$an->no_akun")->num_rows();
+                        // perhitungan jumlah 
+                        if ($sn3 > 0) {
+                            $g3 = $this->db->query($s3)->row_array();
+                        } else {
+                            $g3['debet'] = 0;
+                            $g3['kredit'] = 0;
+                        }
+                        $c = $g3['debet'] + $g3['kredit'];
+
+                        $s4 = "SELECT tanggal,  COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_penjualan WHERE  MONTH(tanggal) < $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND  no_akun = $an->no_akun";
+                        $sn4 = $this->db->query("SELECT * FROM jurnal_penjualan WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND no_akun = \$an->no_akun")->num_rows();
+                        // perhitungan jumlah 
+                        if ($sn4 > 0) {
+                            $g4 = $this->db->query($s4)->row_array();
+                        } else {
+                            $g4['debet'] = 0;
+                            $g4['kredit'] = 0;
+                        }
+                        $d = $g4['debet'] + $g4['kredit'];
+
+                        $s5 = "SELECT tanggal,  COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_umum WHERE  MONTH(tanggal) < $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND  no_akun = $an->no_akun";
+                        $sn5 = $this->db->query("SELECT * FROM jurnal_umum WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND no_akun = \$an->no_akun")->num_rows();
+                        // perhitungan jumlah 
+                        if ($sn5 > 0) {
+                            $g5 = $this->db->query($s5)->row_array();
+                        } else {
+                            $g5['debet'] = 0;
+                            $g5['kredit'] = 0;
+                        }
+                        $e = $g5['debet'] + $g5['kredit'];
+
+                        $s6 = "SELECT tanggal,  COALESCE(SUM(debet), 0) as debet, COALESCE(SUM(kredit), 0) as kredit FROM jurnal_penyesuaian WHERE  MONTH(tanggal) < $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND  no_akun = $an->no_akun";
+                        $sn6 = $this->db->query("SELECT * FROM jurnal_penyesuaian WHERE MONTH(tanggal) = $bulan_pilih[0] AND YEAR(tanggal) = $tahun_pilih[0] AND no_akun = \$an->no_akun")->num_rows();
+                        // perhitungan jumlah 
+                        if ($sn6 > 0) {
+                            $sg6 = $this->db->query($s6)->row_array();
+                        } else {
+                            $sg6['debet'] = 0;
+                            $sg6['kredit'] = 0;
+                        }
+                        $e = $sg6['debet'] + $sg6['kredit'];
+                       

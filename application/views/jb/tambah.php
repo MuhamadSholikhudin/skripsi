@@ -70,7 +70,7 @@
                                     <div class="col-sm-12 col-md-10">
                                         <input class="form-control" type="hidden" name="pil" value="1" required>
                                         <input class="form-control" type="hidden" name="id_akun_pembelian" required>
-                                        <input class="form-control" type="number" id="jb_beli" name="debet1" placeholder="Jumlah penjualan" required>
+                                        <input class="form-control" type="text" id="jb_beli" name="debet1" placeholder="Jumlah penjualan" required>
                                     </div>
                                 </div>
                                 <div class='form-group row pemb'><label class='col-sm-12 col-md-2 col-form-label'>Akun Utang Dagang</label>
@@ -86,7 +86,7 @@
                                     <label class="col-sm-12 col-md-2 col-form-label">Utang Dagang</label>
                                     <div class="col-sm-12 col-md-10">
                                         <input class="form-control" type="hidden" name="id_akun_utang" required>
-                                        <input class="form-control" type="number" id="jb_utang" name="kredit1" placeholder="Jumlah Kas Masuk" required>
+                                        <input class="form-control" type="text" id="jb_utang" name="kredit1" placeholder="Jumlah Kas Masuk" required>
                                     </div>
                                 </div>
 
@@ -159,6 +159,53 @@
                                     <input class="form-control" type="text" name="nama_jurnal_pembelian" placeholder="Isi Nama jurnal_pembelian" required>
                                 </div>
                             </div> -->
+
+                                <script>
+                                    //JURNAL PEMBELIAN -> pembelian
+                                    var jb_beli = document.getElementById("jb_beli");
+                                    jb_beli.addEventListener('keyup', function(e) {
+                                        var jb_utang = document.getElementById("jb_utang");
+                                        jb_utang.value = formatRupiahjb(this.value);
+                                        jb_beli.value = formatRupiahjb(this.value);
+                                    });
+
+                                    function formatRupiahjb(angka, prefix) {
+                                        var number_string = angka.replace(/[^,\d]/g, '').toString(),
+                                            split = number_string.split(','),
+                                            sisa = split[0].length % 3,
+                                            jb_beli = split[0].substr(0, sisa),
+                                            ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+                                        if (ribuan) {
+                                            separator = sisa ? '.' : '';
+                                            jb_beli += separator + ribuan.join('.');
+                                        }
+                                        jb_beli = split[1] != undefined ? jb_beli + ',' + split[1] : jb_beli;
+                                        return prefix == undefined ? jb_beli : (jb_beli ? jb_beli : '');
+                                    }
+                                </script>
+                                <script>
+                                    //JURNAL PEMBELIAN -> akun akun_serba
+                                    var akun_serba = document.getElementById("akun_serba");
+                                    akun_serba.addEventListener('keyup', function(e) {
+                                        var jb_utang = document.getElementById("jb_utang");
+                                        jb_utang.value = formatRupiahakun_serba(this.value);
+                                        akun_serba.value = formatRupiahakun_serba(this.value);
+                                    });
+
+                                    function formatRupiahakun_serba(angka, prefix) {
+                                        var number_string = angka.replace(/[^,\d]/g, '').toString(),
+                                            split = number_string.split(','),
+                                            sisa = split[0].length % 3,
+                                            akun_serba = split[0].substr(0, sisa),
+                                            ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+                                        if (ribuan) {
+                                            separator = sisa ? '.' : '';
+                                            akun_serba += separator + ribuan.join('.');
+                                        }
+                                        akun_serba = split[1] != undefined ? akun_serba + ',' + split[1] : akun_serba;
+                                        return prefix == undefined ? akun_serba : (akun_serba ? akun_serba : '');
+                                    }
+                                </script>
 
                                 <div class="form-group row">
                                     <label class="col-sm-12 col-md-4 col-form-label">Tekan Simpan Untuk Menambahkan -></label>
